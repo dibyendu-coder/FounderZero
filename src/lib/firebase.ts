@@ -12,7 +12,11 @@ import {
   User as FirebaseUser
 } from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore';
-import rawConfig from '../../firebase-applet-config.json';
+// Safely import local config if present (in local/preview environments), without failing builds when gitignored on Vercel
+const localModules = import.meta.glob('../../firebase-applet-config.json', { eager: true }) as Record<string, { default?: Record<string, string> } | Record<string, string>>;
+const rawConfig: Record<string, string> = localModules['../../firebase-applet-config.json']
+  ? ((localModules['../../firebase-applet-config.json'] as any).default || localModules['../../firebase-applet-config.json'])
+  : {};
 
 // Dynamically prioritize VITE_FIREBASE_* environment variables for secure GitHub & Vercel deployments
 export const firebaseConfig = {
