@@ -15,6 +15,7 @@ import {
 } from 'lucide-react';
 import { Button } from './ui/Button';
 import { StartupStage, User } from '../types';
+import { syncUserWithBackend } from '../lib/clientAuthSync';
 import {
   auth,
   googleProvider,
@@ -69,26 +70,15 @@ export const AuthModal: React.FC<AuthModalProps> = ({
     targetStartupName?: string,
     targetStage?: StartupStage
   ) => {
-    const res = await fetch('/api/auth/firebase-sync', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        firebaseUid,
-        email: userEmail,
-        name: userName,
-        photoURL,
-        startupName: targetStartupName,
-        stage: targetStage
-      })
-    });
-
-    if (!res.ok) {
-      throw new Error('Failed to synchronize user workspace.');
-    }
-
-    const data = await res.json();
-    localStorage.setItem('founderzero_token', data.token);
-    onAuthSuccess(data.user, data.token, data.state);
+    const { user, token, state } = await syncUserWithBackend(
+      firebaseUid,
+      userEmail,
+      userName,
+      photoURL,
+      targetStartupName,
+      targetStage || 'Idea'
+    );
+    onAuthSuccess(user, token, state);
     onClose();
   };
 

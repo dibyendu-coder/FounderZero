@@ -71,6 +71,7 @@ export function App() {
     async function loadUserSession() {
       const token = getAuthToken();
       if (token) {
+        let sessionLoaded = false;
         try {
           const res = await fetch('/api/auth/me', {
             headers: {
@@ -84,6 +85,7 @@ export function App() {
               setCurrentUser(data.user);
               if (data.state && data.state.profile) {
                 setAppState(data.state);
+                localStorage.setItem(`founderzero_state_${token}`, JSON.stringify(data.state));
               }
               const hasOnboarded = Boolean(
                 data.user.hasCompletedOnboarding ||
@@ -95,14 +97,38 @@ export function App() {
               } else {
                 setCurrentRoute('dashboard');
               }
-            } else {
-              localStorage.removeItem('founderzero_token');
+              sessionLoaded = true;
             }
-          } else {
-            localStorage.removeItem('founderzero_token');
           }
         } catch (err) {
-          console.warn('Session verification offline');
+          console.warn('Backend session verification offline, checking local storage');
+        }
+
+        // Fallback to local storage state if server was offline/unreachable
+        if (!sessionLoaded) {
+          const localSaved = localStorage.getItem(`founderzero_state_${token}`);
+          if (localSaved) {
+            try {
+              const parsed = JSON.parse(localSaved);
+              if (parsed && parsed.user && parsed.profile) {
+                setCurrentUser(parsed.user);
+                setAppState(parsed);
+                const hasOnboarded = Boolean(
+                  parsed.user.hasCompletedOnboarding ||
+                  parsed.profile?.hasCompletedOnboarding ||
+                  parsed.hasCompletedOnboarding
+                );
+                if (!hasOnboarded && !parsed.user.isDemo) {
+                  setCurrentRoute('onboarding');
+                } else {
+                  setCurrentRoute('dashboard');
+                }
+                sessionLoaded = true;
+              }
+            } catch {
+              // Ignore parse error
+            }
+          }
         }
       }
       setLoading(false);
@@ -110,10 +136,13 @@ export function App() {
     loadUserSession();
   }, []);
 
-  // Save state to backend API whenever updated
+  // Save state to backend API whenever updated & persist locally
   const syncState = async (newState: AppState) => {
     setAppState(newState);
     const token = getAuthToken();
+    if (token) {
+      localStorage.setItem(`founderzero_state_${token}`, JSON.stringify(newState));
+    }
     try {
       await fetch('/api/state', {
         method: 'POST',
@@ -134,6 +163,7 @@ export function App() {
     setCurrentUser(user);
     if (state && state.profile) {
       setAppState(state);
+      localStorage.setItem(`founderzero_state_${token}`, JSON.stringify(state));
     }
     setAuthModalOpen(false);
 
