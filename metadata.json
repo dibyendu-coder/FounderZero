@@ -1,0 +1,6 @@
+{
+  "name": "FounderZero",
+  "description": "Zero-budget startup growth operating system for beginner startup founders.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
