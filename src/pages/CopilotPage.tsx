@@ -263,28 +263,101 @@ export const CopilotPage: React.FC<CopilotPageProps> = ({
         })
       });
 
-      if (res.ok) {
-        const data = await res.json();
-        if (data.assistantMessage) {
+      if (res.ok && res.body) {
+        const reader = res.body.getReader();
+        const decoder = new TextDecoder();
+        let buffer = '';
+        let assistantMsgId = 'msg-a-' + Date.now();
+        let finalAssistantMessage: CopilotMessage | null = null;
+        let finalState: any = null;
+        let streamedContent = '';
+
+        // Add initial empty assistant message for progressive streaming
+        const initialAssistantMsg: CopilotMessage = {
+          id: assistantMsgId,
+          conversationId: currentConvId,
+          role: 'assistant',
+          content: '',
+          timestamp: new Date().toISOString(),
+          mode: modeToUse,
+          thinkingSteps: [
+            { id: 'th-1', label: 'Gemini 2.5 Flash streaming response...', status: 'active' }
+          ]
+        };
+
+        onUpdateState(prev => {
+          const currentMsgs = prev.copilotMessages?.[currentConvId] || [];
+          const hasUser = currentMsgs.some(m => m.id === userMsg.id);
+          const msgs = hasUser
+            ? [...currentMsgs, initialAssistantMsg]
+            : [...currentMsgs, userMsg, initialAssistantMsg];
+          return {
+            ...prev,
+            copilotMessages: {
+              ...(prev.copilotMessages || {}),
+              [currentConvId]: msgs
+            }
+          };
+        });
+
+        while (true) {
+          const { value, done } = await reader.read();
+          if (done) break;
+          buffer += decoder.decode(value, { stream: true });
+          const lines = buffer.split('\n\n');
+          buffer = lines.pop() || '';
+
+          for (const line of lines) {
+            if (line.startsWith('data: ')) {
+              try {
+                const data = JSON.parse(line.slice(6));
+                if (data.type === 'chunk') {
+                  streamedContent += data.text;
+                  onUpdateState(prev => {
+                    const currentMsgs = prev.copilotMessages?.[currentConvId] || [];
+                    const updated = currentMsgs.map(m => {
+                      if (m.id === assistantMsgId) {
+                        return { ...m, content: streamedContent };
+                      }
+                      return m;
+                    });
+                    return {
+                      ...prev,
+                      copilotMessages: {
+                        ...(prev.copilotMessages || {}),
+                        [currentConvId]: updated
+                      }
+                    };
+                  });
+                } else if (data.assistantMessage) {
+                  finalAssistantMessage = data.assistantMessage;
+                  finalState = data.state;
+                }
+              } catch (e) {
+                // Ignore parse errors on partial frames
+              }
+            }
+          }
+        }
+
+        // Apply final fully-populated assistant message with tools, action proposals, etc.
+        if (finalAssistantMessage) {
           onUpdateState(prev => {
             const currentMsgs = prev.copilotMessages?.[currentConvId] || [];
-            const hasUser = currentMsgs.some(m => m.id === userMsg.id);
-            const msgs = hasUser
-              ? [...currentMsgs, data.assistantMessage]
-              : [...currentMsgs, userMsg, data.assistantMessage];
+            const msgs = currentMsgs.map(m => m.id === assistantMsgId ? finalAssistantMessage! : m);
             return {
               ...prev,
-              ...(data.state ? data.state : {}),
+              ...(finalState ? finalState : {}),
               copilotMessages: {
                 ...(prev.copilotMessages || {}),
-                ...(data.state?.copilotMessages || {}),
+                ...(finalState?.copilotMessages || {}),
                 [currentConvId]: msgs
               },
-              copilotConversations: (data.state?.copilotConversations || prev.copilotConversations || []).map(c =>
+              copilotConversations: (finalState?.copilotConversations || prev.copilotConversations || []).map(c =>
                 c.id === currentConvId
                   ? {
                       ...c,
-                      lastMessagePreview: data.assistantMessage.content.slice(0, 100) + '...',
+                      lastMessagePreview: finalAssistantMessage!.content.slice(0, 100) + '...',
                       messagesCount: msgs.length,
                       updatedAt: new Date().toISOString()
                     }

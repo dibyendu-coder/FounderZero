@@ -2044,6 +2044,11 @@ Return JSON array of suggestions:
       return res.status(400).json({ error: "Message is required" });
     }
 
+    res.setHeader("Content-Type", "text/event-stream");
+    res.setHeader("Cache-Control", "no-cache");
+    res.setHeader("Connection", "keep-alive");
+    res.flushHeaders?.();
+
     const cleanMessage = message.trim();
     const effectiveMode = mode || "default";
 
@@ -2115,24 +2120,44 @@ Return JSON array of suggestions:
           const prompt = `${systemPrompt}\n\nUSER'S QUESTION / PROMPT:\n"${cleanMessage}"\n\nProvide direct, practical, evidence-driven advice. You can reply in clear markdown or JSON.`;
 
           let accumulatedText = "";
+          let streamedAny = false;
           try {
             const responseStream = await ai.models.generateContentStream({
               model: m,
-              contents: prompt
+              contents: prompt,
+              config: {
+                temperature: 0.7,
+                topP: 0.9,
+                maxOutputTokens: 2048
+              }
             });
             for await (const chunk of responseStream) {
               if (chunk && chunk.text) {
                 accumulatedText += chunk.text;
+                streamedAny = true;
+                res.write(`data: ${JSON.stringify({ type: "chunk", text: chunk.text })}\n\n`);
+                (res as any).flush?.();
               }
             }
-          } catch (streamErr) {
+          } catch (streamErr: any) {
+            if (streamErr?.message?.includes("looping")) {
+              console.warn(`Model ${m} encountered looping content. Skipping to fallback.`);
+              throw streamErr;
+            }
             // Fallback to non-streaming generateContent if stream fails
             const response = await ai.models.generateContent({
               model: m,
-              contents: prompt
+              contents: prompt,
+              config: {
+                temperature: 0.7,
+                topP: 0.9,
+                maxOutputTokens: 2048
+              }
             });
             if (response && response.text) {
               accumulatedText = response.text;
+              res.write(`data: ${JSON.stringify({ type: "chunk", text: response.text })}\n\n`);
+              (res as any).flush?.();
             }
           }
 
@@ -2454,13 +2479,19 @@ Here is my direct assessment based on your current stage (**${p.stage || 'Valida
 
     saveAppState(userId, state);
 
-    return res.json({
+    if (!assistantContent && userMsg) {
+      // Ensure fallback if somehow empty
+      assistantContent = "I've analyzed your request. How else can I help your startup scale?";
+    }
+
+    res.write(`data: ${JSON.stringify({
       success: true,
       userMessage: userMsg,
       assistantMessage: assistantMsg,
       conversation: conv,
       state
-    });
+    })}\n\n`);
+    res.end();
   });
 
   // 7. Confirm Copilot Action (Save to Notepad, Create Mission, Launch Experiment, etc.)
