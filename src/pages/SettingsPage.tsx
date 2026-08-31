@@ -96,7 +96,7 @@ export const SettingsPage: React.FC<SettingsPageProps> = ({
   }>({
     hasKey: Boolean(profile.geminiApiKey),
     maskedKey: profile.geminiApiKey ? `${profile.geminiApiKey.slice(0, 4)}••••••••${profile.geminiApiKey.slice(-4)}` : null,
-    model: 'gemini-3.7-flash'
+    model: 'gemini-2.5-flash'
   });
   const [testResult, setTestResult] = useState<{
     success?: boolean;
@@ -109,7 +109,7 @@ export const SettingsPage: React.FC<SettingsPageProps> = ({
       setKeyStatus({
         hasKey: true,
         maskedKey: `${profile.geminiApiKey.slice(0, 4)}••••••••${profile.geminiApiKey.slice(-4)}`,
-        model: 'gemini-3.7-flash'
+        model: 'gemini-2.5-flash'
       });
     }
   }, [profile.geminiApiKey]);
@@ -129,7 +129,7 @@ export const SettingsPage: React.FC<SettingsPageProps> = ({
           setKeyStatus({
             hasKey: data.hasKey,
             maskedKey: data.maskedKey,
-            model: data.model || 'gemini-3.7-flash'
+            model: data.model || 'gemini-2.5-flash'
           });
         }
       } catch (e) {
@@ -201,7 +201,7 @@ export const SettingsPage: React.FC<SettingsPageProps> = ({
     setKeyStatus({
       hasKey: Boolean(cleanKey),
       maskedKey: cleanKey ? `${cleanKey.slice(0, 4)}••••••••${cleanKey.slice(-4)}` : null,
-      model: 'gemini-3.7-flash'
+      model: 'gemini-2.5-flash'
     });
     setTestResult({
       success: true,
@@ -217,7 +217,7 @@ export const SettingsPage: React.FC<SettingsPageProps> = ({
     setKeyStatus({
       hasKey: false,
       maskedKey: null,
-      model: 'gemini-3.7-flash'
+      model: 'gemini-2.5-flash'
     });
     setTestResult(null);
   };

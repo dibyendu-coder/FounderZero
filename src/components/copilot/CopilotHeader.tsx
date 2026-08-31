@@ -105,7 +105,7 @@ export const CopilotHeader: React.FC<CopilotHeaderProps> = ({
             title="Using your direct BYOK Gemini API Key"
           >
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-            <span>gemini-3.7-flash</span>
+            <span>gemini-2.5-flash</span>
           </button>
         ) : (
           <button

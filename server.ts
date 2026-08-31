@@ -335,7 +335,7 @@ Respond with strictly valid JSON matching this schema:
 }`;
 
         const response = await ai.models.generateContent({
-          model: "gemini-3.7-flash",
+          model: "gemini-2.5-flash",
           contents: prompt,
           config: { responseMimeType: "application/json" },
         });
@@ -401,26 +401,30 @@ Respond with strictly valid JSON matching this schema:
     }
 
     try {
-      let usedModel = "gemini-3.7-flash";
+      let usedModel = "gemini-2.5-flash";
       let response: any;
+      let lastErr: any = null;
 
-      try {
-        response = await ai.models.generateContent({
-          model: "gemini-3.7-flash",
-          contents: "Hello, respond with OK",
-        });
-      } catch (primaryErr: any) {
-        console.warn("Primary model (gemini-3.7-flash) test warning:", primaryErr?.message);
-        // Fallback test to gemini-flash-latest or gemini-2.5-flash
+      const modelsToTry = ["gemini-2.5-flash", "gemini-1.5-flash", "gemini-2.5-pro", "gemini-1.5-pro", "gemini-flash-latest"];
+      let success = false;
+
+      for (const m of modelsToTry) {
         try {
-          usedModel = "gemini-flash-latest";
           response = await ai.models.generateContent({
-            model: "gemini-flash-latest",
+            model: m,
             contents: "Hello, respond with OK",
           });
-        } catch (fallbackErr: any) {
-          throw primaryErr;
+          usedModel = m;
+          success = true;
+          break;
+        } catch (e: any) {
+          lastErr = e;
+          console.warn(`Model test warning for ${m}:`, e?.message);
         }
+      }
+
+      if (!success) {
+        throw lastErr || new Error("All model verification attempts failed.");
       }
 
       const latencyMs = Date.now() - startTime;
@@ -468,7 +472,7 @@ Respond with strictly valid JSON matching this schema:
       maskedKey: hasCustomKey ? `${customKey.slice(0, 4)}••••••••${customKey.slice(-4)}` : null,
       hasServerKey,
       activeProvider: hasCustomKey ? "custom" : hasServerKey ? "server" : "none",
-      model: "gemini-3.7-flash"
+      model: "gemini-2.5-flash"
     });
   });
 
@@ -536,7 +540,7 @@ Respond with strictly valid JSON matching this schema:
 }`;
 
       const response = await ai.models.generateContent({
-        model: "gemini-3.7-flash",
+        model: "gemini-2.5-flash",
         contents: prompt,
         config: { responseMimeType: "application/json" },
       });
@@ -616,7 +620,7 @@ Respond with strictly valid JSON:
 }`;
 
       const response = await ai.models.generateContent({
-        model: "gemini-3.7-flash",
+        model: "gemini-2.5-flash",
         contents: prompt,
         config: { responseMimeType: "application/json" },
       });
@@ -710,7 +714,7 @@ Respond with strictly valid JSON matching this schema:
 }`;
 
       const response = await ai.models.generateContent({
-        model: "gemini-3.7-flash",
+        model: "gemini-2.5-flash",
         contents: prompt,
         config: { responseMimeType: "application/json" },
       });
@@ -813,7 +817,7 @@ Respond with strictly valid JSON:
 }`;
 
       const response = await ai.models.generateContent({
-        model: "gemini-3.7-flash",
+        model: "gemini-2.5-flash",
         contents: prompt,
         config: { responseMimeType: "application/json" },
       });
@@ -921,7 +925,7 @@ Respond strictly with valid JSON:
 }`;
 
         const response = await ai.models.generateContent({
-          model: "gemini-3.7-flash",
+          model: "gemini-2.5-flash",
           contents: prompt,
           config: { responseMimeType: "application/json" },
         });
@@ -967,7 +971,7 @@ Respond strictly with valid JSON:
 }`;
 
         const response = await ai.models.generateContent({
-          model: "gemini-3.7-flash",
+          model: "gemini-2.5-flash",
           contents: prompt,
           config: { responseMimeType: "application/json" },
         });
@@ -1065,7 +1069,7 @@ Provide a concise, high-impact growth diagnosis JSON containing:
 Return strictly valid JSON.`;
 
         const response = await ai.models.generateContent({
-          model: "gemini-3.7-flash",
+          model: "gemini-2.5-flash",
           contents: prompt,
           config: { responseMimeType: "application/json" },
         });
@@ -1162,7 +1166,7 @@ Return JSON with:
 Return strictly valid JSON.`;
 
         const response = await ai.models.generateContent({
-          model: "gemini-3.7-flash",
+          model: "gemini-2.5-flash",
           contents: prompt,
           config: { responseMimeType: "application/json" },
         });
@@ -1228,7 +1232,7 @@ Bottleneck: ${profile?.biggestUncertainty}
 Give a direct, actionable, zero-budget advice response referencing their actual metrics and stage. Keep it structured in 3 clear bullet points + 1 key action step. No sales hype or generic fluff.`;
 
         const response = await ai.models.generateContent({
-          model: "gemini-3.7-flash",
+          model: "gemini-2.5-flash",
           contents: prompt,
         });
 
@@ -1525,7 +1529,7 @@ Return JSON:
 Strictly output valid JSON.`;
 
         const response = await ai.models.generateContent({
-          model: "gemini-3.7-flash",
+          model: "gemini-2.5-flash",
           contents: prompt,
           config: { responseMimeType: "application/json" }
         });
@@ -1769,7 +1773,7 @@ Return JSON:
 Strictly output valid JSON.`;
 
         const response = await ai.models.generateContent({
-          model: "gemini-3.6-flash",
+          model: "gemini-2.5-flash",
           contents: prompt,
           config: { responseMimeType: "application/json" }
         });
@@ -1835,7 +1839,7 @@ Return JSON array of suggestions:
 ]`;
 
         const response = await ai.models.generateContent({
-          model: "gemini-3.7-flash",
+          model: "gemini-2.5-flash",
           contents: prompt,
           config: { responseMimeType: "application/json" }
         });
@@ -2107,7 +2111,7 @@ Return JSON array of suggestions:
         const prompt = `${systemPrompt}\n\nUSER'S QUESTION / PROMPT:\n"${cleanMessage}"\n\nGenerate direct, practical, evidence-driven advice with valid JSON.`;
 
         const response = await ai.models.generateContent({
-          model: "gemini-3.7-flash",
+          model: "gemini-2.5-flash",
           contents: prompt,
           config: {
             responseMimeType: "application/json"
