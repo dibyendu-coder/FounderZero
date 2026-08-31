@@ -2106,42 +2106,61 @@ Return JSON array of suggestions:
     // 3. Invoke Gemini AI model if available
     const ai = getAi(req);
     if (ai) {
-      try {
-        const systemPrompt = buildCopilotSystemPrompt(retrievedContext.contextPromptText, effectiveMode);
-        const prompt = `${systemPrompt}\n\nUSER'S QUESTION / PROMPT:\n"${cleanMessage}"\n\nGenerate direct, practical, evidence-driven advice with valid JSON.`;
+      const modelsToTry = ["gemini-2.5-flash", "gemini-1.5-flash", "gemini-2.5-pro", "gemini-1.5-pro", "gemini-flash-latest"];
+      let aiSuccess = false;
 
-        const response = await ai.models.generateContent({
-          model: "gemini-2.5-flash",
-          contents: prompt,
-          config: {
-            responseMimeType: "application/json"
-          }
-        });
+      for (const m of modelsToTry) {
+        try {
+          const systemPrompt = buildCopilotSystemPrompt(retrievedContext.contextPromptText, effectiveMode);
+          const prompt = `${systemPrompt}\n\nUSER'S QUESTION / PROMPT:\n"${cleanMessage}"\n\nGenerate direct, practical, evidence-driven advice with valid JSON containing keys: content, evidenceBreakdown, actionProposal, intent, insufficientEvidenceWarning.`;
 
-        if (response.text) {
-          const parsed = JSON.parse(response.text.trim());
-          if (parsed.content) {
-            assistantContent = parsed.content;
+          const response = await ai.models.generateContent({
+            model: m,
+            contents: prompt,
+            config: {
+              responseMimeType: "application/json"
+            }
+          });
+
+          if (response && response.text) {
+            let rawText = response.text.trim();
+            // Clean markdown code block if present
+            if (rawText.startsWith("```json")) {
+              rawText = rawText.replace(/^```json/, "").replace(/```$/, "").trim();
+            } else if (rawText.startsWith("```")) {
+              rawText = rawText.replace(/^```/, "").replace(/```$/, "").trim();
+            }
+
+            const parsed = JSON.parse(rawText);
+            if (parsed.content) {
+              assistantContent = parsed.content;
+            }
+            if (parsed.evidenceBreakdown) {
+              evidenceBreakdown = parsed.evidenceBreakdown;
+            }
+            if (parsed.actionProposal && parsed.actionProposal.title) {
+              actionProposal = {
+                ...parsed.actionProposal,
+                id: "prop-" + Date.now() + "-" + Math.random().toString(36).substring(2, 5),
+                status: "pending"
+              };
+            }
+            if (parsed.intent) {
+              detectedIntent = parsed.intent;
+            }
+            if (parsed.insufficientEvidenceWarning) {
+              insufficientWarning = true;
+            }
+            aiSuccess = true;
+            break;
           }
-          if (parsed.evidenceBreakdown) {
-            evidenceBreakdown = parsed.evidenceBreakdown;
-          }
-          if (parsed.actionProposal && parsed.actionProposal.title) {
-            actionProposal = {
-              ...parsed.actionProposal,
-              id: "prop-" + Date.now() + "-" + Math.random().toString(36).substring(2, 5),
-              status: "pending"
-            };
-          }
-          if (parsed.intent) {
-            detectedIntent = parsed.intent;
-          }
-          if (parsed.insufficientEvidenceWarning) {
-            insufficientWarning = true;
-          }
+        } catch (err: any) {
+          console.warn(`Copilot model attempt (${m}) failed:`, err?.message);
         }
-      } catch (err) {
-        console.error("Gemini Copilot execution error:", err);
+      }
+
+      if (!aiSuccess) {
+        console.warn("All Gemini Copilot model attempts failed. Falling back to deterministic heuristic reasoning.");
       }
     }
 
