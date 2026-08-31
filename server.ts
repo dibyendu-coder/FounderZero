@@ -2103,7 +2103,7 @@ Return JSON array of suggestions:
     let detectedIntent = retrievedContext.detectedIntent;
     let insufficientWarning = false;
 
-    // 3. Invoke Gemini AI model if available
+    // 3. Invoke Gemini AI model with streaming chunk processing if available
     const ai = getAi(req);
     if (ai) {
       const modelsToTry = ["gemini-2.5-flash", "gemini-1.5-flash", "gemini-2.5-pro", "gemini-1.5-pro", "gemini-flash-latest"];
@@ -2114,13 +2114,30 @@ Return JSON array of suggestions:
           const systemPrompt = buildCopilotSystemPrompt(retrievedContext.contextPromptText, effectiveMode);
           const prompt = `${systemPrompt}\n\nUSER'S QUESTION / PROMPT:\n"${cleanMessage}"\n\nProvide direct, practical, evidence-driven advice. You can reply in clear markdown or JSON.`;
 
-          const response = await ai.models.generateContent({
-            model: m,
-            contents: prompt
-          });
+          let accumulatedText = "";
+          try {
+            const responseStream = await ai.models.generateContentStream({
+              model: m,
+              contents: prompt
+            });
+            for await (const chunk of responseStream) {
+              if (chunk && chunk.text) {
+                accumulatedText += chunk.text;
+              }
+            }
+          } catch (streamErr) {
+            // Fallback to non-streaming generateContent if stream fails
+            const response = await ai.models.generateContent({
+              model: m,
+              contents: prompt
+            });
+            if (response && response.text) {
+              accumulatedText = response.text;
+            }
+          }
 
-          if (response && response.text) {
-            let rawText = response.text.trim();
+          if (accumulatedText && accumulatedText.trim()) {
+            let rawText = accumulatedText.trim();
             // Clean markdown code block if present
             if (rawText.startsWith("```json")) {
               rawText = rawText.replace(/^```json/, "").replace(/```$/, "").trim();
