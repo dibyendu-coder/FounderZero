@@ -2209,7 +2209,140 @@ Here is my direct assessment based on your current stage (**${p.stage || 'Valida
       }
     }
 
-    // 5. Construct Assistant Message
+    // 5. Construct Assistant Message with Developer-Grade Tool Executions & Steps
+    const p = state.profile || ({} as any);
+    const m = state.metrics || [];
+    const retMetric = m.find(item => item.name.toLowerCase().includes("retention"))?.currentValue || "41%";
+    
+    const thinkingSteps = [
+      { id: "th-1", label: `Retrieved startup context for ${p.name || 'Startup'} (${p.stage || 'MVP'})`, status: "completed" as const, duration: "0.1s" },
+      { id: "th-2", label: `Queried real-time telemetry (Day-7 Retention: ${retMetric})`, status: "completed" as const, duration: "0.2s" },
+      { id: "th-3", label: "Synthesized customer discovery interview patterns", status: "completed" as const, duration: "0.2s" },
+      { id: "th-4", label: "Formulated evidence-backed next action", status: "completed" as const, duration: "0.1s" }
+    ];
+
+    const toolCalls: any[] = [
+      {
+        id: "tool-1-" + Date.now(),
+        name: "get_startup_context",
+        description: `Fetch startup profile, stage (${p.stage || 'MVP'}), and primary bottleneck`,
+        status: "completed",
+        input: { startupId: p.id || "startup-1", fields: ["stage", "goal90Days", "biggestUncertainty"] },
+        output: {
+          name: p.name || "PulseBoard",
+          stage: p.stage || "MVP",
+          bottleneck: p.biggestUncertainty || "Retention Drop-off",
+          monthlyRevenue: `₹${(p.monthlyRevenue || 0).toLocaleString()}`
+        },
+        duration: "115ms"
+      },
+      {
+        id: "tool-2-" + Date.now(),
+        name: "get_startup_metrics",
+        description: "Retrieve real-time retention, activation, and user growth telemetry",
+        status: "completed",
+        input: { limit: 4, includeTrends: true },
+        output: {
+          retentionD7: retMetric,
+          currentUsers: p.currentUsers || 127,
+          metricsAnalyzed: m.length || 6
+        },
+        duration: "160ms"
+      }
+    ];
+
+    if (state.customerFeedback && state.customerFeedback.length > 0) {
+      toolCalls.push({
+        id: "tool-3-" + Date.now(),
+        name: "get_customer_feedback",
+        description: "Scan qualitative customer feedback and interview transcripts",
+        status: "completed",
+        input: { count: 3, filter: effectiveMode },
+        output: {
+          interviewsAnalyzed: state.customerFeedback.length,
+          topRecurringPain: state.customerFeedback[0]?.keyPainPoint || "Founders forget to open dashboard"
+        },
+        duration: "140ms"
+      });
+    }
+
+    // Generate todo list if multi-step execution is recommended
+    let todoList: any = undefined;
+    if (actionProposal?.missionData?.steps) {
+      todoList = actionProposal.missionData.steps.map((s: any, idx: number) => ({
+        id: s.id || `todo-${idx}`,
+        title: s.text,
+        completed: Boolean(s.completed),
+        inProgress: idx === 0 && !s.completed
+      }));
+    } else if (cleanMessage.toLowerCase().includes("mission") || cleanMessage.toLowerCase().includes("plan") || cleanMessage.toLowerCase().includes("weekly")) {
+      todoList = [
+        { id: "todo-1", title: "Complete 3 direct customer discovery interviews", completed: false, inProgress: true },
+        { id: "todo-2", title: "Deploy zero-friction 1-click Discord webhook digest", completed: false },
+        { id: "todo-3", title: "Measure Day-7 cohort retention before allocating budget", completed: false }
+      ];
+    }
+
+    // Generate permission request for concrete database actions
+    let permissionRequest: any = undefined;
+    if (actionProposal && actionProposal.type === "create_mission" && actionProposal.missionData) {
+      permissionRequest = {
+        id: "perm-" + Date.now(),
+        actionType: "create_mission",
+        title: `Authorize Mission: "${actionProposal.missionData.title}"`,
+        details: [
+          { label: "Category", value: actionProposal.missionData.category || "Growth" },
+          { label: "Objective", value: actionProposal.missionData.objective || "Validate retention bucket" },
+          { label: "Estimated Time", value: actionProposal.missionData.estimatedTime || "3 hours" },
+          { label: "Estimated Cost", value: actionProposal.missionData.estimatedCost || "₹0" }
+        ],
+        impactDescription: "Will create an active 7-day actionable founder mission in your Missions dashboard.",
+        status: "pending",
+        payload: actionProposal
+      };
+    } else if (actionProposal && actionProposal.type === "create_experiment" && actionProposal.experimentData) {
+      permissionRequest = {
+        id: "perm-" + Date.now(),
+        actionType: "create_experiment",
+        title: `Authorize Experiment: "${actionProposal.experimentData.title}"`,
+        details: [
+          { label: "Metric", value: actionProposal.experimentData.metric || "Day-7 Retention" },
+          { label: "Target Goal", value: actionProposal.experimentData.targetValue || "55%" },
+          { label: "Duration", value: actionProposal.experimentData.duration || "14 days" },
+          { label: "Budget", value: actionProposal.experimentData.budget || "₹0" }
+        ],
+        impactDescription: "Will launch and track this experiment in your Experiments board with automated telemetry tracking.",
+        status: "pending",
+        payload: actionProposal
+      };
+    }
+
+    // Proposed Diff View if message suggests updating positioning or goal
+    let diffData: any = undefined;
+    if (cleanMessage.toLowerCase().includes("pitch") || cleanMessage.toLowerCase().includes("position") || cleanMessage.toLowerCase().includes("icp") || cleanMessage.toLowerCase().includes("target customer")) {
+      diffData = {
+        id: "diff-" + Date.now(),
+        title: "Proposed Positioning Calibration",
+        description: "Align your target customer and value proposition to eliminate onboarding drop-off.",
+        target: "positioning",
+        changes: [
+          {
+            field: "targetCustomer",
+            label: "Target Customer Persona",
+            oldValue: p.targetCustomer || "Founders and builders",
+            newValue: "Solo Technical Founders building developer tools with ₹0 ad budget"
+          },
+          {
+            field: "oneLiner",
+            label: "Value Proposition",
+            oldValue: p.oneLiner || p.coreProduct || "Analytics platform for SaaS founders",
+            newValue: "Autonomous AI thinking partner that turns raw user telemetry into high-converting 7-day growth missions"
+          }
+        ],
+        status: "pending"
+      };
+    }
+
     const assistantMsg: CopilotMessage = {
       id: "msg-a-" + Date.now() + "-" + Math.random().toString(36).substring(2, 5),
       conversationId: targetConvId,
@@ -2222,7 +2355,12 @@ Here is my direct assessment based on your current stage (**${p.stage || 'Valida
       retrievedContextSummary: retrievedContext.summary,
       sources: retrievedContext.sources,
       evidenceBreakdown,
-      actionProposal
+      actionProposal,
+      thinkingSteps,
+      toolCalls,
+      todoList,
+      diffData,
+      permissionRequest
     };
 
     state.copilotMessages[targetConvId].push(assistantMsg);

@@ -20,7 +20,8 @@ import {
   BookOpen,
   Bookmark,
   User as UserIcon,
-  PenLine
+  PenLine,
+  LogOut
 } from 'lucide-react';
 import { AppState, StartupProfile, User } from '../types';
 
@@ -247,14 +248,15 @@ export const Sidebar: React.FC<SidebarProps> = ({
 
           <div
             onClick={() => {
-              navigate('settings');
+              navigate('profile');
               if (onCloseMobileMenu) onCloseMobileMenu();
             }}
-            className={`flex items-center gap-3 p-2 rounded-xl hover:bg-slate-800/80 cursor-pointer transition ${
+            className={`flex items-center gap-3 p-2 rounded-xl hover:bg-slate-800/80 cursor-pointer transition group ${
               isCollapsed ? 'justify-center' : ''
             }`}
+            title="Open Founder Profile"
           >
-            <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-[#0052FF] to-[#38BDF8] text-white font-bold text-xs flex items-center justify-center ring-2 ring-blue-500/40 shrink-0">
+            <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-[#0052FF] to-[#38BDF8] text-white font-bold text-xs flex items-center justify-center ring-2 ring-blue-500/40 shrink-0 group-hover:scale-105 transition-transform">
               {(currentUser?.name || activeProfile.founderName || 'F')
                 .split(' ')
                 .map(p => p[0])
@@ -264,7 +266,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
             </div>
             {!isCollapsed && (
               <div className="flex flex-col min-w-0 flex-1">
-                <span className="text-xs font-semibold text-white truncate">
+                <span className="text-xs font-semibold text-white group-hover:text-blue-300 transition truncate">
                   {currentUser?.name || activeProfile.founderName || activeProfile.name}
                 </span>
                 <div className="flex items-center gap-1.5 mt-0.5">
@@ -276,16 +278,29 @@ export const Sidebar: React.FC<SidebarProps> = ({
               </div>
             )}
             {!isCollapsed && (
-              <button
-                onClick={(e) => {
-                  e.stopPropagation();
-                  if (onLogout) onLogout();
-                }}
-                className="p-1 text-slate-400 hover:text-rose-400 hover:bg-slate-800 rounded transition"
-                title="Sign Out"
-              >
-                <Settings size={15} />
-              </button>
+              <div className="flex items-center gap-0.5 shrink-0" onClick={(e) => e.stopPropagation()}>
+                <button
+                  onClick={() => {
+                    navigate('settings');
+                    if (onCloseMobileMenu) onCloseMobileMenu();
+                  }}
+                  className="p-1.5 text-slate-400 hover:text-slate-200 hover:bg-slate-700/60 rounded-lg transition"
+                  title="Startup Settings"
+                >
+                  <Settings size={14} />
+                </button>
+                {onLogout && (
+                  <button
+                    onClick={() => {
+                      if (onLogout) onLogout();
+                    }}
+                    className="p-1.5 text-slate-400 hover:text-rose-400 hover:bg-rose-950/40 rounded-lg transition"
+                    title="Sign Out"
+                  >
+                    <LogOut size={14} />
+                  </button>
+                )}
+              </div>
             )}
           </div>
         </div>

@@ -769,6 +769,56 @@ export interface CopilotActionProposal {
   };
 }
 
+export interface CopilotToolExecution {
+  id: string;
+  name: string;
+  description: string;
+  status: 'running' | 'completed' | 'failed';
+  input?: Record<string, any>;
+  output?: Record<string, any> | string;
+  duration?: string;
+}
+
+export interface CopilotThinkingStep {
+  id: string;
+  label: string;
+  status: 'pending' | 'active' | 'completed';
+  duration?: string;
+}
+
+export interface CopilotTodoItem {
+  id: string;
+  title: string;
+  completed: boolean;
+  inProgress?: boolean;
+}
+
+export interface CopilotDiffChange {
+  field: string;
+  label?: string;
+  oldValue: string;
+  newValue: string;
+}
+
+export interface CopilotDiffData {
+  id: string;
+  title: string;
+  description?: string;
+  target: 'profile' | 'positioning' | 'goal' | 'icp';
+  changes: CopilotDiffChange[];
+  status: 'pending' | 'accepted' | 'rejected';
+}
+
+export interface CopilotPermissionRequestData {
+  id: string;
+  actionType: 'create_mission' | 'create_experiment' | 'update_startup_profile' | 'create_note' | 'delete_data';
+  title: string;
+  details: { label: string; value: string }[];
+  impactDescription?: string;
+  status: 'pending' | 'allowed' | 'denied';
+  payload: any;
+}
+
 export interface CopilotMessage {
   id: string;
   conversationId: string;
@@ -782,6 +832,11 @@ export interface CopilotMessage {
   sources?: CopilotSourceReference[];
   evidenceBreakdown?: EvidenceBreakdown;
   actionProposal?: CopilotActionProposal;
+  toolCalls?: CopilotToolExecution[];
+  thinkingSteps?: CopilotThinkingStep[];
+  todoList?: CopilotTodoItem[];
+  diffData?: CopilotDiffData;
+  permissionRequest?: CopilotPermissionRequestData;
 }
 
 export interface CopilotConversation {
