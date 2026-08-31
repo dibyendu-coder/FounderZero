@@ -2112,14 +2112,11 @@ Return JSON array of suggestions:
       for (const m of modelsToTry) {
         try {
           const systemPrompt = buildCopilotSystemPrompt(retrievedContext.contextPromptText, effectiveMode);
-          const prompt = `${systemPrompt}\n\nUSER'S QUESTION / PROMPT:\n"${cleanMessage}"\n\nGenerate direct, practical, evidence-driven advice with valid JSON containing keys: content, evidenceBreakdown, actionProposal, intent, insufficientEvidenceWarning.`;
+          const prompt = `${systemPrompt}\n\nUSER'S QUESTION / PROMPT:\n"${cleanMessage}"\n\nProvide direct, practical, evidence-driven advice. You can reply in clear markdown or JSON.`;
 
           const response = await ai.models.generateContent({
             model: m,
-            contents: prompt,
-            config: {
-              responseMimeType: "application/json"
-            }
+            contents: prompt
           });
 
           if (response && response.text) {
@@ -2131,28 +2128,38 @@ Return JSON array of suggestions:
               rawText = rawText.replace(/^```/, "").replace(/```$/, "").trim();
             }
 
-            const parsed = JSON.parse(rawText);
-            if (parsed.content) {
-              assistantContent = parsed.content;
+            try {
+              const parsed = JSON.parse(rawText);
+              if (parsed.content) {
+                assistantContent = parsed.content;
+              } else {
+                assistantContent = rawText;
+              }
+              if (parsed.evidenceBreakdown) {
+                evidenceBreakdown = parsed.evidenceBreakdown;
+              }
+              if (parsed.actionProposal && parsed.actionProposal.title) {
+                actionProposal = {
+                  ...parsed.actionProposal,
+                  id: "prop-" + Date.now() + "-" + Math.random().toString(36).substring(2, 5),
+                  status: "pending"
+                };
+              }
+              if (parsed.intent) {
+                detectedIntent = parsed.intent;
+              }
+              if (parsed.insufficientEvidenceWarning) {
+                insufficientWarning = true;
+              }
+            } catch (jsonErr) {
+              // Not JSON, use rawText directly as assistantContent
+              assistantContent = rawText;
             }
-            if (parsed.evidenceBreakdown) {
-              evidenceBreakdown = parsed.evidenceBreakdown;
+
+            if (assistantContent) {
+              aiSuccess = true;
+              break;
             }
-            if (parsed.actionProposal && parsed.actionProposal.title) {
-              actionProposal = {
-                ...parsed.actionProposal,
-                id: "prop-" + Date.now() + "-" + Math.random().toString(36).substring(2, 5),
-                status: "pending"
-              };
-            }
-            if (parsed.intent) {
-              detectedIntent = parsed.intent;
-            }
-            if (parsed.insufficientEvidenceWarning) {
-              insufficientWarning = true;
-            }
-            aiSuccess = true;
-            break;
           }
         } catch (err: any) {
           console.warn(`Copilot model attempt (${m}) failed:`, err?.message);
