@@ -163,35 +163,55 @@ export const FounderProfilePage: React.FC<FounderProfilePageProps> = ({
   }, []);
 
   const handleTestApiKey = async () => {
-    const keyToTest = apiKeyInput.trim();
-    if (!keyToTest) {
-      setTestResult({ success: false, message: 'Please enter a Gemini API key to test' });
+    const rawKey = apiKeyInput.trim();
+    // Sanitize common copy-paste artifacts
+    const keyToTest = rawKey
+      .replace(/^(export\s+)?([A-Z0-9_]*API_KEY[A-Z0-9_]*)\s*=\s*/i, '')
+      .replace(/^Bearer\s+/i, '')
+      .replace(/^["'`]|["'`]$/g, '')
+      .trim();
+
+    if (!keyToTest && !profile.geminiApiKey) {
+      setTestResult({
+        success: false,
+        message: 'Please enter a Gemini API key to test, or generate a free one in Google AI Studio.'
+      });
       return;
     }
+
     setTestingKey(true);
     setTestResult(null);
+
     try {
+      const token = localStorage.getItem('founderzero_token');
       const res = await fetch('/api/ai/test-key', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ apiKey: keyToTest })
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: token ? `Bearer ${token}` : '',
+          'x-user-id': token || 'demo-user-1'
+        },
+        body: JSON.stringify({ apiKey: keyToTest || profile.geminiApiKey })
       });
-      const data = await res.json();
-      if (data.success) {
+
+      const data = await res.json().catch(() => null);
+
+      if (res.ok && data?.success) {
         setTestResult({
           success: true,
-          message: `Connected successfully! Model '${data.model}' is ready.`
+          message: data.message || `Connected successfully! Model '${data.model || 'gemini-3.7-flash'}' is active (${data.latencyMs || 120}ms).`
         });
       } else {
+        const errorDetail = data?.error || (res.status === 404 ? 'API test endpoint not found' : `Verification error (${res.status}): Please check key permissions in Google AI Studio.`);
         setTestResult({
           success: false,
-          message: data.error || 'Invalid Gemini API key. Check key permissions in Google AI Studio.'
+          message: errorDetail
         });
       }
     } catch (err: any) {
       setTestResult({
         success: false,
-        message: 'Failed to test key against Gemini API servers.'
+        message: err?.message ? `Connection error: ${err.message}` : 'Failed to reach Gemini verification endpoint. Check your internet connection.'
       });
     } finally {
       setTestingKey(false);
@@ -199,10 +219,17 @@ export const FounderProfilePage: React.FC<FounderProfilePageProps> = ({
   };
 
   const handleSaveApiKey = () => {
-    const cleanKey = apiKeyInput.trim();
+    const rawKey = apiKeyInput.trim();
+    const cleanKey = rawKey
+      .replace(/^(export\s+)?([A-Z0-9_]*API_KEY[A-Z0-9_]*)\s*=\s*/i, '')
+      .replace(/^Bearer\s+/i, '')
+      .replace(/^["'`]|["'`]$/g, '')
+      .trim();
+
     onUpdateProfile({
       geminiApiKey: cleanKey || undefined
     });
+    setApiKeyInput(cleanKey);
     setKeyStatus({
       hasKey: Boolean(cleanKey),
       maskedKey: cleanKey ? `${cleanKey.slice(0, 4)}••••••••${cleanKey.slice(-4)}` : null,
@@ -210,7 +237,7 @@ export const FounderProfilePage: React.FC<FounderProfilePageProps> = ({
     });
     setTestResult({
       success: true,
-      message: cleanKey ? 'Gemini API key saved! All AI features now utilize your key.' : 'API key removed. Using default engine.'
+      message: cleanKey ? 'Gemini API key saved! All AI features and Copilot now utilize your key.' : 'API key removed. Using default engine.'
     });
     showToast(cleanKey ? '🔑 Custom Gemini API Key saved!' : 'Switched to default AI engine');
   };

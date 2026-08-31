@@ -21,9 +21,12 @@ import {
   Bookmark,
   User as UserIcon,
   PenLine,
-  LogOut
+  LogOut,
+  Sun,
+  Moon
 } from 'lucide-react';
 import { AppState, StartupProfile, User } from '../types';
+import { useTheme } from '../context/ThemeContext';
 
 interface SidebarProps {
   currentRoute: string;
@@ -61,6 +64,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
   const [internalCollapsed, setInternalCollapsed] = React.useState(false);
 
   const isCollapsed = externalCollapsed !== undefined ? externalCollapsed : internalCollapsed;
+  const { isDark, toggleTheme } = useTheme();
   const toggleCollapsed = () => {
     if (externalSetCollapsed) {
       externalSetCollapsed(!isCollapsed);
@@ -279,6 +283,13 @@ export const Sidebar: React.FC<SidebarProps> = ({
             )}
             {!isCollapsed && (
               <div className="flex items-center gap-0.5 shrink-0" onClick={(e) => e.stopPropagation()}>
+                <button
+                  onClick={toggleTheme}
+                  className="p-1.5 text-slate-400 hover:text-amber-300 hover:bg-slate-700/60 rounded-lg transition"
+                  title={isDark ? 'Switch to Light Theme' : 'Switch to Dark Theme'}
+                >
+                  {isDark ? <Sun size={14} className="text-amber-400" /> : <Moon size={14} />}
+                </button>
                 <button
                   onClick={() => {
                     navigate('settings');

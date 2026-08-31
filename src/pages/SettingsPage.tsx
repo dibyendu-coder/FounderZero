@@ -140,35 +140,46 @@ export const SettingsPage: React.FC<SettingsPageProps> = ({
   }, []);
 
   const handleTestApiKey = async () => {
-    const keyToTest = apiKeyInput.trim();
-    if (!keyToTest) {
+    const rawKey = apiKeyInput.trim();
+    const keyToTest = rawKey
+      .replace(/^(export\s+)?([A-Z0-9_]*API_KEY[A-Z0-9_]*)\s*=\s*/i, '')
+      .replace(/^Bearer\s+/i, '')
+      .replace(/^["'`]|["'`]$/g, '')
+      .trim();
+
+    if (!keyToTest && !profile.geminiApiKey) {
       setTestResult({ success: false, message: 'Please enter an API key to test' });
       return;
     }
     setTestingKey(true);
     setTestResult(null);
     try {
+      const token = localStorage.getItem('founderzero_token');
       const res = await fetch('/api/ai/test-key', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ apiKey: keyToTest })
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: token ? `Bearer ${token}` : '',
+          'x-user-id': token || 'demo-user-1'
+        },
+        body: JSON.stringify({ apiKey: keyToTest || profile.geminiApiKey })
       });
-      const data = await res.json();
-      if (data.success) {
+      const data = await res.json().catch(() => null);
+      if (res.ok && data?.success) {
         setTestResult({
           success: true,
-          message: `Connected successfully to Gemini 3.7 Flash!`
+          message: data.message || `Connected successfully to Gemini 3.7 Flash!`
         });
       } else {
         setTestResult({
           success: false,
-          message: data.error || 'Invalid Gemini API key.'
+          message: data?.error || 'Invalid Gemini API key. Check key permissions in Google AI Studio.'
         });
       }
-    } catch (err) {
+    } catch (err: any) {
       setTestResult({
         success: false,
-        message: 'Could not connect to Gemini API servers.'
+        message: err?.message ? `Connection error: ${err.message}` : 'Could not connect to Gemini API servers.'
       });
     } finally {
       setTestingKey(false);
@@ -176,10 +187,17 @@ export const SettingsPage: React.FC<SettingsPageProps> = ({
   };
 
   const handleSaveApiKey = () => {
-    const cleanKey = apiKeyInput.trim();
+    const rawKey = apiKeyInput.trim();
+    const cleanKey = rawKey
+      .replace(/^(export\s+)?([A-Z0-9_]*API_KEY[A-Z0-9_]*)\s*=\s*/i, '')
+      .replace(/^Bearer\s+/i, '')
+      .replace(/^["'`]|["'`]$/g, '')
+      .trim();
+
     onUpdateProfile({
       geminiApiKey: cleanKey || undefined
     });
+    setApiKeyInput(cleanKey);
     setKeyStatus({
       hasKey: Boolean(cleanKey),
       maskedKey: cleanKey ? `${cleanKey.slice(0, 4)}••••••••${cleanKey.slice(-4)}` : null,

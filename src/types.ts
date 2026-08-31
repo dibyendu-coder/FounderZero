@@ -79,7 +79,12 @@ export interface StartupProfile {
   
   // Custom Founder Gemini API Key Configuration
   geminiApiKey?: string;
+  
+  // Appearance & Theme preference
+  theme?: 'light' | 'dark' | 'system';
 }
+
+export type ThemeMode = 'light' | 'dark' | 'system';
 
 export type ActionPriority = 'Do Now' | 'Do Next' | 'Later' | "Don't Do Yet";
 export type ActionStatus = 'pending' | 'started' | 'completed' | 'skipped' | 'snoozed';

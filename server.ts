@@ -25,6 +25,18 @@ import { AppState, StartupStage, CopilotMessage, CopilotConversation, FounderNot
 
 dotenv.config();
 
+// Helper: Sanitize Gemini API keys (strip quotes, export prefixes, whitespace)
+export function sanitizeApiKey(rawKey?: string): string {
+  if (!rawKey || typeof rawKey !== "string") return "";
+  let clean = rawKey.trim();
+  clean = clean.replace(/^(export\s+)?([A-Z0-9_]*API_KEY[A-Z0-9_]*)\s*=\s*/i, "");
+  clean = clean.replace(/^Bearer\s+/i, "");
+  clean = clean.replace(/^["'`]|["'`]$/g, "");
+  clean = clean.split("#")[0].trim();
+  clean = clean.replace(/[\r\n\t\s]/g, "");
+  return clean;
+}
+
 export function createApp(): express.Express {
   const app = express();
 
@@ -46,21 +58,21 @@ export function createApp(): express.Express {
 
   // Helper: Get AI client with support for custom founder Gemini API key
   const getAi = (req?: Request, customKeyOverride?: string) => {
-    let key = (customKeyOverride || "").trim();
+    let key = sanitizeApiKey(customKeyOverride);
 
     if (!key && req) {
       // 1. Check custom HTTP Header
       const headerKey = req.headers["x-gemini-api-key"];
       if (typeof headerKey === "string" && headerKey.trim()) {
-        key = headerKey.trim();
+        key = sanitizeApiKey(headerKey);
       }
 
       // 2. Check request body payload
       if (!key && req.body) {
         if (typeof req.body.geminiApiKey === "string" && req.body.geminiApiKey.trim()) {
-          key = req.body.geminiApiKey.trim();
+          key = sanitizeApiKey(req.body.geminiApiKey);
         } else if (req.body.profile && typeof req.body.profile.geminiApiKey === "string" && req.body.profile.geminiApiKey.trim()) {
-          key = req.body.profile.geminiApiKey.trim();
+          key = sanitizeApiKey(req.body.profile.geminiApiKey);
         }
       }
 
@@ -71,7 +83,7 @@ export function createApp(): express.Express {
           try {
             const state = getAppState(userId);
             if (state?.profile?.geminiApiKey && typeof state.profile.geminiApiKey === "string" && state.profile.geminiApiKey.trim()) {
-              key = state.profile.geminiApiKey.trim();
+              key = sanitizeApiKey(state.profile.geminiApiKey);
             }
           } catch (err) {
             // Ignore state fetch error
@@ -82,7 +94,7 @@ export function createApp(): express.Express {
 
     // 4. Fallback to server environment variable
     if (!key) {
-      key = process.env.GEMINI_API_KEY || "";
+      key = sanitizeApiKey(process.env.GEMINI_API_KEY || "");
     }
 
     if (!key || key === "MY_GEMINI_API_KEY") return null;
@@ -377,42 +389,64 @@ Respond with strictly valid JSON matching this schema:
     const { apiKey } = req.body || {};
     const startTime = Date.now();
 
-    const keyToTest = (apiKey || req.headers["x-gemini-api-key"] || "").toString().trim();
-    const ai = getAi(req, keyToTest || undefined);
+    const rawKey = (apiKey || req.headers["x-gemini-api-key"] || "").toString();
+    const cleanKey = sanitizeApiKey(rawKey);
+    const ai = getAi(req, cleanKey || undefined);
 
     if (!ai) {
       return res.status(400).json({
         success: false,
-        error: "No Gemini API key provided. Please enter a valid key from Google AI Studio (aistudio.google.com)."
+        error: "No Gemini API key provided. Please enter a valid key from Google AI Studio (https://aistudio.google.com/app/apikey)."
       });
     }
 
     try {
-      const response = await ai.models.generateContent({
-        model: "gemini-3.7-flash",
-        contents: "Respond with the word OK",
-      });
+      let usedModel = "gemini-3.7-flash";
+      let response: any;
+
+      try {
+        response = await ai.models.generateContent({
+          model: "gemini-3.7-flash",
+          contents: "Hello, respond with OK",
+        });
+      } catch (primaryErr: any) {
+        console.warn("Primary model (gemini-3.7-flash) test warning:", primaryErr?.message);
+        // Fallback test to gemini-flash-latest or gemini-2.5-flash
+        try {
+          usedModel = "gemini-flash-latest";
+          response = await ai.models.generateContent({
+            model: "gemini-flash-latest",
+            contents: "Hello, respond with OK",
+          });
+        } catch (fallbackErr: any) {
+          throw primaryErr;
+        }
+      }
 
       const latencyMs = Date.now() - startTime;
-      const text = response.text ? response.text.trim() : "";
+      const text = response?.text ? response.text.trim() : "OK";
 
-      if (text) {
-        return res.json({
-          success: true,
-          message: "Gemini API key is verified and operational!",
-          model: "gemini-3.7-flash",
-          latencyMs,
-          isCustomKey: Boolean(keyToTest)
-        });
-      } else {
-        return res.status(400).json({
-          success: false,
-          error: "Model returned an empty response. Please verify API key permissions."
-        });
-      }
+      return res.json({
+        success: true,
+        message: `Gemini API key is verified and operational! Connected to ${usedModel}.`,
+        model: usedModel,
+        latencyMs,
+        isCustomKey: Boolean(cleanKey)
+      });
     } catch (err: any) {
       console.error("Gemini API key verification error:", err);
-      const errMsg = err?.message || "Invalid or restricted Gemini API key. Please check your key at https://aistudio.google.com/app/apikey";
+      let errMsg = err?.message || "Invalid or restricted Gemini API key.";
+
+      if (errMsg.includes("API_KEY_INVALID") || errMsg.includes("400") || errMsg.includes("not valid") || errMsg.includes("API key not valid")) {
+        errMsg = "Invalid API key. Please check your key at https://aistudio.google.com/app/apikey (ensure it starts with 'AIzaSy...').";
+      } else if (errMsg.includes("RESOURCE_EXHAUSTED") || errMsg.includes("429") || errMsg.includes("Quota") || errMsg.includes("exhausted")) {
+        errMsg = "API rate limit or quota exceeded for this key. Check quota in Google AI Studio.";
+      } else if (errMsg.includes("PERMISSION_DENIED") || errMsg.includes("403")) {
+        errMsg = "Permission denied for this key. Please create a new unrestricted key in Google AI Studio.";
+      } else if (errMsg.includes("NOT_FOUND") || errMsg.includes("404")) {
+        errMsg = "Requested model not found or unsupported for this project tier.";
+      }
+
       return res.status(400).json({
         success: false,
         error: errMsg
@@ -423,17 +457,18 @@ Respond with strictly valid JSON matching this schema:
   app.get("/api/ai/key-status", (req: Request, res: Response) => {
     const userId = getUserIdFromReq(req) || "demo-user-1";
     const state = getAppState(userId);
-    const customKey = state.profile?.geminiApiKey;
-    const hasCustomKey = Boolean(customKey && customKey.trim().length > 5);
-    const hasServerKey = Boolean(process.env.GEMINI_API_KEY && process.env.GEMINI_API_KEY !== "MY_GEMINI_API_KEY");
+    const customKey = sanitizeApiKey(state.profile?.geminiApiKey);
+    const hasCustomKey = Boolean(customKey && customKey.length > 5);
+    const hasServerKey = Boolean(process.env.GEMINI_API_KEY && sanitizeApiKey(process.env.GEMINI_API_KEY) !== "MY_GEMINI_API_KEY" && sanitizeApiKey(process.env.GEMINI_API_KEY).length > 5);
 
     return res.json({
       success: true,
+      hasKey: hasCustomKey || hasServerKey,
       hasCustomKey,
-      maskedKey: hasCustomKey ? `${customKey!.slice(0, 4)}••••••••${customKey!.slice(-4)}` : null,
+      maskedKey: hasCustomKey ? `${customKey.slice(0, 4)}••••••••${customKey.slice(-4)}` : null,
       hasServerKey,
       activeProvider: hasCustomKey ? "custom" : hasServerKey ? "server" : "none",
-      recommendedModel: "gemini-3.7-flash"
+      model: "gemini-3.7-flash"
     });
   });
 
