@@ -106,155 +106,7 @@ export const FounderProfilePage: React.FC<FounderProfilePageProps> = ({
   const [aiGenerating, setAiGenerating] = useState(false);
   const [aiToast, setAiToast] = useState<string | null>(null);
 
-  // Gemini API Key Management
-  const [apiKeyInput, setApiKeyInput] = useState(profile.geminiApiKey || '');
-  const [showApiKey, setShowApiKey] = useState(false);
-  const [testingKey, setTestingKey] = useState(false);
-  const [keyStatus, setKeyStatus] = useState<{
-    hasKey: boolean;
-    maskedKey: string | null;
-    model: string;
-  }>({
-    hasKey: Boolean(profile.geminiApiKey),
-    maskedKey: profile.geminiApiKey ? `${profile.geminiApiKey.slice(0, 4)}••••••••${profile.geminiApiKey.slice(-4)}` : null,
-    model: 'gemini-2.5-flash'
-  });
-  const [testResult, setTestResult] = useState<{
-    success?: boolean;
-    message?: string;
-  } | null>(null);
 
-  // Sync apiKeyInput when profile updates
-  useEffect(() => {
-    if (profile.geminiApiKey) {
-      setApiKeyInput(profile.geminiApiKey);
-      setKeyStatus({
-        hasKey: true,
-        maskedKey: `${profile.geminiApiKey.slice(0, 4)}••••••••${profile.geminiApiKey.slice(-4)}`,
-        model: 'gemini-2.5-flash'
-      });
-    }
-  }, [profile.geminiApiKey]);
-
-  // Fetch live key status from backend
-  useEffect(() => {
-    const fetchKeyStatus = async () => {
-      try {
-        const token = localStorage.getItem('founderzero_token');
-        const res = await fetch('/api/ai/key-status', {
-          headers: {
-            Authorization: `Bearer ${token || ''}`,
-            'x-user-id': token || 'demo-user-1'
-          }
-        });
-        if (res.ok) {
-          const data = await res.json();
-          setKeyStatus({
-            hasKey: data.hasKey,
-            maskedKey: data.maskedKey,
-            model: data.model || 'gemini-2.5-flash'
-          });
-        }
-      } catch (e) {
-        // Quiet fallback
-      }
-    };
-    fetchKeyStatus();
-  }, []);
-
-  const handleTestApiKey = async () => {
-    const rawKey = apiKeyInput.trim();
-    // Sanitize common copy-paste artifacts
-    const keyToTest = rawKey
-      .replace(/^(export\s+)?([A-Z0-9_]*API_KEY[A-Z0-9_]*)\s*=\s*/i, '')
-      .replace(/^Bearer\s+/i, '')
-      .replace(/^["'`]|["'`]$/g, '')
-      .trim();
-
-    if (!keyToTest && !profile.geminiApiKey) {
-      setTestResult({
-        success: false,
-        message: 'Please enter a Gemini API key to test, or generate a free one in Google AI Studio.'
-      });
-      return;
-    }
-
-    setTestingKey(true);
-    setTestResult(null);
-
-    try {
-      const token = localStorage.getItem('founderzero_token');
-      const res = await fetch('/api/ai/test-key', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: token ? `Bearer ${token}` : '',
-          'x-user-id': token || 'demo-user-1'
-        },
-        body: JSON.stringify({ apiKey: keyToTest || profile.geminiApiKey })
-      });
-
-      const data = await res.json().catch(() => null);
-
-      if (res.ok && data?.success) {
-        setTestResult({
-          success: true,
-          message: data.message || `Connected successfully! Model '${data.model || 'gemini-2.5-flash'}' is active (${data.latencyMs || 120}ms).`
-        });
-      } else {
-        const errorDetail = data?.error || (res.status === 404 ? 'API test endpoint not found' : `Verification error (${res.status}): Please check key permissions in Google AI Studio.`);
-        setTestResult({
-          success: false,
-          message: errorDetail
-        });
-      }
-    } catch (err: any) {
-      setTestResult({
-        success: false,
-        message: err?.message ? `Connection error: ${err.message}` : 'Failed to reach Gemini verification endpoint. Check your internet connection.'
-      });
-    } finally {
-      setTestingKey(false);
-    }
-  };
-
-  const handleSaveApiKey = () => {
-    const rawKey = apiKeyInput.trim();
-    const cleanKey = rawKey
-      .replace(/^(export\s+)?([A-Z0-9_]*API_KEY[A-Z0-9_]*)\s*=\s*/i, '')
-      .replace(/^Bearer\s+/i, '')
-      .replace(/^["'`]|["'`]$/g, '')
-      .trim();
-
-    onUpdateProfile({
-      geminiApiKey: cleanKey || undefined
-    });
-    setApiKeyInput(cleanKey);
-    setKeyStatus({
-      hasKey: Boolean(cleanKey),
-      maskedKey: cleanKey ? `${cleanKey.slice(0, 4)}••••••••${cleanKey.slice(-4)}` : null,
-      model: 'gemini-2.5-flash'
-    });
-    setTestResult({
-      success: true,
-      message: cleanKey ? 'Gemini API key saved! All AI features and Copilot now utilize your key.' : 'API key removed. Using default engine.'
-    });
-    showToast(cleanKey ? '🔑 Custom Gemini API Key saved!' : 'Switched to default AI engine');
-  };
-
-  const handleRemoveApiKey = () => {
-    setApiKeyInput('');
-    onUpdateProfile({
-      geminiApiKey: ''
-    });
-    setKeyStatus({
-      hasKey: false,
-      maskedKey: null,
-      model: 'gemini-2.5-flash'
-    });
-    setTestResult(null);
-    showToast('Gemini API key removed. Using system default.');
-  };
 
   // Edit Form State
   const [editName, setEditName] = useState(currentUser?.name || profile.founderName || '');
@@ -269,7 +121,6 @@ export const FounderProfilePage: React.FC<FounderProfilePageProps> = ({
   const [editGithub, setEditGithub] = useState(profile.socialLinks?.github || '');
   const [editLinkedin, setEditLinkedin] = useState(profile.socialLinks?.linkedin || '');
   const [editWebsite, setEditWebsite] = useState(profile.socialLinks?.website || '');
-  const [editApiKey, setEditApiKey] = useState(profile.geminiApiKey || '');
   const [editSuperpowers, setEditSuperpowers] = useState<string[]>(
     profile.superpowers || [
       'Autonomous AI Agent Coding',
@@ -316,7 +167,6 @@ export const FounderProfilePage: React.FC<FounderProfilePageProps> = ({
       timezone: editTimezone.trim(),
       workingStyle: editWorkingStyle.trim(),
       founderAvatar: editAvatar,
-      geminiApiKey: editApiKey.trim() || undefined,
       socialLinks: {
         twitter: editTwitter.trim(),
         github: editGithub.trim(),
@@ -325,12 +175,6 @@ export const FounderProfilePage: React.FC<FounderProfilePageProps> = ({
       },
       superpowers: editSuperpowers,
       operatingPrinciples: editPrinciples
-    });
-    setApiKeyInput(editApiKey.trim());
-    setKeyStatus({
-      hasKey: Boolean(editApiKey.trim()),
-      maskedKey: editApiKey.trim() ? `${editApiKey.trim().slice(0, 4)}••••••••${editApiKey.trim().slice(-4)}` : null,
-      model: 'gemini-2.5-flash'
     });
     setIsEditing(false);
     showToast('Founder profile updated successfully');
@@ -972,161 +816,49 @@ Verified via FounderZero AI Operating System`;
         </div>
       </div>
 
-      {/* 4. FOUNDER AI INTELLIGENCE & GEMINI API KEY (BYOK) */}
+      {/* 4. FOUNDER AI INTELLIGENCE & GROQ LLM API */}
       <div className="rounded-2xl bg-gradient-to-b from-slate-900 via-slate-900 to-slate-950 border border-slate-800 p-6 md:p-8 space-y-6 shadow-xl relative overflow-hidden">
         {/* Glow */}
-        <div className="absolute top-0 right-0 w-80 h-80 bg-blue-600/10 blur-3xl pointer-events-none" />
+        <div className="absolute top-0 right-0 w-80 h-80 bg-purple-600/10 blur-3xl pointer-events-none" />
 
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-800/80 pb-5">
           <div className="space-y-1">
             <div className="flex items-center gap-2">
-              <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-600 text-white flex items-center justify-center shadow-lg shadow-blue-500/20">
-                <Key size={16} />
+              <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-purple-600 to-indigo-600 text-white flex items-center justify-center shadow-lg shadow-purple-500/20">
+                <Sparkles size={16} />
               </div>
               <h3 className="text-lg font-bold text-white tracking-tight">
-                Gemini API Intelligence & Custom Key (BYOK)
+                Groq LLM Engine (Server-Side)
               </h3>
             </div>
             <p className="text-xs text-slate-400">
-              Bring your own Google Gemini API key to power all AI Copilot chats, growth diagnostics, semantic note actions, and reality checks with zero rate limits.
+              Founder Copilot and all AI diagnostics are powered by Groq LLM API (llama-3.3-70b-versatile).
             </p>
           </div>
 
           <div className="flex items-center gap-2 self-start md:self-auto">
-            {keyStatus.hasKey ? (
-              <span className="px-3 py-1 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 text-xs font-mono font-semibold flex items-center gap-1.5 shadow-sm">
-                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                Custom Key Active ({keyStatus.model})
-              </span>
-            ) : (
-              <span className="px-3 py-1 rounded-full bg-blue-500/15 border border-blue-500/30 text-blue-400 text-xs font-mono font-semibold flex items-center gap-1.5">
-                <Sparkles size={12} />
-                Using Default System AI Engine
-              </span>
-            )}
+            <span className="px-3 py-1 rounded-full bg-purple-500/15 border border-purple-500/30 text-purple-400 text-xs font-mono font-semibold flex items-center gap-1.5 shadow-sm">
+              <span className="w-2 h-2 rounded-full bg-purple-400 animate-pulse" />
+              Vercel Env Configured
+            </span>
           </div>
         </div>
 
-        {/* Input & Control Row */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-          <div className="lg:col-span-7 space-y-4">
-            <div className="space-y-2">
-              <label className="block text-xs font-mono text-slate-300 font-bold uppercase">
-                Your Gemini API Key (Secret)
-              </label>
-              <div className="relative flex items-center">
-                <input
-                  type={showApiKey ? 'text' : 'password'}
-                  value={apiKeyInput}
-                  onChange={(e) => {
-                    setApiKeyInput(e.target.value);
-                    setTestResult(null);
-                  }}
-                  placeholder="AIzaSy..."
-                  className="w-full bg-slate-950 border border-slate-700/90 rounded-xl pl-3.5 pr-20 py-2.5 text-xs text-white placeholder:text-slate-600 font-mono focus:outline-hidden focus:border-blue-500 shadow-inner"
-                />
-                <button
-                  type="button"
-                  onClick={() => setShowApiKey(!showApiKey)}
-                  className="absolute right-2.5 px-2 py-1 text-slate-400 hover:text-slate-200 text-xs flex items-center gap-1 rounded hover:bg-slate-800 transition"
-                >
-                  {showApiKey ? <EyeOff size={14} /> : <Eye size={14} />}
-                  <span className="text-[11px] font-mono">{showApiKey ? 'Hide' : 'Show'}</span>
-                </button>
-              </div>
-              <div className="flex items-center justify-between text-[11px] text-slate-400 pt-1">
-                <span>Stored securely in your private workspace profile state.</span>
-                <a
-                  href="https://aistudio.google.com/app/apikey"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="text-blue-400 hover:text-blue-300 font-semibold flex items-center gap-1 transition underline-offset-2 hover:underline"
-                >
-                  <span>Get a Free Gemini Key in Google AI Studio</span>
-                  <ExternalLink size={11} />
-                </a>
-              </div>
-            </div>
-
-            {/* Test Result Feedback Box */}
-            {testResult && (
-              <div
-                className={`p-3 rounded-xl border text-xs font-medium flex items-start gap-2.5 transition ${
-                  testResult.success
-                    ? 'bg-emerald-950/30 border-emerald-800/60 text-emerald-300'
-                    : 'bg-rose-950/30 border-rose-800/60 text-rose-300'
-                }`}
-              >
-                {testResult.success ? (
-                  <CheckCircle size={16} className="text-emerald-400 shrink-0 mt-0.5" />
-                ) : (
-                  <AlertCircle size={16} className="text-rose-400 shrink-0 mt-0.5" />
-                )}
-                <div className="space-y-0.5">
-                  <p className="font-semibold">{testResult.success ? 'Verification Passed' : 'Verification Issue'}</p>
-                  <p className="text-[11px] leading-relaxed opacity-90">{testResult.message}</p>
-                </div>
-              </div>
-            )}
-
-            {/* Action Buttons */}
-            <div className="flex items-center gap-3 pt-1 flex-wrap">
-              <button
-                type="button"
-                onClick={handleSaveApiKey}
-                className="px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white text-xs font-semibold rounded-xl flex items-center gap-2 shadow-lg shadow-blue-500/25 transition active:scale-95"
-              >
-                <Check size={14} />
-                <span>Save API Key to Profile</span>
-              </button>
-
-              <button
-                type="button"
-                onClick={handleTestApiKey}
-                disabled={testingKey || !apiKeyInput.trim()}
-                className="px-3.5 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 text-xs font-semibold rounded-xl flex items-center gap-2 transition disabled:opacity-40 active:scale-95"
-              >
-                <RefreshCw size={13} className={testingKey ? 'animate-spin text-blue-400' : 'text-slate-400'} />
-                <span>{testingKey ? 'Testing Connection...' : 'Test & Verify Key'}</span>
-              </button>
-
-              {keyStatus.hasKey && (
-                <button
-                  type="button"
-                  onClick={handleRemoveApiKey}
-                  className="px-3.5 py-2 bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 border border-rose-500/30 text-xs font-semibold rounded-xl flex items-center gap-1.5 transition active:scale-95"
-                >
-                  <Trash2 size={13} />
-                  <span>Remove Custom Key</span>
-                </button>
-              )}
-            </div>
-          </div>
-
-          {/* Feature Matrix Info Box (Right 5 cols) */}
-          <div className="lg:col-span-5 rounded-xl bg-slate-950/80 border border-slate-800 p-4 space-y-3">
-            <span className="text-xs font-mono text-slate-300 font-bold uppercase flex items-center gap-1.5">
-              <Sparkles size={14} className="text-amber-400" />
-              What Your Key Powers Across The App:
-            </span>
-            <ul className="space-y-2 text-xs text-slate-400">
-              <li className="flex items-start gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-blue-400 shrink-0 mt-1.5" />
-                <span><strong className="text-slate-200">AI Copilot & Advisor:</strong> Real-time conversational thinking partner on all startup dilemmas.</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 shrink-0 mt-1.5" />
-                <span><strong className="text-slate-200">Notepad AI & Semantic Search:</strong> Ask natural questions across all your private notes.</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-indigo-400 shrink-0 mt-1.5" />
-                <span><strong className="text-slate-200">Growth Diagnostics:</strong> Dynamic bottleneck audit and next action formulation.</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-amber-400 shrink-0 mt-1.5" />
-                <span><strong className="text-slate-200">Reality Check:</strong> Strict scrutiny on spending and premature hiring decisions.</span>
-              </li>
-            </ul>
+        <div className="space-y-3 text-xs text-slate-300 leading-relaxed">
+          <p>
+            To configure your Groq API key for Vercel deployments, add your <code className="font-mono bg-slate-900 px-1.5 py-0.5 rounded text-purple-300 border border-slate-800">GROQ_API_KEY</code> environment variable in your Vercel project settings.
+          </p>
+          <div className="flex items-center justify-between pt-2">
+            <span className="text-slate-400 font-mono text-[11px]">Console & Key Management:</span>
+            <a
+              href="https://console.groq.com"
+              target="_blank"
+              rel="noreferrer"
+              className="text-purple-400 hover:text-purple-300 font-semibold flex items-center gap-1 transition underline-offset-2 hover:underline"
+            >
+              <span>console.groq.com</span>
+              <ExternalLink size={11} />
+            </a>
           </div>
         </div>
       </div>
@@ -1426,34 +1158,7 @@ Verified via FounderZero AI Operating System`;
                 </div>
               </div>
 
-              {/* Gemini API Key Field in Modal */}
-              <div className="space-y-2 pt-2 border-t border-slate-800">
-                <div className="flex items-center justify-between">
-                  <span className="text-xs font-mono text-slate-300 font-bold uppercase flex items-center gap-1.5">
-                    <Key size={14} className="text-blue-400" />
-                    Google Gemini API Key (BYOK)
-                  </span>
-                  <a
-                    href="https://aistudio.google.com/app/apikey"
-                    target="_blank"
-                    rel="noreferrer"
-                    className="text-[11px] text-blue-400 hover:underline flex items-center gap-1"
-                  >
-                    <span>Get Free Key</span>
-                    <ExternalLink size={10} />
-                  </a>
-                </div>
-                <input
-                  type="password"
-                  value={editApiKey}
-                  onChange={(e) => setEditApiKey(e.target.value)}
-                  placeholder="AIzaSy... (Leave empty to use default engine)"
-                  className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2 text-xs text-white font-mono focus:outline-hidden focus:border-blue-500"
-                />
-                <p className="text-[11px] text-slate-400">
-                  Allows custom unlimited AI quotas across Copilot, Diagnostics, Notes, and Reality Checks.
-                </p>
-              </div>
+
 
               {/* Footer Actions */}
               <div className="pt-4 border-t border-slate-800 flex items-center justify-end gap-3">

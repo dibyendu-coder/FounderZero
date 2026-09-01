@@ -98,25 +98,14 @@ export const CopilotHeader: React.FC<CopilotHeaderProps> = ({
       {/* Right: Actions */}
       <div className="flex items-center gap-2">
         {/* Model Indicator Pill */}
-        {profile?.geminiApiKey ? (
-          <button
-            onClick={() => onNavigate('profile')}
-            className="hidden md:flex items-center gap-1.5 px-2 py-1 rounded bg-emerald-950/60 border border-emerald-800/60 text-emerald-300 text-[11px] font-mono hover:bg-emerald-900/40 transition cursor-pointer"
-            title="Using your direct BYOK Gemini API Key"
-          >
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-            <span>gemini-2.5-flash</span>
-          </button>
-        ) : (
-          <button
-            onClick={() => onNavigate('profile')}
-            className="hidden md:flex items-center gap-1.5 px-2 py-1 rounded bg-slate-800 hover:bg-slate-700/80 border border-slate-700 text-slate-300 text-[11px] font-mono transition cursor-pointer"
-            title="Configure personal Gemini key in Profile"
-          >
-            <Key size={11} className="text-blue-400" />
-            <span>BYOK Setup</span>
-          </button>
-        )}
+        <button
+          onClick={() => onNavigate('profile')}
+          className="hidden md:flex items-center gap-1.5 px-2 py-1 rounded bg-purple-950/60 border border-purple-800/60 text-purple-300 text-[11px] font-mono hover:bg-purple-900/40 transition cursor-pointer"
+          title="Powered by Groq LLM API"
+        >
+          <span className="w-1.5 h-1.5 rounded-full bg-purple-400 animate-pulse" />
+          <span>groq/llama-3.3-70b</span>
+        </button>
 
         {/* New Chat Button */}
         <button

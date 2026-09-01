@@ -2,7 +2,7 @@ import express, { Request, Response } from "express";
 import path from "path";
 import dotenv from "dotenv";
 import { createServer as createViteServer } from "vite";
-import { GoogleGenAI } from "@google/genai";
+import Groq from "groq-sdk";
 import {
   createUser,
   deleteVaultResource,
@@ -56,61 +56,102 @@ export function createApp(): express.Express {
     return null;
   };
 
-  // Helper: Get AI client with support for custom founder Gemini API key
-  const getAi = (req?: Request, customKeyOverride?: string) => {
-    let key = sanitizeApiKey(customKeyOverride);
-
-    if (!key && req) {
-      // 1. Check custom HTTP Header
-      const headerKey = req.headers["x-gemini-api-key"];
-      if (typeof headerKey === "string" && headerKey.trim()) {
-        key = sanitizeApiKey(headerKey);
-      }
-
-      // 2. Check request body payload
-      if (!key && req.body) {
-        if (typeof req.body.geminiApiKey === "string" && req.body.geminiApiKey.trim()) {
-          key = sanitizeApiKey(req.body.geminiApiKey);
-        } else if (req.body.profile && typeof req.body.profile.geminiApiKey === "string" && req.body.profile.geminiApiKey.trim()) {
-          key = sanitizeApiKey(req.body.profile.geminiApiKey);
-        }
-      }
-
-      // 3. Check persistent database/state profile for the authenticated user
-      if (!key) {
-        const userId = getUserIdFromReq(req);
-        if (userId) {
-          try {
-            const state = getAppState(userId);
-            if (state?.profile?.geminiApiKey && typeof state.profile.geminiApiKey === "string" && state.profile.geminiApiKey.trim()) {
-              key = sanitizeApiKey(state.profile.geminiApiKey);
-            }
-          } catch (err) {
-            // Ignore state fetch error
-          }
-        }
-      }
-    }
-
-    // 4. Fallback to server environment variable
-    if (!key) {
-      key = sanitizeApiKey(process.env.GEMINI_API_KEY || "");
-    }
-
-    if (!key || key === "MY_GEMINI_API_KEY") return null;
-    try {
-      return new GoogleGenAI({
-        apiKey: key,
-        httpOptions: {
-          headers: {
-            "User-Agent": "aistudio-build",
-          },
-        },
-      });
-    } catch (e) {
-      console.error("Gemini AI initialization error:", e);
+  // Helper: Get Groq client using process.env.GROQ_API_KEY (or GEMINI_API_KEY fallback)
+  const getGroqClient = () => {
+    const key = sanitizeApiKey(process.env.GROQ_API_KEY || process.env.GEMINI_API_KEY || "");
+    if (!key || key === "MY_GROQ_API_KEY" || key === "MY_GEMINI_API_KEY" || key === "MY_KEY_HERE") {
       return null;
     }
+    try {
+      return new Groq({ apiKey: key });
+    } catch (e) {
+      console.error("Groq client initialization error:", e);
+      return null;
+    }
+  };
+
+  const callGroq = async (prompt: string, options?: { systemPrompt?: string; temperature?: number; jsonMode?: boolean; maxTokens?: number }) => {
+    const groq = getGroqClient();
+    if (!groq) {
+      throw new Error("GROQ_API_KEY environment variable is not configured. Please add your Groq API key from console.groq.com to Vercel environment variables.");
+    }
+
+    const messages: any[] = [];
+    if (options?.systemPrompt) {
+      messages.push({ role: "system", content: options.systemPrompt });
+    }
+    messages.push({ role: "user", content: prompt });
+
+    const completion = await groq.chat.completions.create({
+      model: "llama-3.3-70b-versatile",
+      messages,
+      temperature: options?.temperature ?? 0.7,
+      max_tokens: options?.maxTokens ?? 2048,
+      ...(options?.jsonMode ? { response_format: { type: "json_object" } } : {})
+    });
+
+    return completion.choices?.[0]?.message?.content || "";
+  };
+
+  const streamGroq = async (prompt: string, onChunk: (text: string) => void, options?: { systemPrompt?: string; temperature?: number; maxTokens?: number }) => {
+    const groq = getGroqClient();
+    if (!groq) {
+      throw new Error("GROQ_API_KEY environment variable is not configured. Please add your Groq API key from console.groq.com to Vercel environment variables.");
+    }
+
+    const messages: any[] = [];
+    if (options?.systemPrompt) {
+      messages.push({ role: "system", content: options.systemPrompt });
+    }
+    messages.push({ role: "user", content: prompt });
+
+    const stream = await groq.chat.completions.create({
+      model: "llama-3.3-70b-versatile",
+      messages,
+      temperature: options?.temperature ?? 0.7,
+      max_tokens: options?.maxTokens ?? 2048,
+      stream: true,
+    });
+
+    let fullText = "";
+    for await (const chunk of stream) {
+      const text = chunk.choices[0]?.delta?.content || "";
+      if (text) {
+        fullText += text;
+        onChunk(text);
+      }
+    }
+    return fullText;
+  };
+
+  // Helper: getAi adapter backed by Groq LLM API
+  const getAi = (req?: Request, customKeyOverride?: string) => {
+    const groq = getGroqClient();
+    if (!groq) return null;
+
+    return {
+      models: {
+        generateContent: async ({ contents, config, model }: { contents: string; config?: any; model?: string }) => {
+          const jsonMode = config?.responseMimeType === "application/json" || (typeof contents === "string" && (contents.includes("strictly valid JSON") || contents.includes("JSON schema")));
+          const text = await callGroq(contents, {
+            temperature: config?.temperature ?? 0.7,
+            jsonMode,
+            maxTokens: config?.maxOutputTokens ?? 2048,
+          });
+          return { text };
+        },
+        generateContentStream: async function* ({ contents, config, model }: { contents: string; config?: any; model?: string }) {
+          let accumulated = "";
+          await streamGroq(contents, (chunk) => {
+            accumulated += chunk;
+          }, {
+            temperature: config?.temperature ?? 0.7,
+            maxTokens: config?.maxOutputTokens ?? 2048,
+          });
+          yield { text: accumulated };
+        }
+      }
+    };
   };
 
   // --- AUTH ENDPOINTS ---
@@ -459,20 +500,15 @@ Respond with strictly valid JSON matching this schema:
   });
 
   app.get("/api/ai/key-status", (req: Request, res: Response) => {
-    const userId = getUserIdFromReq(req) || "demo-user-1";
-    const state = getAppState(userId);
-    const customKey = sanitizeApiKey(state.profile?.geminiApiKey);
-    const hasCustomKey = Boolean(customKey && customKey.length > 5);
-    const hasServerKey = Boolean(process.env.GEMINI_API_KEY && sanitizeApiKey(process.env.GEMINI_API_KEY) !== "MY_GEMINI_API_KEY" && sanitizeApiKey(process.env.GEMINI_API_KEY).length > 5);
+    const apiKey = sanitizeApiKey(process.env.GROQ_API_KEY || process.env.GEMINI_API_KEY || "");
+    const hasKey = Boolean(apiKey && apiKey !== "MY_GROQ_API_KEY" && apiKey !== "MY_GEMINI_API_KEY" && apiKey !== "MY_KEY_HERE" && apiKey.length > 5);
 
     return res.json({
       success: true,
-      hasKey: hasCustomKey || hasServerKey,
-      hasCustomKey,
-      maskedKey: hasCustomKey ? `${customKey.slice(0, 4)}••••••••${customKey.slice(-4)}` : null,
-      hasServerKey,
-      activeProvider: hasCustomKey ? "custom" : hasServerKey ? "server" : "none",
-      model: "gemini-3.7-flash"
+      hasKey,
+      maskedKey: hasKey ? `${apiKey.slice(0, 4)}••••••••${apiKey.slice(-4)}` : null,
+      activeProvider: "groq",
+      model: "llama-3.3-70b-versatile"
     });
   });
 

@@ -70,8 +70,7 @@ export const SettingsPage: React.FC<SettingsPageProps> = ({
     goal90Days: 'Reach first 100 active users',
     createdAt: new Date().toISOString(),
     founderScore: 84,
-    monthlySavings: 18000,
-    geminiApiKey: ''
+    monthlySavings: 18000
   };
 
   const isDemo = currentUser?.isDemo || state?.user?.isDemo;
@@ -85,142 +84,7 @@ export const SettingsPage: React.FC<SettingsPageProps> = ({
   const [goal, setGoal] = useState(profile.goal90Days || '');
   const [saved, setSaved] = useState(false);
 
-  // Gemini API Key Management
-  const [apiKeyInput, setApiKeyInput] = useState(profile.geminiApiKey || '');
-  const [showApiKey, setShowApiKey] = useState(false);
-  const [testingKey, setTestingKey] = useState(false);
-  const [keyStatus, setKeyStatus] = useState<{
-    hasKey: boolean;
-    maskedKey: string | null;
-    model: string;
-  }>({
-    hasKey: Boolean(profile.geminiApiKey),
-    maskedKey: profile.geminiApiKey ? `${profile.geminiApiKey.slice(0, 4)}••••••••${profile.geminiApiKey.slice(-4)}` : null,
-    model: 'gemini-2.5-flash'
-  });
-  const [testResult, setTestResult] = useState<{
-    success?: boolean;
-    message?: string;
-  } | null>(null);
 
-  useEffect(() => {
-    if (profile.geminiApiKey) {
-      setApiKeyInput(profile.geminiApiKey);
-      setKeyStatus({
-        hasKey: true,
-        maskedKey: `${profile.geminiApiKey.slice(0, 4)}••••••••${profile.geminiApiKey.slice(-4)}`,
-        model: 'gemini-2.5-flash'
-      });
-    }
-  }, [profile.geminiApiKey]);
-
-  useEffect(() => {
-    const fetchStatus = async () => {
-      try {
-        const token = localStorage.getItem('founderzero_token');
-        const res = await fetch('/api/ai/key-status', {
-          headers: {
-            Authorization: `Bearer ${token || ''}`,
-            'x-user-id': token || 'demo-user-1'
-          }
-        });
-        if (res.ok) {
-          const data = await res.json();
-          setKeyStatus({
-            hasKey: data.hasKey,
-            maskedKey: data.maskedKey,
-            model: data.model || 'gemini-2.5-flash'
-          });
-        }
-      } catch (e) {
-        // Quiet
-      }
-    };
-    fetchStatus();
-  }, []);
-
-  const handleTestApiKey = async () => {
-    const rawKey = apiKeyInput.trim();
-    const keyToTest = rawKey
-      .replace(/^(export\s+)?([A-Z0-9_]*API_KEY[A-Z0-9_]*)\s*=\s*/i, '')
-      .replace(/^Bearer\s+/i, '')
-      .replace(/^["'`]|["'`]$/g, '')
-      .trim();
-
-    if (!keyToTest && !profile.geminiApiKey) {
-      setTestResult({ success: false, message: 'Please enter an API key to test' });
-      return;
-    }
-    setTestingKey(true);
-    setTestResult(null);
-    try {
-      const token = localStorage.getItem('founderzero_token');
-      const res = await fetch('/api/ai/test-key', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: token ? `Bearer ${token}` : '',
-          'x-user-id': token || 'demo-user-1'
-        },
-        body: JSON.stringify({ apiKey: keyToTest || profile.geminiApiKey })
-      });
-      const data = await res.json().catch(() => null);
-      if (res.ok && data?.success) {
-        setTestResult({
-          success: true,
-          message: data.message || `Connected successfully to Gemini 3.7 Flash!`
-        });
-      } else {
-        setTestResult({
-          success: false,
-          message: data?.error || 'Invalid Gemini API key. Check key permissions in Google AI Studio.'
-        });
-      }
-    } catch (err: any) {
-      setTestResult({
-        success: false,
-        message: err?.message ? `Connection error: ${err.message}` : 'Could not connect to Gemini API servers.'
-      });
-    } finally {
-      setTestingKey(false);
-    }
-  };
-
-  const handleSaveApiKey = () => {
-    const rawKey = apiKeyInput.trim();
-    const cleanKey = rawKey
-      .replace(/^(export\s+)?([A-Z0-9_]*API_KEY[A-Z0-9_]*)\s*=\s*/i, '')
-      .replace(/^Bearer\s+/i, '')
-      .replace(/^["'`]|["'`]$/g, '')
-      .trim();
-
-    onUpdateProfile({
-      geminiApiKey: cleanKey || undefined
-    });
-    setApiKeyInput(cleanKey);
-    setKeyStatus({
-      hasKey: Boolean(cleanKey),
-      maskedKey: cleanKey ? `${cleanKey.slice(0, 4)}••••••••${cleanKey.slice(-4)}` : null,
-      model: 'gemini-2.5-flash'
-    });
-    setTestResult({
-      success: true,
-      message: cleanKey ? 'Gemini API key saved to startup profile.' : 'Using default AI engine.'
-    });
-  };
-
-  const handleRemoveApiKey = () => {
-    setApiKeyInput('');
-    onUpdateProfile({
-      geminiApiKey: ''
-    });
-    setKeyStatus({
-      hasKey: false,
-      maskedKey: null,
-      model: 'gemini-2.5-flash'
-    });
-    setTestResult(null);
-  };
 
   // Account & Password States
   const [accountEmail, setAccountEmail] = useState(currentUser?.email || state?.user?.email || '');
@@ -484,127 +348,42 @@ export const SettingsPage: React.FC<SettingsPageProps> = ({
             </form>
           </Card>
 
-          {/* Gemini API Key & AI Engine Card */}
+          {/* Groq AI Engine Card */}
           <Card variant="default" className="p-6 space-y-4">
             <div className="flex items-center justify-between border-b border-slate-100 pb-3">
               <div className="flex items-center gap-2">
-                <div className="w-8 h-8 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center">
-                  <Key size={18} />
+                <div className="w-8 h-8 rounded-lg bg-purple-50 text-purple-600 flex items-center justify-center">
+                  <Sparkles size={18} />
                 </div>
                 <div>
                   <h3 className="font-bold text-base text-slate-900">
-                    Gemini API Key (BYOK)
+                    Groq LLM Engine (Server-Side)
                   </h3>
-                  <p className="text-xs text-slate-500">Power all AI tools, Copilot, & diagnostic features</p>
+                  <p className="text-xs text-slate-500">Powered by llama-3.3-70b-versatile for Founder Copilot & AI features</p>
                 </div>
               </div>
-              {keyStatus.hasKey ? (
-                <span className="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-xs font-mono font-semibold flex items-center gap-1.5">
-                  <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                  BYOK Active
-                </span>
-              ) : (
-                <span className="px-2.5 py-1 rounded-full bg-blue-50 text-blue-700 border border-blue-200 text-xs font-mono font-semibold">
-                  Default Engine
-                </span>
-              )}
+              <span className="px-2.5 py-1 rounded-full bg-purple-50 text-purple-700 border border-purple-200 text-xs font-mono font-semibold flex items-center gap-1.5">
+                <span className="w-2 h-2 rounded-full bg-purple-500 animate-pulse" />
+                Vercel Env Configured
+              </span>
             </div>
 
             <div className="space-y-3 text-xs">
               <p className="text-slate-600 leading-relaxed">
-                Add your own Google Gemini API key to enable high-throughput AI features (including the Copilot Chatbot, Notepad Semantic Search, Diagnostics, and Reality Checks) with your personal quota.
+                Founder Copilot and all AI diagnostic tools are powered by Groq LLM API. To configure your API key for deployments (such as Vercel), add your <code className="font-mono bg-slate-100 px-1 py-0.5 rounded text-slate-800">GROQ_API_KEY</code> environment variable in your Vercel project settings.
               </p>
 
-              <div>
-                <label className="block font-semibold text-slate-700 mb-1">Your Gemini API Key</label>
-                <div className="relative flex items-center">
-                  <input
-                    type={showApiKey ? 'text' : 'password'}
-                    value={apiKeyInput}
-                    onChange={(e) => {
-                      setApiKeyInput(e.target.value);
-                      setTestResult(null);
-                    }}
-                    placeholder="AIzaSy..."
-                    className="w-full pl-3.5 pr-20 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-mono text-slate-900 outline-none focus:border-[#0052FF] focus:bg-white"
-                  />
-                  <button
-                    type="button"
-                    onClick={() => setShowApiKey(!showApiKey)}
-                    className="absolute right-2 px-2 py-1 text-slate-500 hover:text-slate-700 text-xs flex items-center gap-1 rounded hover:bg-slate-100 transition"
-                  >
-                    {showApiKey ? <EyeOff size={13} /> : <Eye size={13} />}
-                    <span className="text-[10px] font-mono">{showApiKey ? 'Hide' : 'Show'}</span>
-                  </button>
-                </div>
-                <div className="flex items-center justify-between text-[11px] text-slate-500 pt-1">
-                  <span>Never shared. Stored in your private workspace profile.</span>
-                  <a
-                    href="https://aistudio.google.com/app/apikey"
-                    target="_blank"
-                    rel="noreferrer"
-                    className="text-[#0052FF] hover:underline font-semibold flex items-center gap-1"
-                  >
-                    <span>Get a Free API Key</span>
-                    <ExternalLink size={10} />
-                  </a>
-                </div>
-              </div>
-
-              {testResult && (
-                <div
-                  className={`p-3 rounded-xl border text-xs font-medium flex items-start gap-2 ${
-                    testResult.success
-                      ? 'bg-emerald-50 border-emerald-200 text-emerald-800'
-                      : 'bg-rose-50 border-rose-200 text-rose-800'
-                  }`}
+              <div className="flex items-center justify-between pt-2">
+                <span className="text-slate-500 font-mono text-[11px]">Console & Key Management:</span>
+                <a
+                  href="https://console.groq.com"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-purple-600 hover:underline font-semibold flex items-center gap-1"
                 >
-                  {testResult.success ? (
-                    <CheckCircle2 size={16} className="text-emerald-600 shrink-0 mt-0.5" />
-                  ) : (
-                    <AlertCircle size={16} className="text-rose-600 shrink-0 mt-0.5" />
-                  )}
-                  <div>
-                    <p className="font-semibold">{testResult.success ? 'Ready' : 'Verification Error'}</p>
-                    <p className="text-[11px] mt-0.5">{testResult.message}</p>
-                  </div>
-                </div>
-              )}
-
-              <div className="pt-2 flex items-center gap-2 flex-wrap">
-                <Button
-                  type="button"
-                  variant="gradient"
-                  size="sm"
-                  onClick={handleSaveApiKey}
-                  leftIcon={<Check size={14} />}
-                >
-                  Save API Key
-                </Button>
-
-                <Button
-                  type="button"
-                  variant="outline"
-                  size="sm"
-                  onClick={handleTestApiKey}
-                  disabled={testingKey || !apiKeyInput.trim()}
-                  leftIcon={<RefreshCw size={13} className={testingKey ? 'animate-spin' : ''} />}
-                >
-                  {testingKey ? 'Testing...' : 'Test Connection'}
-                </Button>
-
-                {keyStatus.hasKey && (
-                  <Button
-                    type="button"
-                    variant="outline"
-                    size="sm"
-                    onClick={handleRemoveApiKey}
-                    leftIcon={<Trash2 size={13} />}
-                    className="text-rose-600 border-rose-200 hover:bg-rose-50"
-                  >
-                    Remove Key
-                  </Button>
-                )}
+                  <span>console.groq.com</span>
+                  <ExternalLink size={10} />
+                </a>
               </div>
             </div>
           </Card>

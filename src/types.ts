@@ -77,8 +77,6 @@ export interface StartupProfile {
   skillRatings?: FounderSkillRating[];
   badges?: FounderBadge[];
   
-  // Custom Founder Gemini API Key Configuration
-  geminiApiKey?: string;
   
   // Appearance & Theme preference
   theme?: 'light' | 'dark' | 'system';

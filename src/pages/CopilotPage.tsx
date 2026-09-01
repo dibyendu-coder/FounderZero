@@ -248,8 +248,6 @@ export const CopilotPage: React.FC<CopilotPageProps> = ({
         'x-user-id': token || 'demo-user-1'
       };
       if (token) headers['Authorization'] = `Bearer ${token}`;
-      if (profile.geminiApiKey) headers['x-gemini-api-key'] = profile.geminiApiKey;
-
       const res = await fetch('/api/copilot/chat', {
         method: 'POST',
         headers,
@@ -258,8 +256,7 @@ export const CopilotPage: React.FC<CopilotPageProps> = ({
           conversationId: currentConvId,
           message: textToSend,
           mode: modeToUse,
-          activeContexts,
-          geminiApiKey: profile.geminiApiKey
+          activeContexts
         })
       });
 
