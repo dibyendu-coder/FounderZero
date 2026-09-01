@@ -335,7 +335,7 @@ Respond with strictly valid JSON matching this schema:
 }`;
 
         const response = await ai.models.generateContent({
-          model: "gemini-2.5-flash",
+          model: "gemini-3.7-flash",
           contents: prompt,
           config: { responseMimeType: "application/json" },
         });
@@ -401,11 +401,11 @@ Respond with strictly valid JSON matching this schema:
     }
 
     try {
-      let usedModel = "gemini-2.5-flash";
+      let usedModel = "gemini-3.7-flash";
       let response: any;
       let lastErr: any = null;
 
-      const modelsToTry = ["gemini-2.5-flash", "gemini-1.5-flash", "gemini-2.5-pro", "gemini-1.5-pro", "gemini-flash-latest"];
+      const modelsToTry = ["gemini-3.7-flash", "gemini-flash-latest", "gemini-3.1-pro-preview"];
       let success = false;
 
       for (const m of modelsToTry) {
@@ -472,7 +472,7 @@ Respond with strictly valid JSON matching this schema:
       maskedKey: hasCustomKey ? `${customKey.slice(0, 4)}••••••••${customKey.slice(-4)}` : null,
       hasServerKey,
       activeProvider: hasCustomKey ? "custom" : hasServerKey ? "server" : "none",
-      model: "gemini-2.5-flash"
+      model: "gemini-3.7-flash"
     });
   });
 
@@ -540,7 +540,7 @@ Respond with strictly valid JSON matching this schema:
 }`;
 
       const response = await ai.models.generateContent({
-        model: "gemini-2.5-flash",
+        model: "gemini-3.7-flash",
         contents: prompt,
         config: { responseMimeType: "application/json" },
       });
@@ -620,7 +620,7 @@ Respond with strictly valid JSON:
 }`;
 
       const response = await ai.models.generateContent({
-        model: "gemini-2.5-flash",
+        model: "gemini-3.7-flash",
         contents: prompt,
         config: { responseMimeType: "application/json" },
       });
@@ -714,7 +714,7 @@ Respond with strictly valid JSON matching this schema:
 }`;
 
       const response = await ai.models.generateContent({
-        model: "gemini-2.5-flash",
+        model: "gemini-3.7-flash",
         contents: prompt,
         config: { responseMimeType: "application/json" },
       });
@@ -817,7 +817,7 @@ Respond with strictly valid JSON:
 }`;
 
       const response = await ai.models.generateContent({
-        model: "gemini-2.5-flash",
+        model: "gemini-3.7-flash",
         contents: prompt,
         config: { responseMimeType: "application/json" },
       });
@@ -925,7 +925,7 @@ Respond strictly with valid JSON:
 }`;
 
         const response = await ai.models.generateContent({
-          model: "gemini-2.5-flash",
+          model: "gemini-3.7-flash",
           contents: prompt,
           config: { responseMimeType: "application/json" },
         });
@@ -971,7 +971,7 @@ Respond strictly with valid JSON:
 }`;
 
         const response = await ai.models.generateContent({
-          model: "gemini-2.5-flash",
+          model: "gemini-3.7-flash",
           contents: prompt,
           config: { responseMimeType: "application/json" },
         });
@@ -1069,7 +1069,7 @@ Provide a concise, high-impact growth diagnosis JSON containing:
 Return strictly valid JSON.`;
 
         const response = await ai.models.generateContent({
-          model: "gemini-2.5-flash",
+          model: "gemini-3.7-flash",
           contents: prompt,
           config: { responseMimeType: "application/json" },
         });
@@ -1166,7 +1166,7 @@ Return JSON with:
 Return strictly valid JSON.`;
 
         const response = await ai.models.generateContent({
-          model: "gemini-2.5-flash",
+          model: "gemini-3.7-flash",
           contents: prompt,
           config: { responseMimeType: "application/json" },
         });
@@ -1232,7 +1232,7 @@ Bottleneck: ${profile?.biggestUncertainty}
 Give a direct, actionable, zero-budget advice response referencing their actual metrics and stage. Keep it structured in 3 clear bullet points + 1 key action step. No sales hype or generic fluff.`;
 
         const response = await ai.models.generateContent({
-          model: "gemini-2.5-flash",
+          model: "gemini-3.7-flash",
           contents: prompt,
         });
 
@@ -1529,7 +1529,7 @@ Return JSON:
 Strictly output valid JSON.`;
 
         const response = await ai.models.generateContent({
-          model: "gemini-2.5-flash",
+          model: "gemini-3.7-flash",
           contents: prompt,
           config: { responseMimeType: "application/json" }
         });
@@ -1773,7 +1773,7 @@ Return JSON:
 Strictly output valid JSON.`;
 
         const response = await ai.models.generateContent({
-          model: "gemini-2.5-flash",
+          model: "gemini-3.7-flash",
           contents: prompt,
           config: { responseMimeType: "application/json" }
         });
@@ -1839,7 +1839,7 @@ Return JSON array of suggestions:
 ]`;
 
         const response = await ai.models.generateContent({
-          model: "gemini-2.5-flash",
+          model: "gemini-3.7-flash",
           contents: prompt,
           config: { responseMimeType: "application/json" }
         });
@@ -2044,10 +2044,13 @@ Return JSON array of suggestions:
       return res.status(400).json({ error: "Message is required" });
     }
 
-    res.setHeader("Content-Type", "text/event-stream");
-    res.setHeader("Cache-Control", "no-cache");
-    res.setHeader("Connection", "keep-alive");
-    res.flushHeaders?.();
+    const isVercel = Boolean(process.env.VERCEL);
+    if (!isVercel) {
+      res.setHeader("Content-Type", "text/event-stream");
+      res.setHeader("Cache-Control", "no-cache");
+      res.setHeader("Connection", "keep-alive");
+      res.flushHeaders?.();
+    }
 
     const cleanMessage = message.trim();
     const effectiveMode = mode || "default";
@@ -2111,7 +2114,7 @@ Return JSON array of suggestions:
     // 3. Invoke Gemini AI model with streaming chunk processing if available
     const ai = getAi(req);
     if (ai) {
-      const modelsToTry = ["gemini-2.5-flash", "gemini-1.5-flash", "gemini-2.5-pro", "gemini-1.5-pro", "gemini-flash-latest"];
+      const modelsToTry = ["gemini-3.7-flash", "gemini-flash-latest", "gemini-3.1-pro-preview"];
       let aiSuccess = false;
 
       for (const m of modelsToTry) {
@@ -2484,14 +2487,19 @@ Here is my direct assessment based on your current stage (**${p.stage || 'Valida
       assistantContent = "I've analyzed your request. How else can I help your startup scale?";
     }
 
-    res.write(`data: ${JSON.stringify({
+    const payload = {
       success: true,
       userMessage: userMsg,
       assistantMessage: assistantMsg,
       conversation: conv,
       state
-    })}\n\n`);
-    res.end();
+    };
+    if (Boolean(process.env.VERCEL)) {
+      return res.json(payload);
+    } else {
+      res.write(`data: ${JSON.stringify(payload)}\n\n`);
+      res.end();
+    }
   });
 
   // 7. Confirm Copilot Action (Save to Notepad, Create Mission, Launch Experiment, etc.)

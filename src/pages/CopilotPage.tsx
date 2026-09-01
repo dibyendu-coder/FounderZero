@@ -263,108 +263,143 @@ export const CopilotPage: React.FC<CopilotPageProps> = ({
         })
       });
 
-      if (res.ok && res.body) {
-        const reader = res.body.getReader();
-        const decoder = new TextDecoder();
-        let buffer = '';
-        let assistantMsgId = 'msg-a-' + Date.now();
-        let finalAssistantMessage: CopilotMessage | null = null;
-        let finalState: any = null;
-        let streamedContent = '';
+      if (res.ok) {
+        const contentType = res.headers.get('content-type') || '';
+        if (contentType.includes('application/json')) {
+          const data = await res.json();
+          if (data && data.assistantMessage) {
+            const finalAssistantMessage = data.assistantMessage;
+            const finalState = data.state;
 
-        // Add initial empty assistant message for progressive streaming
-        const initialAssistantMsg: CopilotMessage = {
-          id: assistantMsgId,
-          conversationId: currentConvId,
-          role: 'assistant',
-          content: '',
-          timestamp: new Date().toISOString(),
-          mode: modeToUse,
-          thinkingSteps: [
-            { id: 'th-1', label: 'Gemini 2.5 Flash streaming response...', status: 'active' }
-          ]
-        };
+            onUpdateState(prev => {
+              const currentMsgs = prev.copilotMessages?.[currentConvId] || [];
+              const hasUser = currentMsgs.some(m => m.id === userMsg.id);
+              const baseMsgs = hasUser ? currentMsgs : [...currentMsgs, userMsg];
+              const msgs = [...baseMsgs, finalAssistantMessage];
+              return {
+                ...prev,
+                ...(finalState ? finalState : {}),
+                copilotMessages: {
+                  ...(prev.copilotMessages || {}),
+                  ...(finalState?.copilotMessages || {}),
+                  [currentConvId]: msgs
+                },
+                copilotConversations: (finalState?.copilotConversations || prev.copilotConversations || []).map(c =>
+                  c.id === currentConvId
+                    ? {
+                        ...c,
+                        lastMessagePreview: finalAssistantMessage.content.slice(0, 100) + '...',
+                        messagesCount: msgs.length,
+                        updatedAt: new Date().toISOString()
+                      }
+                    : c
+                )
+              };
+            });
+          }
+        } else if (res.body) {
+          const reader = res.body.getReader();
+          const decoder = new TextDecoder();
+          let buffer = '';
+          let assistantMsgId = 'msg-a-' + Date.now();
+          let finalAssistantMessage: CopilotMessage | null = null;
+          let finalState: any = null;
+          let streamedContent = '';
 
-        onUpdateState(prev => {
-          const currentMsgs = prev.copilotMessages?.[currentConvId] || [];
-          const hasUser = currentMsgs.some(m => m.id === userMsg.id);
-          const msgs = hasUser
-            ? [...currentMsgs, initialAssistantMsg]
-            : [...currentMsgs, userMsg, initialAssistantMsg];
-          return {
-            ...prev,
-            copilotMessages: {
-              ...(prev.copilotMessages || {}),
-              [currentConvId]: msgs
-            }
+          // Add initial empty assistant message for progressive streaming
+          const initialAssistantMsg: CopilotMessage = {
+            id: assistantMsgId,
+            conversationId: currentConvId,
+            role: 'assistant',
+            content: '',
+            timestamp: new Date().toISOString(),
+            mode: modeToUse,
+            thinkingSteps: [
+              { id: 'th-1', label: 'Gemini 2.5 Flash streaming response...', status: 'active' }
+            ]
           };
-        });
 
-        while (true) {
-          const { value, done } = await reader.read();
-          if (done) break;
-          buffer += decoder.decode(value, { stream: true });
-          const lines = buffer.split('\n\n');
-          buffer = lines.pop() || '';
+          onUpdateState(prev => {
+            const currentMsgs = prev.copilotMessages?.[currentConvId] || [];
+            const hasUser = currentMsgs.some(m => m.id === userMsg.id);
+            const msgs = hasUser
+              ? [...currentMsgs, initialAssistantMsg]
+              : [...currentMsgs, userMsg, initialAssistantMsg];
+            return {
+              ...prev,
+              copilotMessages: {
+                ...(prev.copilotMessages || {}),
+                [currentConvId]: msgs
+              }
+            };
+          });
 
-          for (const line of lines) {
-            if (line.startsWith('data: ')) {
-              try {
-                const data = JSON.parse(line.slice(6));
-                if (data.type === 'chunk') {
-                  streamedContent += data.text;
-                  onUpdateState(prev => {
-                    const currentMsgs = prev.copilotMessages?.[currentConvId] || [];
-                    const updated = currentMsgs.map(m => {
-                      if (m.id === assistantMsgId) {
-                        return { ...m, content: streamedContent };
-                      }
-                      return m;
+          while (true) {
+            const { value, done } = await reader.read();
+            if (done) break;
+            buffer += decoder.decode(value, { stream: true });
+            const lines = buffer.split('\n\n');
+            buffer = lines.pop() || '';
+
+            for (const line of lines) {
+              if (line.startsWith('data: ')) {
+                try {
+                  const data = JSON.parse(line.slice(6));
+                  if (data.type === 'chunk') {
+                    streamedContent += data.text;
+                    onUpdateState(prev => {
+                      const currentMsgs = prev.copilotMessages?.[currentConvId] || [];
+                      const updated = currentMsgs.map(m => {
+                        if (m.id === assistantMsgId) {
+                          return { ...m, content: streamedContent };
+                        }
+                        return m;
+                      });
+                      return {
+                        ...prev,
+                        copilotMessages: {
+                          ...(prev.copilotMessages || {}),
+                          [currentConvId]: updated
+                        }
+                      };
                     });
-                    return {
-                      ...prev,
-                      copilotMessages: {
-                        ...(prev.copilotMessages || {}),
-                        [currentConvId]: updated
-                      }
-                    };
-                  });
-                } else if (data.assistantMessage) {
-                  finalAssistantMessage = data.assistantMessage;
-                  finalState = data.state;
+                  } else if (data.assistantMessage) {
+                    finalAssistantMessage = data.assistantMessage;
+                    finalState = data.state;
+                  }
+                } catch (e) {
+                  // Ignore parse errors on partial frames
                 }
-              } catch (e) {
-                // Ignore parse errors on partial frames
               }
             }
           }
-        }
 
-        // Apply final fully-populated assistant message with tools, action proposals, etc.
-        if (finalAssistantMessage) {
-          onUpdateState(prev => {
-            const currentMsgs = prev.copilotMessages?.[currentConvId] || [];
-            const msgs = currentMsgs.map(m => m.id === assistantMsgId ? finalAssistantMessage! : m);
-            return {
-              ...prev,
-              ...(finalState ? finalState : {}),
-              copilotMessages: {
-                ...(prev.copilotMessages || {}),
-                ...(finalState?.copilotMessages || {}),
-                [currentConvId]: msgs
-              },
-              copilotConversations: (finalState?.copilotConversations || prev.copilotConversations || []).map(c =>
-                c.id === currentConvId
-                  ? {
-                      ...c,
-                      lastMessagePreview: finalAssistantMessage!.content.slice(0, 100) + '...',
-                      messagesCount: msgs.length,
-                      updatedAt: new Date().toISOString()
-                    }
-                  : c
-              )
-            };
-          });
+          // Apply final fully-populated assistant message with tools, action proposals, etc.
+          if (finalAssistantMessage) {
+            onUpdateState(prev => {
+              const currentMsgs = prev.copilotMessages?.[currentConvId] || [];
+              const msgs = currentMsgs.map(m => m.id === assistantMsgId ? finalAssistantMessage! : m);
+              return {
+                ...prev,
+                ...(finalState ? finalState : {}),
+                copilotMessages: {
+                  ...(prev.copilotMessages || {}),
+                  ...(finalState?.copilotMessages || {}),
+                  [currentConvId]: msgs
+                },
+                copilotConversations: (finalState?.copilotConversations || prev.copilotConversations || []).map(c =>
+                  c.id === currentConvId
+                    ? {
+                        ...c,
+                        lastMessagePreview: finalAssistantMessage!.content.slice(0, 100) + '...',
+                        messagesCount: msgs.length,
+                        updatedAt: new Date().toISOString()
+                      }
+                    : c
+                )
+              };
+            });
+          }
         }
       }
     } catch (err: any) {
