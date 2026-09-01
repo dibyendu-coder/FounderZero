@@ -2124,43 +2124,62 @@ Return JSON array of suggestions:
 
           let accumulatedText = "";
           let streamedAny = false;
-          try {
-            const responseStream = await ai.models.generateContentStream({
-              model: m,
-              contents: prompt,
-              config: {
-                temperature: 0.7,
-                topP: 0.9,
-                maxOutputTokens: 2048
+          if (isVercel) {
+            try {
+              const response = await ai.models.generateContent({
+                model: m,
+                contents: prompt,
+                config: {
+                  temperature: 0.7,
+                  topP: 0.9,
+                  maxOutputTokens: 2048
+                }
+              });
+              if (response && response.text) {
+                accumulatedText = response.text;
               }
-            });
-            for await (const chunk of responseStream) {
-              if (chunk && chunk.text) {
-                accumulatedText += chunk.text;
-                streamedAny = true;
-                res.write(`data: ${JSON.stringify({ type: "chunk", text: chunk.text })}\n\n`);
+            } catch (verr: any) {
+              console.warn(`Vercel non-streaming model ${m} failed:`, verr?.message);
+            }
+          } else {
+            try {
+              const responseStream = await ai.models.generateContentStream({
+                model: m,
+                contents: prompt,
+                config: {
+                  temperature: 0.7,
+                  topP: 0.9,
+                  maxOutputTokens: 2048
+                }
+              });
+              for await (const chunk of responseStream) {
+                if (chunk && chunk.text) {
+                  accumulatedText += chunk.text;
+                  streamedAny = true;
+                  res.write(`data: ${JSON.stringify({ type: "chunk", text: chunk.text })}\n\n`);
+                  (res as any).flush?.();
+                }
+              }
+            } catch (streamErr: any) {
+              if (streamErr?.message?.includes("looping")) {
+                console.warn(`Model ${m} encountered looping content. Skipping to fallback.`);
+                throw streamErr;
+              }
+              // Fallback to non-streaming generateContent if stream fails
+              const response = await ai.models.generateContent({
+                model: m,
+                contents: prompt,
+                config: {
+                  temperature: 0.7,
+                  topP: 0.9,
+                  maxOutputTokens: 2048
+                }
+              });
+              if (response && response.text) {
+                accumulatedText = response.text;
+                res.write(`data: ${JSON.stringify({ type: "chunk", text: response.text })}\n\n`);
                 (res as any).flush?.();
               }
-            }
-          } catch (streamErr: any) {
-            if (streamErr?.message?.includes("looping")) {
-              console.warn(`Model ${m} encountered looping content. Skipping to fallback.`);
-              throw streamErr;
-            }
-            // Fallback to non-streaming generateContent if stream fails
-            const response = await ai.models.generateContent({
-              model: m,
-              contents: prompt,
-              config: {
-                temperature: 0.7,
-                topP: 0.9,
-                maxOutputTokens: 2048
-              }
-            });
-            if (response && response.text) {
-              accumulatedText = response.text;
-              res.write(`data: ${JSON.stringify({ type: "chunk", text: response.text })}\n\n`);
-              (res as any).flush?.();
             }
           }
 
