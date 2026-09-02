@@ -20,7 +20,7 @@ import {
   updateVaultResource
 } from "./server/db";
 import { generateTailoredDashboardState, OnboardingInput } from "./server/onboardingEngine";
-import { retrieveRelevantContext, buildCopilotSystemPrompt } from "./server/copilotEngine";
+import { retrieveRelevantContext, buildCopilotSystemPrompt, generateSmartCopilotReply } from "./server/copilotEngine";
 import { AppState, StartupStage, CopilotMessage, CopilotConversation, FounderNote } from "./src/types";
 
 dotenv.config();
@@ -2168,7 +2168,7 @@ Return JSON array of suggestions:
       const retrievedContext = retrieveRelevantContext(cleanMessage, effectiveMode, state);
 
       let assistantContent = "";
-      let evidenceBreakdown = {
+      let evidenceBreakdown: any = {
         knownData: [
           { label: "Startup", value: state.profile?.name || "PulseBoard" },
           { label: "Stage", value: state.profile?.stage || "Validating" },
@@ -2309,105 +2309,11 @@ Return JSON array of suggestions:
 
       // 4. Fallback Heuristic Reasoning if AI failed or not configured
       if (!assistantContent) {
-        const p = state.profile || ({} as any);
-        const m = state.metrics || [];
-        const f = state.customerFeedback || [];
-        const retMetric = m.find(item => item.name.toLowerCase().includes("retention"))?.currentValue || "41%";
-
-        if (effectiveMode === "reality-check" || cleanMessage.toLowerCase().includes("ad") || cleanMessage.toLowerCase().includes("spend")) {
-          assistantContent = `### Reality Check: REJECT PREMATURE SPEND
-
-**Recommendation**: Do not allocate budget to paid ads or external marketing yet.
-
-#### Evidence Breakdown:
-- **Known Data**: Your monthly budget is ₹${(p.monthlyBudget || 2000).toLocaleString()}, MRR is ₹${(p.monthlyRevenue || 0).toLocaleString()}, and 7-day retention is ${retMetric}.
-- **Founder Assumption**: Paid traffic will convert without high organic retention.
-- **AI Inference**: Spending ₹50,000 on ads with a 41% retention bucket results in a 95% capital loss within 14 days.
-
-#### Direct Next Step:
-Execute an organic community launch sprint (Show HN, IndieHackers milestone, developer Discord outreach) to prove that users retain for 30 days before spending money.`;
-
-          actionProposal = {
-            id: "prop-" + Date.now(),
-            type: "create_mission",
-            title: "Run Organic Community Distribution Sprint",
-            description: "Acquire 50 high-intent developer signups with zero ad spend via Show HN and Reddit teardowns.",
-            status: "pending",
-            missionData: {
-              title: "Acquire 50 Organic Users via Community Teardown",
-              category: "Growth",
-              objective: "Validate retention bucket without spending advertising capital.",
-              whyItMatters: "Zero-burn distribution protects runway while calibrating onboarding.",
-              estimatedTime: "3 hours",
-              estimatedCost: "₹0",
-              difficulty: "Medium",
-              expectedResult: "50 qualified developer signups.",
-              steps: [
-                { id: "s1", text: "Draft technical breakdown of zero-bloat architecture on Show HN", completed: false },
-                { id: "s2", text: "Post interactive demo sandbox with no signup password wall", completed: false },
-                { id: "s3", text: "Collect 10 qualitative feedback reviews on Discord", completed: false }
-              ]
-            }
-          };
-        } else if (cleanMessage.toLowerCase().includes("retention") || cleanMessage.toLowerCase().includes("drop") || cleanMessage.toLowerCase().includes("churn")) {
-          assistantContent = `### Retention Diagnosis & Leverage Point
-
-Based on your telemetry, your **7-day retention is currently ${retMetric}** (target benchmark: 55%+). 
-
-#### Based on your data:
-- **Activation Drop-off**: 52% of visitors who signup do not complete initial API key integration.
-- **Customer Interviews**: 4 out of 5 founders requested an automated daily Discord/Slack webhook rather than visiting a web portal.
-
-#### My Recommendation:
-Do NOT build more analytics charts. Instead, build a **1-click Discord daily digest webhook** so the core value arrives in the founder's existing daily workspace.`;
-
-          actionProposal = {
-            id: "prop-" + Date.now(),
-            type: "create_experiment",
-            title: "Launch 1-Click Discord Retention Digest Experiment",
-            description: "Test if delivering daily digests to Discord increases Day-7 retention from 41% to 55%.",
-            status: "pending",
-            experimentData: {
-              title: "Automated Discord Digest Webhook vs Web Login",
-              hypothesis: "If we deliver daily telemetry snapshots directly into user Discord channels, then Day-7 retention will increase from 41% to 55% because founders avoid browser tab friction.",
-              problem: "Founders forget to log into the web dashboard daily.",
-              metric: "Day-7 Retention Rate",
-              currentValue: String(retMetric),
-              targetValue: "55%",
-              method: "Offer 1-click Discord webhook connect in onboarding for next 50 signups",
-              audience: "New signups",
-              duration: "14 days",
-              budget: "₹0"
-            }
-          };
-        } else {
-          assistantContent = `### Strategic Synthesis for ${p.name || 'Your Startup'}
-
-Here is my direct assessment based on your current stage (**${p.stage || 'Validating'}**) and 90-day target (**${p.goal90Days || 'Reach PMF'}**):
-
-1. **Core Leverage**: Focus all weekly energy on your single biggest bottleneck: **${p.biggestUncertainty || 'User Retention'}**.
-2. **Execution Focus**: Talk to 3 active users directly to understand why they returned or dropped off.
-3. **Zero-Budget Rule**: Keep infrastructure spend at ₹0 using verified open-source and free-tier tools.`;
-
-          actionProposal = {
-            id: "prop-" + Date.now(),
-            type: "notepad_draft",
-            title: "Save Founder Strategy Playbook to Notepad",
-            description: "Save this action plan directly to your Strategy collection in Founder Notepad.",
-            status: "pending",
-            draftNote: {
-              title: `${p.name || 'Startup'} Weekly Focus & Execution Playbook`,
-              collection: "Strategy",
-              tags: ["Strategy", "Focus", "Execution", "Zero-Budget"],
-              blocks: [
-                { id: "b1", type: "callout", content: `🎯 **Focus Rule**: 100% of effort goes into solving "${p.biggestUncertainty || 'User Retention'}".`, calloutVariant: "founder" },
-                { id: "b2", type: "heading2", content: "Key Objectives for the Week" },
-                { id: "b3", type: "checklist", content: "Complete 3 direct customer discovery interviews", checked: false },
-                { id: "b4", type: "checklist", content: "Deploy 1-click Discord digest webhook", checked: false }
-              ]
-            }
-          };
-        }
+        const smartReply = generateSmartCopilotReply(cleanMessage, effectiveMode, state);
+        assistantContent = smartReply.content;
+        evidenceBreakdown = smartReply.evidenceBreakdown;
+        actionProposal = smartReply.actionProposal;
+        detectedIntent = smartReply.intent;
       }
 
       // 5. Construct Assistant Message with Developer-Grade Tool Executions & Steps

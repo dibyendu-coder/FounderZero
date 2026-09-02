@@ -3694,6 +3694,30 @@
       ],
       "copilotConversations": [
         {
+          "id": "conv-1788347007599-hd26",
+          "userId": "demo-user-1",
+          "startupId": "pulseboard-demo",
+          "title": "What is the best tech stack for an ...",
+          "createdAt": "2026-09-02T11:03:27.599Z",
+          "updatedAt": "2026-09-02T11:03:27.601Z",
+          "pinned": false,
+          "lastMessagePreview": " Technical Architecture & Execution Strategy for PulseBoard\n\nAddressing your technical query: \"What is the best tech sta...",
+          "messagesCount": 2,
+          "mode": "default"
+        },
+        {
+          "id": "conv-1788347007542-0uxz",
+          "userId": "demo-user-1",
+          "startupId": "pulseboard-demo",
+          "title": "How do I price my SaaS product?",
+          "createdAt": "2026-09-02T11:03:27.542Z",
+          "updatedAt": "2026-09-02T11:03:27.572Z",
+          "pinned": false,
+          "lastMessagePreview": " Pricing & Monetization Calibration for PulseBoard\n\nAnalyzing your query: \"How do I price my SaaS product?\"\n\n Strategic ...",
+          "messagesCount": 2,
+          "mode": "default"
+        },
+        {
           "id": "conv-1788346101999-hli6",
           "userId": "demo-user-1",
           "startupId": "pulseboard-demo",
@@ -4456,6 +4480,656 @@
                 }
               }
             }
+          }
+        ],
+        "conv-1788347007542-0uxz": [
+          {
+            "id": "msg-u-1788347007542-2er",
+            "conversationId": "conv-1788347007542-0uxz",
+            "role": "user",
+            "content": "How do I price my SaaS product?",
+            "timestamp": "2026-09-02T11:03:27.542Z",
+            "mode": "default"
+          },
+          {
+            "id": "msg-a-1788347007572-aat",
+            "conversationId": "conv-1788347007542-0uxz",
+            "role": "assistant",
+            "content": "### Pricing & Monetization Calibration for PulseBoard\n\nAnalyzing your query: **\"How do I price my SaaS product?\"**\n\n#### Strategic Assessment:\n- **Value Metric**: Align pricing with the primary metric of value delivered (e.g. active tracked metrics, automated alerts, or monthly active seats) rather than generic user seats.\n- **Freemium Trap**: Free tiers for B2B developer tools should gate usage volume or advanced automation, never core utility.\n- **Recommended Tiers**:\n  1. **Starter (₹0)**: 1 Project, Core Telemetry, Manual Exports.\n  2. **Pro (₹1,499/mo)**: Unlimited Projects, Automated Daily Digest, AI Copilot reasoning.\n  3. **Team (₹4,999/mo)**: Multi-member workspaces & priority webhook streaming.\n\n#### Next Step:\nTest value-based pricing on your next 10 customer discovery calls before modifying public billing pages.",
+            "timestamp": "2026-09-02T11:03:27.572Z",
+            "mode": "default",
+            "intent": "pricing_and_monetization_review",
+            "insufficientEvidenceWarning": false,
+            "retrievedContextSummary": [
+              {
+                "category": "metric",
+                "label": "2 Metrics Evaluated",
+                "count": 2
+              },
+              {
+                "category": "feedback",
+                "label": "2 Customer Feedback Records",
+                "count": 2
+              },
+              {
+                "category": "note",
+                "label": "3 Linked Notes",
+                "count": 3
+              },
+              {
+                "category": "experiment",
+                "label": "2 Experiments",
+                "count": 2
+              },
+              {
+                "category": "memory",
+                "label": "3 Founder Memories",
+                "count": 3
+              },
+              {
+                "category": "vault",
+                "label": "2 Saved Vault Resources",
+                "count": 2
+              }
+            ],
+            "sources": [
+              {
+                "type": "profile",
+                "id": "pulseboard-demo",
+                "title": "Startup Profile: PulseBoard",
+                "subtitle": "Stage: Launched • Goal: Reach 300 active users and ₹25,000 MRR without paid ad spend",
+                "route": "profile"
+              },
+              {
+                "type": "metric",
+                "id": "m-mrr",
+                "title": "Monthly Recurring Revenue (MRR): 8400 ₹",
+                "subtitle": "Validates financial sustainability and founder independence.",
+                "value": "8400₹",
+                "route": "metrics"
+              },
+              {
+                "type": "metric",
+                "id": "m-churn",
+                "title": "Monthly Revenue Churn: 2.8 %",
+                "subtitle": "Low churn preserves recurring revenue compounding.",
+                "value": "2.8%",
+                "route": "metrics"
+              },
+              {
+                "type": "feedback",
+                "id": "fb-1",
+                "title": "Customer Feedback: Rahul M. (SaaS Founder)",
+                "subtitle": "Competitor complexity & chart clutter",
+                "route": "customers"
+              },
+              {
+                "type": "feedback",
+                "id": "fb-2",
+                "title": "Customer Feedback: Sarah K. (Indie Hacker)",
+                "subtitle": "Onboarding documentation gap for Next.js App Router",
+                "route": "customers"
+              },
+              {
+                "type": "note",
+                "id": "note-2",
+                "title": "Note: Pricing Strategy: ₹0 to ₹1 Lakh MRR Roadmap",
+                "subtitle": "Collection: Strategy",
+                "route": "notepad"
+              },
+              {
+                "type": "note",
+                "id": "note-3",
+                "title": "Note: Experiment Hypothesis: 1-Click Onboarding Sandbox",
+                "subtitle": "Collection: Experiments",
+                "route": "notepad"
+              },
+              {
+                "type": "note",
+                "id": "note-4",
+                "title": "Note: Zero-Budget Tech Stack & Architecture Notes",
+                "subtitle": "Collection: Technical",
+                "route": "notepad"
+              },
+              {
+                "type": "experiment",
+                "id": "exp-1",
+                "title": "Experiment: Reddit r/SaaS Teardown Growth Post",
+                "subtitle": "Metric: New User Signups • Target: 167",
+                "route": "experiments"
+              },
+              {
+                "type": "experiment",
+                "id": "exp-2",
+                "title": "Experiment: Pro Plan Pricing Upgrade Waitlist Test",
+                "subtitle": "Metric: Upgrade Modal Click-Through Rate • Target: 15%",
+                "route": "experiments"
+              },
+              {
+                "type": "memory",
+                "id": "mem-1",
+                "title": "Memory: Primary ICP",
+                "subtitle": "Early-stage indie hackers and solo technical founders running micro-SaaS with <₹50k MRR",
+                "route": "profile"
+              },
+              {
+                "type": "memory",
+                "id": "mem-2",
+                "title": "Memory: Zero-Burn Rule",
+                "subtitle": "Strictly zero paid advertising spend until Day-30 retention crosses 40% organically",
+                "route": "profile"
+              },
+              {
+                "type": "memory",
+                "id": "mem-3",
+                "title": "Memory: Pricing Floor",
+                "subtitle": "No $5/month pricing tiers. Minimum base tier set at ₹799/month ($19/mo) with grandfathered early-adopter pass",
+                "route": "profile"
+              },
+              {
+                "type": "vault",
+                "id": "sv-3",
+                "title": "Vault: How to Improve SaaS Retention & Reduce Churn: A Comprehensive Framework",
+                "subtitle": "Saved Resource",
+                "route": "vault"
+              },
+              {
+                "type": "vault",
+                "id": "sv-10",
+                "title": "Vault: Pricing Strategy for Bootstrapped Micro-SaaS: From ₹0 to ₹1 Lakh MRR",
+                "subtitle": "Saved Resource",
+                "route": "vault"
+              },
+              {
+                "type": "health",
+                "id": "dim-3",
+                "title": "Health: Product & Onboarding",
+                "subtitle": "Status: Needs Attention • Score: 65/100",
+                "value": "65/100",
+                "route": "health"
+              },
+              {
+                "type": "health",
+                "id": "dim-4",
+                "title": "Health: Distribution & Traffic",
+                "subtitle": "Status: Needs Attention • Score: 52/100",
+                "value": "52/100",
+                "route": "health"
+              }
+            ],
+            "evidenceBreakdown": {
+              "knownData": [
+                {
+                  "label": "Startup Name",
+                  "value": "PulseBoard"
+                },
+                {
+                  "label": "Stage",
+                  "value": "Launched"
+                },
+                {
+                  "label": "Day-7 Retention",
+                  "value": 41
+                },
+                {
+                  "label": "Monthly Budget",
+                  "value": "₹2,000"
+                }
+              ],
+              "founderAssumptions": [
+                "Assumption regarding \"How do I price my SaaS product...\""
+              ],
+              "inferences": [
+                "Directly addressing prompt intent: pricing and monetization review"
+              ],
+              "generalKnowledge": [
+                "Early-stage bootstrapped SaaS requires high organic retention before capital scaling"
+              ]
+            },
+            "actionProposal": {
+              "id": "prop-1788347007571",
+              "type": "notepad_draft",
+              "title": "Save SaaS Pricing Matrix to Notepad",
+              "description": "Save this value-based pricing structure to your Strategy collection.",
+              "status": "pending",
+              "draftNote": {
+                "title": "PulseBoard Value-Based Pricing Architecture",
+                "collection": "Strategy",
+                "tags": [
+                  "Pricing",
+                  "Monetization",
+                  "SaaS",
+                  "Tiers"
+                ],
+                "blocks": [
+                  {
+                    "id": "b1",
+                    "type": "callout",
+                    "content": "💡 **Rule**: Charge based on value metrics (insights delivered), not arbitrary user seats.",
+                    "calloutVariant": "founder"
+                  },
+                  {
+                    "id": "b2",
+                    "type": "heading2",
+                    "content": "Proposed Tier Structure"
+                  },
+                  {
+                    "id": "b3",
+                    "type": "checklist",
+                    "content": "Validate ₹1,499/mo price point with 3 active users",
+                    "checked": false
+                  },
+                  {
+                    "id": "b4",
+                    "type": "checklist",
+                    "content": "Implement usage-based paywall trigger in onboarding",
+                    "checked": false
+                  }
+                ]
+              }
+            },
+            "thinkingSteps": [
+              {
+                "id": "th-1",
+                "label": "Retrieved startup context for PulseBoard (Launched)",
+                "status": "completed",
+                "duration": "0.1s"
+              },
+              {
+                "id": "th-2",
+                "label": "Queried real-time telemetry (Day-7 Retention: 41)",
+                "status": "completed",
+                "duration": "0.2s"
+              },
+              {
+                "id": "th-3",
+                "label": "Synthesized customer discovery interview patterns",
+                "status": "completed",
+                "duration": "0.2s"
+              },
+              {
+                "id": "th-4",
+                "label": "Formulated evidence-backed next action",
+                "status": "completed",
+                "duration": "0.1s"
+              }
+            ],
+            "toolCalls": [
+              {
+                "id": "tool-1-1788347007572",
+                "name": "get_startup_context",
+                "description": "Fetch startup profile, stage (Launched), and primary bottleneck",
+                "status": "completed",
+                "input": {
+                  "startupId": "pulseboard-demo",
+                  "fields": [
+                    "stage",
+                    "goal90Days",
+                    "biggestUncertainty"
+                  ]
+                },
+                "output": {
+                  "name": "PulseBoard",
+                  "stage": "Launched",
+                  "bottleneck": "Can't get users",
+                  "monthlyRevenue": "₹8,400"
+                },
+                "duration": "115ms"
+              },
+              {
+                "id": "tool-2-1788347007572",
+                "name": "get_startup_metrics",
+                "description": "Retrieve real-time retention, activation, and user growth telemetry",
+                "status": "completed",
+                "input": {
+                  "limit": 4,
+                  "includeTrends": true
+                },
+                "output": {
+                  "retentionD7": 41,
+                  "currentUsers": 127,
+                  "metricsAnalyzed": 5
+                },
+                "duration": "160ms"
+              },
+              {
+                "id": "tool-3-1788347007572",
+                "name": "get_customer_feedback",
+                "description": "Scan qualitative customer feedback and interview transcripts",
+                "status": "completed",
+                "input": {
+                  "count": 3,
+                  "filter": "default"
+                },
+                "output": {
+                  "interviewsAnalyzed": 2,
+                  "topRecurringPain": "Competitor complexity & chart clutter"
+                },
+                "duration": "140ms"
+              }
+            ]
+          }
+        ],
+        "conv-1788347007599-hd26": [
+          {
+            "id": "msg-u-1788347007599-vhd",
+            "conversationId": "conv-1788347007599-hd26",
+            "role": "user",
+            "content": "What is the best tech stack for an Express React MVP?",
+            "timestamp": "2026-09-02T11:03:27.599Z",
+            "mode": "default"
+          },
+          {
+            "id": "msg-a-1788347007601-bq7",
+            "conversationId": "conv-1788347007599-hd26",
+            "role": "assistant",
+            "content": "### Technical Architecture & Execution Strategy for PulseBoard\n\nAddressing your technical query: **\"What is the best tech stack for an Express React MVP?\"**\n\n#### Technical Principles for Launched Stage:\n- **Zero Infrastructure Bloat**: Keep deployment architecture single-monolith or serverless edge with zero unnecessary microservices.\n- **Type Safety End-to-End**: Shared TypeScript interfaces (`types.ts`) between frontend and backend prevent runtime payload mismatches.\n- **Progressive Enhancement**: Implement local state caching with automated API synchronization for instant UI responsiveness.\n\n#### Recommended Stack Checklist:\n1. **Frontend**: React 19 + TypeScript + TailwindCSS.\n2. **Backend**: Node/Express or Vite middleware with typed route handlers.\n3. **Storage**: Light JSON store (`founderzero-db.json`) for zero-cost dev, easily syncable to Cloud Firestore.",
+            "timestamp": "2026-09-02T11:03:27.601Z",
+            "mode": "default",
+            "intent": "mvp_technical_architecture",
+            "insufficientEvidenceWarning": false,
+            "retrievedContextSummary": [
+              {
+                "category": "metric",
+                "label": "3 Metrics Evaluated",
+                "count": 3
+              },
+              {
+                "category": "feedback",
+                "label": "2 Customer Feedback Records",
+                "count": 2
+              },
+              {
+                "category": "note",
+                "label": "2 Linked Notes",
+                "count": 2
+              },
+              {
+                "category": "experiment",
+                "label": "2 Experiments",
+                "count": 2
+              },
+              {
+                "category": "memory",
+                "label": "3 Founder Memories",
+                "count": 3
+              },
+              {
+                "category": "vault",
+                "label": "1 Saved Vault Resources",
+                "count": 1
+              }
+            ],
+            "sources": [
+              {
+                "type": "profile",
+                "id": "pulseboard-demo",
+                "title": "Startup Profile: PulseBoard",
+                "subtitle": "Stage: Launched • Goal: Reach 300 active users and ₹25,000 MRR without paid ad spend",
+                "route": "profile"
+              },
+              {
+                "type": "metric",
+                "id": "m-users",
+                "title": "Total Registered Users: 127 users",
+                "subtitle": "Top of funnel milestone showing product curiosity.",
+                "value": "127users",
+                "route": "metrics"
+              },
+              {
+                "type": "metric",
+                "id": "m-activation",
+                "title": "Activation Rate: 58 %",
+                "subtitle": "Critical indicator of onboarding friction and immediate value perception.",
+                "value": "58%",
+                "route": "metrics"
+              },
+              {
+                "type": "metric",
+                "id": "m-retention",
+                "title": "30-Day Retention: 41 %",
+                "subtitle": "The ultimate indicator of Product-Market Fit.",
+                "value": "41%",
+                "route": "metrics"
+              },
+              {
+                "type": "feedback",
+                "id": "fb-1",
+                "title": "Customer Feedback: Rahul M. (SaaS Founder)",
+                "subtitle": "Competitor complexity & chart clutter",
+                "route": "customers"
+              },
+              {
+                "type": "feedback",
+                "id": "fb-2",
+                "title": "Customer Feedback: Sarah K. (Indie Hacker)",
+                "subtitle": "Onboarding documentation gap for Next.js App Router",
+                "route": "customers"
+              },
+              {
+                "type": "note",
+                "id": "note-4",
+                "title": "Note: Zero-Budget Tech Stack & Architecture Notes",
+                "subtitle": "Collection: Technical",
+                "route": "notepad"
+              },
+              {
+                "type": "note",
+                "id": "note-5",
+                "title": "Note: Hacker News Launch Playbook & Organic Loops",
+                "subtitle": "Collection: Marketing",
+                "route": "notepad"
+              },
+              {
+                "type": "experiment",
+                "id": "exp-1",
+                "title": "Experiment: Reddit r/SaaS Teardown Growth Post",
+                "subtitle": "Metric: New User Signups • Target: 167",
+                "route": "experiments"
+              },
+              {
+                "type": "experiment",
+                "id": "exp-2",
+                "title": "Experiment: Pro Plan Pricing Upgrade Waitlist Test",
+                "subtitle": "Metric: Upgrade Modal Click-Through Rate • Target: 15%",
+                "route": "experiments"
+              },
+              {
+                "type": "memory",
+                "id": "mem-1",
+                "title": "Memory: Primary ICP",
+                "subtitle": "Early-stage indie hackers and solo technical founders running micro-SaaS with <₹50k MRR",
+                "route": "profile"
+              },
+              {
+                "type": "memory",
+                "id": "mem-2",
+                "title": "Memory: Zero-Burn Rule",
+                "subtitle": "Strictly zero paid advertising spend until Day-30 retention crosses 40% organically",
+                "route": "profile"
+              },
+              {
+                "type": "memory",
+                "id": "mem-3",
+                "title": "Memory: Pricing Floor",
+                "subtitle": "No $5/month pricing tiers. Minimum base tier set at ₹799/month ($19/mo) with grandfathered early-adopter pass",
+                "route": "profile"
+              },
+              {
+                "type": "vault",
+                "id": "sv-7",
+                "title": "Vault: shadcn/ui — Beautifully Designed React & Tailwind Components",
+                "subtitle": "Saved Resource",
+                "route": "vault"
+              },
+              {
+                "type": "health",
+                "id": "dim-3",
+                "title": "Health: Product & Onboarding",
+                "subtitle": "Status: Needs Attention • Score: 65/100",
+                "value": "65/100",
+                "route": "health"
+              },
+              {
+                "type": "health",
+                "id": "dim-4",
+                "title": "Health: Distribution & Traffic",
+                "subtitle": "Status: Needs Attention • Score: 52/100",
+                "value": "52/100",
+                "route": "health"
+              }
+            ],
+            "evidenceBreakdown": {
+              "knownData": [
+                {
+                  "label": "Startup Name",
+                  "value": "PulseBoard"
+                },
+                {
+                  "label": "Stage",
+                  "value": "Launched"
+                },
+                {
+                  "label": "Day-7 Retention",
+                  "value": 41
+                },
+                {
+                  "label": "Monthly Budget",
+                  "value": "₹2,000"
+                }
+              ],
+              "founderAssumptions": [
+                "Assumption regarding \"What is the best tech stack fo...\""
+              ],
+              "inferences": [
+                "Directly addressing prompt intent: mvp technical architecture"
+              ],
+              "generalKnowledge": [
+                "Early-stage bootstrapped SaaS requires high organic retention before capital scaling"
+              ]
+            },
+            "actionProposal": {
+              "id": "prop-1788347007601",
+              "type": "notepad_draft",
+              "title": "Save Technical Architecture Playbook",
+              "description": "Save this technical architecture blueprint to your Strategy collection.",
+              "status": "pending",
+              "draftNote": {
+                "title": "PulseBoard Monolith Technical Architecture Blueprint",
+                "collection": "Product",
+                "tags": [
+                  "Architecture",
+                  "TypeScript",
+                  "Stack",
+                  "Zero-Bloat"
+                ],
+                "blocks": [
+                  {
+                    "id": "b1",
+                    "type": "callout",
+                    "content": "⚡ **Rule**: Avoid complex Kubernetes/microservices until MRR exceeds ₹5,000,000.",
+                    "calloutVariant": "founder"
+                  },
+                  {
+                    "id": "b2",
+                    "type": "heading2",
+                    "content": "Core Tech Principles"
+                  },
+                  {
+                    "id": "b3",
+                    "type": "checklist",
+                    "content": "Verify end-to-end API type safety in types.ts",
+                    "checked": false
+                  },
+                  {
+                    "id": "b4",
+                    "type": "checklist",
+                    "content": "Implement progressive SSE response streaming",
+                    "checked": false
+                  }
+                ]
+              }
+            },
+            "thinkingSteps": [
+              {
+                "id": "th-1",
+                "label": "Retrieved startup context for PulseBoard (Launched)",
+                "status": "completed",
+                "duration": "0.1s"
+              },
+              {
+                "id": "th-2",
+                "label": "Queried real-time telemetry (Day-7 Retention: 41)",
+                "status": "completed",
+                "duration": "0.2s"
+              },
+              {
+                "id": "th-3",
+                "label": "Synthesized customer discovery interview patterns",
+                "status": "completed",
+                "duration": "0.2s"
+              },
+              {
+                "id": "th-4",
+                "label": "Formulated evidence-backed next action",
+                "status": "completed",
+                "duration": "0.1s"
+              }
+            ],
+            "toolCalls": [
+              {
+                "id": "tool-1-1788347007601",
+                "name": "get_startup_context",
+                "description": "Fetch startup profile, stage (Launched), and primary bottleneck",
+                "status": "completed",
+                "input": {
+                  "startupId": "pulseboard-demo",
+                  "fields": [
+                    "stage",
+                    "goal90Days",
+                    "biggestUncertainty"
+                  ]
+                },
+                "output": {
+                  "name": "PulseBoard",
+                  "stage": "Launched",
+                  "bottleneck": "Can't get users",
+                  "monthlyRevenue": "₹8,400"
+                },
+                "duration": "115ms"
+              },
+              {
+                "id": "tool-2-1788347007601",
+                "name": "get_startup_metrics",
+                "description": "Retrieve real-time retention, activation, and user growth telemetry",
+                "status": "completed",
+                "input": {
+                  "limit": 4,
+                  "includeTrends": true
+                },
+                "output": {
+                  "retentionD7": 41,
+                  "currentUsers": 127,
+                  "metricsAnalyzed": 5
+                },
+                "duration": "160ms"
+              },
+              {
+                "id": "tool-3-1788347007601",
+                "name": "get_customer_feedback",
+                "description": "Scan qualitative customer feedback and interview transcripts",
+                "status": "completed",
+                "input": {
+                  "count": 3,
+                  "filter": "default"
+                },
+                "output": {
+                  "interviewsAnalyzed": 2,
+                  "topRecurringPain": "Competitor complexity & chart clutter"
+                },
+                "duration": "140ms"
+              }
+            ]
           }
         ]
       },

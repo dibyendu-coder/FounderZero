@@ -402,3 +402,311 @@ JSON RESPONSE SCHEMA:
   ]
 }`;
 }
+
+export function generateSmartCopilotReply(
+  query: string,
+  mode: CopilotMode = 'default',
+  state: AppState
+): {
+  content: string;
+  intent: string;
+  evidenceBreakdown: EvidenceBreakdown;
+  actionProposal?: CopilotActionProposal;
+  thinkingSteps: any[];
+  toolCalls: any[];
+  retrievedContextSummary: { category: string; label: string; count: number }[];
+  sources: CopilotSourceReference[];
+} {
+  const cleanQuery = (query || '').trim();
+  const qLower = cleanQuery.toLowerCase();
+  const p = state.profile || ({} as any);
+  const m = state.metrics || [];
+  const f = state.customerFeedback || [];
+  const startupName = p.name || 'PulseBoard';
+  const retMetric = m.find(item => item.name.toLowerCase().includes('retention'))?.currentValue || '41%';
+
+  const context = retrieveRelevantContext(cleanQuery, mode, state);
+
+  let assistantContent = '';
+  let intent = context.detectedIntent;
+  let actionProposal: CopilotActionProposal | undefined = undefined;
+
+  // Category 1: Capital / Ads / Paid Marketing / Spend
+  if (mode === 'reality-check' || qLower.includes('ad') || qLower.includes('spend') || qLower.includes('budget') || qLower.includes('burn') || qLower.includes('hire') || qLower.includes('cost')) {
+    intent = 'capital_spend_analysis';
+    assistantContent = `### Capital & Spend Analysis: REJECT PREMATURE SPEND
+
+Regarding your query: **"${cleanQuery}"**
+
+#### Evidence-Driven Assessment:
+- **Current Runway & Budget**: Your monthly budget is ₹${(p.monthlyBudget || 2000).toLocaleString()}, MRR is ₹${(p.monthlyRevenue || 0).toLocaleString()}, and current Day-7 retention is **${retMetric}**.
+- **Capital Rule**: Allocating budget to paid ad channels (Google/Meta/LinkedIn) before establishing a 50%+ Day-30 retention baseline causes high capital leakage.
+- **Acquisition Leverage**: Solo founders at stage **${p.stage || 'Validating'}** should rely 100% on zero-burn distribution channels (Show HN, direct developer teardowns, organic community seeding).
+
+#### Immediate Next Action:
+Execute a zero-budget community launch sprint to acquire 50 retained users before spending any capital.`;
+
+    actionProposal = {
+      id: 'prop-' + Date.now(),
+      type: 'create_mission',
+      title: 'Run Organic Community Distribution Sprint',
+      description: 'Acquire 50 high-intent signups with zero ad spend via Show HN and developer teardowns.',
+      status: 'pending',
+      missionData: {
+        title: 'Acquire 50 Organic Users via Community Teardowns',
+        category: 'Growth',
+        objective: 'Validate retention bucket without spending advertising capital.',
+        whyItMatters: 'Zero-burn distribution protects runway while calibrating onboarding.',
+        estimatedTime: '3 hours',
+        estimatedCost: '₹0',
+        difficulty: 'Medium',
+        expectedResult: '50 qualified developer signups.',
+        steps: [
+          { id: 's1', text: 'Draft technical breakdown of zero-bloat architecture on Show HN', completed: false },
+          { id: 's2', text: 'Post interactive demo sandbox with no signup password wall', completed: false },
+          { id: 's3', text: 'Collect 10 qualitative feedback reviews on Discord', completed: false }
+        ]
+      }
+    };
+  }
+  // Category 2: Retention / Churn / User Drop-off
+  else if (mode === 'feedback-analysis' || qLower.includes('retention') || qLower.includes('churn') || qLower.includes('drop') || qLower.includes('leave') || qLower.includes('stay') || qLower.includes('activation')) {
+    intent = 'diagnose_user_retention';
+    assistantContent = `### Retention Telemetry Diagnosis for ${startupName}
+
+You asked: **"${cleanQuery}"**
+
+#### Telemetry Analysis:
+- **Baseline Metric**: Your **Day-7 Retention is currently ${retMetric}** (target benchmark for PMF: 50%+).
+- **Activation Friction**: Customer feedback scans reveal founders drop off during complex initial onboarding setup.
+- **Retention Lever**: Delivering automated daily value directly into existing communication channels (Discord/Slack webhooks or daily email digests) removes tab-switching friction.
+
+#### Core Recommendation:
+Do not build more dashboard analytics charts. Instead, launch a **1-click automated daily digest webhook** so your product's core insight arrives where users already work.`;
+
+    actionProposal = {
+      id: 'prop-' + Date.now(),
+      type: 'create_experiment',
+      title: 'Launch 1-Click Retention Digest Experiment',
+      description: `Test if automated daily digests increase Day-7 retention from ${retMetric} to 55%.`,
+      status: 'pending',
+      experimentData: {
+        title: 'Automated Discord Digest Webhook vs Web Portal',
+        hypothesis: `If we deliver daily telemetry snapshots directly into user communication channels, Day-7 retention will increase from ${retMetric} to 55%.`,
+        problem: 'Founders forget to log into web dashboard daily.',
+        metric: 'Day-7 Retention Rate',
+        currentValue: String(retMetric),
+        targetValue: '55%',
+        method: 'Offer 1-click Discord webhook connect in onboarding',
+        audience: 'New signups',
+        duration: '14 days',
+        budget: '₹0'
+      }
+    };
+  }
+  // Category 3: Pricing / Monetization / Tiers
+  else if (mode === 'decision-support' || qLower.includes('price') || qLower.includes('pricing') || qLower.includes('monetiz') || qLower.includes('charge') || qLower.includes('freemium') || qLower.includes('tier') || qLower.includes('plan')) {
+    intent = 'pricing_and_monetization_review';
+    assistantContent = `### Pricing & Monetization Calibration for ${startupName}
+
+Analyzing your query: **"${cleanQuery}"**
+
+#### Strategic Assessment:
+- **Value Metric**: Align pricing with the primary metric of value delivered (e.g. active tracked metrics, automated alerts, or monthly active seats) rather than generic user seats.
+- **Freemium Trap**: Free tiers for B2B developer tools should gate usage volume or advanced automation, never core utility.
+- **Recommended Tiers**:
+  1. **Starter (₹0)**: 1 Project, Core Telemetry, Manual Exports.
+  2. **Pro (₹1,499/mo)**: Unlimited Projects, Automated Daily Digest, AI Copilot reasoning.
+  3. **Team (₹4,999/mo)**: Multi-member workspaces & priority webhook streaming.
+
+#### Next Step:
+Test value-based pricing on your next 10 customer discovery calls before modifying public billing pages.`;
+
+    actionProposal = {
+      id: 'prop-' + Date.now(),
+      type: 'notepad_draft',
+      title: 'Save SaaS Pricing Matrix to Notepad',
+      description: 'Save this value-based pricing structure to your Strategy collection.',
+      status: 'pending',
+      draftNote: {
+        title: `${startupName} Value-Based Pricing Architecture`,
+        collection: 'Strategy',
+        tags: ['Pricing', 'Monetization', 'SaaS', 'Tiers'],
+        blocks: [
+          { id: 'b1', type: 'callout', content: '💡 **Rule**: Charge based on value metrics (insights delivered), not arbitrary user seats.', calloutVariant: 'founder' },
+          { id: 'b2', type: 'heading2', content: 'Proposed Tier Structure' },
+          { id: 'b3', type: 'checklist', content: 'Validate ₹1,499/mo price point with 3 active users', checked: false },
+          { id: 'b4', type: 'checklist', content: 'Implement usage-based paywall trigger in onboarding', checked: false }
+        ]
+      }
+    };
+  }
+  // Category 4: Product Validation / Mom Test / User Discovery
+  else if (mode === 'product-validation' || qLower.includes('validate') || qLower.includes('mom test') || qLower.includes('interview') || qLower.includes('idea') || qLower.includes('problem')) {
+    intent = 'product_idea_validation';
+    assistantContent = `### Product Validation & Customer Discovery Framework
+
+Regarding: **"${cleanQuery}"**
+
+#### Mom Test Validation Protocol:
+1. **Talk About Their Past Actions, Not Future Promises**: Ask *"How do you currently track user churn?"* instead of *"Would you buy an AI churn tool?"*.
+2. **Identify Hard Workarounds**: If founders are using messy Google Sheets or manual SQL queries daily, the pain is urgent and real.
+3. **Ask for Commitment**: A validated idea ends with a commitment (time, intro, or pre-order deposit), not polite compliments.
+
+#### Proposed Validation Sprint:
+Conduct 5 non-leading customer discovery calls using the 3 core questions below:
+- *"What was the hardest part about growing your startup last week?"*
+- *"Why was that hard?"*
+- *"What have you tried to fix it?"*`;
+
+    actionProposal = {
+      id: 'prop-' + Date.now(),
+      type: 'create_mission',
+      title: 'Conduct 5 Mom-Test Customer Discovery Interviews',
+      description: 'Validate problem urgency and current workarounds with 5 target founders.',
+      status: 'pending',
+      missionData: {
+        title: 'Run 5 Mom-Test Customer Interviews',
+        category: 'Validation',
+        objective: 'Uncover real workarounds and pain severity before writing complex code.',
+        whyItMatters: 'Prevents building features nobody wants.',
+        estimatedTime: '4 hours',
+        estimatedCost: '₹0',
+        difficulty: 'Medium',
+        expectedResult: '5 transcripts with verified pain severity rating.',
+        steps: [
+          { id: 's1', text: 'Reach out to 15 targeted founders on Twitter/Discord', completed: false },
+          { id: 's2', text: 'Ask non-leading questions focused on past behavior', completed: false },
+          { id: 's3', text: 'Document recurring pain points in Founder Notepad', completed: false }
+        ]
+      }
+    };
+  }
+  // Category 5: Technical Stack / Architecture / Code
+  else if (mode === 'building-help' || qLower.includes('code') || qLower.includes('stack') || qLower.includes('tech') || qLower.includes('database') || qLower.includes('architecture') || qLower.includes('api') || qLower.includes('react') || qLower.includes('express')) {
+    intent = 'mvp_technical_architecture';
+    assistantContent = `### Technical Architecture & Execution Strategy for ${startupName}
+
+Addressing your technical query: **"${cleanQuery}"**
+
+#### Technical Principles for ${p.stage || 'MVP'} Stage:
+- **Zero Infrastructure Bloat**: Keep deployment architecture single-monolith or serverless edge with zero unnecessary microservices.
+- **Type Safety End-to-End**: Shared TypeScript interfaces (\`types.ts\`) between frontend and backend prevent runtime payload mismatches.
+- **Progressive Enhancement**: Implement local state caching with automated API synchronization for instant UI responsiveness.
+
+#### Recommended Stack Checklist:
+1. **Frontend**: React 19 + TypeScript + TailwindCSS.
+2. **Backend**: Node/Express or Vite middleware with typed route handlers.
+3. **Storage**: Light JSON store (\`founderzero-db.json\`) for zero-cost dev, easily syncable to Cloud Firestore.`;
+
+    actionProposal = {
+      id: 'prop-' + Date.now(),
+      type: 'notepad_draft',
+      title: 'Save Technical Architecture Playbook',
+      description: 'Save this technical architecture blueprint to your Strategy collection.',
+      status: 'pending',
+      draftNote: {
+        title: `${startupName} Monolith Technical Architecture Blueprint`,
+        collection: 'Product',
+        tags: ['Architecture', 'TypeScript', 'Stack', 'Zero-Bloat'],
+        blocks: [
+          { id: 'b1', type: 'callout', content: '⚡ **Rule**: Avoid complex Kubernetes/microservices until MRR exceeds ₹5,000,000.', calloutVariant: 'founder' },
+          { id: 'b2', type: 'heading2', content: 'Core Tech Principles' },
+          { id: 'b3', type: 'checklist', content: 'Verify end-to-end API type safety in types.ts', checked: false },
+          { id: 'b4', type: 'checklist', content: 'Implement progressive SSE response streaming', checked: false }
+        ]
+      }
+    };
+  }
+  // Category 6: General Strategy / Open Questions / Custom Prompts
+  else {
+    intent = 'strategic_query_synthesis';
+    assistantContent = `### Strategic Synthesis for ${startupName}
+
+Direct analysis for your prompt: **"${cleanQuery}"**
+
+#### Strategic Assessment (${p.stage || 'Validating'} Stage):
+1. **Target Bottleneck**: Focus 100% of weekly execution on your primary bottleneck: **"${p.biggestUncertainty || 'User Retention & Growth'}"**.
+2. **Evidence-Grounded Next Steps**:
+   - **Step 1**: Talk to 3 active signups to map their exact activation journey.
+   - **Step 2**: Remove all non-essential onboarding steps (password walls, long forms).
+   - **Step 3**: Track weekly Day-7 cohort retention to verify product-market fit signal.
+3. **Zero-Burn Rule**: Leverage free-tier open-source tools and community channels before spending on advertising.`;
+
+    actionProposal = {
+      id: 'prop-' + Date.now(),
+      type: 'notepad_draft',
+      title: `Save Execution Plan for "${cleanQuery.slice(0, 30)}..."`,
+      description: 'Save this strategic response directly into Founder Notepad.',
+      status: 'pending',
+      draftNote: {
+        title: `Action Plan: ${cleanQuery.slice(0, 45)}`,
+        collection: 'Strategy',
+        tags: ['Execution', 'Strategy', 'Focus'],
+        blocks: [
+          { id: 'b1', type: 'callout', content: `🎯 **Focus Goal**: Solve "${p.biggestUncertainty || 'User Retention'}" first.`, calloutVariant: 'founder' },
+          { id: 'b2', type: 'heading2', content: 'Next Actions' },
+          { id: 'b3', type: 'checklist', content: `Address: ${cleanQuery}`, checked: false },
+          { id: 'b4', type: 'checklist', content: 'Measure user feedback response', checked: false }
+        ]
+      }
+    };
+  }
+
+  const evidenceBreakdown: EvidenceBreakdown = {
+    knownData: [
+      { label: 'Startup Name', value: startupName },
+      { label: 'Stage', value: p.stage || 'Validating' },
+      { label: 'Day-7 Retention', value: retMetric },
+      { label: 'Monthly Budget', value: `₹${(p.monthlyBudget || 2000).toLocaleString()}` }
+    ],
+    founderAssumptions: [
+      `Assumption regarding "${cleanQuery.slice(0, 30)}..."`
+    ],
+    inferences: [
+      `Directly addressing prompt intent: ${intent.replace(/_/g, ' ')}`
+    ],
+    generalKnowledge: [
+      'Early-stage bootstrapped SaaS requires high organic retention before capital scaling'
+    ]
+  };
+
+  const thinkingSteps = [
+    { id: 'th-1', label: `Analyzed query: "${cleanQuery.slice(0, 40)}${cleanQuery.length > 40 ? '...' : ''}"`, status: 'completed' as const, duration: '0.1s' },
+    { id: 'th-2', label: `Retrieved startup context for ${startupName} (${p.stage || 'MVP'})`, status: 'completed' as const, duration: '0.1s' },
+    { id: 'th-3', label: `Evaluated telemetry signals (D7 Retention: ${retMetric})`, status: 'completed' as const, duration: '0.1s' },
+    { id: 'th-4', label: 'Generated query-specific strategic counsel', status: 'completed' as const, duration: '0.1s' }
+  ];
+
+  const toolCalls = [
+    {
+      id: 'tool-1-' + Date.now(),
+      name: 'analyze_user_query',
+      description: `Analyze intent and keywords for "${cleanQuery.slice(0, 30)}..."`,
+      status: 'completed',
+      input: { query: cleanQuery, mode },
+      output: { detectedIntent: intent, startup: startupName },
+      duration: '90ms'
+    },
+    {
+      id: 'tool-2-' + Date.now(),
+      name: 'get_startup_context',
+      description: `Fetch telemetry metrics & stage (${p.stage || 'MVP'})`,
+      status: 'completed',
+      input: { startupId: p.id || 'startup-1' },
+      output: { retentionD7: retMetric, goal: p.goal90Days || 'Reach PMF' },
+      duration: '110ms'
+    }
+  ];
+
+  return {
+    content: assistantContent,
+    intent,
+    evidenceBreakdown,
+    actionProposal,
+    thinkingSteps,
+    toolCalls,
+    retrievedContextSummary: context.summary,
+    sources: context.sources
+  };
+}

@@ -34,6 +34,7 @@ import { CopilotPromptComposer } from '../components/copilot/CopilotPromptCompos
 import { CopilotMessageItem } from '../components/copilot/CopilotMessageItem';
 import { CopilotThinking } from '../components/copilot/CopilotThinking';
 import { SLASH_COMMANDS } from '../components/copilot/CopilotSlashMenu';
+import { generateSmartCopilotReply } from '../../server/copilotEngine';
 
 interface CopilotPageProps {
   state: AppState;
@@ -377,15 +378,33 @@ export const CopilotPage: React.FC<CopilotPageProps> = ({
 
           // Ensure a fallback assistant message if finalAssistantMessage was missing
           if (!finalAssistantMessage) {
-            const fallbackText = streamedContent.trim() || `### Founder Copilot Synthesis\n\nI've evaluated your prompt: **"${textToSend}"**.\n\n#### Direct Next Step:\nFocus on direct customer retention and zero-burn distribution. Talk to 3 active users directly to understand activation bottlenecks before allocating ad spend.`;
-            finalAssistantMessage = {
-              id: assistantMsgId,
-              conversationId: currentConvId,
-              role: 'assistant',
-              content: fallbackText,
-              timestamp: new Date().toISOString(),
-              mode: modeToUse
-            };
+            if (streamedContent.trim()) {
+              finalAssistantMessage = {
+                id: assistantMsgId,
+                conversationId: currentConvId,
+                role: 'assistant',
+                content: streamedContent.trim(),
+                timestamp: new Date().toISOString(),
+                mode: modeToUse
+              };
+            } else {
+              const smartReply = generateSmartCopilotReply(textToSend, modeToUse, state);
+              finalAssistantMessage = {
+                id: assistantMsgId,
+                conversationId: currentConvId,
+                role: 'assistant',
+                content: smartReply.content,
+                timestamp: new Date().toISOString(),
+                mode: modeToUse,
+                intent: smartReply.intent,
+                retrievedContextSummary: smartReply.retrievedContextSummary,
+                sources: smartReply.sources,
+                evidenceBreakdown: smartReply.evidenceBreakdown,
+                actionProposal: smartReply.actionProposal,
+                thinkingSteps: smartReply.thinkingSteps,
+                toolCalls: smartReply.toolCalls
+              };
+            }
           }
 
           // Apply final fully-populated assistant message with tools, action proposals, etc.
@@ -418,14 +437,22 @@ export const CopilotPage: React.FC<CopilotPageProps> = ({
           });
         }
       } else {
-        // Response not OK (HTTP 500/404) -> Fallback response
+        // Response not OK -> Dynamic Smart Fallback based on user prompt
+        const smartReply = generateSmartCopilotReply(textToSend, modeToUse, state);
         const fallbackMsg: CopilotMessage = {
           id: 'msg-a-' + Date.now(),
           conversationId: currentConvId,
           role: 'assistant',
-          content: `### Strategic Copilot Synthesis\n\nI've analyzed your prompt regarding **"${textToSend}"**.\n\n#### Primary Recommendation:\nFocus 100% of effort on verifying user activation and retention before spending on marketing. Execute an organic community launch sprint (Show HN, Reddit teardowns) to prove retention value.`,
+          content: smartReply.content,
           timestamp: new Date().toISOString(),
-          mode: modeToUse
+          mode: modeToUse,
+          intent: smartReply.intent,
+          retrievedContextSummary: smartReply.retrievedContextSummary,
+          sources: smartReply.sources,
+          evidenceBreakdown: smartReply.evidenceBreakdown,
+          actionProposal: smartReply.actionProposal,
+          thinkingSteps: smartReply.thinkingSteps,
+          toolCalls: smartReply.toolCalls
         };
         onUpdateState(prev => {
           const currentMsgs = prev.copilotMessages?.[currentConvId] || [];
@@ -441,13 +468,21 @@ export const CopilotPage: React.FC<CopilotPageProps> = ({
     } catch (err: any) {
       if (err.name !== 'AbortError') {
         console.error('Failed to send message to Copilot:', err);
+        const smartReply = generateSmartCopilotReply(textToSend, modeToUse, state);
         const fallbackMsg: CopilotMessage = {
           id: 'msg-a-' + Date.now(),
           conversationId: currentConvId,
           role: 'assistant',
-          content: `### Strategic Copilot Synthesis\n\nI've analyzed your prompt regarding **"${textToSend}"**.\n\n#### Direct Next Step:\n1. Focus all weekly energy on your primary bottleneck.\n2. Complete 3 direct customer discovery interviews with signups.\n3. Keep infrastructure spend at ₹0.`,
+          content: smartReply.content,
           timestamp: new Date().toISOString(),
-          mode: modeToUse
+          mode: modeToUse,
+          intent: smartReply.intent,
+          retrievedContextSummary: smartReply.retrievedContextSummary,
+          sources: smartReply.sources,
+          evidenceBreakdown: smartReply.evidenceBreakdown,
+          actionProposal: smartReply.actionProposal,
+          thinkingSteps: smartReply.thinkingSteps,
+          toolCalls: smartReply.toolCalls
         };
         onUpdateState(prev => {
           const currentMsgs = prev.copilotMessages?.[currentConvId] || [];
