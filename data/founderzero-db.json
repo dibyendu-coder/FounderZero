@@ -1,0 +1,4505 @@
+{
+  "users": [
+    {
+      "id": "demo-user-1",
+      "email": "alex@pulseboard.io",
+      "name": "Alex Rivera",
+      "passwordHash": "demo123",
+      "isDemo": true
+    }
+  ],
+  "appStates": {
+    "demo-user-1": {
+      "user": {
+        "id": "demo-user-1",
+        "email": "alex@pulseboard.io",
+        "name": "Alex Rivera",
+        "isDemo": true
+      },
+      "profile": {
+        "id": "pulseboard-demo",
+        "name": "PulseBoard",
+        "description": "Real-time performance metrics and retention tracking for indie SaaS products.",
+        "category": "Developer Tools & Analytics",
+        "targetCustomer": "Solo SaaS Founders & Bootstrappers",
+        "problem": "Founders waste hours configuring complex analytics tools like Amplitude when they only need 3 core retention metrics.",
+        "stage": "Launched",
+        "teamSize": 1,
+        "founderSkills": [
+          "Product Design",
+          "TypeScript",
+          "Content Marketing",
+          "Fullstack React",
+          "Autonomous AI Workflows"
+        ],
+        "techStack": [
+          "React / Next.js",
+          "Supabase",
+          "Tailwind CSS",
+          "OpenCode / Cline",
+          "PostHog Free"
+        ],
+        "monetizationModel": "Subscription (B2B SaaS with Free Starter)",
+        "monthlyBudget": 2000,
+        "availableHoursPerWeek": 25,
+        "currentUsers": 127,
+        "monthlyRevenue": 8400,
+        "biggestUncertainty": "Can't get users",
+        "goal90Days": "Reach 300 active users and ₹25,000 MRR without paid ad spend",
+        "founderName": "Alex Rivera",
+        "founderTitle": "Solo Technical Founder & Product Architect",
+        "founderBio": "Building zero-budget developer tools with high product craft. Obsessed with fast feedback loops, Mom Test validation, and autonomous AI-assisted shipping.",
+        "founderArchetype": "Full-Stack Builder & Lean Operator",
+        "location": "Bengaluru, India / Remote",
+        "timezone": "UTC+05:30 (IST)",
+        "workingStyle": "Deep Work Sprints • Async-First • Rapid Prototyping",
+        "founderAvatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=250&q=80",
+        "socialLinks": {
+          "twitter": "https://twitter.com/alexrivera_dev",
+          "github": "https://github.com/alexrivera-builds",
+          "linkedin": "https://linkedin.com/in/alexrivera-founder",
+          "website": "https://pulseboard.dev",
+          "productHunt": "https://producthunt.com/@alexrivera"
+        },
+        "superpowers": [
+          "Autonomous AI Agent Coding",
+          "High-Velocity MVP Prototyping",
+          "Customer Discovery & Mom Test",
+          "Zero-Budget Infrastructure",
+          "Organic Content Distribution"
+        ],
+        "operatingPrinciples": [
+          "Talk to 3 active users before writing a single complex backend module",
+          "Zero paid ad spend until reaching 40%+ 30-day cohort retention",
+          "Never deploy bloated infrastructure when a free tier or static edge function suffices",
+          "Ship thin, complete end-to-end vertical slices over wide unfinished surface areas"
+        ],
+        "skillRatings": [
+          {
+            "skill": "Full-Stack TypeScript / React",
+            "level": "Expert",
+            "category": "Engineering",
+            "percentage": 92
+          },
+          {
+            "skill": "Autonomous Coding Agents (OpenCode/Cline)",
+            "level": "Expert",
+            "category": "Engineering",
+            "percentage": 90
+          },
+          {
+            "skill": "Product Design & UX Craft",
+            "level": "Proficient",
+            "category": "Product & Design",
+            "percentage": 84
+          },
+          {
+            "skill": "Customer Discovery (The Mom Test)",
+            "level": "Proficient",
+            "category": "Growth & Distribution",
+            "percentage": 80
+          },
+          {
+            "skill": "Zero-Budget Infrastructure Ops",
+            "level": "Expert",
+            "category": "Operations & Strategy",
+            "percentage": 95
+          },
+          {
+            "skill": "Copywriting & Developer Marketing",
+            "level": "Competent",
+            "category": "Growth & Distribution",
+            "percentage": 72
+          }
+        ],
+        "badges": [
+          {
+            "id": "zero-burn",
+            "title": "Zero-Burn Master",
+            "description": "Sustained <₹2,000 monthly software overhead while deploying full-stack SaaS.",
+            "icon": "Zap",
+            "category": "zero-budget",
+            "earnedDate": "Aug 2026"
+          },
+          {
+            "id": "mom-test-certified",
+            "title": "Mom Test Practitioner",
+            "description": "Conducted 10+ objective problem validation interviews with zero leading questions.",
+            "icon": "Users",
+            "category": "validation",
+            "earnedDate": "Aug 2026"
+          },
+          {
+            "id": "agentic-builder",
+            "title": "Autonomous Agent Operator",
+            "description": "Accelerated MVP delivery 3x using integrated OpenCode/Cline coding workflows.",
+            "icon": "Cpu",
+            "category": "execution",
+            "earnedDate": "Aug 2026"
+          },
+          {
+            "id": "first-revenue",
+            "title": "Monetization Unlocked",
+            "description": "Secured first recurring paying customers at ₹8,400+ MRR.",
+            "icon": "TrendingUp",
+            "category": "growth",
+            "earnedDate": "Aug 2026"
+          }
+        ],
+        "createdAt": "2026-09-02T10:48:21.138Z",
+        "founderScore": 78,
+        "monthlySavings": 7800
+      },
+      "nextActions": [
+        {
+          "id": "action-1",
+          "title": "Interview 5 active users who logged in 3+ times this week",
+          "whyItMatters": "Identifies the specific feature driving activation so you can double down on your core loop.",
+          "expectedImpact": "Increases 30-day user retention from 41% to ~55%",
+          "estimatedTime": "3 hours",
+          "estimatedCost": "₹0",
+          "difficulty": "Medium",
+          "deadline": "In 3 days",
+          "relatedBottleneck": "User Retention & Core Value Loop",
+          "priority": "Do Now",
+          "reason": "You have 127 registered users, but only 41% stick around past week 2. You need qualitative clarity on who finds high value.",
+          "evidence": "127 total signups, 41% 30-day retention, 8 customer interview notes recorded.",
+          "status": "pending"
+        },
+        {
+          "id": "action-2",
+          "title": "Publish a teardown blog post on Product Hunt / Reddit r/SaaS",
+          "whyItMatters": "Zero-cost organic acquisition leverage targeting high-intent solo founders.",
+          "expectedImpact": "+35 to 60 targeted signup leads without spending budget",
+          "estimatedTime": "4 hours",
+          "estimatedCost": "₹0",
+          "difficulty": "Medium",
+          "deadline": "This week",
+          "relatedBottleneck": "Organic Distribution",
+          "priority": "Do Next",
+          "reason": "Your monthly ad budget is ₹2,000. Organic community teardowns generate 10x higher trust for dev tools.",
+          "evidence": "Previous Reddit post yielded 18 signups at ₹0 CAC.",
+          "status": "pending"
+        },
+        {
+          "id": "action-3",
+          "title": "Set up an automated offboarding survey for churned users",
+          "whyItMatters": "Captures direct objections before users completely disappear.",
+          "expectedImpact": "Pinpoints primary churn cause (Price vs Feature missing vs Onboarding confusion)",
+          "estimatedTime": "1 hour",
+          "estimatedCost": "₹0",
+          "difficulty": "Easy",
+          "deadline": "Next week",
+          "relatedBottleneck": "Monetization & Churn Leakage",
+          "priority": "Later",
+          "reason": "3 users cancelled subscriptions last month without leaving written feedback.",
+          "evidence": "3 churn events recorded in 30 days.",
+          "status": "pending"
+        }
+      ],
+      "dontDoItems": [
+        {
+          "id": "dont-1",
+          "action": "Do NOT spend money on Meta or Google Ads yet",
+          "reason": "Your paid conversion pathway is unproven and 30-day retention is 41%. Ads will burn your ₹2,000 monthly budget within 48 hours without producing lasting ROI.",
+          "currentEvidence": "CAC on paid channels estimated at ₹1,200/user, while MRR per user is ₹66. You would lose money on every signup.",
+          "risk": "Draining startup runway on empty clicks before fixing onboarding churn.",
+          "betterAlternative": "Run 2 zero-budget community distribution experiments on Twitter/X and Indie Hackers."
+        },
+        {
+          "id": "dont-2",
+          "action": "Do NOT build Enterprise SSO or Custom Roles yet",
+          "reason": "Zero enterprise prospects have requested SSO. 100% of your current 127 users are solo founders and micro-teams.",
+          "currentEvidence": "Customer feedback logs show 14 feature requests, 0 for SSO or multi-org permissions.",
+          "risk": "Wasting 3 weeks of solo developer bandwidth on complex security infrastructure nobody uses.",
+          "betterAlternative": "Simplify dashboard onboarding setup from 4 steps to 2 steps."
+        }
+      ],
+      "healthDimensions": [
+        {
+          "id": "dim-1",
+          "name": "Problem Validation",
+          "score": 88,
+          "status": "Strong",
+          "evidence": "18 founder interviews completed; 83% confirmed existing analytics tools are overly complex.",
+          "risk": "Low. Problem is real and well-understood.",
+          "recommendedAction": "Keep interview notes updated as new user segments join."
+        },
+        {
+          "id": "dim-2",
+          "name": "Customer Understanding",
+          "score": 82,
+          "status": "Healthy",
+          "evidence": "8 detailed interview records saved with tagged pain points and exact customer vocabulary.",
+          "risk": "Minor gap in understanding why non-technical founders churn.",
+          "recommendedAction": "Interview 2 non-technical users next week."
+        },
+        {
+          "id": "dim-3",
+          "name": "Product & Onboarding",
+          "score": 65,
+          "status": "Needs Attention",
+          "evidence": "Activation rate is 58%. 42% drop off before sending their first event payload.",
+          "risk": "High dropoff during SDK setup.",
+          "recommendedAction": "Build a 1-click test event button in onboarding."
+        },
+        {
+          "id": "dim-4",
+          "name": "Distribution & Traffic",
+          "score": 52,
+          "status": "Needs Attention",
+          "evidence": "127 users acquired primarily from 1 viral Reddit thread. Lacking repeatable channels.",
+          "risk": "Traffic stalls when founder stops manual posting.",
+          "recommendedAction": "Test a weekly automated build-in-public newsletter."
+        },
+        {
+          "id": "dim-5",
+          "name": "Revenue & Pricing",
+          "score": 70,
+          "status": "Healthy",
+          "evidence": "₹8,400 MRR from 12 paying users at ₹700/mo.",
+          "risk": "Low pricing might limit ARPU growth.",
+          "recommendedAction": "Test a ₹1,200 Pro tier with priority retention alerts."
+        },
+        {
+          "id": "dim-6",
+          "name": "Retention & Churn",
+          "score": 58,
+          "status": "Needs Attention",
+          "evidence": "30-day retention is 41%. Target for SaaS analytics is 60%+.",
+          "risk": "Leaky bucket reduces lifetime value (LTV).",
+          "recommendedAction": "Run retention sprint with targeted email re-engagement."
+        },
+        {
+          "id": "dim-7",
+          "name": "Operations & Bandwidth",
+          "score": 75,
+          "status": "Healthy",
+          "evidence": "25 hours/week invested by solo founder with clear task allocation.",
+          "risk": "Single founder vulnerability.",
+          "recommendedAction": "Automate repetitive customer support responses with FAQ."
+        },
+        {
+          "id": "dim-8",
+          "name": "Financial Discipline",
+          "score": 95,
+          "status": "Strong",
+          "evidence": "Monthly software expenses: ₹0 (all free-tier tools). Saving ₹7,800/month.",
+          "risk": "None. Exceptional capital efficiency.",
+          "recommendedAction": "Maintain zero-budget tool stack until ₹50,000 MRR."
+        }
+      ],
+      "roadmapStages": [
+        {
+          "id": "stage-1",
+          "name": "IDEA & PROBLEM",
+          "status": "completed",
+          "description": "Define problem, target customer persona, and conduct 10 validation interviews.",
+          "milestones": [
+            {
+              "id": "m1",
+              "title": "Define ICP and Problem Statement",
+              "completed": true,
+              "successCriteria": "Documented ICP & core pain point"
+            },
+            {
+              "id": "m2",
+              "title": "10 Customer Problem Interviews",
+              "completed": true,
+              "successCriteria": "Recorded 10 interview summaries"
+            }
+          ]
+        },
+        {
+          "id": "stage-2",
+          "name": "VALIDATION",
+          "status": "completed",
+          "description": "Test willingness to use and pay via landing page & manual concierge test.",
+          "milestones": [
+            {
+              "id": "m3",
+              "title": "Zero-cost landing page launch",
+              "completed": true,
+              "successCriteria": "50+ waitlist signups"
+            },
+            {
+              "id": "m4",
+              "title": "Validate pricing willingness",
+              "completed": true,
+              "successCriteria": "5 pre-orders or verbal commitments"
+            }
+          ]
+        },
+        {
+          "id": "stage-3",
+          "name": "MVP & LAUNCH",
+          "status": "completed",
+          "description": "Ship minimal usable version to early adopters and fix high-friction bugs.",
+          "milestones": [
+            {
+              "id": "m5",
+              "title": "Deploy functional MVP v1.0",
+              "completed": true,
+              "successCriteria": "Core value delivered in under 5 mins"
+            },
+            {
+              "id": "m6",
+              "title": "Public launch on Show HN & Reddit",
+              "completed": true,
+              "successCriteria": "100+ registered users"
+            }
+          ]
+        },
+        {
+          "id": "stage-4",
+          "name": "FIRST REVENUE",
+          "status": "active",
+          "description": "Convert free users into paying customers and reach initial MRR goal.",
+          "milestones": [
+            {
+              "id": "m7",
+              "title": "Reach 10 paying customers",
+              "completed": true,
+              "successCriteria": "₹7,000+ MRR"
+            },
+            {
+              "id": "m8",
+              "title": "Optimize activation to 60%",
+              "completed": false,
+              "successCriteria": "60% signups complete setup"
+            }
+          ]
+        },
+        {
+          "id": "stage-5",
+          "name": "PRODUCT-MARKET FIT",
+          "status": "upcoming",
+          "description": "Achieve 60%+ 30-day retention and sustainable organic referral loops.",
+          "milestones": [
+            {
+              "id": "m9",
+              "title": "Achieve 60% 30-day retention",
+              "completed": false,
+              "successCriteria": "Cohorts stabilize past 30 days"
+            },
+            {
+              "id": "m10",
+              "title": "Reach ₹25,000 MRR",
+              "completed": false,
+              "successCriteria": "Predictable monthly revenue"
+            }
+          ]
+        },
+        {
+          "id": "stage-6",
+          "name": "GROWTH & SCALE",
+          "status": "upcoming",
+          "description": "Scale acquisition channels with repeatable flywheel.",
+          "milestones": [
+            {
+              "id": "m11",
+              "title": "Establish 2 repeatable growth channels",
+              "completed": false,
+              "successCriteria": "Consistent weekly lead flow"
+            }
+          ]
+        }
+      ],
+      "missions": [
+        {
+          "id": "mission-1",
+          "title": "Interview 5 Active Users",
+          "category": "Customer Validation",
+          "objective": "Discover what specific value features keep users coming back.",
+          "whyItMatters": "Retaining existing users is 5x cheaper than acquiring new ones.",
+          "estimatedTime": "3 hours",
+          "estimatedCost": "₹0",
+          "difficulty": "Medium",
+          "expectedResult": "Identify the top 2 features driving 80% of retention.",
+          "completed": false,
+          "steps": [
+            {
+              "id": "s1",
+              "text": "Filter users with 3+ logins in the last 7 days",
+              "completed": true
+            },
+            {
+              "id": "s2",
+              "text": "Send 10 personalized, non-sales email invites for a 15-min chat",
+              "completed": true
+            },
+            {
+              "id": "s3",
+              "text": "Conduct interviews asking \"What would you do if PulseBoard disappeared tomorrow?\"",
+              "completed": false
+            },
+            {
+              "id": "s4",
+              "text": "Log key quotes and pain points into Customer Insights",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "id": "mission-2",
+          "title": "Optimize Onboarding Activation",
+          "category": "Product Experience",
+          "objective": "Increase user activation rate from 58% to 70%.",
+          "whyItMatters": "42% of users quit before seeing value. Fixing activation instantly boosts signups value.",
+          "estimatedTime": "2 hours",
+          "estimatedCost": "₹0",
+          "difficulty": "Easy",
+          "expectedResult": "Fewer setup dropoffs and faster time-to-first-metric.",
+          "completed": false,
+          "steps": [
+            {
+              "id": "s1",
+              "text": "Add sample demo data button on first setup screen",
+              "completed": true
+            },
+            {
+              "id": "s2",
+              "text": "Create 1-click copy script snippet",
+              "completed": true
+            },
+            {
+              "id": "s3",
+              "text": "Send automated welcome tip email 2 hours after signup",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "id": "mission-3",
+          "title": "Run First Zero-Budget Pricing Experiment",
+          "category": "Monetization",
+          "objective": "Test whether users will upgrade to a Pro tier at ₹1,200/mo.",
+          "whyItMatters": "Increasing ARPU accelerates MRR growth without needing 10x traffic.",
+          "estimatedTime": "2.5 hours",
+          "estimatedCost": "₹0",
+          "difficulty": "Medium",
+          "expectedResult": "Clear demand signal for advanced alerts tier.",
+          "completed": true,
+          "steps": [
+            {
+              "id": "s1",
+              "text": "Define Pro features: Instant Telegram alerts + weekly summary PDF",
+              "completed": true
+            },
+            {
+              "id": "s2",
+              "text": "Add Pro Plan callout in dashboard setting with waitlist modal",
+              "completed": true
+            },
+            {
+              "id": "s3",
+              "text": "Track modal clicks over 14 days",
+              "completed": true
+            },
+            {
+              "id": "s4",
+              "text": "Analyze conversion intent",
+              "completed": true
+            }
+          ]
+        }
+      ],
+      "experiments": [
+        {
+          "id": "exp-1",
+          "title": "Reddit r/SaaS Teardown Growth Post",
+          "hypothesis": "Posting a detailed, authentic teardown of SaaS retention metrics on r/SaaS will drive 40+ signups.",
+          "problem": "Organic distribution is currently stagnant between launches.",
+          "metric": "New User Signups",
+          "currentValue": "127",
+          "targetValue": "167",
+          "method": "Write a zero-fluff 800-word post with real anonymized retention charts and a free tool link.",
+          "audience": "Indie Hackers & Reddit SaaS Community",
+          "duration": "7 Days",
+          "budget": "₹0",
+          "status": "Running",
+          "createdAt": "2026-08-01"
+        },
+        {
+          "id": "exp-2",
+          "title": "Pro Plan Pricing Upgrade Waitlist Test",
+          "hypothesis": "At least 15% of active users will click \"Upgrade to Pro (₹1,200/mo)\" when offered instant Telegram churn alerts.",
+          "problem": "Low ARPU limiting revenue scaling.",
+          "metric": "Upgrade Modal Click-Through Rate",
+          "currentValue": "0%",
+          "targetValue": "15%",
+          "method": "In-app banner highlighting Telegram alerts with a \"Request Early Access\" button.",
+          "audience": "127 Active Free Users",
+          "duration": "14 Days",
+          "budget": "₹0",
+          "status": "Completed",
+          "resultOutcome": "22 out of 127 users (17.3%) clicked the Pro Upgrade button.",
+          "learnings": "High demand exists for instant alerts. Telegram bot integration is high value.",
+          "nextSteps": "Build simple Telegram bot integration for Pro tier.",
+          "createdAt": "2026-07-15"
+        }
+      ],
+      "tools": [
+        {
+          "id": "tool-1",
+          "category": "Analytics & Tracking",
+          "freeOption": "PostHog Open Source / Vercel Analytics Free",
+          "whatItSolves": "User event tracking, funnel analysis, and web analytics.",
+          "freeLimitations": "Up to 1,000,000 events/mo free.",
+          "whenToUpgrade": "When exceeding 1M events or needing custom enterprise SLAs.",
+          "monthlyCost": 4500,
+          "monthlySaving": 4500,
+          "status": "free"
+        },
+        {
+          "id": "tool-2",
+          "category": "Email Marketing & Newsletters",
+          "freeOption": "Resend Free Tier + Brevo",
+          "whatItSolves": "Transactional onboarding emails and product update broadcasts.",
+          "freeLimitations": "3,000 transactional emails/month free.",
+          "whenToUpgrade": "When subscriber list exceeds 2,500 contacts.",
+          "monthlyCost": 2000,
+          "monthlySaving": 2000,
+          "status": "free"
+        },
+        {
+          "id": "tool-3",
+          "category": "Landing Page & Hosting",
+          "freeOption": "Vercel / Cloudflare Pages Free Tier",
+          "whatItSolves": "Instant SSL, edge hosting, and global CDN for web apps.",
+          "freeLimitations": "100GB bandwidth / 100k executions daily.",
+          "whenToUpgrade": "When scaling to multi-region team deployments.",
+          "monthlyCost": 1300,
+          "monthlySaving": 1300,
+          "status": "free"
+        }
+      ],
+      "realityChecks": [
+        {
+          "id": "rc-1",
+          "decisionClaim": "I want to spend ₹50,000 on Facebook and Google Ads to acquire new users.",
+          "actualEvidence": "Current 30-day retention is 41%, and onboard activation is 58%. Organic CAC is ₹0 via Reddit.",
+          "missingEvidence": "No evidence that paid traffic converts to long-term paying customers; unproven ad copy.",
+          "counterargument": "Sending paid traffic into a 42% onboarding drop-off bucket will burn money without yielding sticky revenue.",
+          "risk": "Loss of ₹50,000 (25 months of current operating budget) with minimal retention.",
+          "betterAlternative": "Run 3 free community distribution sprints on Indie Hackers & LinkedIn before touching paid ads.",
+          "recommendedDecision": "REJECT paid ads for now. Focus 100% on fixing activation to 65% first.",
+          "confidence": "High",
+          "evidenceStrength": "Strong",
+          "estimatedCost": "₹50,000 potential risk",
+          "potentialDownside": "Complete depletion of cash reserves.",
+          "createdAt": "2026-08-05"
+        }
+      ],
+      "customerFeedback": [
+        {
+          "id": "fb-1",
+          "customerName": "Rahul M. (SaaS Founder)",
+          "type": "Interview",
+          "content": "I love how clean the dashboard is. Other analytics tools give me 50 charts I don't understand. I just wanted to know if users came back this week.",
+          "tags": [
+            "Simplicity",
+            "Core Value",
+            "Retention"
+          ],
+          "keyPainPoint": "Competitor complexity & chart clutter",
+          "createdAt": "2026-08-04"
+        },
+        {
+          "id": "fb-2",
+          "customerName": "Sarah K. (Indie Hacker)",
+          "type": "Support",
+          "content": "I got stuck trying to find where to put the tracking script in my Next.js app directory. A code example for App Router would be great.",
+          "tags": [
+            "Onboarding",
+            "Developer Experience",
+            "Next.js"
+          ],
+          "keyPainPoint": "Onboarding documentation gap for Next.js App Router",
+          "objection": "Unclear setup instructions",
+          "createdAt": "2026-08-06"
+        }
+      ],
+      "insights": [
+        {
+          "id": "ins-1",
+          "title": "Bottleneck Shifted: Distribution is Now #1 Priority",
+          "description": "Your problem validation and revenue models are verified. Acquisition flow is currently resting on a single channel.",
+          "type": "bottleneck",
+          "date": "2026-08-08"
+        },
+        {
+          "id": "ins-2",
+          "title": "Pro Tier Pricing Experiment Succeeded",
+          "description": "17.3% of active users requested Pro Telegram alerts, confirming strong willingness to pay ₹1,200/mo.",
+          "type": "experiment",
+          "date": "2026-08-02"
+        },
+        {
+          "id": "ins-3",
+          "title": "Zero Software Spend Maintained",
+          "description": "Saved ₹7,800 this month using high-grade free tier tools (PostHog, Resend, Vercel).",
+          "type": "financial",
+          "date": "2026-08-01"
+        }
+      ],
+      "metrics": [
+        {
+          "id": "m-users",
+          "name": "Total Registered Users",
+          "key": "users",
+          "currentValue": 127,
+          "unit": "users",
+          "trend": "+18% this month",
+          "explanation": "Total number of founder accounts created in PulseBoard.",
+          "whyItMatters": "Top of funnel milestone showing product curiosity.",
+          "whatToImprove": "Increase community post cadence to sustain user growth.",
+          "hasEnoughData": true,
+          "history": [
+            {
+              "date": "May",
+              "value": 24
+            },
+            {
+              "date": "Jun",
+              "value": 58
+            },
+            {
+              "date": "Jul",
+              "value": 104
+            },
+            {
+              "date": "Aug",
+              "value": 127
+            }
+          ]
+        },
+        {
+          "id": "m-activation",
+          "name": "Activation Rate",
+          "key": "activation",
+          "currentValue": 58,
+          "unit": "%",
+          "trend": "+4% vs last month",
+          "explanation": "Percentage of signups who send at least 1 analytics event within 24 hours.",
+          "whyItMatters": "Critical indicator of onboarding friction and immediate value perception.",
+          "whatToImprove": "Add interactive setup checklist and demo data toggle.",
+          "hasEnoughData": true,
+          "history": [
+            {
+              "date": "May",
+              "value": 45
+            },
+            {
+              "date": "Jun",
+              "value": 50
+            },
+            {
+              "date": "Jul",
+              "value": 54
+            },
+            {
+              "date": "Aug",
+              "value": 58
+            }
+          ]
+        },
+        {
+          "id": "m-retention",
+          "name": "30-Day Retention",
+          "key": "retention",
+          "currentValue": 41,
+          "unit": "%",
+          "trend": "Flat",
+          "explanation": "Percentage of users returning to view metrics 30 days after signup.",
+          "whyItMatters": "The ultimate indicator of Product-Market Fit.",
+          "whatToImprove": "Build automated weekly email digest showing founder growth stats.",
+          "hasEnoughData": true,
+          "history": [
+            {
+              "date": "May",
+              "value": 38
+            },
+            {
+              "date": "Jun",
+              "value": 40
+            },
+            {
+              "date": "Jul",
+              "value": 41
+            },
+            {
+              "date": "Aug",
+              "value": 41
+            }
+          ]
+        },
+        {
+          "id": "m-mrr",
+          "name": "Monthly Recurring Revenue (MRR)",
+          "key": "mrr",
+          "currentValue": 8400,
+          "unit": "₹",
+          "trend": "+₹2,100 this month",
+          "explanation": "Predictable monthly revenue from paid subscribers.",
+          "whyItMatters": "Validates financial sustainability and founder independence.",
+          "whatToImprove": "Launch the Pro Tier (₹1,200/mo) with Telegram alerts.",
+          "hasEnoughData": true,
+          "history": [
+            {
+              "date": "May",
+              "value": 2100
+            },
+            {
+              "date": "Jun",
+              "value": 4200
+            },
+            {
+              "date": "Jul",
+              "value": 6300
+            },
+            {
+              "date": "Aug",
+              "value": 8400
+            }
+          ]
+        },
+        {
+          "id": "m-churn",
+          "name": "Monthly Revenue Churn",
+          "key": "churn",
+          "currentValue": 2.8,
+          "unit": "%",
+          "trend": "-0.5% vs last month",
+          "explanation": "Percentage of MRR lost due to cancellations.",
+          "whyItMatters": "Low churn preserves recurring revenue compounding.",
+          "whatToImprove": "Implement exit surveys to capture cancellation reasons.",
+          "hasEnoughData": true,
+          "history": [
+            {
+              "date": "May",
+              "value": 4.5
+            },
+            {
+              "date": "Jun",
+              "value": 3.8
+            },
+            {
+              "date": "Jul",
+              "value": 3.3
+            },
+            {
+              "date": "Aug",
+              "value": 2.8
+            }
+          ]
+        }
+      ],
+      "activities": [
+        {
+          "id": "act-1",
+          "title": "Experiment Completed: Pro Tier Waitlist",
+          "description": "17.3% of active users clicked Pro upgrade button.",
+          "timestamp": "2 days ago",
+          "type": "experiment"
+        },
+        {
+          "id": "act-2",
+          "title": "Customer Feedback Recorded",
+          "description": "Sarah K. noted onboarding script difficulty with Next.js.",
+          "timestamp": "3 days ago",
+          "type": "customer"
+        },
+        {
+          "id": "act-3",
+          "title": "Reality Check Analyzed",
+          "description": "Evaluated ₹50,000 ad spend decision — Recommended organic focus.",
+          "timestamp": "4 days ago",
+          "type": "reality_check"
+        },
+        {
+          "id": "act-4",
+          "title": "MRR Milestone Achieved",
+          "description": "Crossed ₹8,400 monthly recurring revenue from 12 supporters.",
+          "timestamp": "6 days ago",
+          "type": "metric"
+        }
+      ],
+      "notifications": [
+        {
+          "id": "notif-1",
+          "title": "New Recommendation Generated",
+          "message": "Focus on interviewing 5 active users to uncover your retention leverage.",
+          "timestamp": "1 hour ago",
+          "read": false,
+          "type": "action"
+        },
+        {
+          "id": "notif-2",
+          "title": "Milestone Progress",
+          "message": "You have completed 3 of 4 First Revenue milestones!",
+          "timestamp": "Yesterday",
+          "read": true,
+          "type": "mission"
+        }
+      ],
+      "resources": [
+        {
+          "id": "res-opencode",
+          "title": "OpenCode",
+          "description": "Open-source coding agent designed for terminal and editor environments with multi-provider and local model flexibility.",
+          "url": "https://github.com/opencode-ai/opencode",
+          "resourceType": "coding_agent",
+          "category": "BUILD",
+          "subcategory": "AI Coding Agents",
+          "pricingType": "open_source",
+          "isOpenSource": true,
+          "isFree": true,
+          "hasFreeTier": true,
+          "freeTierDescription": "100% Free and Open Source. Zero licensing cost (Bring your own API key or run free local models via Ollama).",
+          "license": "Apache 2.0",
+          "platform": [
+            "Terminal",
+            "VS Code",
+            "CLI"
+          ],
+          "difficulty": "Intermediate",
+          "technicalLevel": "Technical",
+          "startupStages": [
+            "Idea",
+            "Validating",
+            "Building MVP",
+            "Launched"
+          ],
+          "founderGoals": [
+            "Build MVP faster",
+            "Zero software cost",
+            "Local model privacy"
+          ],
+          "useCases": [
+            "Autonomous code generation",
+            "Refactoring legacy repos",
+            "Offline AI coding"
+          ],
+          "skillsRequired": [
+            "Terminal CLI",
+            "Git basics"
+          ],
+          "timeToLearn": "20 mins",
+          "recommendedFor": "Founders who want an open-source coding agent without vendor lock-in or recurring subscriptions.",
+          "tags": [
+            "Coding Agent",
+            "Open Source",
+            "Local Models",
+            "Terminal",
+            "CLI"
+          ],
+          "qualityScore": 93,
+          "qualityBreakdown": {
+            "relevance": 10,
+            "freeAccessibility": 10,
+            "openSource": 10,
+            "docQuality": 9,
+            "founderUsefulness": 10,
+            "maintenance": 9,
+            "community": 8,
+            "recency": 9,
+            "practicalValue": 10
+          },
+          "qualityExplanation": "High-leverage open-source coding agent that executes tasks directly in the filesystem. Excellent local model support via Ollama avoids API token bills.",
+          "lastVerifiedAt": "2026-08",
+          "source": "Official GitHub Repository",
+          "status": "active",
+          "createdAt": "2026-01-10",
+          "updatedAt": "2026-08-20",
+          "codingAgentDetails": {
+            "supportedEnvironments": [
+              "Terminal",
+              "VS Code",
+              "Docker"
+            ],
+            "localModelSupport": true,
+            "modelFlexibility": "Ollama, LM Studio, OpenAI, Anthropic, Gemini, DeepSeek",
+            "repositoryUrl": "https://github.com/opencode-ai/opencode",
+            "documentationUrl": "https://github.com/opencode-ai/opencode#readme",
+            "setupDifficulty": "Easy",
+            "license": "Apache 2.0"
+          },
+          "isFeatured": true
+        },
+        {
+          "id": "res-cline",
+          "title": "Cline (Autonomous VS Code Agent)",
+          "description": "Open-source autonomous AI coding assistant extension for VS Code that reads files, writes code, executes terminal commands, and browses documentation.",
+          "url": "https://github.com/cline/cline",
+          "resourceType": "coding_agent",
+          "category": "BUILD",
+          "subcategory": "AI Coding Agents",
+          "pricingType": "open_source",
+          "isOpenSource": true,
+          "isFree": true,
+          "hasFreeTier": true,
+          "freeTierDescription": "100% Free extension. Connect to local LLMs (Ollama) or custom API endpoints with zero markup.",
+          "license": "Apache 2.0",
+          "platform": [
+            "VS Code",
+            "VSCodium",
+            "Cursor"
+          ],
+          "difficulty": "Beginner",
+          "technicalLevel": "Semi-Technical",
+          "startupStages": [
+            "Idea",
+            "Validating",
+            "Building MVP",
+            "Launched",
+            "First Revenue"
+          ],
+          "founderGoals": [
+            "Ship features in hours",
+            "Fix bugs autonomously",
+            "Full terminal agency"
+          ],
+          "useCases": [
+            "End-to-end fullstack feature building",
+            "Writing unit tests",
+            "Automated bug resolution"
+          ],
+          "skillsRequired": [
+            "Basic VS Code usage"
+          ],
+          "timeToLearn": "10 mins",
+          "recommendedFor": "Solo founders wanting a powerful agent inside their daily editor with granular step-by-step human confirmation.",
+          "tags": [
+            "VS Code",
+            "Coding Agent",
+            "Open Source",
+            "Autonomous",
+            "Editor Extension"
+          ],
+          "qualityScore": 96,
+          "qualityBreakdown": {
+            "relevance": 10,
+            "freeAccessibility": 10,
+            "openSource": 10,
+            "docQuality": 10,
+            "founderUsefulness": 10,
+            "maintenance": 10,
+            "community": 9,
+            "recency": 10,
+            "practicalValue": 10
+          },
+          "qualityExplanation": "Verified open source with active community maintenance. Provides full autonomous multi-file edits with clear human-in-the-loop permission prompts.",
+          "lastVerifiedAt": "2026-08",
+          "source": "Official GitHub & VS Code Marketplace",
+          "status": "active",
+          "createdAt": "2026-01-15",
+          "updatedAt": "2026-08-25",
+          "codingAgentDetails": {
+            "supportedEnvironments": [
+              "VS Code",
+              "VSCodium"
+            ],
+            "localModelSupport": true,
+            "modelFlexibility": "OpenRouter, Ollama, Anthropic, OpenAI, Gemini, Custom OpenAI-compatible",
+            "repositoryUrl": "https://github.com/cline/cline",
+            "documentationUrl": "https://github.com/cline/cline#readme",
+            "setupDifficulty": "Easy",
+            "license": "Apache 2.0"
+          },
+          "isFeatured": true
+        },
+        {
+          "id": "res-openhands",
+          "title": "OpenHands (Platform for Software Agents)",
+          "description": "Open-source platform for AI software developers that can write code, run shell commands, and interact with web browsers in sandboxed Docker environments.",
+          "url": "https://github.com/All-Hands-AI/OpenHands",
+          "resourceType": "coding_agent",
+          "category": "BUILD",
+          "subcategory": "AI Coding Agents",
+          "pricingType": "open_source",
+          "isOpenSource": true,
+          "isFree": true,
+          "hasFreeTier": true,
+          "freeTierDescription": "Self-hosted version is 100% free and open-source under MIT license.",
+          "license": "MIT",
+          "platform": [
+            "Docker",
+            "Web UI",
+            "CLI",
+            "Self-Hosted"
+          ],
+          "difficulty": "Intermediate",
+          "technicalLevel": "Technical",
+          "startupStages": [
+            "Building MVP",
+            "Launched",
+            "Growing"
+          ],
+          "founderGoals": [
+            "Automate GitHub PR reviews",
+            "Autonomous bug fixing in isolated container"
+          ],
+          "useCases": [
+            "Autonomous issue resolution",
+            "Docker sandbox execution",
+            "Benchmark evaluation"
+          ],
+          "skillsRequired": [
+            "Docker",
+            "Terminal CLI"
+          ],
+          "timeToLearn": "30 mins",
+          "recommendedFor": "Founders needing sandboxed automated agent execution for complex repositories.",
+          "tags": [
+            "Coding Agent",
+            "Open Source",
+            "Docker Sandbox",
+            "Autonomous",
+            "MIT"
+          ],
+          "qualityScore": 91,
+          "qualityBreakdown": {
+            "relevance": 9,
+            "freeAccessibility": 9,
+            "openSource": 10,
+            "docQuality": 9,
+            "founderUsefulness": 9,
+            "maintenance": 10,
+            "community": 9,
+            "recency": 9,
+            "practicalValue": 9
+          },
+          "qualityExplanation": "Robust sandboxed runtime that prevents agents from accidentally executing destructive commands on the host machine.",
+          "lastVerifiedAt": "2026-08",
+          "source": "Official GitHub Organization",
+          "status": "active",
+          "createdAt": "2026-02-01",
+          "updatedAt": "2026-08-22",
+          "codingAgentDetails": {
+            "supportedEnvironments": [
+              "Docker",
+              "Web UI",
+              "CLI"
+            ],
+            "localModelSupport": true,
+            "modelFlexibility": "LiteLLM backend (100+ providers + Local Ollama)",
+            "repositoryUrl": "https://github.com/All-Hands-AI/OpenHands",
+            "documentationUrl": "https://docs.all-hands.dev",
+            "setupDifficulty": "Medium",
+            "license": "MIT"
+          }
+        },
+        {
+          "id": "res-aider",
+          "title": "Aider (Git-Native Pair Programming)",
+          "description": "Terminal-based AI pair programmer that integrates tightly with Git, automatically writing clean commit messages for each code change.",
+          "url": "https://github.com/paul-gauthier/aider",
+          "resourceType": "coding_agent",
+          "category": "BUILD",
+          "subcategory": "AI Coding Agents",
+          "pricingType": "open_source",
+          "isOpenSource": true,
+          "isFree": true,
+          "hasFreeTier": true,
+          "freeTierDescription": "100% Free and open-source CLI tool under Apache 2.0.",
+          "license": "Apache 2.0",
+          "platform": [
+            "Terminal CLI",
+            "Mac",
+            "Linux",
+            "Windows"
+          ],
+          "difficulty": "Intermediate",
+          "technicalLevel": "Technical",
+          "startupStages": [
+            "Validating",
+            "Building MVP",
+            "Launched"
+          ],
+          "founderGoals": [
+            "Git-backed code generation",
+            "Refactoring without leaving the terminal"
+          ],
+          "useCases": [
+            "Multi-file edits",
+            "Git repo automated commits",
+            "Voice-to-code coding in terminal"
+          ],
+          "skillsRequired": [
+            "Git workflow",
+            "Command line"
+          ],
+          "timeToLearn": "15 mins",
+          "recommendedFor": "Technical founders who live in the terminal and want precise Git branch commit control.",
+          "tags": [
+            "Pair Programming",
+            "Git Native",
+            "CLI",
+            "Open Source",
+            "Terminal"
+          ],
+          "qualityScore": 94,
+          "qualityBreakdown": {
+            "relevance": 9,
+            "freeAccessibility": 10,
+            "openSource": 10,
+            "docQuality": 10,
+            "founderUsefulness": 10,
+            "maintenance": 10,
+            "community": 9,
+            "recency": 9,
+            "practicalValue": 10
+          },
+          "qualityExplanation": "Consistently ranks at top of coding benchmarks for edit accuracy and map-of-repo context retrieval.",
+          "lastVerifiedAt": "2026-08",
+          "source": "Official GitHub Repository",
+          "status": "active",
+          "createdAt": "2026-01-20",
+          "updatedAt": "2026-08-24",
+          "codingAgentDetails": {
+            "supportedEnvironments": [
+              "Terminal CLI",
+              "VS Code terminal",
+              "Any Shell"
+            ],
+            "localModelSupport": true,
+            "modelFlexibility": "Claude, OpenAI, DeepSeek, Ollama, Local llama.cpp",
+            "repositoryUrl": "https://github.com/paul-gauthier/aider",
+            "documentationUrl": "https://aider.chat/docs",
+            "setupDifficulty": "Easy",
+            "license": "Apache 2.0"
+          },
+          "isFeatured": true
+        },
+        {
+          "id": "res-continue",
+          "title": "Continue.dev",
+          "description": "Open-source autopilot for software development that brings AI chat and tab-autocomplete directly into VS Code and JetBrains IDEs.",
+          "url": "https://github.com/continuedev/continue",
+          "resourceType": "coding_agent",
+          "category": "BUILD",
+          "subcategory": "AI Coding Agents",
+          "pricingType": "open_source",
+          "isOpenSource": true,
+          "isFree": true,
+          "hasFreeTier": true,
+          "freeTierDescription": "100% Free & Open Source Apache 2.0 extension.",
+          "license": "Apache 2.0",
+          "platform": [
+            "VS Code",
+            "JetBrains",
+            "VSCodium"
+          ],
+          "difficulty": "Beginner",
+          "technicalLevel": "Semi-Technical",
+          "startupStages": [
+            "Building MVP",
+            "Launched",
+            "Growing"
+          ],
+          "founderGoals": [
+            "Inline tab autocomplete",
+            "Codebase indexation and Q&A"
+          ],
+          "useCases": [
+            "Fast autocompletion",
+            "Explaining complex libraries",
+            "Unit test generation"
+          ],
+          "skillsRequired": [
+            "IDE familiarity"
+          ],
+          "timeToLearn": "5 mins",
+          "recommendedFor": "Founders who want Copilot-style inline tab autocomplete without paying $20/month.",
+          "tags": [
+            "Autocomplete",
+            "IDE Extension",
+            "Open Source",
+            "JetBrains",
+            "VS Code"
+          ],
+          "qualityScore": 92,
+          "qualityBreakdown": {
+            "relevance": 9,
+            "freeAccessibility": 10,
+            "openSource": 10,
+            "docQuality": 9,
+            "founderUsefulness": 9,
+            "maintenance": 9,
+            "community": 9,
+            "recency": 9,
+            "practicalValue": 9
+          },
+          "qualityExplanation": "Seamless drop-in replacement for paid autocomplete tools with full privacy and local model compatibility.",
+          "lastVerifiedAt": "2026-08",
+          "source": "Official Website & GitHub",
+          "status": "active",
+          "createdAt": "2026-02-05",
+          "updatedAt": "2026-08-20",
+          "codingAgentDetails": {
+            "supportedEnvironments": [
+              "VS Code",
+              "JetBrains IDEs (IntelliJ, PyCharm, WebStorm)"
+            ],
+            "localModelSupport": true,
+            "modelFlexibility": "Ollama, LM Studio, Anthropic, Gemini, OpenAI, Groq",
+            "repositoryUrl": "https://github.com/continuedev/continue",
+            "documentationUrl": "https://docs.continue.dev",
+            "setupDifficulty": "Easy",
+            "license": "Apache 2.0"
+          }
+        },
+        {
+          "id": "res-goose",
+          "title": "Goose (On-Machine AI Agent by Block)",
+          "description": "Open-source, extensible AI agent that automates complex engineering tasks, runs shell commands, and builds software directly on your machine.",
+          "url": "https://github.com/block/goose",
+          "resourceType": "coding_agent",
+          "category": "BUILD",
+          "subcategory": "AI Coding Agents",
+          "pricingType": "open_source",
+          "isOpenSource": true,
+          "isFree": true,
+          "hasFreeTier": true,
+          "freeTierDescription": "100% Free Apache 2.0 open-source agent.",
+          "license": "Apache 2.0",
+          "platform": [
+            "CLI",
+            "Desktop App",
+            "Mac",
+            "Linux",
+            "Windows"
+          ],
+          "difficulty": "Intermediate",
+          "technicalLevel": "Technical",
+          "startupStages": [
+            "Building MVP",
+            "Launched"
+          ],
+          "founderGoals": [
+            "Automate workflow scripting",
+            "Tool extension with MCP protocol"
+          ],
+          "useCases": [
+            "Repository refactoring",
+            "System script automation",
+            "MCP tool integrations"
+          ],
+          "skillsRequired": [
+            "Terminal",
+            "Python / Rust knowledge helpful"
+          ],
+          "timeToLearn": "25 mins",
+          "recommendedFor": "Founders building multi-tool automation workflows powered by Model Context Protocol (MCP).",
+          "tags": [
+            "Goose",
+            "Block",
+            "MCP",
+            "Open Source",
+            "Autonomous Agent"
+          ],
+          "qualityScore": 90,
+          "qualityBreakdown": {
+            "relevance": 9,
+            "freeAccessibility": 10,
+            "openSource": 10,
+            "docQuality": 9,
+            "founderUsefulness": 8,
+            "maintenance": 9,
+            "community": 8,
+            "recency": 10,
+            "practicalValue": 8
+          },
+          "qualityExplanation": "Backed by Block engineering with native Model Context Protocol (MCP) tool support.",
+          "lastVerifiedAt": "2026-08",
+          "source": "Official Block GitHub",
+          "status": "active",
+          "createdAt": "2026-03-01",
+          "updatedAt": "2026-08-18",
+          "codingAgentDetails": {
+            "supportedEnvironments": [
+              "CLI",
+              "Desktop GUI"
+            ],
+            "localModelSupport": true,
+            "modelFlexibility": "Ollama, Databricks, OpenAI, Anthropic, Gemini",
+            "repositoryUrl": "https://github.com/block/goose",
+            "documentationUrl": "https://block.github.io/goose",
+            "setupDifficulty": "Medium",
+            "license": "Apache 2.0"
+          }
+        },
+        {
+          "id": "res-vscodium",
+          "title": "VSCodium (Libre VS Code Build)",
+          "description": "Community-driven, freely-licensed binary distribution of Microsoft’s editor VS Code without telemetry, tracking, or proprietary branding.",
+          "url": "https://vscodium.com",
+          "resourceType": "ide",
+          "category": "BUILD",
+          "subcategory": "IDEs & Editors",
+          "pricingType": "open_source",
+          "isOpenSource": true,
+          "isFree": true,
+          "hasFreeTier": true,
+          "freeTierDescription": "100% Free and Libre Open Source Software (FLOSS) under MIT license.",
+          "license": "MIT",
+          "platform": [
+            "Mac",
+            "Windows",
+            "Linux"
+          ],
+          "difficulty": "Beginner",
+          "technicalLevel": "Semi-Technical",
+          "startupStages": [
+            "Idea",
+            "Validating",
+            "Building MVP",
+            "Launched",
+            "First Revenue",
+            "Growing"
+          ],
+          "founderGoals": [
+            "Zero telemetry development",
+            "Lightweight full-featured editor"
+          ],
+          "useCases": [
+            "Web development",
+            "Fullstack coding",
+            "Open VSX extension access"
+          ],
+          "skillsRequired": [
+            "General computer navigation"
+          ],
+          "timeToLearn": "10 mins",
+          "recommendedFor": "Founders who want full VS Code capabilities with zero telemetry, data tracking, or Microsoft vendor lock-in.",
+          "tags": [
+            "IDE",
+            "FLOSS",
+            "Open Source",
+            "VSCodium",
+            "Privacy"
+          ],
+          "qualityScore": 95,
+          "qualityBreakdown": {
+            "relevance": 10,
+            "freeAccessibility": 10,
+            "openSource": 10,
+            "docQuality": 9,
+            "founderUsefulness": 10,
+            "maintenance": 10,
+            "community": 9,
+            "recency": 9,
+            "practicalValue": 10
+          },
+          "qualityExplanation": "Pure open-source binaries compiled directly from the vscode repository source. Safe, lightweight, and completely telemetry-free.",
+          "lastVerifiedAt": "2026-08",
+          "source": "Official VSCodium Website",
+          "status": "active",
+          "createdAt": "2026-01-05",
+          "updatedAt": "2026-08-20",
+          "ideDetails": {
+            "platform": [
+              "Mac (Apple Silicon & Intel)",
+              "Windows",
+              "Linux (deb/rpm/flatpak)"
+            ],
+            "languageSupport": [
+              "TypeScript",
+              "JavaScript",
+              "Python",
+              "Go",
+              "Rust",
+              "All via LSP"
+            ],
+            "extensions": "Open VSX Registry + standard .vsix extensions",
+            "aiSupport": "Supports Cline, Continue, Aider, OpenCode",
+            "offlineSupport": true,
+            "isOpenSource": true,
+            "bestUseCase": "General-purpose fullstack and frontend web application development"
+          },
+          "isFeatured": true
+        },
+        {
+          "id": "res-zed",
+          "title": "Zed Editor",
+          "description": "High-performance, multiplayer code editor written in Rust with instant startup times, low memory consumption, and native AI integration.",
+          "url": "https://zed.dev",
+          "resourceType": "ide",
+          "category": "BUILD",
+          "subcategory": "IDEs & Editors",
+          "pricingType": "open_source",
+          "isOpenSource": true,
+          "isFree": true,
+          "hasFreeTier": true,
+          "freeTierDescription": "100% Free and Open Source (GPL & Apache 2.0). Free collaborative editing.",
+          "license": "GPLv3 / Apache 2.0",
+          "platform": [
+            "Mac",
+            "Linux",
+            "Windows (Beta)"
+          ],
+          "difficulty": "Beginner",
+          "technicalLevel": "Semi-Technical",
+          "startupStages": [
+            "Building MVP",
+            "Launched",
+            "Growing"
+          ],
+          "founderGoals": [
+            "Blazing fast editor speed",
+            "Pair programming with remote co-founder"
+          ],
+          "useCases": [
+            "Fast editing on laptops with low battery usage",
+            "Real-time collaborative pair programming"
+          ],
+          "skillsRequired": [
+            "Basic code editing"
+          ],
+          "timeToLearn": "10 mins",
+          "recommendedFor": "Founders on Mac/Linux who hate editor lag and want instant file jumping with native AI assistance.",
+          "tags": [
+            "Zed",
+            "Rust",
+            "High Performance",
+            "Open Source",
+            "Pair Programming"
+          ],
+          "qualityScore": 94,
+          "qualityBreakdown": {
+            "relevance": 9,
+            "freeAccessibility": 10,
+            "openSource": 10,
+            "docQuality": 9,
+            "founderUsefulness": 9,
+            "maintenance": 10,
+            "community": 9,
+            "recency": 10,
+            "practicalValue": 9
+          },
+          "qualityExplanation": "GPU-accelerated text rendering with zero input lag. Built-in multiplayer workspaces make co-founder pairing painless.",
+          "lastVerifiedAt": "2026-08",
+          "source": "Official Zed Website & GitHub",
+          "status": "active",
+          "createdAt": "2026-02-01",
+          "updatedAt": "2026-08-25",
+          "ideDetails": {
+            "platform": [
+              "macOS",
+              "Linux",
+              "Windows (Preview)"
+            ],
+            "languageSupport": [
+              "Rust",
+              "TypeScript",
+              "Python",
+              "Go",
+              "HTML/CSS",
+              "Elixir"
+            ],
+            "extensions": "Growing community extension catalog",
+            "aiSupport": "Native Assistant Panel + inline transformations (Anthropic, OpenAI, Ollama)",
+            "offlineSupport": true,
+            "isOpenSource": true,
+            "bestUseCase": "High-speed code navigation and frictionless pair programming"
+          }
+        },
+        {
+          "id": "res-neovim",
+          "title": "Neovim",
+          "description": "Hyperextensible, terminal-based modal text editor focused on speed, extensibility with Lua, and built-in Language Server Protocol (LSP).",
+          "url": "https://neovim.io",
+          "resourceType": "ide",
+          "category": "BUILD",
+          "subcategory": "IDEs & Editors",
+          "pricingType": "open_source",
+          "isOpenSource": true,
+          "isFree": true,
+          "hasFreeTier": true,
+          "freeTierDescription": "100% Free and Open Source (Apache 2.0 / Vim License). Zero cost forever.",
+          "license": "Apache 2.0",
+          "platform": [
+            "Terminal",
+            "Mac",
+            "Linux",
+            "Windows",
+            "SSH Remote"
+          ],
+          "difficulty": "Advanced",
+          "technicalLevel": "Advanced Dev",
+          "startupStages": [
+            "Building MVP",
+            "Launched",
+            "Growing"
+          ],
+          "founderGoals": [
+            "Keyboard-only speed",
+            "Remote server development via SSH"
+          ],
+          "useCases": [
+            "Modal editing",
+            "Coding over SSH on low-spec cloud VPS",
+            "Customized dev workflows"
+          ],
+          "skillsRequired": [
+            "Vim motions",
+            "Lua / Shell config"
+          ],
+          "timeToLearn": "40+ hours",
+          "recommendedFor": "Advanced technical founders who want the fastest possible keyboard navigation without touching a mouse.",
+          "tags": [
+            "Neovim",
+            "Modal Editing",
+            "Lua",
+            "Terminal",
+            "Open Source"
+          ],
+          "qualityScore": 91,
+          "qualityBreakdown": {
+            "relevance": 8,
+            "freeAccessibility": 10,
+            "openSource": 10,
+            "docQuality": 9,
+            "founderUsefulness": 8,
+            "maintenance": 10,
+            "community": 10,
+            "recency": 9,
+            "practicalValue": 8
+          },
+          "qualityExplanation": "Maximum possible developer velocity for experienced modal typists; extremely lightweight footprint.",
+          "lastVerifiedAt": "2026-08",
+          "source": "Official Neovim Website",
+          "status": "active",
+          "createdAt": "2026-01-01",
+          "updatedAt": "2026-08-15",
+          "ideDetails": {
+            "platform": [
+              "Cross-platform POSIX",
+              "macOS",
+              "Linux",
+              "Windows"
+            ],
+            "languageSupport": [
+              "Any language via Treesitter & LSP"
+            ],
+            "extensions": "Vibrant Lua plugin ecosystem (Lazy.nvim, Mason, Telescope)",
+            "aiSupport": "Avante.nvim, CodeCompanion.nvim, Copilot.lua, Aider",
+            "offlineSupport": true,
+            "isOpenSource": true,
+            "bestUseCase": "Keyboard-driven editing and remote server management"
+          }
+        },
+        {
+          "id": "res-supabase",
+          "title": "Supabase (Open Source Firebase Alternative)",
+          "description": "PostgreSQL database backend with instant REST/GraphQL APIs, Auth, Realtime listeners, Storage, and Vector embeddings.",
+          "url": "https://supabase.com",
+          "resourceType": "tool",
+          "category": "BUILD",
+          "subcategory": "Databases & Backend",
+          "pricingType": "free_tier",
+          "isOpenSource": true,
+          "isFree": false,
+          "hasFreeTier": true,
+          "freeTierDescription": "Free Tier includes 2 active Postgres databases, 500MB storage, 50,000 monthly active users (MAU), 5GB bandwidth, and 1GB file storage.",
+          "license": "Apache 2.0 (Self-Hostable)",
+          "platform": [
+            "Cloud Managed",
+            "Self-Hosted Docker"
+          ],
+          "difficulty": "Beginner",
+          "technicalLevel": "Semi-Technical",
+          "startupStages": [
+            "Idea",
+            "Validating",
+            "Building MVP",
+            "Launched",
+            "First Revenue"
+          ],
+          "founderGoals": [
+            "Launch backend in 10 minutes",
+            "Zero backend maintenance cost",
+            "Postgres SQL power"
+          ],
+          "useCases": [
+            "User authentication",
+            "Relational database",
+            "Vector search for AI"
+          ],
+          "skillsRequired": [
+            "Basic SQL or JavaScript SDK"
+          ],
+          "timeToLearn": "30 mins",
+          "recommendedFor": "Founders building web or mobile apps needing an instant production-ready SQL database with built-in login.",
+          "tags": [
+            "Postgres",
+            "Backend",
+            "Authentication",
+            "Open Source",
+            "Free Tier"
+          ],
+          "qualityScore": 97,
+          "qualityBreakdown": {
+            "relevance": 10,
+            "freeAccessibility": 9,
+            "openSource": 10,
+            "docQuality": 10,
+            "founderUsefulness": 10,
+            "maintenance": 10,
+            "community": 10,
+            "recency": 10,
+            "practicalValue": 10
+          },
+          "qualityExplanation": "The standard backend choice for solo builders. Excellent free tier and full SQL access prevents proprietary database lock-in.",
+          "lastVerifiedAt": "2026-08",
+          "source": "Official Supabase Pricing & Docs",
+          "status": "active",
+          "createdAt": "2026-01-01",
+          "updatedAt": "2026-08-26",
+          "isFeatured": true
+        },
+        {
+          "id": "res-cloudflare-pages",
+          "title": "Cloudflare Pages & Workers",
+          "description": "Zero-cost serverless hosting and edge compute platform with unlimited bandwidth, free custom domains, and automatic SSL.",
+          "url": "https://pages.cloudflare.com",
+          "resourceType": "tool",
+          "category": "BUILD",
+          "subcategory": "Hosting & Deployment",
+          "pricingType": "free_tier",
+          "isOpenSource": false,
+          "isFree": false,
+          "hasFreeTier": true,
+          "freeTierDescription": "Free plan: Unlimited bandwidth, unlimited static requests, 500 builds/month, and 100,000 free serverless Worker executions/day.",
+          "platform": [
+            "Web",
+            "CLI / Wrangler"
+          ],
+          "difficulty": "Beginner",
+          "technicalLevel": "Semi-Technical",
+          "startupStages": [
+            "Idea",
+            "Validating",
+            "Building MVP",
+            "Launched",
+            "First Revenue",
+            "Growing"
+          ],
+          "founderGoals": [
+            "Never pay for bandwidth",
+            "Host landing pages & web apps with 0 latency"
+          ],
+          "useCases": [
+            "Next.js / Vite SPA deployment",
+            "Custom domain SSL setup",
+            "Edge API endpoints"
+          ],
+          "skillsRequired": [
+            "Git push to deploy"
+          ],
+          "timeToLearn": "15 mins",
+          "recommendedFor": "Founders who want to avoid unexpected bandwidth bills when their product goes viral on Reddit or Hacker News.",
+          "tags": [
+            "Hosting",
+            "Free Bandwidth",
+            "Edge CDN",
+            "Deployment",
+            "Free Tier"
+          ],
+          "qualityScore": 96,
+          "qualityBreakdown": {
+            "relevance": 10,
+            "freeAccessibility": 10,
+            "openSource": 6,
+            "docQuality": 9,
+            "founderUsefulness": 10,
+            "maintenance": 10,
+            "community": 9,
+            "recency": 9,
+            "practicalValue": 10
+          },
+          "qualityExplanation": "Unlike competitors that charge after 100GB bandwidth, Cloudflare Pages offers genuinely unlimited static bandwidth on its free tier.",
+          "lastVerifiedAt": "2026-08",
+          "source": "Official Cloudflare Pricing",
+          "status": "active",
+          "createdAt": "2026-01-10",
+          "updatedAt": "2026-08-20"
+        },
+        {
+          "id": "res-shadcn-ui",
+          "title": "shadcn/ui",
+          "description": "Beautifully designed, accessible, copy-and-paste React & Tailwind components that you own 100% in your codebase.",
+          "url": "https://ui.shadcn.com",
+          "resourceType": "template",
+          "category": "BUILD",
+          "subcategory": "UI/UX & Design",
+          "pricingType": "open_source",
+          "isOpenSource": true,
+          "isFree": true,
+          "hasFreeTier": true,
+          "freeTierDescription": "100% Free & Open Source (MIT). Not an npm dependency — you own the code.",
+          "license": "MIT",
+          "platform": [
+            "React",
+            "Next.js",
+            "Vite",
+            "Tailwind CSS"
+          ],
+          "difficulty": "Beginner",
+          "technicalLevel": "Semi-Technical",
+          "startupStages": [
+            "Idea",
+            "Validating",
+            "Building MVP",
+            "Launched"
+          ],
+          "founderGoals": [
+            "Build world-class UI without a designer",
+            "Full accessibility out of the box"
+          ],
+          "useCases": [
+            "Dashboards",
+            "Forms",
+            "Modals",
+            "Dropdowns",
+            "Landing page UI"
+          ],
+          "skillsRequired": [
+            "React",
+            "Tailwind CSS"
+          ],
+          "timeToLearn": "15 mins",
+          "recommendedFor": "Solo founders building SaaS applications who want clean, accessible, modern UI in minutes.",
+          "tags": [
+            "UI Components",
+            "Tailwind CSS",
+            "Accessible",
+            "Open Source",
+            "Design System"
+          ],
+          "qualityScore": 98,
+          "qualityBreakdown": {
+            "relevance": 10,
+            "freeAccessibility": 10,
+            "openSource": 10,
+            "docQuality": 10,
+            "founderUsefulness": 10,
+            "maintenance": 10,
+            "community": 10,
+            "recency": 10,
+            "practicalValue": 10
+          },
+          "qualityExplanation": "Revolutionized frontend developer experience. Code is pasted directly into your repository, giving you zero library lock-in.",
+          "lastVerifiedAt": "2026-08",
+          "source": "Official GitHub & Website",
+          "status": "active",
+          "createdAt": "2026-01-01",
+          "updatedAt": "2026-08-25",
+          "isFeatured": true
+        },
+        {
+          "id": "res-posthog",
+          "title": "PostHog (Open Source Product OS)",
+          "description": "All-in-one product analytics suite combining user funnels, session recordings, feature flags, A/B testing, and user feedback surveys.",
+          "url": "https://posthog.com",
+          "resourceType": "tool",
+          "category": "BUILD",
+          "subcategory": "Analytics & Monitoring",
+          "pricingType": "free_tier",
+          "isOpenSource": true,
+          "isFree": false,
+          "hasFreeTier": true,
+          "freeTierDescription": "Generous Free Tier: 1 Million free events/month, 5,000 free session recordings/month, 250 survey responses, and unlimited feature flags.",
+          "license": "MIT (Self-Hostable) / Cloud Hosted",
+          "platform": [
+            "Web",
+            "Mobile",
+            "Node.js",
+            "Python"
+          ],
+          "difficulty": "Beginner",
+          "technicalLevel": "Semi-Technical",
+          "startupStages": [
+            "Launched",
+            "First Revenue",
+            "Growing"
+          ],
+          "founderGoals": [
+            "Diagnose user drop-off with screen replays",
+            "Track product retention funnels"
+          ],
+          "useCases": [
+            "Session replay debugging",
+            "User onboarding funnel tracking",
+            "Feature flag rollouts"
+          ],
+          "skillsRequired": [
+            "1-line script installation"
+          ],
+          "timeToLearn": "20 mins",
+          "recommendedFor": "Launched founders who need to watch exactly where real users get stuck in their product onboarding.",
+          "tags": [
+            "Analytics",
+            "Session Replays",
+            "Product OS",
+            "Funnels",
+            "Free Tier"
+          ],
+          "qualityScore": 96,
+          "qualityBreakdown": {
+            "relevance": 10,
+            "freeAccessibility": 9,
+            "openSource": 10,
+            "docQuality": 10,
+            "founderUsefulness": 10,
+            "maintenance": 10,
+            "community": 10,
+            "recency": 10,
+            "practicalValue": 10
+          },
+          "qualityExplanation": "Session recordings give early founders 100x more insight than raw charts. Free tier handles early traction easily.",
+          "lastVerifiedAt": "2026-08",
+          "source": "Official PostHog Pricing",
+          "status": "active",
+          "createdAt": "2026-01-10",
+          "updatedAt": "2026-08-22"
+        },
+        {
+          "id": "res-penpot",
+          "title": "Penpot (Open Source Design & Prototyping)",
+          "description": "Web-based open-source design and prototyping tool that uses native web standards (SVG, CSS Flexbox, Grid), serving as a free alternative to Figma.",
+          "url": "https://penpot.app",
+          "resourceType": "tool",
+          "category": "BUILD",
+          "subcategory": "UI/UX & Design",
+          "pricingType": "open_source",
+          "isOpenSource": true,
+          "isFree": true,
+          "hasFreeTier": true,
+          "freeTierDescription": "100% Free cloud tier with unlimited files and teams, or self-host via Docker.",
+          "license": "MPL-2.0",
+          "platform": [
+            "Web Browser",
+            "Self-Hosted Docker"
+          ],
+          "difficulty": "Beginner",
+          "technicalLevel": "Non-Technical",
+          "startupStages": [
+            "Idea",
+            "Validating",
+            "Building MVP"
+          ],
+          "founderGoals": [
+            "Design wireframes for free",
+            "CSS-native prototypes for developer handoff"
+          ],
+          "useCases": [
+            "Landing page mockups",
+            "SaaS app wireframes",
+            "Vector icon editing"
+          ],
+          "skillsRequired": [
+            "Visual layout"
+          ],
+          "timeToLearn": "30 mins",
+          "recommendedFor": "Founders who want collaborative design files without Figma subscription seat fees.",
+          "tags": [
+            "Design",
+            "Figma Alternative",
+            "Open Source",
+            "Wireframing",
+            "Prototyping"
+          ],
+          "qualityScore": 92,
+          "qualityBreakdown": {
+            "relevance": 9,
+            "freeAccessibility": 10,
+            "openSource": 10,
+            "docQuality": 9,
+            "founderUsefulness": 9,
+            "maintenance": 9,
+            "community": 8,
+            "recency": 9,
+            "practicalValue": 9
+          },
+          "qualityExplanation": "Generates real CSS flexbox and grid layouts, making the bridge from mockup to React code seamless.",
+          "lastVerifiedAt": "2026-08",
+          "source": "Official Penpot Website",
+          "status": "active",
+          "createdAt": "2026-02-10",
+          "updatedAt": "2026-08-15"
+        },
+        {
+          "id": "res-art-mom-test",
+          "title": "The Mom Test: How to Talk to Customers (Summary & Question Bank)",
+          "description": "Rob Fitzpatrick’s definitive framework for validating startup ideas without asking leading questions that get fake polite validation.",
+          "url": "https://robfitz.com/the-mom-test",
+          "resourceType": "article",
+          "category": "LEARN",
+          "subcategory": "Customer Discovery Guides",
+          "pricingType": "free",
+          "isOpenSource": false,
+          "isFree": true,
+          "hasFreeTier": false,
+          "freeTierDescription": "Freely accessible core framework summary and question templates.",
+          "difficulty": "Beginner",
+          "technicalLevel": "Non-Technical",
+          "startupStages": [
+            "Idea",
+            "Validating",
+            "Building MVP"
+          ],
+          "founderGoals": [
+            "Validate problem pain intensity",
+            "Stop hearing fake compliments from prospective users"
+          ],
+          "useCases": [
+            "Conducting user interviews",
+            "Writing cold outreach messages",
+            "Qualifying customer intent"
+          ],
+          "skillsRequired": [
+            "Active listening"
+          ],
+          "timeToLearn": "12 mins",
+          "recommendedFor": "Founders about to write code or conduct customer discovery calls.",
+          "tags": [
+            "Customer Interviews",
+            "Validation",
+            "Problem Discovery",
+            "The Mom Test",
+            "Playbook"
+          ],
+          "qualityScore": 99,
+          "qualityBreakdown": {
+            "relevance": 10,
+            "freeAccessibility": 10,
+            "openSource": 5,
+            "docQuality": 10,
+            "founderUsefulness": 10,
+            "maintenance": 10,
+            "community": 10,
+            "recency": 9,
+            "practicalValue": 10
+          },
+          "qualityExplanation": "Essential reading. Prevents the #1 startup killer: building something nobody wants because people lied to be nice.",
+          "lastVerifiedAt": "2026-08",
+          "source": "Rob Fitzpatrick / Founder Guides",
+          "status": "active",
+          "createdAt": "2026-01-01",
+          "updatedAt": "2026-08-20",
+          "articleDetails": {
+            "readingTimeMinutes": 8,
+            "problemSolved": "How to ask customer interview questions so that even your mom cannot lie to you.",
+            "authorOrSource": "Rob Fitzpatrick",
+            "isPaywalled": false
+          },
+          "isFeatured": true
+        },
+        {
+          "id": "res-art-do-things-dont-scale",
+          "title": "Do Things That Don’t Scale",
+          "description": "Paul Graham’s classic essay on manual user acquisition, founder-led recruitment, and providing unscalable delight to win early evangelists.",
+          "url": "https://paulgraham.com/ds.html",
+          "resourceType": "article",
+          "category": "LEARN",
+          "subcategory": "Startup Articles",
+          "pricingType": "free",
+          "isOpenSource": false,
+          "isFree": true,
+          "hasFreeTier": false,
+          "freeTierDescription": "100% Free on Paul Graham’s official website.",
+          "difficulty": "Beginner",
+          "technicalLevel": "Non-Technical",
+          "startupStages": [
+            "Idea",
+            "Validating",
+            "Building MVP",
+            "Launched"
+          ],
+          "founderGoals": [
+            "Get first 10-100 users manually",
+            "Stop waiting for passive viral growth"
+          ],
+          "useCases": [
+            "Direct founder sales",
+            "Manual user onboarding",
+            "Overcoming early growth paralysis"
+          ],
+          "skillsRequired": [
+            "Founder grit"
+          ],
+          "timeToLearn": "15 mins",
+          "recommendedFor": "Founders waiting for users to magically show up instead of going out to manually onboard them.",
+          "tags": [
+            "Paul Graham",
+            "Y Combinator",
+            "Early Growth",
+            "Distribution",
+            "Customer Onboarding"
+          ],
+          "qualityScore": 98,
+          "qualityBreakdown": {
+            "relevance": 10,
+            "freeAccessibility": 10,
+            "openSource": 5,
+            "docQuality": 10,
+            "founderUsefulness": 10,
+            "maintenance": 10,
+            "community": 10,
+            "recency": 8,
+            "practicalValue": 10
+          },
+          "qualityExplanation": "Timeless guidance explaining why manual hustle beats complex marketing funnels in the first 100 users.",
+          "lastVerifiedAt": "2026-08",
+          "source": "Paul Graham Official Archive",
+          "status": "active",
+          "createdAt": "2026-01-01",
+          "updatedAt": "2026-08-15",
+          "articleDetails": {
+            "readingTimeMinutes": 14,
+            "problemSolved": "How early stage startups bootstrap initial user growth without an existing brand or ad budget.",
+            "authorOrSource": "Paul Graham (Y Combinator)",
+            "isPaywalled": false
+          },
+          "isFeatured": true
+        },
+        {
+          "id": "res-art-first-1000-users",
+          "title": "How the Biggest Consumer & SaaS Apps Got Their First 1,000 Users",
+          "description": "Lenny Rachitsky’s deep-dive research analyzing 100+ top companies across the 7 primary distribution channels used to acquire first 1,000 users.",
+          "url": "https://www.lennysnewsletter.com/p/how-the-biggest-consumer-apps-got",
+          "resourceType": "article",
+          "category": "LEARN",
+          "subcategory": "Growth Articles",
+          "pricingType": "free",
+          "isOpenSource": false,
+          "isFree": true,
+          "hasFreeTier": false,
+          "freeTierDescription": "Free un-gated edition on Lenny’s Substack.",
+          "difficulty": "Intermediate",
+          "technicalLevel": "Non-Technical",
+          "startupStages": [
+            "Launched",
+            "First Revenue",
+            "Growing"
+          ],
+          "founderGoals": [
+            "Identify repeatable acquisition channels",
+            "Stop guessing where customers hang out"
+          ],
+          "useCases": [
+            "Cold outreach",
+            "Community seeding",
+            "Product Hunt launches",
+            "Build-in-public"
+          ],
+          "skillsRequired": [
+            "Marketing & Distribution"
+          ],
+          "timeToLearn": "20 mins",
+          "recommendedFor": "Founders who launched their product and now need a concrete distribution channel playbook.",
+          "tags": [
+            "Lenny Rachitsky",
+            "First 1000 Users",
+            "Distribution",
+            "Case Studies",
+            "Zero Budget Growth"
+          ],
+          "qualityScore": 97,
+          "qualityBreakdown": {
+            "relevance": 10,
+            "freeAccessibility": 10,
+            "openSource": 5,
+            "docQuality": 10,
+            "founderUsefulness": 10,
+            "maintenance": 9,
+            "community": 10,
+            "recency": 9,
+            "practicalValue": 10
+          },
+          "qualityExplanation": "Breaks down acquisition into 7 actionable tactics with real founder case studies and zero fluff.",
+          "lastVerifiedAt": "2026-08",
+          "source": "Lenny’s Newsletter (Free Edition)",
+          "status": "active",
+          "createdAt": "2026-01-20",
+          "updatedAt": "2026-08-20",
+          "articleDetails": {
+            "readingTimeMinutes": 18,
+            "problemSolved": "Choosing the right initial customer acquisition channel based on your product category.",
+            "authorOrSource": "Lenny Rachitsky",
+            "isPaywalled": false
+          }
+        },
+        {
+          "id": "res-art-retention-loops",
+          "title": "Retention Cohorts & Diagnostics: Why Retention is King",
+          "description": "Tactical guide on measuring week-over-week cohort retention, identifying the drop-off cliff, and fixing activation before scaling acquisition.",
+          "url": "https://brianbalfour.com/essays/retention-cohorts",
+          "resourceType": "article",
+          "category": "LEARN",
+          "subcategory": "Product Articles",
+          "pricingType": "free",
+          "isOpenSource": false,
+          "isFree": true,
+          "hasFreeTier": false,
+          "freeTierDescription": "Free guide on Brian Balfour’s publication.",
+          "difficulty": "Intermediate",
+          "technicalLevel": "Semi-Technical",
+          "startupStages": [
+            "Launched",
+            "First Revenue",
+            "Growing"
+          ],
+          "founderGoals": [
+            "Diagnose leaky bucket churn",
+            "Calculate true 30-day retention curve"
+          ],
+          "useCases": [
+            "Cohort curve flattening",
+            "Onboarding milestone activation analysis"
+          ],
+          "skillsRequired": [
+            "Basic metrics understanding"
+          ],
+          "timeToLearn": "15 mins",
+          "recommendedFor": "Founders with active users whose numbers keep dropping after week 2.",
+          "tags": [
+            "Retention",
+            "Churn",
+            "Cohorts",
+            "Product Market Fit",
+            "Metrics"
+          ],
+          "qualityScore": 95,
+          "qualityBreakdown": {
+            "relevance": 10,
+            "freeAccessibility": 10,
+            "openSource": 5,
+            "docQuality": 9,
+            "founderUsefulness": 10,
+            "maintenance": 9,
+            "community": 9,
+            "recency": 9,
+            "practicalValue": 10
+          },
+          "qualityExplanation": "Clearly explains why pouring traffic into a leaky bucket fails, and provides mathematical rules to spot real product-market fit.",
+          "lastVerifiedAt": "2026-08",
+          "source": "Reforge & Brian Balfour Archive",
+          "status": "active",
+          "createdAt": "2026-02-01",
+          "updatedAt": "2026-08-15",
+          "articleDetails": {
+            "readingTimeMinutes": 12,
+            "problemSolved": "How to determine if your product actually retains users before spending money on growth.",
+            "authorOrSource": "Brian Balfour / Reforge",
+            "isPaywalled": false
+          }
+        },
+        {
+          "id": "res-art-saas-pricing",
+          "title": "SaaS Pricing for Bootstrappers: The 10x Value Equation",
+          "description": "Practical guide to pricing your early SaaS product, eliminating the $5/month trap, and structuring tiers that customers gladly pay for.",
+          "url": "https://robwalling.com/saas-pricing-guide",
+          "resourceType": "article",
+          "category": "LEARN",
+          "subcategory": "Pricing Guides",
+          "pricingType": "free",
+          "isOpenSource": false,
+          "isFree": true,
+          "hasFreeTier": false,
+          "freeTierDescription": "100% Free article on Rob Walling’s blog.",
+          "difficulty": "Beginner",
+          "technicalLevel": "Non-Technical",
+          "startupStages": [
+            "Building MVP",
+            "Launched",
+            "First Revenue"
+          ],
+          "founderGoals": [
+            "Price based on value not cost",
+            "Stop undercharging out of impostor syndrome"
+          ],
+          "useCases": [
+            "Setting initial pricing tiers",
+            "Annual vs monthly discounts",
+            "Handling pricing objections"
+          ],
+          "skillsRequired": [
+            "Business logic"
+          ],
+          "timeToLearn": "10 mins",
+          "recommendedFor": "Founders scared to ask for money or charging $5 for a tool that saves companies $500/month.",
+          "tags": [
+            "Pricing",
+            "Monetization",
+            "Bootstrapping",
+            "Rob Walling",
+            "SaaS Economics"
+          ],
+          "qualityScore": 94,
+          "qualityBreakdown": {
+            "relevance": 9,
+            "freeAccessibility": 10,
+            "openSource": 5,
+            "docQuality": 9,
+            "founderUsefulness": 10,
+            "maintenance": 9,
+            "community": 9,
+            "recency": 9,
+            "practicalValue": 10
+          },
+          "qualityExplanation": "Direct, actionable framework specifically tailored for bootstrapped founders with ₹0 or small budgets.",
+          "lastVerifiedAt": "2026-08",
+          "source": "MicroConf / Rob Walling",
+          "status": "active",
+          "createdAt": "2026-02-15",
+          "updatedAt": "2026-08-20",
+          "articleDetails": {
+            "readingTimeMinutes": 9,
+            "problemSolved": "How to structure pricing tiers that convert without underpricing your core product.",
+            "authorOrSource": "Rob Walling (MicroConf)",
+            "isPaywalled": false
+          }
+        },
+        {
+          "id": "res-news-tldr",
+          "title": "TLDR Tech & Startups",
+          "description": "Free daily email newsletter summarizing the most interesting news in tech, AI, startups, and software engineering in 5 minutes.",
+          "url": "https://tldr.tech",
+          "resourceType": "newsletter",
+          "category": "READ",
+          "subcategory": "Technology & Startup Newsletters",
+          "pricingType": "free",
+          "isOpenSource": false,
+          "isFree": true,
+          "hasFreeTier": false,
+          "freeTierDescription": "100% Free daily newsletter. No paywall.",
+          "difficulty": "Beginner",
+          "technicalLevel": "Non-Technical",
+          "startupStages": [
+            "Idea",
+            "Validating",
+            "Building MVP",
+            "Launched",
+            "First Revenue",
+            "Growing"
+          ],
+          "founderGoals": [
+            "Stay updated on tech trends in 5 minutes",
+            "Discover new tools & AI breakthroughs"
+          ],
+          "useCases": [
+            "Daily morning reading",
+            "Tracking software market movements"
+          ],
+          "skillsRequired": [
+            "Reading"
+          ],
+          "timeToLearn": "5 mins/day",
+          "recommendedFor": "Founders who want a fast, high-signal, zero-fluff daily tech and AI briefing.",
+          "tags": [
+            "Newsletter",
+            "Daily Tech",
+            "AI",
+            "Startups",
+            "Free Subscription"
+          ],
+          "qualityScore": 96,
+          "qualityBreakdown": {
+            "relevance": 9,
+            "freeAccessibility": 10,
+            "openSource": 5,
+            "docQuality": 10,
+            "founderUsefulness": 9,
+            "maintenance": 10,
+            "community": 10,
+            "recency": 10,
+            "practicalValue": 9
+          },
+          "qualityExplanation": "Verified 100% free daily email with 1.25M+ subscribers. Summarizes major tech releases without long sponsored fluff.",
+          "lastVerifiedAt": "2026-08",
+          "source": "TLDR.tech Official",
+          "status": "active",
+          "createdAt": "2026-01-01",
+          "updatedAt": "2026-08-28",
+          "newsletterDetails": {
+            "newsletterFrequency": "Daily",
+            "subscriptionUrl": "https://tldr.tech/signup",
+            "isFree": true,
+            "topics": [
+              "Startups",
+              "AI Models",
+              "Software Engineering",
+              "Big Tech"
+            ],
+            "audienceLevel": "All Founders"
+          },
+          "isFeatured": true
+        },
+        {
+          "id": "res-news-product-hunt",
+          "title": "Product Hunt Daily",
+          "description": "Daily newsletter covering top product launches, maker interviews, emerging tech trends, and community favorites.",
+          "url": "https://www.producthunt.com/newsletter",
+          "resourceType": "newsletter",
+          "category": "READ",
+          "subcategory": "Product Newsletters",
+          "pricingType": "free",
+          "isOpenSource": false,
+          "isFree": true,
+          "hasFreeTier": false,
+          "freeTierDescription": "100% Free daily product launch newsletter.",
+          "difficulty": "Beginner",
+          "technicalLevel": "Non-Technical",
+          "startupStages": [
+            "Idea",
+            "Validating",
+            "Building MVP",
+            "Launched",
+            "First Revenue"
+          ],
+          "founderGoals": [
+            "Study successful product launches",
+            "Find emerging tool niches"
+          ],
+          "useCases": [
+            "Competitive research",
+            "Launch strategy benchmarking"
+          ],
+          "skillsRequired": [
+            "Product awareness"
+          ],
+          "timeToLearn": "5 mins/day",
+          "recommendedFor": "Founders preparing for their own launch or looking for product inspiration.",
+          "tags": [
+            "Product Hunt",
+            "Launches",
+            "Makers",
+            "Product Inspiration",
+            "Free"
+          ],
+          "qualityScore": 93,
+          "qualityBreakdown": {
+            "relevance": 9,
+            "freeAccessibility": 10,
+            "openSource": 5,
+            "docQuality": 9,
+            "founderUsefulness": 9,
+            "maintenance": 10,
+            "community": 10,
+            "recency": 10,
+            "practicalValue": 9
+          },
+          "qualityExplanation": "Great for seeing how peer founders position their value propositions and video demos.",
+          "lastVerifiedAt": "2026-08",
+          "source": "Product Hunt Official",
+          "status": "active",
+          "createdAt": "2026-01-05",
+          "updatedAt": "2026-08-28",
+          "newsletterDetails": {
+            "newsletterFrequency": "Daily",
+            "subscriptionUrl": "https://www.producthunt.com/newsletter",
+            "isFree": true,
+            "topics": [
+              "New Products",
+              "Maker Stories",
+              "Launch Strategies",
+              "SaaS Tools"
+            ],
+            "audienceLevel": "All Founders"
+          }
+        },
+        {
+          "id": "res-news-yc-digest",
+          "title": "Y Combinator Startup Library & Digest",
+          "description": "Official YC tactical essays, videos, and Startup School updates from partners on problem validation, pricing, and scaling.",
+          "url": "https://www.ycombinator.com/library",
+          "resourceType": "newsletter",
+          "category": "READ",
+          "subcategory": "Startup Newsletters",
+          "pricingType": "free",
+          "isOpenSource": false,
+          "isFree": true,
+          "hasFreeTier": false,
+          "freeTierDescription": "100% Free library and email curriculum from Y Combinator.",
+          "difficulty": "Beginner",
+          "technicalLevel": "Non-Technical",
+          "startupStages": [
+            "Idea",
+            "Validating",
+            "Building MVP",
+            "Launched",
+            "First Revenue",
+            "Growing"
+          ],
+          "founderGoals": [
+            "Learn YC standard operating playbooks",
+            "Understand investor & customer expectations"
+          ],
+          "useCases": [
+            "Weekly founder study",
+            "Co-founder alignment discussions"
+          ],
+          "skillsRequired": [
+            "Startup curiosity"
+          ],
+          "timeToLearn": "15 mins/week",
+          "recommendedFor": "Any founder building a high-growth company or applying to accelerator programs.",
+          "tags": [
+            "Y Combinator",
+            "Startup School",
+            "Strategy",
+            "Fundraising",
+            "Free Playbooks"
+          ],
+          "qualityScore": 98,
+          "qualityBreakdown": {
+            "relevance": 10,
+            "freeAccessibility": 10,
+            "openSource": 5,
+            "docQuality": 10,
+            "founderUsefulness": 10,
+            "maintenance": 10,
+            "community": 10,
+            "recency": 9,
+            "practicalValue": 10
+          },
+          "qualityExplanation": "Gold standard startup advice backed by data from thousands of successful venture and bootstrapped companies.",
+          "lastVerifiedAt": "2026-08",
+          "source": "Y Combinator Official Library",
+          "status": "active",
+          "createdAt": "2026-01-01",
+          "updatedAt": "2026-08-25",
+          "newsletterDetails": {
+            "newsletterFrequency": "Weekly",
+            "subscriptionUrl": "https://www.startupschool.org",
+            "isFree": true,
+            "topics": [
+              "YC Lectures",
+              "Founder Playbooks",
+              "Problem Validation",
+              "Pitch Decks"
+            ],
+            "audienceLevel": "Early Stage"
+          },
+          "isFeatured": true
+        },
+        {
+          "id": "res-news-first-round",
+          "title": "First Round Review (Free Bi-Weekly Digest)",
+          "description": "Long-form tactical essays and management playbooks written directly by top operating leaders from Notion, Figma, Stripe, and Airbnb.",
+          "url": "https://review.firstround.com",
+          "resourceType": "newsletter",
+          "category": "READ",
+          "subcategory": "Founder Newsletters",
+          "pricingType": "free",
+          "isOpenSource": false,
+          "isFree": true,
+          "hasFreeTier": false,
+          "freeTierDescription": "100% Free publication. No paywall.",
+          "difficulty": "Intermediate",
+          "technicalLevel": "Non-Technical",
+          "startupStages": [
+            "Launched",
+            "First Revenue",
+            "Growing"
+          ],
+          "founderGoals": [
+            "Master tactical hiring, sales, and product strategy",
+            "Deep dive into real operating playbooks"
+          ],
+          "useCases": [
+            "Scaling sales teams",
+            "Customer success operations",
+            "Product management frameworks"
+          ],
+          "skillsRequired": [
+            "Business operations"
+          ],
+          "timeToLearn": "20 mins/article",
+          "recommendedFor": "Founders looking for deep, practitioner-level operating wisdom rather than shallow listicles.",
+          "tags": [
+            "First Round Review",
+            "Operations",
+            "Leadership",
+            "Product Strategy",
+            "Free Articles"
+          ],
+          "qualityScore": 97,
+          "qualityBreakdown": {
+            "relevance": 10,
+            "freeAccessibility": 10,
+            "openSource": 5,
+            "docQuality": 10,
+            "founderUsefulness": 10,
+            "maintenance": 9,
+            "community": 9,
+            "recency": 9,
+            "practicalValue": 10
+          },
+          "qualityExplanation": "Widely considered the Harvard Business Review for tech startups. Extremely thorough and completely free.",
+          "lastVerifiedAt": "2026-08",
+          "source": "First Round Capital",
+          "status": "active",
+          "createdAt": "2026-01-15",
+          "updatedAt": "2026-08-22",
+          "newsletterDetails": {
+            "newsletterFrequency": "Bi-weekly",
+            "subscriptionUrl": "https://review.firstround.com/newsletter",
+            "isFree": true,
+            "topics": [
+              "Hiring",
+              "Go-To-Market",
+              "Product Strategy",
+              "Engineering Leadership"
+            ],
+            "audienceLevel": "Growth & Product"
+          }
+        },
+        {
+          "id": "res-news-bytebytego",
+          "title": "ByteByteGo (Free System Architecture Digest)",
+          "description": "Alex Xu’s visual breakdowns of system architecture, distributed databases, cloud scale, and real-world backend infrastructure.",
+          "url": "https://bytebytego.com",
+          "resourceType": "newsletter",
+          "category": "READ",
+          "subcategory": "Engineering & Technical Newsletters",
+          "pricingType": "free_tier",
+          "isOpenSource": false,
+          "isFree": false,
+          "hasFreeTier": true,
+          "freeTierDescription": "Weekly free visual system architecture deep-dive emails.",
+          "difficulty": "Intermediate",
+          "technicalLevel": "Technical",
+          "startupStages": [
+            "Building MVP",
+            "Launched",
+            "Growing"
+          ],
+          "founderGoals": [
+            "Understand scalable backend architecture visually",
+            "Make correct database and caching choices"
+          ],
+          "useCases": [
+            "System design decisions",
+            "Choosing SQL vs NoSQL vs Caching",
+            "Cloud architecture optimization"
+          ],
+          "skillsRequired": [
+            "Basic software architecture"
+          ],
+          "timeToLearn": "10 mins/week",
+          "recommendedFor": "Technical founders architecting backends that will need to scale cost-effectively.",
+          "tags": [
+            "System Design",
+            "Architecture",
+            "Databases",
+            "Backend Scale",
+            "ByteByteGo"
+          ],
+          "qualityScore": 95,
+          "qualityBreakdown": {
+            "relevance": 9,
+            "freeAccessibility": 9,
+            "openSource": 5,
+            "docQuality": 10,
+            "founderUsefulness": 9,
+            "maintenance": 10,
+            "community": 10,
+            "recency": 10,
+            "practicalValue": 9
+          },
+          "qualityExplanation": "Visual diagrams make complex engineering concepts intuitive in minutes.",
+          "lastVerifiedAt": "2026-08",
+          "source": "ByteByteGo Substack",
+          "status": "active",
+          "createdAt": "2026-02-01",
+          "updatedAt": "2026-08-26",
+          "newsletterDetails": {
+            "newsletterFrequency": "Weekly",
+            "subscriptionUrl": "https://blog.bytebytego.com",
+            "isFree": true,
+            "topics": [
+              "System Design",
+              "Postgres vs Mongo",
+              "Caching",
+              "Microservices",
+              "Cloud Architecture"
+            ],
+            "audienceLevel": "Technical Founders"
+          }
+        },
+        {
+          "id": "res-disc-next-saas",
+          "title": "Next.js SaaS Starter (Open Source)",
+          "description": "Production-ready open-source Next.js starter repository with Supabase Auth, Stripe billing, Tailwind CSS, and dashboard layout.",
+          "url": "https://github.com/shadcn-ui/taxonomy",
+          "resourceType": "repository",
+          "category": "DISCOVER",
+          "subcategory": "Starter Templates & Boilerplates",
+          "pricingType": "open_source",
+          "isOpenSource": true,
+          "isFree": true,
+          "hasFreeTier": true,
+          "freeTierDescription": "100% Free under MIT license. Clone and deploy anywhere.",
+          "license": "MIT",
+          "platform": [
+            "Next.js",
+            "React",
+            "TypeScript",
+            "Tailwind"
+          ],
+          "difficulty": "Beginner",
+          "technicalLevel": "Semi-Technical",
+          "startupStages": [
+            "Idea",
+            "Validating",
+            "Building MVP"
+          ],
+          "founderGoals": [
+            "Skip weeks of boilerplate authentication code",
+            "Launch working MVP today"
+          ],
+          "useCases": [
+            "SaaS app foundations",
+            "User login & settings",
+            "Stripe checkout flow"
+          ],
+          "skillsRequired": [
+            "React / TypeScript basics"
+          ],
+          "timeToLearn": "30 mins",
+          "recommendedFor": "Founders starting a new web app who want to skip setting up authentication, database schemas, and billing from scratch.",
+          "tags": [
+            "SaaS Boilerplate",
+            "Next.js",
+            "TypeScript",
+            "Open Source",
+            "MIT"
+          ],
+          "qualityScore": 96,
+          "qualityBreakdown": {
+            "relevance": 10,
+            "freeAccessibility": 10,
+            "openSource": 10,
+            "docQuality": 9,
+            "founderUsefulness": 10,
+            "maintenance": 9,
+            "community": 10,
+            "recency": 9,
+            "practicalValue": 10
+          },
+          "qualityExplanation": "Saves 40+ hours of boilerplate setup. Clean architecture and zero vendor lock-in.",
+          "lastVerifiedAt": "2026-08",
+          "source": "GitHub Open Source Community",
+          "status": "active",
+          "createdAt": "2026-01-10",
+          "updatedAt": "2026-08-20",
+          "isFeatured": true
+        },
+        {
+          "id": "res-disc-indie-hackers",
+          "title": "Indie Hackers Community & Revenue Database",
+          "description": "Community of bootstrapped founders sharing verified revenue numbers, transparent growth logs, launch playbooks, and honest feedback.",
+          "url": "https://www.indiehackers.com",
+          "resourceType": "community",
+          "category": "DISCOVER",
+          "subcategory": "Founder Communities",
+          "pricingType": "free",
+          "isOpenSource": false,
+          "isFree": true,
+          "hasFreeTier": false,
+          "freeTierDescription": "100% Free to join, post, and read verified founder case studies.",
+          "difficulty": "Beginner",
+          "technicalLevel": "Non-Technical",
+          "startupStages": [
+            "Idea",
+            "Validating",
+            "Building MVP",
+            "Launched",
+            "First Revenue",
+            "Growing"
+          ],
+          "founderGoals": [
+            "Find beta testers",
+            "Learn from profitable solo bootstrappers",
+            "Build in public"
+          ],
+          "useCases": [
+            "Product feedback posts",
+            "Milestone celebrations",
+            "Finding co-founders & early adopters"
+          ],
+          "skillsRequired": [
+            "Community engagement"
+          ],
+          "timeToLearn": "Ongoing",
+          "recommendedFor": "Solo founders wanting a supportive, non-venture-capital-obsessed community focused on cash-flow profitability.",
+          "tags": [
+            "Indie Hackers",
+            "Bootstrapping",
+            "Community",
+            "Case Studies",
+            "Zero Budget"
+          ],
+          "qualityScore": 94,
+          "qualityBreakdown": {
+            "relevance": 10,
+            "freeAccessibility": 10,
+            "openSource": 5,
+            "docQuality": 9,
+            "founderUsefulness": 10,
+            "maintenance": 9,
+            "community": 10,
+            "recency": 9,
+            "practicalValue": 9
+          },
+          "qualityExplanation": "The premier hub for bootstrappers. Transparent revenue milestones keep founders grounded in real economics.",
+          "lastVerifiedAt": "2026-08",
+          "source": "Indie Hackers Official",
+          "status": "active",
+          "createdAt": "2026-01-01",
+          "updatedAt": "2026-08-26"
+        },
+        {
+          "id": "res-disc-github-pack",
+          "title": "GitHub for Startups & Developer Pack",
+          "description": "Curated collection of free developer tools, cloud infrastructure credits, domain vouchers, and continuous integration runners.",
+          "url": "https://github.com/enterprise/startups",
+          "resourceType": "program",
+          "category": "DISCOVER",
+          "subcategory": "Startup Programs & Credits",
+          "pricingType": "free",
+          "isOpenSource": false,
+          "isFree": true,
+          "hasFreeTier": false,
+          "freeTierDescription": "Free access to GitHub Enterprise, Copilot credits, and partner cloud vouchers for eligible early startups.",
+          "difficulty": "Beginner",
+          "technicalLevel": "Non-Technical",
+          "startupStages": [
+            "Idea",
+            "Validating",
+            "Building MVP",
+            "Launched"
+          ],
+          "founderGoals": [
+            "Save thousands on developer tooling",
+            "Free CI/CD compute minutes"
+          ],
+          "useCases": [
+            "Automated testing pipelines",
+            "Security vulnerability scanning",
+            "Free domain vouchers"
+          ],
+          "skillsRequired": [
+            "GitHub account"
+          ],
+          "timeToLearn": "15 mins",
+          "recommendedFor": "Early startups wanting to access enterprise-grade DevOps tools with ₹0 overhead.",
+          "tags": [
+            "GitHub",
+            "Free Credits",
+            "Startup Pack",
+            "DevOps",
+            "Free Tools"
+          ],
+          "qualityScore": 95,
+          "qualityBreakdown": {
+            "relevance": 9,
+            "freeAccessibility": 10,
+            "openSource": 5,
+            "docQuality": 9,
+            "founderUsefulness": 10,
+            "maintenance": 10,
+            "community": 10,
+            "recency": 9,
+            "practicalValue": 10
+          },
+          "qualityExplanation": "Substantial cost savings for early development. Backed by verified developer ecosystems.",
+          "lastVerifiedAt": "2026-08",
+          "source": "GitHub Official Startups Program",
+          "status": "active",
+          "createdAt": "2026-01-10",
+          "updatedAt": "2026-08-20"
+        }
+      ],
+      "resourceInteractions": [
+        {
+          "id": "int-1",
+          "userId": "demo-user-1",
+          "startupId": "pulseboard-demo",
+          "resourceId": "res-cline",
+          "interactionType": "tried",
+          "createdAt": "2026-08-20T10:00:00Z",
+          "notes": "Built the first version of the analytics dashboard with Cline and Sonnet 3.5"
+        },
+        {
+          "id": "int-2",
+          "userId": "demo-user-1",
+          "startupId": "pulseboard-demo",
+          "resourceId": "res-art-mom-test",
+          "interactionType": "completed",
+          "createdAt": "2026-08-22T14:30:00Z",
+          "notes": "Reviewed question bank before interviewing 8 founders."
+        },
+        {
+          "id": "int-3",
+          "userId": "demo-user-1",
+          "startupId": "pulseboard-demo",
+          "resourceId": "res-posthog",
+          "interactionType": "saved",
+          "createdAt": "2026-08-24T09:15:00Z"
+        },
+        {
+          "id": "int-4",
+          "userId": "demo-user-1",
+          "startupId": "pulseboard-demo",
+          "resourceId": "res-supabase",
+          "interactionType": "completed",
+          "createdAt": "2026-08-25T11:00:00Z"
+        }
+      ],
+      "learningProfile": {
+        "completedCount": 2,
+        "articlesRead": 1,
+        "toolsTried": 1,
+        "coursesCompleted": 0,
+        "skillsLearned": [
+          "The Mom Test",
+          "Postgres SQL",
+          "Cline CLI",
+          "Customer Discovery"
+        ],
+        "topicsExplored": [
+          "Customer Interviews",
+          "Validation",
+          "Autonomous Agents",
+          "Databases"
+        ],
+        "skillMastery": {
+          "technical": 65,
+          "product": 70,
+          "marketing": 45,
+          "sales": 35,
+          "operations": 50
+        },
+        "gapsIdentified": [
+          "Zero-budget community distribution channels",
+          "Direct founder sales outreach & pricing strategy"
+        ]
+      },
+      "vaultCollections": [
+        {
+          "id": "col-mvp",
+          "name": "MVP Tools",
+          "description": "Core free-tier stack for building fast without recurring bills",
+          "icon": "Layers",
+          "color": "#0052FF",
+          "createdAt": "2026-08-15T08:00:00Z"
+        },
+        {
+          "id": "col-marketing",
+          "name": "Marketing Ideas",
+          "description": "Zero-cost distribution tactics and community acquisition channels",
+          "icon": "TrendingUp",
+          "color": "#10B981",
+          "createdAt": "2026-08-15T08:00:00Z"
+        },
+        {
+          "id": "col-ai",
+          "name": "AI Tools",
+          "description": "Open-source coding agents and local model setups",
+          "icon": "Sparkles",
+          "color": "#8B5CF6",
+          "createdAt": "2026-08-16T09:00:00Z"
+        },
+        {
+          "id": "col-read-later",
+          "name": "Read Later",
+          "description": "Tactical founder essays, pricing playbooks, and case studies",
+          "icon": "BookOpen",
+          "color": "#F59E0B",
+          "createdAt": "2026-08-16T09:00:00Z"
+        },
+        {
+          "id": "col-fundraising",
+          "name": "Fundraising",
+          "description": "Angel deck templates, SAFE note guides, and pitch notes",
+          "icon": "DollarSign",
+          "color": "#EC4899",
+          "createdAt": "2026-08-17T10:00:00Z"
+        },
+        {
+          "id": "col-things-to-try",
+          "name": "Things To Try",
+          "description": "New workflows and experiments to benchmark in the next sprint",
+          "icon": "FlaskConical",
+          "color": "#06B6D4",
+          "createdAt": "2026-08-18T11:00:00Z"
+        },
+        {
+          "id": "col-product-inspo",
+          "name": "Product Inspiration",
+          "description": "Great onboarding flows, micro-interactions, and landing pages",
+          "icon": "Lightbulb",
+          "color": "#3B82F6",
+          "createdAt": "2026-08-19T12:00:00Z"
+        },
+        {
+          "id": "col-github",
+          "name": "Useful GitHub Repos",
+          "description": "Open-source boilerplate, agent runtimes, and starter templates",
+          "icon": "FolderGit2",
+          "color": "#64748B",
+          "createdAt": "2026-08-20T14:00:00Z"
+        },
+        {
+          "id": "col-future",
+          "name": "Future Ideas",
+          "description": "Long-term features and platform pivot hypotheses",
+          "icon": "Target",
+          "color": "#A855F7",
+          "createdAt": "2026-08-21T15:00:00Z"
+        }
+      ],
+      "savedResources": [
+        {
+          "id": "sv-1",
+          "userId": "demo-user-1",
+          "startupId": "pulseboard-demo",
+          "resourceId": "res-opencode",
+          "url": "https://github.com/opencode-ai/opencode",
+          "title": "OpenCode — Open-Source Autonomous Coding Agent",
+          "description": "Open-source coding agent for terminal and editor environments with Ollama local model support and zero vendor lock-in.",
+          "resourceType": "coding_agent",
+          "category": "Development",
+          "tags": [
+            "AI",
+            "Coding Agent",
+            "Open Source",
+            "Developer Tools",
+            "CLI"
+          ],
+          "notes": "Try this when current coding workflow becomes too slow or token costs spike.",
+          "priority": "high",
+          "status": "completed",
+          "faviconUrl": "https://github.githubassets.com/favicons/favicon.png",
+          "source": "GitHub",
+          "author": "OpenCode Team",
+          "collections": [
+            "AI Tools",
+            "MVP Tools",
+            "Useful GitHub Repos"
+          ],
+          "readingTimeMinutes": 5,
+          "suggestedStage": "Building MVP",
+          "relevantProblem": "Building Without Coding Team",
+          "relevantSkill": "Autonomous Coding",
+          "isOpenSource": true,
+          "githubRepo": "opencode-ai/opencode",
+          "createdAt": "2026-08-10T10:00:00Z",
+          "updatedAt": "2026-08-20T11:00:00Z",
+          "lastOpenedAt": "2026-08-25T14:00:00Z"
+        },
+        {
+          "id": "sv-2",
+          "userId": "demo-user-1",
+          "startupId": "pulseboard-demo",
+          "resourceId": "res-art-mom-test",
+          "url": "https://www.momtestbook.com",
+          "title": "The Mom Test: How to Talk to Customers When Everyone is Lying to You",
+          "description": "The definitive handbook for conducting customer validation interviews without asking leading questions.",
+          "resourceType": "article",
+          "category": "Product",
+          "tags": [
+            "Customer Interviews",
+            "Validation",
+            "User Research",
+            "Discovery"
+          ],
+          "notes": "Use these specific rule-of-thumb questions during next week customer interview calls.",
+          "priority": "high",
+          "status": "completed",
+          "faviconUrl": "https://www.google.com/s2/favicons?domain=momtestbook.com&sz=64",
+          "source": "Rob Fitzpatrick",
+          "author": "Rob Fitzpatrick",
+          "collections": [
+            "Read Later",
+            "Marketing Ideas"
+          ],
+          "readingTimeMinutes": 12,
+          "suggestedStage": "Validating",
+          "relevantProblem": "Customer Acquisition",
+          "relevantSkill": "Customer Interviews",
+          "createdAt": "2026-08-11T12:30:00Z",
+          "updatedAt": "2026-08-22T09:15:00Z",
+          "lastOpenedAt": "2026-08-22T14:30:00Z"
+        },
+        {
+          "id": "sv-3",
+          "userId": "demo-user-1",
+          "startupId": "pulseboard-demo",
+          "url": "https://lennyrachitsky.substack.com/p/how-to-increase-retention",
+          "title": "How to Improve SaaS Retention & Reduce Churn: A Comprehensive Framework",
+          "description": "Tactical breakdown of cohort retention curves, activation milestones, and fixing onboarding churn for B2B & micro-SaaS.",
+          "resourceType": "newsletter",
+          "category": "Growth",
+          "tags": [
+            "Retention",
+            "Churn",
+            "Onboarding",
+            "Cohort Analysis",
+            "SaaS"
+          ],
+          "notes": "Crucial reading for our 41% 30-day retention bottleneck. Focus on the activation milestone chapter.",
+          "priority": "high",
+          "status": "reading",
+          "faviconUrl": "https://substackcdn.com/image/fetch/w_64,h_64,c_fill,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F982e5ee6-d18e-4a62-8703-a1789c67fc7e_256x256.png",
+          "source": "Lenny's Newsletter",
+          "author": "Lenny Rachitsky",
+          "collections": [
+            "Read Later",
+            "Marketing Ideas"
+          ],
+          "readingTimeMinutes": 15,
+          "suggestedStage": "Launched",
+          "relevantProblem": "Retention",
+          "relevantSkill": "Cohort Retention Analysis",
+          "reminder": {
+            "id": "rem-1",
+            "dueDate": "2026-08-30T09:00:00Z",
+            "label": "Tomorrow",
+            "note": "Review cohort milestone tactics before deploying sprint 4",
+            "triggered": false
+          },
+          "createdAt": "2026-08-11T14:00:00Z",
+          "updatedAt": "2026-08-28T16:20:00Z",
+          "lastOpenedAt": "2026-08-28T16:00:00Z"
+        },
+        {
+          "id": "sv-4",
+          "userId": "demo-user-1",
+          "startupId": "pulseboard-demo",
+          "resourceId": "res-posthog",
+          "url": "https://posthog.com",
+          "title": "PostHog — Open-Source Product Analytics & Session Replay",
+          "description": "Generous free tier: 1M events/month, 5,000 session recordings, feature flags, and survey widgets with zero cost.",
+          "resourceType": "tool",
+          "category": "Development",
+          "tags": [
+            "Analytics",
+            "Free Tier",
+            "Session Replay",
+            "Feature Flags"
+          ],
+          "notes": "Use session replays to see where users drop off during step 2 of setup.",
+          "priority": "medium",
+          "status": "completed",
+          "faviconUrl": "https://posthog.com/favicon.ico",
+          "source": "PostHog",
+          "collections": [
+            "MVP Tools",
+            "Things To Try"
+          ],
+          "readingTimeMinutes": 8,
+          "suggestedStage": "Launched",
+          "relevantProblem": "Retention",
+          "relevantSkill": "Product Analytics",
+          "isOpenSource": true,
+          "createdAt": "2026-08-14T09:00:00Z",
+          "updatedAt": "2026-08-24T09:15:00Z",
+          "lastOpenedAt": "2026-08-24T09:15:00Z"
+        },
+        {
+          "id": "sv-5",
+          "userId": "demo-user-1",
+          "startupId": "pulseboard-demo",
+          "url": "https://www.julian.com/guide/growth/acquisition-channels",
+          "title": "The Definitive Guide to Organic Customer Acquisition for Solo Builders",
+          "description": "Step-by-step tactics to get your first 100 paying customers through Reddit, indie directories, and high-value teardowns.",
+          "resourceType": "article",
+          "category": "Growth",
+          "tags": [
+            "Distribution",
+            "First 100 Customers",
+            "Organic Marketing",
+            "Growth"
+          ],
+          "notes": "Plan our next 2 community launches using the template in section 3.",
+          "priority": "high",
+          "status": "unread",
+          "faviconUrl": "https://www.google.com/s2/favicons?domain=julian.com&sz=64",
+          "source": "Julian Shapiro",
+          "author": "Julian Shapiro",
+          "collections": [
+            "Read Later",
+            "Marketing Ideas"
+          ],
+          "readingTimeMinutes": 18,
+          "suggestedStage": "Launched",
+          "relevantProblem": "Customer Acquisition",
+          "relevantSkill": "Organic Distribution",
+          "createdAt": "2026-08-18T15:00:00Z",
+          "updatedAt": "2026-08-18T15:00:00Z"
+        },
+        {
+          "id": "sv-6",
+          "userId": "demo-user-1",
+          "startupId": "pulseboard-demo",
+          "resourceId": "res-supabase",
+          "url": "https://supabase.com",
+          "title": "Supabase — The Open Source Firebase Alternative",
+          "description": "Generous free tier: Postgres database, Auth, 50,000 MAUs, and real-time subscriptions.",
+          "resourceType": "tool",
+          "category": "Development",
+          "tags": [
+            "Database",
+            "Postgres",
+            "Backend",
+            "Auth",
+            "Free Tier"
+          ],
+          "notes": "Our core database backend. Migration from SQLite was smooth.",
+          "priority": "high",
+          "status": "completed",
+          "faviconUrl": "https://supabase.com/favicon/favicon-32x32.png",
+          "source": "Supabase",
+          "collections": [
+            "MVP Tools"
+          ],
+          "readingTimeMinutes": 10,
+          "suggestedStage": "Building MVP",
+          "relevantProblem": "Zero Budget Tech Stack",
+          "relevantSkill": "Postgres SQL",
+          "isOpenSource": true,
+          "createdAt": "2026-08-19T11:00:00Z",
+          "updatedAt": "2026-08-25T11:00:00Z",
+          "lastOpenedAt": "2026-08-25T11:00:00Z"
+        },
+        {
+          "id": "sv-7",
+          "userId": "demo-user-1",
+          "startupId": "pulseboard-demo",
+          "url": "https://github.com/shadcn-ui/ui",
+          "title": "shadcn/ui — Beautifully Designed React & Tailwind Components",
+          "description": "Accessible and customizable components that you can copy and paste into your apps. Free and open-source.",
+          "resourceType": "repository",
+          "category": "Design",
+          "tags": [
+            "UI Components",
+            "React",
+            "Tailwind CSS",
+            "Open Source"
+          ],
+          "notes": "Use this for all clean modal and dropdown design patterns.",
+          "priority": "medium",
+          "status": "completed",
+          "faviconUrl": "https://ui.shadcn.com/favicon.ico",
+          "source": "GitHub",
+          "author": "shadcn",
+          "collections": [
+            "Useful GitHub Repos",
+            "Product Inspiration"
+          ],
+          "readingTimeMinutes": 6,
+          "suggestedStage": "Building MVP",
+          "relevantProblem": "Design Velocity",
+          "relevantSkill": "Tailwind CSS",
+          "isOpenSource": true,
+          "githubRepo": "shadcn-ui/ui",
+          "createdAt": "2026-08-21T16:00:00Z",
+          "updatedAt": "2026-08-21T16:00:00Z"
+        },
+        {
+          "id": "sv-8",
+          "userId": "demo-user-1",
+          "startupId": "pulseboard-demo",
+          "url": "https://news.ycombinator.com/item?id=38421811",
+          "title": "Show HN: How Dropbox Used Referral Loops to Grow from 100k to 4M Users",
+          "description": "In-depth analysis of incentive design, viral coefficient math, and low-friction 2-sided sharing loops.",
+          "resourceType": "article",
+          "category": "Growth",
+          "tags": [
+            "Viral Growth",
+            "Referrals",
+            "Experimentation",
+            "Growth Loops"
+          ],
+          "notes": "Useful blueprint when designing referral experiment #3 next month.",
+          "priority": "medium",
+          "status": "unread",
+          "faviconUrl": "https://news.ycombinator.com/favicon.ico",
+          "source": "Hacker News",
+          "collections": [
+            "Read Later",
+            "Marketing Ideas",
+            "Things To Try"
+          ],
+          "readingTimeMinutes": 10,
+          "suggestedStage": "Growing",
+          "relevantProblem": "Customer Acquisition",
+          "relevantSkill": "Growth Loops",
+          "createdAt": "2026-08-23T10:00:00Z",
+          "updatedAt": "2026-08-23T10:00:00Z"
+        },
+        {
+          "id": "sv-9",
+          "userId": "demo-user-1",
+          "startupId": "pulseboard-demo",
+          "url": "https://docs.cursor.com",
+          "title": "Cursor IDE Documentation & Prompt Engineering Rules",
+          "description": "Guide on .cursorrules and multi-file codebase indexing for AI-assisted software engineering.",
+          "resourceType": "documentation",
+          "category": "Development",
+          "tags": [
+            "IDE",
+            "AI Coding",
+            "Productivity",
+            "Documentation"
+          ],
+          "notes": "Adopted the custom .cursorrules file into our git root.",
+          "priority": "low",
+          "status": "completed",
+          "faviconUrl": "https://cursor.com/favicon.ico",
+          "source": "Cursor",
+          "collections": [
+            "AI Tools",
+            "MVP Tools"
+          ],
+          "readingTimeMinutes": 15,
+          "suggestedStage": "Building MVP",
+          "relevantProblem": "Solo Developer Speed",
+          "relevantSkill": "AI Prompting",
+          "createdAt": "2026-08-24T18:00:00Z",
+          "updatedAt": "2026-08-24T18:00:00Z"
+        },
+        {
+          "id": "sv-10",
+          "userId": "demo-user-1",
+          "startupId": "pulseboard-demo",
+          "url": "https://saasmetrics.co/pricing-models-for-bootstrappers",
+          "title": "Pricing Strategy for Bootstrapped Micro-SaaS: From ₹0 to ₹1 Lakh MRR",
+          "description": "Why you should never price at $5/month, value metrics selection, and how to grandfather early test users.",
+          "resourceType": "article",
+          "category": "Operations",
+          "tags": [
+            "Pricing",
+            "Monetization",
+            "Unit Economics",
+            "Bootstrapping"
+          ],
+          "notes": "Review before transitioning from free beta to our first paid ₹499/mo tier.",
+          "priority": "high",
+          "status": "reading",
+          "faviconUrl": "https://www.google.com/s2/favicons?domain=saasmetrics.co&sz=64",
+          "source": "SaaS Metrics",
+          "author": "Patrick Campbell",
+          "collections": [
+            "Read Later",
+            "Fundraising"
+          ],
+          "readingTimeMinutes": 14,
+          "suggestedStage": "First Revenue",
+          "relevantProblem": "Pricing",
+          "relevantSkill": "SaaS Pricing Strategy",
+          "createdAt": "2026-08-26T09:30:00Z",
+          "updatedAt": "2026-08-27T11:00:00Z",
+          "lastOpenedAt": "2026-08-27T11:00:00Z"
+        }
+      ],
+      "notes": [
+        {
+          "id": "note-1",
+          "title": "Customer Discovery: Rahul on Analytics Bottlenecks",
+          "collection": "Customers",
+          "tags": [
+            "Customer Discovery",
+            "Mom Test",
+            "Interviews",
+            "Rahul"
+          ],
+          "isFavorite": true,
+          "isPinned": true,
+          "includeInKnowledgeBase": true,
+          "createdAt": "2026-08-27T10:15:00.000Z",
+          "updatedAt": "2026-08-28T14:30:00.000Z",
+          "lastViewedAt": "2026-08-29T18:00:00.000Z",
+          "connections": [
+            {
+              "entityType": "mission",
+              "entityId": "m-1",
+              "entityTitle": "Conduct 5 Problem Interviews",
+              "entitySubtitle": "Customer Validation Mission"
+            },
+            {
+              "entityType": "experiment",
+              "entityId": "exp-1",
+              "entityTitle": "Interactive Demo Sandbox Onboarding",
+              "entitySubtitle": "Growth Experiment"
+            },
+            {
+              "entityType": "resource",
+              "entityId": "res-mom-test",
+              "entityTitle": "The Mom Test Framework Guide",
+              "entitySubtitle": "Founder Vault Resource"
+            }
+          ],
+          "blocks": [
+            {
+              "id": "n1-b1",
+              "type": "callout",
+              "content": "🎙️ **Interview Summary**: Rahul validated our assumption that indie hackers find traditional analytics setups painful and expensive. He wants a 1-click Discord digest.",
+              "calloutVariant": "idea"
+            },
+            {
+              "id": "n1-b2",
+              "type": "heading2",
+              "content": "Interview Details"
+            },
+            {
+              "id": "n1-b3",
+              "type": "paragraph",
+              "content": "**Interviewee**: Rahul Sharma (Founder @ DevDash)\n**Date**: August 27, 2026\n**Duration**: 28 minutes\n**Problem Intensity**: 9/10 (High urgency)"
+            },
+            {
+              "id": "n1-b4",
+              "type": "heading2",
+              "content": "Key Pain Points Uncovered"
+            },
+            {
+              "id": "n1-b5",
+              "type": "bulletList",
+              "content": "Set up PostHog self-hosted instance on Hetzner, but Docker containers crashed twice and ate 6 hours of debug time."
+            },
+            {
+              "id": "n1-b6",
+              "type": "bulletList",
+              "content": "Mixpanel charged him surprise overage fees after a Hacker News frontpage spike."
+            },
+            {
+              "id": "n1-b7",
+              "type": "bulletList",
+              "content": "He only cares about 2 numbers: \"How many people returned on Day 7?\" and \"Which feature generated the first payment?\""
+            },
+            {
+              "id": "n1-b8",
+              "type": "heading2",
+              "content": "Verbatim Quote"
+            },
+            {
+              "id": "n1-b9",
+              "type": "quote",
+              "content": "\"I don't need 40 graphs. Give me 3 numbers on my phone at 9 AM every Monday and tell me which feature is bleeding users.\""
+            },
+            {
+              "id": "n1-b10",
+              "type": "heading2",
+              "content": "Next Immediate Actions"
+            },
+            {
+              "id": "n1-b11",
+              "type": "checklist",
+              "content": "Prototype automated Telegram / Discord digest webhook",
+              "checked": true
+            },
+            {
+              "id": "n1-b12",
+              "type": "checklist",
+              "content": "Interview 10 potential customers before Friday with zero pitch bias",
+              "checked": false
+            }
+          ]
+        },
+        {
+          "id": "note-2",
+          "title": "Pricing Strategy: ₹0 to ₹1 Lakh MRR Roadmap",
+          "collection": "Strategy",
+          "tags": [
+            "Pricing",
+            "Monetization",
+            "Unit Economics",
+            "Bootstrapping"
+          ],
+          "isFavorite": true,
+          "isPinned": false,
+          "includeInKnowledgeBase": true,
+          "createdAt": "2026-08-25T11:00:00.000Z",
+          "updatedAt": "2026-08-27T16:20:00.000Z",
+          "lastViewedAt": "2026-08-28T09:15:00.000Z",
+          "connections": [
+            {
+              "entityType": "metric",
+              "entityId": "m-revenue",
+              "entityTitle": "Monthly Recurring Revenue",
+              "entitySubtitle": "Current: ₹8,400/mo"
+            },
+            {
+              "entityType": "goal",
+              "entityId": "goal-90",
+              "entityTitle": "Reach ₹25,000 MRR & 300 active users",
+              "entitySubtitle": "90-Day North Star Target"
+            }
+          ],
+          "blocks": [
+            {
+              "id": "n2-b1",
+              "type": "callout",
+              "content": "💰 **Pricing Rule**: Never price at $5/month. Low prices attract support-heavy customers while generating insufficient revenue to fund operations.",
+              "calloutVariant": "founder"
+            },
+            {
+              "id": "n2-b2",
+              "type": "heading2",
+              "content": "Tier Structure for Bootstrapped SaaS"
+            },
+            {
+              "id": "n2-b3",
+              "type": "table",
+              "content": "",
+              "tableData": {
+                "headers": [
+                  "Plan",
+                  "Price (INR)",
+                  "Limits",
+                  "Target ICP"
+                ],
+                "rows": [
+                  [
+                    "Solo Free Tier",
+                    "₹0 / forever",
+                    "1,000 monthly active users, 1 project",
+                    "Early builders & hobbyists"
+                  ],
+                  [
+                    "Indie Pro",
+                    "₹999 / month",
+                    "25,000 monthly active users, AI telemetry",
+                    "Solo full-time SaaS founders"
+                  ],
+                  [
+                    "Growth Team",
+                    "₹2,999 / month",
+                    "100,000 users, team seats, Discord bot",
+                    "Fast-growing micro-startups"
+                  ]
+                ]
+              }
+            },
+            {
+              "id": "n2-b4",
+              "type": "heading2",
+              "content": "Grandfathering Strategy for Alpha Users"
+            },
+            {
+              "id": "n2-b5",
+              "type": "paragraph",
+              "content": "The first 50 users who give qualitative feedback will receive a permanent 40% lifetime discount code (`FOUNDER40`). This creates goodwill and incentivizes rigorous user feedback loops."
+            },
+            {
+              "id": "n2-b6",
+              "type": "heading2",
+              "content": "Paywall Triggers"
+            },
+            {
+              "id": "n2-b7",
+              "type": "bulletList",
+              "content": "Trigger 1: Generating custom automated cohort retention summaries."
+            },
+            {
+              "id": "n2-b8",
+              "type": "bulletList",
+              "content": "Trigger 2: Connecting more than 2 production domains or mobile apps."
+            }
+          ]
+        },
+        {
+          "id": "note-3",
+          "title": "Experiment Hypothesis: 1-Click Onboarding Sandbox",
+          "collection": "Experiments",
+          "tags": [
+            "Experiment",
+            "Onboarding",
+            "Activation",
+            "Hypothesis"
+          ],
+          "isFavorite": false,
+          "isPinned": false,
+          "includeInKnowledgeBase": true,
+          "createdAt": "2026-08-24T14:00:00.000Z",
+          "updatedAt": "2026-08-26T18:45:00.000Z",
+          "connections": [
+            {
+              "entityType": "experiment",
+              "entityId": "exp-onboarding",
+              "entityTitle": "Interactive Demo Sandbox Onboarding",
+              "entitySubtitle": "Status: Running"
+            }
+          ],
+          "blocks": [
+            {
+              "id": "n3-b1",
+              "type": "heading2",
+              "content": "Hypothesis Statement"
+            },
+            {
+              "id": "n3-b2",
+              "type": "paragraph",
+              "content": "I think reducing onboarding from 5 steps to 3 will improve visitor activation from 18% to 35% within the first session."
+            },
+            {
+              "id": "n3-b3",
+              "type": "heading2",
+              "content": "Key Assumptions"
+            },
+            {
+              "id": "n3-b4",
+              "type": "bulletList",
+              "content": "Visitors want to see real charts with sample numbers before investing time inserting our tracking script."
+            },
+            {
+              "id": "n3-b5",
+              "type": "bulletList",
+              "content": "Mandatory password creation creates friction that causes 45% drop-off on screen 2."
+            },
+            {
+              "id": "n3-b6",
+              "type": "heading2",
+              "content": "Test Implementation"
+            },
+            {
+              "id": "n3-b7",
+              "type": "code",
+              "content": "// Immediate demo state toggle\nconst [isSandboxMode, setIsSandboxMode] = useState(true);\n\nexport function OnboardingHero() {\n  return (\n    <div className=\"sandbox-banner\">\n      <p>Exploring live simulated SaaS data. Click \"Connect Live App\" when ready.</p>\n    </div>\n  );\n}",
+              "language": "typescript"
+            }
+          ]
+        },
+        {
+          "id": "note-4",
+          "title": "Zero-Budget Tech Stack & Architecture Notes",
+          "collection": "Technical",
+          "tags": [
+            "Architecture",
+            "Zero-Burn",
+            "Supabase",
+            "Tailwind",
+            "AI Agents"
+          ],
+          "isFavorite": false,
+          "isPinned": false,
+          "includeInKnowledgeBase": true,
+          "createdAt": "2026-08-22T09:00:00.000Z",
+          "updatedAt": "2026-08-25T11:30:00.000Z",
+          "connections": [
+            {
+              "entityType": "startup",
+              "entityId": "pulseboard-demo",
+              "entityTitle": "PulseBoard Architecture",
+              "entitySubtitle": "Zero-Burn Production Stack"
+            }
+          ],
+          "blocks": [
+            {
+              "id": "n4-b1",
+              "type": "callout",
+              "content": "⚡ **Zero-Burn Architecture**: Free tiers only. No AWS RDS, no paid Redis, no expensive monthly SaaS.",
+              "calloutVariant": "success"
+            },
+            {
+              "id": "n4-b2",
+              "type": "heading2",
+              "content": "Core Infrastructure Breakdown"
+            },
+            {
+              "id": "n4-b3",
+              "type": "bulletList",
+              "content": "**Frontend & Edge**: React 18 + Vite deployed on Cloud Run / Vercel Free."
+            },
+            {
+              "id": "n4-b4",
+              "type": "bulletList",
+              "content": "**Database**: Supabase / Firestore with Row-Level Security."
+            },
+            {
+              "id": "n4-b5",
+              "type": "bulletList",
+              "content": "**Autonomous Coding**: OpenCode terminal agent & Cline with Claude 3.5 Sonnet / Gemini Flash."
+            },
+            {
+              "id": "n4-b6",
+              "type": "bulletList",
+              "content": "**Telemetry & Analytics**: PostHog Free Tier (up to 1M events/month)."
+            }
+          ]
+        },
+        {
+          "id": "note-5",
+          "title": "Hacker News Launch Playbook & Organic Loops",
+          "collection": "Marketing",
+          "tags": [
+            "Show HN",
+            "Distribution",
+            "Organic Growth",
+            "Launch"
+          ],
+          "isFavorite": true,
+          "isPinned": false,
+          "includeInKnowledgeBase": true,
+          "createdAt": "2026-08-20T16:00:00.000Z",
+          "updatedAt": "2026-08-23T12:00:00.000Z",
+          "blocks": [
+            {
+              "id": "n5-b1",
+              "type": "heading2",
+              "content": "Show HN Title Ideas"
+            },
+            {
+              "id": "n5-b2",
+              "type": "bulletList",
+              "content": "Show HN: PulseBoard – Lightweight SaaS retention tracking with zero bloat and ₹0 burn"
+            },
+            {
+              "id": "n5-b3",
+              "type": "bulletList",
+              "content": "Show HN: I got tired of heavy analytics setups, so I built a 1-file telemetry dashboard"
+            },
+            {
+              "id": "n5-b4",
+              "type": "heading2",
+              "content": "Core Rules for HN Success"
+            },
+            {
+              "id": "n5-b5",
+              "type": "paragraph",
+              "content": "1. No marketing fluff or corporate jargon.\n2. Include a direct live demo link that requires zero login.\n3. Reply to every comment within 5 minutes with technical honesty."
+            }
+          ]
+        }
+      ],
+      "noteCollections": [
+        "Ideas",
+        "Product",
+        "Customers",
+        "Research",
+        "Marketing",
+        "Growth",
+        "Experiments",
+        "Meetings",
+        "Strategy",
+        "Technical",
+        "Fundraising",
+        "Personal"
+      ],
+      "copilotConversations": [
+        {
+          "id": "conv-1788346101999-hli6",
+          "userId": "demo-user-1",
+          "startupId": "pulseboard-demo",
+          "title": "How do I improve my retention rate?",
+          "createdAt": "2026-09-02T10:48:21.999Z",
+          "updatedAt": "2026-09-02T10:48:22.053Z",
+          "pinned": false,
+          "lastMessagePreview": " Retention Diagnosis & Leverage Point\n\nBased on your telemetry, your 7-day retention is currently 41 (target benchmark: ...",
+          "messagesCount": 2,
+          "mode": "default"
+        },
+        {
+          "id": "conv-retention",
+          "userId": "demo-user-1",
+          "startupId": "startup-demo-user-1",
+          "title": "Diagnosing Day-7 Retention Drop-off",
+          "createdAt": "2026-08-29T14:30:00.000Z",
+          "updatedAt": "2026-08-29T15:10:00.000Z",
+          "pinned": true,
+          "lastMessagePreview": "Based on your data: 41% of users return on Day 7. Focus on 1-click Discord digests rather than expanding analytics charts.",
+          "messagesCount": 4,
+          "mode": "default",
+          "tags": [
+            "Retention",
+            "Onboarding",
+            "Customer Feedback"
+          ]
+        },
+        {
+          "id": "conv-acquisition",
+          "userId": "demo-user-1",
+          "startupId": "startup-demo-user-1",
+          "title": "First 100 Users Acquisition Plan",
+          "createdAt": "2026-08-28T11:00:00.000Z",
+          "updatedAt": "2026-08-28T11:45:00.000Z",
+          "pinned": false,
+          "lastMessagePreview": "I have mapped 3 zero-budget distribution loops: Show HN teardown, IndieHackers milestone log, and developer Discord outreach.",
+          "messagesCount": 2,
+          "mode": "brainstorm",
+          "tags": [
+            "Distribution",
+            "Zero-Budget",
+            "Launch"
+          ]
+        },
+        {
+          "id": "conv-reality-check",
+          "userId": "demo-user-1",
+          "startupId": "startup-demo-user-1",
+          "title": "Reality Check: Paid Meta Ads Test",
+          "createdAt": "2026-08-27T16:00:00.000Z",
+          "updatedAt": "2026-08-27T16:30:00.000Z",
+          "pinned": false,
+          "lastMessagePreview": "I would not spend ₹50,000 on ads yet. Why: Your retention is currently 41% and CAC is uncalibrated.",
+          "messagesCount": 2,
+          "mode": "reality-check",
+          "tags": [
+            "Reality Check",
+            "Capital Efficiency",
+            "Ads"
+          ]
+        }
+      ],
+      "copilotMessages": {
+        "conv-retention": [
+          {
+            "id": "msg-ret-1",
+            "conversationId": "conv-retention",
+            "role": "user",
+            "content": "Why might users be dropping off after signing up?",
+            "timestamp": "2026-08-29T14:30:00.000Z",
+            "mode": "default"
+          },
+          {
+            "id": "msg-ret-2",
+            "conversationId": "conv-retention",
+            "role": "assistant",
+            "content": "### Evidence Summary\n\nBased on your telemetry and customer interviews, users are dropping off because **the time-to-first-value is currently too long** (estimated at 6+ minutes), and founders forget to check manual web dashboards.\n\n#### Based on your data:\n- **Day-7 Retention**: 41% (Threshold for healthy SaaS is 55%+)\n- **Activation Drop-off**: 52% of new signups abandon during API key insertion\n- **Customer Interviews (4/5)**: Specifically requested daily automated digests into Discord / Telegram instead of having to log into another browser tab.\n\n#### My Recommendation:\nDo not build more charts or telemetry settings. Build an automated **1-click Discord / Telegram daily digest webhook** so the value lands directly in the founder's daily workflow.",
+            "timestamp": "2026-08-29T14:30:05.000Z",
+            "mode": "default",
+            "intent": "diagnose_retention_bottleneck",
+            "retrievedContextSummary": [
+              {
+                "category": "metric",
+                "label": "Day-7 Retention (41%)",
+                "count": 1
+              },
+              {
+                "category": "feedback",
+                "label": "5 Customer Interviews",
+                "count": 5
+              },
+              {
+                "category": "note",
+                "label": "Customer Interview Notes: Rahul",
+                "count": 1
+              },
+              {
+                "category": "vault",
+                "label": "SaaS Retention & Cohorts Guide",
+                "count": 1
+              }
+            ],
+            "sources": [
+              {
+                "type": "metric",
+                "id": "metric-retention",
+                "title": "Day-7 Retention Rate",
+                "subtitle": "Telemetry metric",
+                "value": "41.0%",
+                "route": "metrics"
+              },
+              {
+                "type": "feedback",
+                "id": "fb-1",
+                "title": "Customer Feedback: Rahul Sharma",
+                "subtitle": "Wanted automated 1-click Discord summary",
+                "route": "customers"
+              },
+              {
+                "type": "note",
+                "id": "note-1",
+                "title": "Note: Customer Interview #1 – Rahul Sharma",
+                "subtitle": "Pain point: Docker crash & overage fees",
+                "route": "notepad"
+              },
+              {
+                "type": "vault",
+                "id": "vault-1",
+                "title": "Saved Vault Resource: The SaaS Retention Playbook",
+                "subtitle": "You saved this on Aug 24",
+                "route": "vault"
+              }
+            ],
+            "evidenceBreakdown": {
+              "knownData": [
+                {
+                  "label": "Day-7 Retention",
+                  "value": "41.0%",
+                  "sourceId": "metric-retention"
+                },
+                {
+                  "label": "Customer Interviews",
+                  "value": "5 completed (4 requested digests)",
+                  "sourceId": "fb-1"
+                },
+                {
+                  "label": "Monthly Revenue",
+                  "value": "₹0 MRR",
+                  "sourceId": "profile"
+                }
+              ],
+              "founderAssumptions": [
+                "Founders want a comprehensive 10-screen visual dashboard with custom filters"
+              ],
+              "inferences": [
+                "Push notifications via existing communication channels will double Day-7 return rate"
+              ],
+              "generalKnowledge": [
+                "Pushing value to user native workspaces (Slack/Discord) yields 2-3x higher engagement than pull web portals"
+              ]
+            },
+            "actionProposal": {
+              "id": "prop-exp-1",
+              "type": "create_experiment",
+              "title": "Launch 1-Click Discord Retention Digest Experiment",
+              "description": "Test whether delivering a daily 9 AM Discord digest increases Day-7 user retention from 41% to 55%.",
+              "status": "pending",
+              "experimentData": {
+                "title": "Automated Discord Digest Webhook vs Web Login",
+                "hypothesis": "If we deliver daily telemetry snapshots directly into user Discord channels, then Day-7 retention will increase from 41% to 55% because users see value without browser friction.",
+                "problem": "Users forget to bookmark and log into the standalone web dashboard daily.",
+                "metric": "Day-7 Retention Rate",
+                "currentValue": "41.0%",
+                "targetValue": "55.0%",
+                "method": "Enable opt-in webhook during onboarding for the next 50 signups",
+                "audience": "Next 50 new signups",
+                "duration": "14 days",
+                "budget": "₹0"
+              }
+            }
+          }
+        ],
+        "conv-reality-check": [
+          {
+            "id": "msg-rc-1",
+            "conversationId": "conv-reality-check",
+            "role": "user",
+            "content": "Should I spend ₹50,000 on Meta and Google Ads to get 500 users faster?",
+            "timestamp": "2026-08-27T16:00:00.000Z",
+            "mode": "reality-check"
+          },
+          {
+            "id": "msg-rc-2",
+            "conversationId": "conv-reality-check",
+            "role": "assistant",
+            "content": "### Reality Check: REJECT PAID ADS FOR NOW\n\n**I would not spend ₹50,000 on ads yet.**\n\n#### Why:\n1. **Retention is uncalibrated (41%)**: Pouring paid traffic into a leaky onboarding funnel burns capital with near-zero long-term LTV.\n2. **CAC is unproven**: At an estimated ₹1,200 ad CAC, ₹50,000 yields ~40 signups, costing ₹1,200 per user while your current revenue per user is ₹0.\n3. **You have not run a ₹0 organic distribution test first**: Organic channels (Show HN, Reddit build-in-public) yield higher-intent technical users for free.\n\n#### Suggested Next Step:\nRun a ₹0 community distribution experiment first. Acquire 50 users organically to calibrate onboarding before spending any advertising budget.",
+            "timestamp": "2026-08-27T16:00:04.000Z",
+            "mode": "reality-check",
+            "intent": "reality_check_ads",
+            "retrievedContextSummary": [
+              {
+                "category": "profile",
+                "label": "Monthly Budget: ₹2,000 / Revenue: ₹0",
+                "count": 1
+              },
+              {
+                "category": "health",
+                "label": "Capital Efficiency: High Risk if spending on ads",
+                "count": 1
+              },
+              {
+                "category": "metric",
+                "label": "Retention: 41%",
+                "count": 1
+              }
+            ],
+            "sources": [
+              {
+                "type": "health",
+                "id": "health-cap",
+                "title": "Startup Health: Capital & Unit Economics",
+                "subtitle": "Score: 62/100 • Needs Attention",
+                "route": "health"
+              },
+              {
+                "type": "metric",
+                "id": "metric-retention",
+                "title": "Day-7 Retention: 41%",
+                "subtitle": "Below healthy benchmark",
+                "route": "metrics"
+              }
+            ],
+            "evidenceBreakdown": {
+              "knownData": [
+                {
+                  "label": "Current Monthly Revenue",
+                  "value": "₹0 MRR"
+                },
+                {
+                  "label": "Monthly Budget",
+                  "value": "₹2,000 / month"
+                },
+                {
+                  "label": "Proposed Spend",
+                  "value": "₹50,000 (25x monthly budget)"
+                }
+              ],
+              "founderAssumptions": [
+                "Paid ad traffic will convert at the same rate as organic founder-referred users"
+              ],
+              "inferences": [
+                "Ad spend without high Day-30 retention will deplete runway within 1 week"
+              ],
+              "generalKnowledge": [
+                "B2B dev tools with high organic word-of-mouth acquire their first 100 users via community launches, not paid Facebook banners"
+              ]
+            },
+            "actionProposal": {
+              "id": "prop-rc-1",
+              "type": "create_mission",
+              "title": "Execute ₹0 Community Distribution Sprint",
+              "description": "Ship 2 organic build-in-public breakdowns on Reddit (r/SideProject) and Show HN to secure 50 targeted signups at ₹0 CAC.",
+              "status": "pending",
+              "missionData": {
+                "title": "Acquire First 50 Organic Users via Community Teardown",
+                "category": "Growth",
+                "objective": "Validate onboarding conversion and acquire 50 qualified signups with zero ad spend.",
+                "whyItMatters": "Establishes baseline organic conversion before risking capital.",
+                "estimatedTime": "4 hours",
+                "estimatedCost": "₹0",
+                "difficulty": "Medium",
+                "expectedResult": "50 targeted signups and 10 qualitative feedback comments.",
+                "steps": [
+                  {
+                    "id": "s1",
+                    "text": "Draft Show HN title and transparent technical architecture note",
+                    "completed": false
+                  },
+                  {
+                    "id": "s2",
+                    "text": "Share interactive sandbox demo link requiring zero signup password",
+                    "completed": false
+                  },
+                  {
+                    "id": "s3",
+                    "text": "Reply to every comment within 5 minutes and capture feature objections",
+                    "completed": false
+                  }
+                ]
+              }
+            }
+          }
+        ],
+        "conv-acquisition": [
+          {
+            "id": "msg-acq-1",
+            "conversationId": "conv-acquisition",
+            "role": "user",
+            "content": "Give me 10 ways to acquire my first 100 users for PulseBoard.",
+            "timestamp": "2026-08-28T11:00:00.000Z",
+            "mode": "brainstorm"
+          },
+          {
+            "id": "msg-acq-2",
+            "conversationId": "conv-acquisition",
+            "role": "assistant",
+            "content": "### 10 Tailored Acquisition Channels for PulseBoard (₹0 Budget)\n\nGiven your target ICP (**indie developers & bootstrapped SaaS founders**), technical skills (**React + Node**), and budget (**₹0**), here are 10 concrete, non-generic channels:\n\n1. **Show HN Architecture Breakdown**: Post a detailed breakdown titled: *\"Show HN: How I built a zero-bloat retention tracker for ₹0 server cost\"*. Developers love technical transparency.\n2. **Interactive Live Demo Sandbox**: Remove signup friction on the landing page so visitors test dummy data with 1 click.\n3. **Curated Open Source GitHub Repo**: Release a lightweight client SDK repo on GitHub (e.g., `pulseboard-react`) and list it in awesome-saas directories.\n4. **IndieHackers Milestone Log**: Post your daily learnings and Day-7 retention metrics on IndieHackers.\n5. **Direct Founder DM Outreach**: Message 20 founders on X/Twitter who recently launched on ProductHunt and ask: *\"How are you tracking day-7 dropoff?\"*\n6. **Free Micro-Tool: SaaS Retention Calculator**: Launch a 1-page free calculator estimating revenue lost to churn.\n7. **Discord & Slack Community Value Posts**: Share teardowns of high-churn SaaS onboarding in communities like MicroConf and Indie Worldwide.\n8. **ProductHunt Launch Sprint**: Schedule a Tuesday launch focusing on the pain of bloated $300/mo analytics tools.\n9. **Founder-to-Founder Lifetime Discount**: Offer a permanent 40% discount code (`FOUNDER40`) to the first 50 users who complete an onboarding call.\n10. **Engineering as Marketing**: Write a high-ranking technical guide on *\"Why PostgreSQL Window Functions are all you need for Cohort Analytics\"*.",
+            "timestamp": "2026-08-28T11:00:05.000Z",
+            "mode": "brainstorm",
+            "retrievedContextSummary": [
+              {
+                "category": "profile",
+                "label": "PulseBoard (Validating, B2B SaaS)",
+                "count": 1
+              },
+              {
+                "category": "note",
+                "label": "Show HN Launch Plan",
+                "count": 1
+              },
+              {
+                "category": "vault",
+                "label": "14 Saved Developer Tools & Repos",
+                "count": 1
+              }
+            ],
+            "sources": [
+              {
+                "type": "profile",
+                "id": "prof-1",
+                "title": "Startup Profile: PulseBoard",
+                "subtitle": "Category: Developer Tools • ICP: Indie Founders",
+                "route": "profile"
+              },
+              {
+                "type": "note",
+                "id": "note-5",
+                "title": "Note: Show HN Launch Plan",
+                "subtitle": "In Collection: Marketing",
+                "route": "notepad"
+              }
+            ],
+            "evidenceBreakdown": {
+              "knownData": [
+                {
+                  "label": "Target ICP",
+                  "value": "Indie developers and micro-SaaS builders"
+                },
+                {
+                  "label": "Founder Superpowers",
+                  "value": "Autonomous AI workflows & rapid MVP shipping"
+                },
+                {
+                  "label": "Available Budget",
+                  "value": "₹0 (Zero-burn strategy)"
+                }
+              ],
+              "founderAssumptions": [
+                "Indie developers actively seek alternatives to expensive Mixpanel/PostHog plans"
+              ],
+              "inferences": [
+                "Transparent open-source style distribution will outperform standard sales pitches by 5x"
+              ],
+              "generalKnowledge": [
+                "Technical founders buy from peers who provide engineering insights and free utilities"
+              ]
+            },
+            "actionProposal": {
+              "id": "prop-acq-note",
+              "type": "notepad_draft",
+              "title": "Save Acquisition Action Plan to Notepad",
+              "description": "Save these 10 prioritized acquisition channels directly into your \"Marketing\" collection in Founder Notepad.",
+              "status": "pending",
+              "draftNote": {
+                "title": "PulseBoard 10-Channel Acquisition Playbook",
+                "collection": "Marketing",
+                "tags": [
+                  "Acquisition",
+                  "Growth",
+                  "Launch",
+                  "Zero-Budget"
+                ],
+                "blocks": [
+                  {
+                    "id": "b1",
+                    "type": "callout",
+                    "content": "🎯 **Acquisition Rule**: Execute 2 channels deeply before testing channel #3. Do not spread effort thinly across 10 channels at once.",
+                    "calloutVariant": "founder"
+                  },
+                  {
+                    "id": "b2",
+                    "type": "heading2",
+                    "content": "Top Priority 0-to-1 Distribution Channels"
+                  },
+                  {
+                    "id": "b3",
+                    "type": "checklist",
+                    "content": "Channel 1: Show HN technical architecture post with live sandbox demo",
+                    "checked": false
+                  },
+                  {
+                    "id": "b4",
+                    "type": "checklist",
+                    "content": "Channel 2: Free SaaS Retention Calculator micro-tool",
+                    "checked": false
+                  },
+                  {
+                    "id": "b5",
+                    "type": "checklist",
+                    "content": "Channel 3: 20 Direct founder outreach DMs on X offering FOUNDER40 code",
+                    "checked": false
+                  }
+                ]
+              }
+            }
+          }
+        ],
+        "conv-1788346101999-hli6": [
+          {
+            "id": "msg-u-1788346101999-v10",
+            "conversationId": "conv-1788346101999-hli6",
+            "role": "user",
+            "content": "How do I improve my retention rate?",
+            "timestamp": "2026-09-02T10:48:21.999Z",
+            "mode": "default"
+          },
+          {
+            "id": "msg-a-1788346102053-824",
+            "conversationId": "conv-1788346101999-hli6",
+            "role": "assistant",
+            "content": "### Retention Diagnosis & Leverage Point\n\nBased on your telemetry, your **7-day retention is currently 41** (target benchmark: 55%+). \n\n#### Based on your data:\n- **Activation Drop-off**: 52% of visitors who signup do not complete initial API key integration.\n- **Customer Interviews**: 4 out of 5 founders requested an automated daily Discord/Slack webhook rather than visiting a web portal.\n\n#### My Recommendation:\nDo NOT build more analytics charts. Instead, build a **1-click Discord daily digest webhook** so the core value arrives in the founder's existing daily workspace.",
+            "timestamp": "2026-09-02T10:48:22.053Z",
+            "mode": "default",
+            "intent": "diagnose_user_retention",
+            "insufficientEvidenceWarning": false,
+            "retrievedContextSummary": [
+              {
+                "category": "metric",
+                "label": "3 Metrics Evaluated",
+                "count": 3
+              },
+              {
+                "category": "feedback",
+                "label": "2 Customer Feedback Records",
+                "count": 2
+              },
+              {
+                "category": "note",
+                "label": "3 Linked Notes",
+                "count": 3
+              },
+              {
+                "category": "experiment",
+                "label": "2 Experiments",
+                "count": 2
+              },
+              {
+                "category": "memory",
+                "label": "3 Founder Memories",
+                "count": 3
+              },
+              {
+                "category": "vault",
+                "label": "1 Saved Vault Resources",
+                "count": 1
+              }
+            ],
+            "sources": [
+              {
+                "type": "profile",
+                "id": "pulseboard-demo",
+                "title": "Startup Profile: PulseBoard",
+                "subtitle": "Stage: Launched • Goal: Reach 300 active users and ₹25,000 MRR without paid ad spend",
+                "route": "profile"
+              },
+              {
+                "type": "metric",
+                "id": "m-activation",
+                "title": "Activation Rate: 58 %",
+                "subtitle": "Critical indicator of onboarding friction and immediate value perception.",
+                "value": "58%",
+                "route": "metrics"
+              },
+              {
+                "type": "metric",
+                "id": "m-retention",
+                "title": "30-Day Retention: 41 %",
+                "subtitle": "The ultimate indicator of Product-Market Fit.",
+                "value": "41%",
+                "route": "metrics"
+              },
+              {
+                "type": "metric",
+                "id": "m-churn",
+                "title": "Monthly Revenue Churn: 2.8 %",
+                "subtitle": "Low churn preserves recurring revenue compounding.",
+                "value": "2.8%",
+                "route": "metrics"
+              },
+              {
+                "type": "feedback",
+                "id": "fb-1",
+                "title": "Customer Feedback: Rahul M. (SaaS Founder)",
+                "subtitle": "Competitor complexity & chart clutter",
+                "route": "customers"
+              },
+              {
+                "type": "feedback",
+                "id": "fb-2",
+                "title": "Customer Feedback: Sarah K. (Indie Hacker)",
+                "subtitle": "Onboarding documentation gap for Next.js App Router",
+                "route": "customers"
+              },
+              {
+                "type": "note",
+                "id": "note-1",
+                "title": "Note: Customer Discovery: Rahul on Analytics Bottlenecks",
+                "subtitle": "Collection: Customers",
+                "route": "notepad"
+              },
+              {
+                "type": "note",
+                "id": "note-2",
+                "title": "Note: Pricing Strategy: ₹0 to ₹1 Lakh MRR Roadmap",
+                "subtitle": "Collection: Strategy",
+                "route": "notepad"
+              },
+              {
+                "type": "note",
+                "id": "note-3",
+                "title": "Note: Experiment Hypothesis: 1-Click Onboarding Sandbox",
+                "subtitle": "Collection: Experiments",
+                "route": "notepad"
+              },
+              {
+                "type": "experiment",
+                "id": "exp-1",
+                "title": "Experiment: Reddit r/SaaS Teardown Growth Post",
+                "subtitle": "Metric: New User Signups • Target: 167",
+                "route": "experiments"
+              },
+              {
+                "type": "experiment",
+                "id": "exp-2",
+                "title": "Experiment: Pro Plan Pricing Upgrade Waitlist Test",
+                "subtitle": "Metric: Upgrade Modal Click-Through Rate • Target: 15%",
+                "route": "experiments"
+              },
+              {
+                "type": "memory",
+                "id": "mem-1",
+                "title": "Memory: Primary ICP",
+                "subtitle": "Early-stage indie hackers and solo technical founders running micro-SaaS with <₹50k MRR",
+                "route": "profile"
+              },
+              {
+                "type": "memory",
+                "id": "mem-2",
+                "title": "Memory: Zero-Burn Rule",
+                "subtitle": "Strictly zero paid advertising spend until Day-30 retention crosses 40% organically",
+                "route": "profile"
+              },
+              {
+                "type": "memory",
+                "id": "mem-3",
+                "title": "Memory: Pricing Floor",
+                "subtitle": "No $5/month pricing tiers. Minimum base tier set at ₹799/month ($19/mo) with grandfathered early-adopter pass",
+                "route": "profile"
+              },
+              {
+                "type": "vault",
+                "id": "sv-3",
+                "title": "Vault: How to Improve SaaS Retention & Reduce Churn: A Comprehensive Framework",
+                "subtitle": "Saved Resource",
+                "route": "vault"
+              },
+              {
+                "type": "health",
+                "id": "dim-3",
+                "title": "Health: Product & Onboarding",
+                "subtitle": "Status: Needs Attention • Score: 65/100",
+                "value": "65/100",
+                "route": "health"
+              },
+              {
+                "type": "health",
+                "id": "dim-4",
+                "title": "Health: Distribution & Traffic",
+                "subtitle": "Status: Needs Attention • Score: 52/100",
+                "value": "52/100",
+                "route": "health"
+              }
+            ],
+            "evidenceBreakdown": {
+              "knownData": [
+                {
+                  "label": "Startup",
+                  "value": "PulseBoard"
+                },
+                {
+                  "label": "Stage",
+                  "value": "Launched"
+                },
+                {
+                  "label": "MRR",
+                  "value": "₹8,400"
+                }
+              ],
+              "founderAssumptions": [
+                "Assumption that technical founders require real-time dashboarding"
+              ],
+              "inferences": [
+                "Push-based notifications directly into Discord/Slack will decrease churn by 50%"
+              ],
+              "generalKnowledge": [
+                "Bootstrapped SaaS PMF is characterized by high 30-day organic retention"
+              ]
+            },
+            "actionProposal": {
+              "id": "prop-1788346102053",
+              "type": "create_experiment",
+              "title": "Launch 1-Click Discord Retention Digest Experiment",
+              "description": "Test if delivering daily digests to Discord increases Day-7 retention from 41% to 55%.",
+              "status": "pending",
+              "experimentData": {
+                "title": "Automated Discord Digest Webhook vs Web Login",
+                "hypothesis": "If we deliver daily telemetry snapshots directly into user Discord channels, then Day-7 retention will increase from 41% to 55% because founders avoid browser tab friction.",
+                "problem": "Founders forget to log into the web dashboard daily.",
+                "metric": "Day-7 Retention Rate",
+                "currentValue": "41",
+                "targetValue": "55%",
+                "method": "Offer 1-click Discord webhook connect in onboarding for next 50 signups",
+                "audience": "New signups",
+                "duration": "14 days",
+                "budget": "₹0"
+              }
+            },
+            "thinkingSteps": [
+              {
+                "id": "th-1",
+                "label": "Retrieved startup context for PulseBoard (Launched)",
+                "status": "completed",
+                "duration": "0.1s"
+              },
+              {
+                "id": "th-2",
+                "label": "Queried real-time telemetry (Day-7 Retention: 41)",
+                "status": "completed",
+                "duration": "0.2s"
+              },
+              {
+                "id": "th-3",
+                "label": "Synthesized customer discovery interview patterns",
+                "status": "completed",
+                "duration": "0.2s"
+              },
+              {
+                "id": "th-4",
+                "label": "Formulated evidence-backed next action",
+                "status": "completed",
+                "duration": "0.1s"
+              }
+            ],
+            "toolCalls": [
+              {
+                "id": "tool-1-1788346102053",
+                "name": "get_startup_context",
+                "description": "Fetch startup profile, stage (Launched), and primary bottleneck",
+                "status": "completed",
+                "input": {
+                  "startupId": "pulseboard-demo",
+                  "fields": [
+                    "stage",
+                    "goal90Days",
+                    "biggestUncertainty"
+                  ]
+                },
+                "output": {
+                  "name": "PulseBoard",
+                  "stage": "Launched",
+                  "bottleneck": "Can't get users",
+                  "monthlyRevenue": "₹8,400"
+                },
+                "duration": "115ms"
+              },
+              {
+                "id": "tool-2-1788346102053",
+                "name": "get_startup_metrics",
+                "description": "Retrieve real-time retention, activation, and user growth telemetry",
+                "status": "completed",
+                "input": {
+                  "limit": 4,
+                  "includeTrends": true
+                },
+                "output": {
+                  "retentionD7": 41,
+                  "currentUsers": 127,
+                  "metricsAnalyzed": 5
+                },
+                "duration": "160ms"
+              },
+              {
+                "id": "tool-3-1788346102053",
+                "name": "get_customer_feedback",
+                "description": "Scan qualitative customer feedback and interview transcripts",
+                "status": "completed",
+                "input": {
+                  "count": 3,
+                  "filter": "default"
+                },
+                "output": {
+                  "interviewsAnalyzed": 2,
+                  "topRecurringPain": "Competitor complexity & chart clutter"
+                },
+                "duration": "140ms"
+              }
+            ],
+            "permissionRequest": {
+              "id": "perm-1788346102053",
+              "actionType": "create_experiment",
+              "title": "Authorize Experiment: \"Automated Discord Digest Webhook vs Web Login\"",
+              "details": [
+                {
+                  "label": "Metric",
+                  "value": "Day-7 Retention Rate"
+                },
+                {
+                  "label": "Target Goal",
+                  "value": "55%"
+                },
+                {
+                  "label": "Duration",
+                  "value": "14 days"
+                },
+                {
+                  "label": "Budget",
+                  "value": "₹0"
+                }
+              ],
+              "impactDescription": "Will launch and track this experiment in your Experiments board with automated telemetry tracking.",
+              "status": "pending",
+              "payload": {
+                "id": "prop-1788346102053",
+                "type": "create_experiment",
+                "title": "Launch 1-Click Discord Retention Digest Experiment",
+                "description": "Test if delivering daily digests to Discord increases Day-7 retention from 41% to 55%.",
+                "status": "pending",
+                "experimentData": {
+                  "title": "Automated Discord Digest Webhook vs Web Login",
+                  "hypothesis": "If we deliver daily telemetry snapshots directly into user Discord channels, then Day-7 retention will increase from 41% to 55% because founders avoid browser tab friction.",
+                  "problem": "Founders forget to log into the web dashboard daily.",
+                  "metric": "Day-7 Retention Rate",
+                  "currentValue": "41",
+                  "targetValue": "55%",
+                  "method": "Offer 1-click Discord webhook connect in onboarding for next 50 signups",
+                  "audience": "New signups",
+                  "duration": "14 days",
+                  "budget": "₹0"
+                }
+              }
+            }
+          }
+        ]
+      },
+      "founderMemories": [
+        {
+          "id": "mem-1",
+          "userId": "demo-user-1",
+          "startupId": "startup-demo-user-1",
+          "category": "target_icp",
+          "key": "Primary ICP",
+          "value": "Early-stage indie hackers and solo technical founders running micro-SaaS with <₹50k MRR",
+          "confidence": "Proven",
+          "source": "Customer Interview #1 (Rahul Sharma)",
+          "createdAt": "2026-08-27T10:00:00.000Z",
+          "updatedAt": "2026-08-27T10:00:00.000Z",
+          "confirmedByFounder": true
+        },
+        {
+          "id": "mem-2",
+          "userId": "demo-user-1",
+          "startupId": "startup-demo-user-1",
+          "category": "constraint",
+          "key": "Zero-Burn Rule",
+          "value": "Strictly zero paid advertising spend until Day-30 retention crosses 40% organically",
+          "confidence": "Proven",
+          "source": "Startup Health Reality Check",
+          "createdAt": "2026-08-25T14:30:00.000Z",
+          "updatedAt": "2026-08-25T14:30:00.000Z",
+          "confirmedByFounder": true
+        },
+        {
+          "id": "mem-3",
+          "userId": "demo-user-1",
+          "startupId": "startup-demo-user-1",
+          "category": "business_model",
+          "key": "Pricing Floor",
+          "value": "No $5/month pricing tiers. Minimum base tier set at ₹799/month ($19/mo) with grandfathered early-adopter pass",
+          "confidence": "Proven",
+          "source": "Founder Note: SaaS Pricing Architecture",
+          "createdAt": "2026-08-26T09:15:00.000Z",
+          "updatedAt": "2026-08-26T09:15:00.000Z",
+          "confirmedByFounder": true
+        }
+      ]
+    }
+  }
+}

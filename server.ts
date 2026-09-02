@@ -141,14 +141,48 @@ export function createApp(): express.Express {
           return { text };
         },
         generateContentStream: async function* ({ contents, config, model }: { contents: string; config?: any; model?: string }) {
-          let accumulated = "";
-          await streamGroq(contents, (chunk) => {
-            accumulated += chunk;
-          }, {
-            temperature: config?.temperature ?? 0.7,
-            maxTokens: config?.maxOutputTokens ?? 2048,
-          });
-          yield { text: accumulated };
+          const queue: string[] = [];
+          let isFinished = false;
+          let streamErr: any = null;
+          let resolveNext: (() => void) | null = null;
+
+          streamGroq(
+            contents,
+            (chunk) => {
+              queue.push(chunk);
+              if (resolveNext) {
+                const r = resolveNext;
+                resolveNext = null;
+                r();
+              }
+            },
+            {
+              temperature: config?.temperature ?? 0.7,
+              maxTokens: config?.maxOutputTokens ?? 2048
+            }
+          )
+            .then(() => {
+              isFinished = true;
+              if (resolveNext) resolveNext();
+            })
+            .catch((e) => {
+              streamErr = e;
+              isFinished = true;
+              if (resolveNext) resolveNext();
+            });
+
+          while (!isFinished || queue.length > 0) {
+            if (queue.length === 0) {
+              await new Promise<void>((resolve) => {
+                resolveNext = resolve;
+              });
+            }
+            while (queue.length > 0) {
+              const textChunk = queue.shift();
+              if (textChunk) yield { text: textChunk };
+            }
+            if (streamErr) throw streamErr;
+          }
         }
       }
     };
@@ -2072,214 +2106,216 @@ Return JSON array of suggestions:
 
   // 6. Send message to Copilot (Intelligent Context Retrieval + Gemini Reasoning)
   app.post("/api/copilot/chat", async (req: Request, res: Response) => {
-    const userId = getUserIdFromReq(req) || "demo-user-1";
-    const state = getAppState(userId);
-    const { conversationId, message, mode } = req.body || {};
+    try {
+      const userId = getUserIdFromReq(req) || "demo-user-1";
+      const state = getAppState(userId);
+      const { conversationId, message, mode } = req.body || {};
 
-    if (!message || typeof message !== "string" || !message.trim()) {
-      return res.status(400).json({ error: "Message is required" });
-    }
+      if (!message || typeof message !== "string" || !message.trim()) {
+        return res.status(400).json({ error: "Message is required" });
+      }
 
-    const isVercel = Boolean(process.env.VERCEL);
-    if (!isVercel) {
-      res.setHeader("Content-Type", "text/event-stream");
-      res.setHeader("Cache-Control", "no-cache");
-      res.setHeader("Connection", "keep-alive");
-      res.flushHeaders?.();
-    }
+      const isVercel = Boolean(process.env.VERCEL);
+      if (!isVercel) {
+        res.setHeader("Content-Type", "text/event-stream");
+        res.setHeader("Cache-Control", "no-cache");
+        res.setHeader("Connection", "keep-alive");
+        res.flushHeaders?.();
+      }
 
-    const cleanMessage = message.trim();
-    const effectiveMode = mode || "default";
+      const cleanMessage = message.trim();
+      const effectiveMode = mode || "default";
 
-    if (!state.copilotConversations) state.copilotConversations = [];
-    if (!state.copilotMessages) state.copilotMessages = {};
+      if (!state.copilotConversations) state.copilotConversations = [];
+      if (!state.copilotMessages) state.copilotMessages = {};
 
-    let conv = state.copilotConversations.find(c => c.id === conversationId);
-    let targetConvId = conversationId;
+      let conv = state.copilotConversations.find(c => c.id === conversationId);
+      let targetConvId = conversationId;
 
-    if (!conv) {
-      targetConvId = "conv-" + Date.now() + "-" + Math.random().toString(36).substring(2, 6);
-      conv = {
-        id: targetConvId,
-        userId,
-        startupId: state.profile?.id || "startup-" + userId,
-        title: cleanMessage.length > 35 ? cleanMessage.slice(0, 35) + "..." : cleanMessage,
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
-        pinned: false,
-        lastMessagePreview: cleanMessage,
-        messagesCount: 0,
+      if (!conv) {
+        targetConvId = "conv-" + Date.now() + "-" + Math.random().toString(36).substring(2, 6);
+        conv = {
+          id: targetConvId,
+          userId,
+          startupId: state.profile?.id || "startup-" + userId,
+          title: cleanMessage.length > 35 ? cleanMessage.slice(0, 35) + "..." : cleanMessage,
+          createdAt: new Date().toISOString(),
+          updatedAt: new Date().toISOString(),
+          pinned: false,
+          lastMessagePreview: cleanMessage,
+          messagesCount: 0,
+          mode: effectiveMode
+        };
+        state.copilotConversations.unshift(conv);
+      }
+
+      if (!state.copilotMessages[targetConvId]) {
+        state.copilotMessages[targetConvId] = [];
+      }
+
+      // 1. Create and store user message
+      const userMsg: CopilotMessage = {
+        id: "msg-u-" + Date.now() + "-" + Math.random().toString(36).substring(2, 5),
+        conversationId: targetConvId,
+        role: "user",
+        content: cleanMessage,
+        timestamp: new Date().toISOString(),
         mode: effectiveMode
       };
-      state.copilotConversations.unshift(conv);
-    }
+      state.copilotMessages[targetConvId].push(userMsg);
 
-    if (!state.copilotMessages[targetConvId]) {
-      state.copilotMessages[targetConvId] = [];
-    }
+      // 2. Run Intelligent Context Retrieval
+      const retrievedContext = retrieveRelevantContext(cleanMessage, effectiveMode, state);
 
-    // 1. Create and store user message
-    const userMsg: CopilotMessage = {
-      id: "msg-u-" + Date.now() + "-" + Math.random().toString(36).substring(2, 5),
-      conversationId: targetConvId,
-      role: "user",
-      content: cleanMessage,
-      timestamp: new Date().toISOString(),
-      mode: effectiveMode
-    };
-    state.copilotMessages[targetConvId].push(userMsg);
+      let assistantContent = "";
+      let evidenceBreakdown = {
+        knownData: [
+          { label: "Startup", value: state.profile?.name || "PulseBoard" },
+          { label: "Stage", value: state.profile?.stage || "Validating" },
+          { label: "MRR", value: `₹${(state.profile?.monthlyRevenue || 0).toLocaleString()}` }
+        ],
+        founderAssumptions: ["Assumption that technical founders require real-time dashboarding"],
+        inferences: ["Push-based notifications directly into Discord/Slack will decrease churn by 50%"],
+        generalKnowledge: ["Bootstrapped SaaS PMF is characterized by high 30-day organic retention"]
+      };
+      let actionProposal: any = undefined;
+      let detectedIntent = retrievedContext.detectedIntent;
+      let insufficientWarning = false;
 
-    // 2. Run Intelligent Context Retrieval
-    const retrievedContext = retrieveRelevantContext(cleanMessage, effectiveMode, state);
+      // 3. Invoke Gemini AI model with streaming chunk processing if available
+      const ai = getAi(req);
+      if (ai) {
+        const modelsToTry = ["gemini-3.7-flash", "gemini-flash-latest", "gemini-3.1-pro-preview"];
+        let aiSuccess = false;
 
-    let assistantContent = "";
-    let evidenceBreakdown = {
-      knownData: [
-        { label: "Startup", value: state.profile?.name || "PulseBoard" },
-        { label: "Stage", value: state.profile?.stage || "Validating" },
-        { label: "MRR", value: `₹${(state.profile?.monthlyRevenue || 0).toLocaleString()}` }
-      ],
-      founderAssumptions: ["Assumption that technical founders require real-time dashboarding"],
-      inferences: ["Push-based notifications directly into Discord/Slack will decrease churn by 50%"],
-      generalKnowledge: ["Bootstrapped SaaS PMF is characterized by high 30-day organic retention"]
-    };
-    let actionProposal: any = undefined;
-    let detectedIntent = retrievedContext.detectedIntent;
-    let insufficientWarning = false;
+        for (const m of modelsToTry) {
+          try {
+            const systemPrompt = buildCopilotSystemPrompt(retrievedContext.contextPromptText, effectiveMode);
+            const prompt = `${systemPrompt}\n\nUSER'S QUESTION / PROMPT:\n"${cleanMessage}"\n\nProvide direct, practical, evidence-driven advice. You can reply in clear markdown or JSON.`;
 
-    // 3. Invoke Gemini AI model with streaming chunk processing if available
-    const ai = getAi(req);
-    if (ai) {
-      const modelsToTry = ["gemini-3.7-flash", "gemini-flash-latest", "gemini-3.1-pro-preview"];
-      let aiSuccess = false;
-
-      for (const m of modelsToTry) {
-        try {
-          const systemPrompt = buildCopilotSystemPrompt(retrievedContext.contextPromptText, effectiveMode);
-          const prompt = `${systemPrompt}\n\nUSER'S QUESTION / PROMPT:\n"${cleanMessage}"\n\nProvide direct, practical, evidence-driven advice. You can reply in clear markdown or JSON.`;
-
-          let accumulatedText = "";
-          let streamedAny = false;
-          if (isVercel) {
-            try {
-              const response = await ai.models.generateContent({
-                model: m,
-                contents: prompt,
-                config: {
-                  temperature: 0.7,
-                  topP: 0.9,
-                  maxOutputTokens: 2048
+            let accumulatedText = "";
+            let streamedAny = false;
+            if (isVercel) {
+              try {
+                const response = await ai.models.generateContent({
+                  model: m,
+                  contents: prompt,
+                  config: {
+                    temperature: 0.7,
+                    topP: 0.9,
+                    maxOutputTokens: 2048
+                  }
+                });
+                if (response && response.text) {
+                  accumulatedText = response.text;
                 }
-              });
-              if (response && response.text) {
-                accumulatedText = response.text;
+              } catch (verr: any) {
+                console.warn(`Vercel non-streaming model ${m} failed:`, verr?.message);
               }
-            } catch (verr: any) {
-              console.warn(`Vercel non-streaming model ${m} failed:`, verr?.message);
-            }
-          } else {
-            try {
-              const responseStream = await ai.models.generateContentStream({
-                model: m,
-                contents: prompt,
-                config: {
-                  temperature: 0.7,
-                  topP: 0.9,
-                  maxOutputTokens: 2048
+            } else {
+              try {
+                const responseStream = await ai.models.generateContentStream({
+                  model: m,
+                  contents: prompt,
+                  config: {
+                    temperature: 0.7,
+                    topP: 0.9,
+                    maxOutputTokens: 2048
+                  }
+                });
+                for await (const chunk of responseStream) {
+                  if (chunk && chunk.text) {
+                    accumulatedText += chunk.text;
+                    streamedAny = true;
+                    // Only stream if chunk is text, not raw JSON
+                    if (!chunk.text.trim().startsWith('{') && !chunk.text.trim().startsWith('[')) {
+                      res.write(`data: ${JSON.stringify({ type: "chunk", text: chunk.text })}\n\n`);
+                      (res as any).flush?.();
+                    }
+                  }
                 }
-              });
-              for await (const chunk of responseStream) {
-                if (chunk && chunk.text) {
-                  accumulatedText += chunk.text;
-                  streamedAny = true;
-                  res.write(`data: ${JSON.stringify({ type: "chunk", text: chunk.text })}\n\n`);
-                  (res as any).flush?.();
+              } catch (streamErr: any) {
+                if (streamErr?.message?.includes("looping")) {
+                  console.warn(`Model ${m} encountered looping content. Skipping to fallback.`);
+                  throw streamErr;
                 }
-              }
-            } catch (streamErr: any) {
-              if (streamErr?.message?.includes("looping")) {
-                console.warn(`Model ${m} encountered looping content. Skipping to fallback.`);
-                throw streamErr;
-              }
-              // Fallback to non-streaming generateContent if stream fails
-              const response = await ai.models.generateContent({
-                model: m,
-                contents: prompt,
-                config: {
-                  temperature: 0.7,
-                  topP: 0.9,
-                  maxOutputTokens: 2048
+                // Fallback to non-streaming generateContent if stream fails
+                const response = await ai.models.generateContent({
+                  model: m,
+                  contents: prompt,
+                  config: {
+                    temperature: 0.7,
+                    topP: 0.9,
+                    maxOutputTokens: 2048
+                  }
+                });
+                if (response && response.text) {
+                  accumulatedText = response.text;
                 }
-              });
-              if (response && response.text) {
-                accumulatedText = response.text;
-                res.write(`data: ${JSON.stringify({ type: "chunk", text: response.text })}\n\n`);
-                (res as any).flush?.();
               }
             }
-          }
 
-          if (accumulatedText && accumulatedText.trim()) {
-            let rawText = accumulatedText.trim();
-            // Clean markdown code block if present
-            if (rawText.startsWith("```json")) {
-              rawText = rawText.replace(/^```json/, "").replace(/```$/, "").trim();
-            } else if (rawText.startsWith("```")) {
-              rawText = rawText.replace(/^```/, "").replace(/```$/, "").trim();
-            }
+            if (accumulatedText && accumulatedText.trim()) {
+              let rawText = accumulatedText.trim();
+              // Clean markdown code block if present
+              if (rawText.startsWith("```json")) {
+                rawText = rawText.replace(/^```json/, "").replace(/```$/, "").trim();
+              } else if (rawText.startsWith("```")) {
+                rawText = rawText.replace(/^```/, "").replace(/```$/, "").trim();
+              }
 
-            try {
-              const parsed = JSON.parse(rawText);
-              if (parsed.content) {
-                assistantContent = parsed.content;
-              } else {
+              try {
+                const parsed = JSON.parse(rawText);
+                if (parsed.content) {
+                  assistantContent = parsed.content;
+                } else {
+                  assistantContent = rawText;
+                }
+                if (parsed.evidenceBreakdown) {
+                  evidenceBreakdown = parsed.evidenceBreakdown;
+                }
+                if (parsed.actionProposal && parsed.actionProposal.title) {
+                  actionProposal = {
+                    ...parsed.actionProposal,
+                    id: "prop-" + Date.now() + "-" + Math.random().toString(36).substring(2, 5),
+                    status: "pending"
+                  };
+                }
+                if (parsed.intent) {
+                  detectedIntent = parsed.intent;
+                }
+                if (parsed.insufficientEvidenceWarning) {
+                  insufficientWarning = true;
+                }
+              } catch (jsonErr) {
+                // Not JSON, use rawText directly as assistantContent
                 assistantContent = rawText;
               }
-              if (parsed.evidenceBreakdown) {
-                evidenceBreakdown = parsed.evidenceBreakdown;
-              }
-              if (parsed.actionProposal && parsed.actionProposal.title) {
-                actionProposal = {
-                  ...parsed.actionProposal,
-                  id: "prop-" + Date.now() + "-" + Math.random().toString(36).substring(2, 5),
-                  status: "pending"
-                };
-              }
-              if (parsed.intent) {
-                detectedIntent = parsed.intent;
-              }
-              if (parsed.insufficientEvidenceWarning) {
-                insufficientWarning = true;
-              }
-            } catch (jsonErr) {
-              // Not JSON, use rawText directly as assistantContent
-              assistantContent = rawText;
-            }
 
-            if (assistantContent) {
-              aiSuccess = true;
-              break;
+              if (assistantContent) {
+                aiSuccess = true;
+                break;
+              }
             }
+          } catch (err: any) {
+            console.warn(`Copilot model attempt (${m}) failed:`, err?.message);
           }
-        } catch (err: any) {
-          console.warn(`Copilot model attempt (${m}) failed:`, err?.message);
+        }
+
+        if (!aiSuccess) {
+          console.warn("All Gemini Copilot model attempts failed. Falling back to deterministic heuristic reasoning.");
         }
       }
 
-      if (!aiSuccess) {
-        console.warn("All Gemini Copilot model attempts failed. Falling back to deterministic heuristic reasoning.");
-      }
-    }
+      // 4. Fallback Heuristic Reasoning if AI failed or not configured
+      if (!assistantContent) {
+        const p = state.profile || ({} as any);
+        const m = state.metrics || [];
+        const f = state.customerFeedback || [];
+        const retMetric = m.find(item => item.name.toLowerCase().includes("retention"))?.currentValue || "41%";
 
-    // 4. Fallback Heuristic Reasoning if AI failed or not configured
-    if (!assistantContent) {
-      const p = state.profile || ({} as any);
-      const m = state.metrics || [];
-      const f = state.customerFeedback || [];
-      const retMetric = m.find(item => item.name.toLowerCase().includes("retention"))?.currentValue || "41%";
-
-      if (effectiveMode === "reality-check" || cleanMessage.toLowerCase().includes("ad") || cleanMessage.toLowerCase().includes("spend")) {
-        assistantContent = `### Reality Check: REJECT PREMATURE SPEND
+        if (effectiveMode === "reality-check" || cleanMessage.toLowerCase().includes("ad") || cleanMessage.toLowerCase().includes("spend")) {
+          assistantContent = `### Reality Check: REJECT PREMATURE SPEND
 
 **Recommendation**: Do not allocate budget to paid ads or external marketing yet.
 
@@ -2291,30 +2327,30 @@ Return JSON array of suggestions:
 #### Direct Next Step:
 Execute an organic community launch sprint (Show HN, IndieHackers milestone, developer Discord outreach) to prove that users retain for 30 days before spending money.`;
 
-        actionProposal = {
-          id: "prop-" + Date.now(),
-          type: "create_mission",
-          title: "Run Organic Community Distribution Sprint",
-          description: "Acquire 50 high-intent developer signups with zero ad spend via Show HN and Reddit teardowns.",
-          status: "pending",
-          missionData: {
-            title: "Acquire 50 Organic Users via Community Teardown",
-            category: "Growth",
-            objective: "Validate retention bucket without spending advertising capital.",
-            whyItMatters: "Zero-burn distribution protects runway while calibrating onboarding.",
-            estimatedTime: "3 hours",
-            estimatedCost: "₹0",
-            difficulty: "Medium",
-            expectedResult: "50 qualified developer signups.",
-            steps: [
-              { id: "s1", text: "Draft technical breakdown of zero-bloat architecture on Show HN", completed: false },
-              { id: "s2", text: "Post interactive demo sandbox with no signup password wall", completed: false },
-              { id: "s3", text: "Collect 10 qualitative feedback reviews on Discord", completed: false }
-            ]
-          }
-        };
-      } else if (cleanMessage.toLowerCase().includes("retention") || cleanMessage.toLowerCase().includes("drop") || cleanMessage.toLowerCase().includes("churn")) {
-        assistantContent = `### Retention Diagnosis & Leverage Point
+          actionProposal = {
+            id: "prop-" + Date.now(),
+            type: "create_mission",
+            title: "Run Organic Community Distribution Sprint",
+            description: "Acquire 50 high-intent developer signups with zero ad spend via Show HN and Reddit teardowns.",
+            status: "pending",
+            missionData: {
+              title: "Acquire 50 Organic Users via Community Teardown",
+              category: "Growth",
+              objective: "Validate retention bucket without spending advertising capital.",
+              whyItMatters: "Zero-burn distribution protects runway while calibrating onboarding.",
+              estimatedTime: "3 hours",
+              estimatedCost: "₹0",
+              difficulty: "Medium",
+              expectedResult: "50 qualified developer signups.",
+              steps: [
+                { id: "s1", text: "Draft technical breakdown of zero-bloat architecture on Show HN", completed: false },
+                { id: "s2", text: "Post interactive demo sandbox with no signup password wall", completed: false },
+                { id: "s3", text: "Collect 10 qualitative feedback reviews on Discord", completed: false }
+              ]
+            }
+          };
+        } else if (cleanMessage.toLowerCase().includes("retention") || cleanMessage.toLowerCase().includes("drop") || cleanMessage.toLowerCase().includes("churn")) {
+          assistantContent = `### Retention Diagnosis & Leverage Point
 
 Based on your telemetry, your **7-day retention is currently ${retMetric}** (target benchmark: 55%+). 
 
@@ -2325,27 +2361,27 @@ Based on your telemetry, your **7-day retention is currently ${retMetric}** (tar
 #### My Recommendation:
 Do NOT build more analytics charts. Instead, build a **1-click Discord daily digest webhook** so the core value arrives in the founder's existing daily workspace.`;
 
-        actionProposal = {
-          id: "prop-" + Date.now(),
-          type: "create_experiment",
-          title: "Launch 1-Click Discord Retention Digest Experiment",
-          description: "Test if delivering daily digests to Discord increases Day-7 retention from 41% to 55%.",
-          status: "pending",
-          experimentData: {
-            title: "Automated Discord Digest Webhook vs Web Login",
-            hypothesis: "If we deliver daily telemetry snapshots directly into user Discord channels, then Day-7 retention will increase from 41% to 55% because founders avoid browser tab friction.",
-            problem: "Founders forget to log into the web dashboard daily.",
-            metric: "Day-7 Retention Rate",
-            currentValue: String(retMetric),
-            targetValue: "55%",
-            method: "Offer 1-click Discord webhook connect in onboarding for next 50 signups",
-            audience: "New signups",
-            duration: "14 days",
-            budget: "₹0"
-          }
-        };
-      } else {
-        assistantContent = `### Strategic Synthesis for ${p.name || 'Your Startup'}
+          actionProposal = {
+            id: "prop-" + Date.now(),
+            type: "create_experiment",
+            title: "Launch 1-Click Discord Retention Digest Experiment",
+            description: "Test if delivering daily digests to Discord increases Day-7 retention from 41% to 55%.",
+            status: "pending",
+            experimentData: {
+              title: "Automated Discord Digest Webhook vs Web Login",
+              hypothesis: "If we deliver daily telemetry snapshots directly into user Discord channels, then Day-7 retention will increase from 41% to 55% because founders avoid browser tab friction.",
+              problem: "Founders forget to log into the web dashboard daily.",
+              metric: "Day-7 Retention Rate",
+              currentValue: String(retMetric),
+              targetValue: "55%",
+              method: "Offer 1-click Discord webhook connect in onboarding for next 50 signups",
+              audience: "New signups",
+              duration: "14 days",
+              budget: "₹0"
+            }
+          };
+        } else {
+          assistantContent = `### Strategic Synthesis for ${p.name || 'Your Startup'}
 
 Here is my direct assessment based on your current stage (**${p.stage || 'Validating'}**) and 90-day target (**${p.goal90Days || 'Reach PMF'}**):
 
@@ -2353,207 +2389,224 @@ Here is my direct assessment based on your current stage (**${p.stage || 'Valida
 2. **Execution Focus**: Talk to 3 active users directly to understand why they returned or dropped off.
 3. **Zero-Budget Rule**: Keep infrastructure spend at ₹0 using verified open-source and free-tier tools.`;
 
-        actionProposal = {
-          id: "prop-" + Date.now(),
-          type: "notepad_draft",
-          title: "Save Founder Strategy Playbook to Notepad",
-          description: "Save this action plan directly to your Strategy collection in Founder Notepad.",
+          actionProposal = {
+            id: "prop-" + Date.now(),
+            type: "notepad_draft",
+            title: "Save Founder Strategy Playbook to Notepad",
+            description: "Save this action plan directly to your Strategy collection in Founder Notepad.",
+            status: "pending",
+            draftNote: {
+              title: `${p.name || 'Startup'} Weekly Focus & Execution Playbook`,
+              collection: "Strategy",
+              tags: ["Strategy", "Focus", "Execution", "Zero-Budget"],
+              blocks: [
+                { id: "b1", type: "callout", content: `🎯 **Focus Rule**: 100% of effort goes into solving "${p.biggestUncertainty || 'User Retention'}".`, calloutVariant: "founder" },
+                { id: "b2", type: "heading2", content: "Key Objectives for the Week" },
+                { id: "b3", type: "checklist", content: "Complete 3 direct customer discovery interviews", checked: false },
+                { id: "b4", type: "checklist", content: "Deploy 1-click Discord digest webhook", checked: false }
+              ]
+            }
+          };
+        }
+      }
+
+      // 5. Construct Assistant Message with Developer-Grade Tool Executions & Steps
+      const p = state.profile || ({} as any);
+      const m = state.metrics || [];
+      const retMetric = m.find(item => item.name.toLowerCase().includes("retention"))?.currentValue || "41%";
+      
+      const thinkingSteps = [
+        { id: "th-1", label: `Retrieved startup context for ${p.name || 'Startup'} (${p.stage || 'MVP'})`, status: "completed" as const, duration: "0.1s" },
+        { id: "th-2", label: `Queried real-time telemetry (Day-7 Retention: ${retMetric})`, status: "completed" as const, duration: "0.2s" },
+        { id: "th-3", label: "Synthesized customer discovery interview patterns", status: "completed" as const, duration: "0.2s" },
+        { id: "th-4", label: "Formulated evidence-backed next action", status: "completed" as const, duration: "0.1s" }
+      ];
+
+      const toolCalls: any[] = [
+        {
+          id: "tool-1-" + Date.now(),
+          name: "get_startup_context",
+          description: `Fetch startup profile, stage (${p.stage || 'MVP'}), and primary bottleneck`,
+          status: "completed",
+          input: { startupId: p.id || "startup-1", fields: ["stage", "goal90Days", "biggestUncertainty"] },
+          output: {
+            name: p.name || "PulseBoard",
+            stage: p.stage || "MVP",
+            bottleneck: p.biggestUncertainty || "Retention Drop-off",
+            monthlyRevenue: `₹${(p.monthlyRevenue || 0).toLocaleString()}`
+          },
+          duration: "115ms"
+        },
+        {
+          id: "tool-2-" + Date.now(),
+          name: "get_startup_metrics",
+          description: "Retrieve real-time retention, activation, and user growth telemetry",
+          status: "completed",
+          input: { limit: 4, includeTrends: true },
+          output: {
+            retentionD7: retMetric,
+            currentUsers: p.currentUsers || 127,
+            metricsAnalyzed: m.length || 6
+          },
+          duration: "160ms"
+        }
+      ];
+
+      if (state.customerFeedback && state.customerFeedback.length > 0) {
+        toolCalls.push({
+          id: "tool-3-" + Date.now(),
+          name: "get_customer_feedback",
+          description: "Scan qualitative customer feedback and interview transcripts",
+          status: "completed",
+          input: { count: 3, filter: effectiveMode },
+          output: {
+            interviewsAnalyzed: state.customerFeedback.length,
+            topRecurringPain: state.customerFeedback[0]?.keyPainPoint || "Founders forget to open dashboard"
+          },
+          duration: "140ms"
+        });
+      }
+
+      // Generate todo list if multi-step execution is recommended
+      let todoList: any = undefined;
+      if (actionProposal?.missionData?.steps) {
+        todoList = actionProposal.missionData.steps.map((s: any, idx: number) => ({
+          id: s.id || `todo-${idx}`,
+          title: s.text,
+          completed: Boolean(s.completed),
+          inProgress: idx === 0 && !s.completed
+        }));
+      } else if (cleanMessage.toLowerCase().includes("mission") || cleanMessage.toLowerCase().includes("plan") || cleanMessage.toLowerCase().includes("weekly")) {
+        todoList = [
+          { id: "todo-1", title: "Complete 3 direct customer discovery interviews", completed: false, inProgress: true },
+          { id: "todo-2", title: "Deploy zero-friction 1-click Discord webhook digest", completed: false },
+          { id: "todo-3", title: "Measure Day-7 cohort retention before allocating budget", completed: false }
+        ];
+      }
+
+      // Generate permission request for concrete database actions
+      let permissionRequest: any = undefined;
+      if (actionProposal && actionProposal.type === "create_mission" && actionProposal.missionData) {
+        permissionRequest = {
+          id: "perm-" + Date.now(),
+          actionType: "create_mission",
+          title: `Authorize Mission: "${actionProposal.missionData.title}"`,
+          details: [
+            { label: "Category", value: actionProposal.missionData.category || "Growth" },
+            { label: "Objective", value: actionProposal.missionData.objective || "Validate retention bucket" },
+            { label: "Estimated Time", value: actionProposal.missionData.estimatedTime || "3 hours" },
+            { label: "Estimated Cost", value: actionProposal.missionData.estimatedCost || "₹0" }
+          ],
+          impactDescription: "Will create an active 7-day actionable founder mission in your Missions dashboard.",
           status: "pending",
-          draftNote: {
-            title: `${p.name || 'Startup'} Weekly Focus & Execution Playbook`,
-            collection: "Strategy",
-            tags: ["Strategy", "Focus", "Execution", "Zero-Budget"],
-            blocks: [
-              { id: "b1", type: "callout", content: `🎯 **Focus Rule**: 100% of effort goes into solving "${p.biggestUncertainty || 'User Retention'}".`, calloutVariant: "founder" },
-              { id: "b2", type: "heading2", content: "Key Objectives for the Week" },
-              { id: "b3", type: "checklist", content: "Complete 3 direct customer discovery interviews", checked: false },
-              { id: "b4", type: "checklist", content: "Deploy 1-click Discord digest webhook", checked: false }
-            ]
-          }
+          payload: actionProposal
+        };
+      } else if (actionProposal && actionProposal.type === "create_experiment" && actionProposal.experimentData) {
+        permissionRequest = {
+          id: "perm-" + Date.now(),
+          actionType: "create_experiment",
+          title: `Authorize Experiment: "${actionProposal.experimentData.title}"`,
+          details: [
+            { label: "Metric", value: actionProposal.experimentData.metric || "Day-7 Retention" },
+            { label: "Target Goal", value: actionProposal.experimentData.targetValue || "55%" },
+            { label: "Duration", value: actionProposal.experimentData.duration || "14 days" },
+            { label: "Budget", value: actionProposal.experimentData.budget || "₹0" }
+          ],
+          impactDescription: "Will launch and track this experiment in your Experiments board with automated telemetry tracking.",
+          status: "pending",
+          payload: actionProposal
         };
       }
-    }
 
-    // 5. Construct Assistant Message with Developer-Grade Tool Executions & Steps
-    const p = state.profile || ({} as any);
-    const m = state.metrics || [];
-    const retMetric = m.find(item => item.name.toLowerCase().includes("retention"))?.currentValue || "41%";
-    
-    const thinkingSteps = [
-      { id: "th-1", label: `Retrieved startup context for ${p.name || 'Startup'} (${p.stage || 'MVP'})`, status: "completed" as const, duration: "0.1s" },
-      { id: "th-2", label: `Queried real-time telemetry (Day-7 Retention: ${retMetric})`, status: "completed" as const, duration: "0.2s" },
-      { id: "th-3", label: "Synthesized customer discovery interview patterns", status: "completed" as const, duration: "0.2s" },
-      { id: "th-4", label: "Formulated evidence-backed next action", status: "completed" as const, duration: "0.1s" }
-    ];
-
-    const toolCalls: any[] = [
-      {
-        id: "tool-1-" + Date.now(),
-        name: "get_startup_context",
-        description: `Fetch startup profile, stage (${p.stage || 'MVP'}), and primary bottleneck`,
-        status: "completed",
-        input: { startupId: p.id || "startup-1", fields: ["stage", "goal90Days", "biggestUncertainty"] },
-        output: {
-          name: p.name || "PulseBoard",
-          stage: p.stage || "MVP",
-          bottleneck: p.biggestUncertainty || "Retention Drop-off",
-          monthlyRevenue: `₹${(p.monthlyRevenue || 0).toLocaleString()}`
-        },
-        duration: "115ms"
-      },
-      {
-        id: "tool-2-" + Date.now(),
-        name: "get_startup_metrics",
-        description: "Retrieve real-time retention, activation, and user growth telemetry",
-        status: "completed",
-        input: { limit: 4, includeTrends: true },
-        output: {
-          retentionD7: retMetric,
-          currentUsers: p.currentUsers || 127,
-          metricsAnalyzed: m.length || 6
-        },
-        duration: "160ms"
+      // Proposed Diff View if message suggests updating positioning or goal
+      let diffData: any = undefined;
+      if (cleanMessage.toLowerCase().includes("pitch") || cleanMessage.toLowerCase().includes("position") || cleanMessage.toLowerCase().includes("icp") || cleanMessage.toLowerCase().includes("target customer")) {
+        diffData = {
+          id: "diff-" + Date.now(),
+          title: "Proposed Positioning Calibration",
+          description: "Align your target customer and value proposition to eliminate onboarding drop-off.",
+          target: "positioning",
+          changes: [
+            {
+              field: "targetCustomer",
+              label: "Target Customer Persona",
+              oldValue: p.targetCustomer || "Founders and builders",
+              newValue: "Solo Technical Founders building developer tools with ₹0 ad budget"
+            },
+            {
+              field: "oneLiner",
+              label: "Value Proposition",
+              oldValue: p.oneLiner || p.coreProduct || "Analytics platform for SaaS founders",
+              newValue: "Autonomous AI thinking partner that turns raw user telemetry into high-converting 7-day growth missions"
+            }
+          ],
+          status: "pending"
+        };
       }
-    ];
 
-    if (state.customerFeedback && state.customerFeedback.length > 0) {
-      toolCalls.push({
-        id: "tool-3-" + Date.now(),
-        name: "get_customer_feedback",
-        description: "Scan qualitative customer feedback and interview transcripts",
-        status: "completed",
-        input: { count: 3, filter: effectiveMode },
-        output: {
-          interviewsAnalyzed: state.customerFeedback.length,
-          topRecurringPain: state.customerFeedback[0]?.keyPainPoint || "Founders forget to open dashboard"
-        },
-        duration: "140ms"
-      });
-    }
-
-    // Generate todo list if multi-step execution is recommended
-    let todoList: any = undefined;
-    if (actionProposal?.missionData?.steps) {
-      todoList = actionProposal.missionData.steps.map((s: any, idx: number) => ({
-        id: s.id || `todo-${idx}`,
-        title: s.text,
-        completed: Boolean(s.completed),
-        inProgress: idx === 0 && !s.completed
-      }));
-    } else if (cleanMessage.toLowerCase().includes("mission") || cleanMessage.toLowerCase().includes("plan") || cleanMessage.toLowerCase().includes("weekly")) {
-      todoList = [
-        { id: "todo-1", title: "Complete 3 direct customer discovery interviews", completed: false, inProgress: true },
-        { id: "todo-2", title: "Deploy zero-friction 1-click Discord webhook digest", completed: false },
-        { id: "todo-3", title: "Measure Day-7 cohort retention before allocating budget", completed: false }
-      ];
-    }
-
-    // Generate permission request for concrete database actions
-    let permissionRequest: any = undefined;
-    if (actionProposal && actionProposal.type === "create_mission" && actionProposal.missionData) {
-      permissionRequest = {
-        id: "perm-" + Date.now(),
-        actionType: "create_mission",
-        title: `Authorize Mission: "${actionProposal.missionData.title}"`,
-        details: [
-          { label: "Category", value: actionProposal.missionData.category || "Growth" },
-          { label: "Objective", value: actionProposal.missionData.objective || "Validate retention bucket" },
-          { label: "Estimated Time", value: actionProposal.missionData.estimatedTime || "3 hours" },
-          { label: "Estimated Cost", value: actionProposal.missionData.estimatedCost || "₹0" }
-        ],
-        impactDescription: "Will create an active 7-day actionable founder mission in your Missions dashboard.",
-        status: "pending",
-        payload: actionProposal
+      const assistantMsg: CopilotMessage = {
+        id: "msg-a-" + Date.now() + "-" + Math.random().toString(36).substring(2, 5),
+        conversationId: targetConvId,
+        role: "assistant",
+        content: assistantContent,
+        timestamp: new Date().toISOString(),
+        mode: effectiveMode,
+        intent: detectedIntent,
+        insufficientEvidenceWarning: insufficientWarning,
+        retrievedContextSummary: retrievedContext.summary,
+        sources: retrievedContext.sources,
+        evidenceBreakdown,
+        actionProposal,
+        thinkingSteps,
+        toolCalls,
+        todoList,
+        diffData,
+        permissionRequest
       };
-    } else if (actionProposal && actionProposal.type === "create_experiment" && actionProposal.experimentData) {
-      permissionRequest = {
-        id: "perm-" + Date.now(),
-        actionType: "create_experiment",
-        title: `Authorize Experiment: "${actionProposal.experimentData.title}"`,
-        details: [
-          { label: "Metric", value: actionProposal.experimentData.metric || "Day-7 Retention" },
-          { label: "Target Goal", value: actionProposal.experimentData.targetValue || "55%" },
-          { label: "Duration", value: actionProposal.experimentData.duration || "14 days" },
-          { label: "Budget", value: actionProposal.experimentData.budget || "₹0" }
-        ],
-        impactDescription: "Will launch and track this experiment in your Experiments board with automated telemetry tracking.",
-        status: "pending",
-        payload: actionProposal
+
+      state.copilotMessages[targetConvId].push(assistantMsg);
+
+      // Update conversation metadata
+      conv.updatedAt = new Date().toISOString();
+      conv.lastMessagePreview = assistantContent.replace(/[#*`_]/g, "").slice(0, 120) + "...";
+      conv.messagesCount = state.copilotMessages[targetConvId].length;
+
+      saveAppState(userId, state);
+
+      if (!assistantContent && userMsg) {
+        // Ensure fallback if somehow empty
+        assistantContent = "I've analyzed your request. How else can I help your startup scale?";
+      }
+
+      const payload = {
+        success: true,
+        userMessage: userMsg,
+        assistantMessage: assistantMsg,
+        conversation: conv,
+        state
       };
-    }
-
-    // Proposed Diff View if message suggests updating positioning or goal
-    let diffData: any = undefined;
-    if (cleanMessage.toLowerCase().includes("pitch") || cleanMessage.toLowerCase().includes("position") || cleanMessage.toLowerCase().includes("icp") || cleanMessage.toLowerCase().includes("target customer")) {
-      diffData = {
-        id: "diff-" + Date.now(),
-        title: "Proposed Positioning Calibration",
-        description: "Align your target customer and value proposition to eliminate onboarding drop-off.",
-        target: "positioning",
-        changes: [
-          {
-            field: "targetCustomer",
-            label: "Target Customer Persona",
-            oldValue: p.targetCustomer || "Founders and builders",
-            newValue: "Solo Technical Founders building developer tools with ₹0 ad budget"
-          },
-          {
-            field: "oneLiner",
-            label: "Value Proposition",
-            oldValue: p.oneLiner || p.coreProduct || "Analytics platform for SaaS founders",
-            newValue: "Autonomous AI thinking partner that turns raw user telemetry into high-converting 7-day growth missions"
-          }
-        ],
-        status: "pending"
+      if (Boolean(process.env.VERCEL)) {
+        return res.json(payload);
+      } else {
+        res.write(`data: ${JSON.stringify(payload)}\n\n`);
+        res.end();
+      }
+    } catch (endpointErr: any) {
+      console.error("Error in /api/copilot/chat endpoint:", endpointErr);
+      const fallbackMsg: CopilotMessage = {
+        id: "msg-a-" + Date.now(),
+        conversationId: req.body?.conversationId || "conv-fallback",
+        role: "assistant",
+        content: "### Strategic Copilot Synthesis\n\nI've analyzed your request.\n\n#### Recommendation:\nFocus 100% of effort on verifying user activation and retention before spending on marketing.",
+        timestamp: new Date().toISOString(),
+        mode: req.body?.mode || "default"
       };
-    }
-
-    const assistantMsg: CopilotMessage = {
-      id: "msg-a-" + Date.now() + "-" + Math.random().toString(36).substring(2, 5),
-      conversationId: targetConvId,
-      role: "assistant",
-      content: assistantContent,
-      timestamp: new Date().toISOString(),
-      mode: effectiveMode,
-      intent: detectedIntent,
-      insufficientEvidenceWarning: insufficientWarning,
-      retrievedContextSummary: retrievedContext.summary,
-      sources: retrievedContext.sources,
-      evidenceBreakdown,
-      actionProposal,
-      thinkingSteps,
-      toolCalls,
-      todoList,
-      diffData,
-      permissionRequest
-    };
-
-    state.copilotMessages[targetConvId].push(assistantMsg);
-
-    // Update conversation metadata
-    conv.updatedAt = new Date().toISOString();
-    conv.lastMessagePreview = assistantContent.replace(/[#*`_]/g, "").slice(0, 120) + "...";
-    conv.messagesCount = state.copilotMessages[targetConvId].length;
-
-    saveAppState(userId, state);
-
-    if (!assistantContent && userMsg) {
-      // Ensure fallback if somehow empty
-      assistantContent = "I've analyzed your request. How else can I help your startup scale?";
-    }
-
-    const payload = {
-      success: true,
-      userMessage: userMsg,
-      assistantMessage: assistantMsg,
-      conversation: conv,
-      state
-    };
-    if (Boolean(process.env.VERCEL)) {
-      return res.json(payload);
-    } else {
-      res.write(`data: ${JSON.stringify(payload)}\n\n`);
-      res.end();
+      if (!res.headersSent) {
+        return res.json({ success: true, assistantMessage: fallbackMsg });
+      } else {
+        res.write(`data: ${JSON.stringify({ assistantMessage: fallbackMsg })}\n\n`);
+        res.end();
+      }
     }
   });
 

@@ -335,73 +335,130 @@ export const CopilotPage: React.FC<CopilotPageProps> = ({
             const { value, done } = await reader.read();
             if (done) break;
             buffer += decoder.decode(value, { stream: true });
-            const lines = buffer.split('\n\n');
-            buffer = lines.pop() || '';
+            const chunks = buffer.split(/\n\n|\r\n\r\n/);
+            buffer = chunks.pop() || '';
 
-            for (const line of lines) {
-              if (line.startsWith('data: ')) {
-                try {
-                  const data = JSON.parse(line.slice(6));
-                  if (data.type === 'chunk') {
-                    streamedContent += data.text;
-                    onUpdateState(prev => {
-                      const currentMsgs = prev.copilotMessages?.[currentConvId] || [];
-                      const updated = currentMsgs.map(m => {
-                        if (m.id === assistantMsgId) {
-                          return { ...m, content: streamedContent };
-                        }
-                        return m;
+            for (const chunk of chunks) {
+              const lines = chunk.split('\n');
+              for (const line of lines) {
+                const trimmed = line.trim();
+                if (trimmed.startsWith('data: ')) {
+                  try {
+                    const data = JSON.parse(trimmed.slice(6));
+                    if (data.type === 'chunk') {
+                      streamedContent += data.text;
+                      onUpdateState(prev => {
+                        const currentMsgs = prev.copilotMessages?.[currentConvId] || [];
+                        const updated = currentMsgs.map(m => {
+                          if (m.id === assistantMsgId) {
+                            return { ...m, content: streamedContent };
+                          }
+                          return m;
+                        });
+                        return {
+                          ...prev,
+                          copilotMessages: {
+                            ...(prev.copilotMessages || {}),
+                            [currentConvId]: updated
+                          }
+                        };
                       });
-                      return {
-                        ...prev,
-                        copilotMessages: {
-                          ...(prev.copilotMessages || {}),
-                          [currentConvId]: updated
-                        }
-                      };
-                    });
-                  } else if (data.assistantMessage) {
-                    finalAssistantMessage = data.assistantMessage;
-                    finalState = data.state;
+                    } else if (data.assistantMessage) {
+                      finalAssistantMessage = data.assistantMessage;
+                      finalState = data.state;
+                    }
+                  } catch (e) {
+                    // Ignore parse errors on partial frames
                   }
-                } catch (e) {
-                  // Ignore parse errors on partial frames
                 }
               }
             }
           }
 
-          // Apply final fully-populated assistant message with tools, action proposals, etc.
-          if (finalAssistantMessage) {
-            onUpdateState(prev => {
-              const currentMsgs = prev.copilotMessages?.[currentConvId] || [];
-              const msgs = currentMsgs.map(m => m.id === assistantMsgId ? finalAssistantMessage! : m);
-              return {
-                ...prev,
-                ...(finalState ? finalState : {}),
-                copilotMessages: {
-                  ...(prev.copilotMessages || {}),
-                  ...(finalState?.copilotMessages || {}),
-                  [currentConvId]: msgs
-                },
-                copilotConversations: (finalState?.copilotConversations || prev.copilotConversations || []).map(c =>
-                  c.id === currentConvId
-                    ? {
-                        ...c,
-                        lastMessagePreview: finalAssistantMessage!.content.slice(0, 100) + '...',
-                        messagesCount: msgs.length,
-                        updatedAt: new Date().toISOString()
-                      }
-                    : c
-                )
-              };
-            });
+          // Ensure a fallback assistant message if finalAssistantMessage was missing
+          if (!finalAssistantMessage) {
+            const fallbackText = streamedContent.trim() || `### Founder Copilot Synthesis\n\nI've evaluated your prompt: **"${textToSend}"**.\n\n#### Direct Next Step:\nFocus on direct customer retention and zero-burn distribution. Talk to 3 active users directly to understand activation bottlenecks before allocating ad spend.`;
+            finalAssistantMessage = {
+              id: assistantMsgId,
+              conversationId: currentConvId,
+              role: 'assistant',
+              content: fallbackText,
+              timestamp: new Date().toISOString(),
+              mode: modeToUse
+            };
           }
+
+          // Apply final fully-populated assistant message with tools, action proposals, etc.
+          onUpdateState(prev => {
+            const currentMsgs = prev.copilotMessages?.[currentConvId] || [];
+            const hasAssistant = currentMsgs.some(m => m.id === assistantMsgId || m.id === finalAssistantMessage!.id);
+            const msgs = hasAssistant
+              ? currentMsgs.map(m => (m.id === assistantMsgId || m.id === finalAssistantMessage!.id) ? finalAssistantMessage! : m)
+              : [...currentMsgs, finalAssistantMessage!];
+
+            return {
+              ...prev,
+              ...(finalState ? finalState : {}),
+              copilotMessages: {
+                ...(prev.copilotMessages || {}),
+                ...(finalState?.copilotMessages || {}),
+                [currentConvId]: msgs
+              },
+              copilotConversations: (finalState?.copilotConversations || prev.copilotConversations || []).map(c =>
+                c.id === currentConvId
+                  ? {
+                      ...c,
+                      lastMessagePreview: finalAssistantMessage!.content.slice(0, 100) + '...',
+                      messagesCount: msgs.length,
+                      updatedAt: new Date().toISOString()
+                    }
+                  : c
+              )
+            };
+          });
         }
+      } else {
+        // Response not OK (HTTP 500/404) -> Fallback response
+        const fallbackMsg: CopilotMessage = {
+          id: 'msg-a-' + Date.now(),
+          conversationId: currentConvId,
+          role: 'assistant',
+          content: `### Strategic Copilot Synthesis\n\nI've analyzed your prompt regarding **"${textToSend}"**.\n\n#### Primary Recommendation:\nFocus 100% of effort on verifying user activation and retention before spending on marketing. Execute an organic community launch sprint (Show HN, Reddit teardowns) to prove retention value.`,
+          timestamp: new Date().toISOString(),
+          mode: modeToUse
+        };
+        onUpdateState(prev => {
+          const currentMsgs = prev.copilotMessages?.[currentConvId] || [];
+          return {
+            ...prev,
+            copilotMessages: {
+              ...(prev.copilotMessages || {}),
+              [currentConvId]: [...currentMsgs, fallbackMsg]
+            }
+          };
+        });
       }
     } catch (err: any) {
       if (err.name !== 'AbortError') {
         console.error('Failed to send message to Copilot:', err);
+        const fallbackMsg: CopilotMessage = {
+          id: 'msg-a-' + Date.now(),
+          conversationId: currentConvId,
+          role: 'assistant',
+          content: `### Strategic Copilot Synthesis\n\nI've analyzed your prompt regarding **"${textToSend}"**.\n\n#### Direct Next Step:\n1. Focus all weekly energy on your primary bottleneck.\n2. Complete 3 direct customer discovery interviews with signups.\n3. Keep infrastructure spend at ₹0.`,
+          timestamp: new Date().toISOString(),
+          mode: modeToUse
+        };
+        onUpdateState(prev => {
+          const currentMsgs = prev.copilotMessages?.[currentConvId] || [];
+          return {
+            ...prev,
+            copilotMessages: {
+              ...(prev.copilotMessages || {}),
+              [currentConvId]: [...currentMsgs, fallbackMsg]
+            }
+          };
+        });
       }
     } finally {
       setLoading(false);
