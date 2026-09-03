@@ -107,27 +107,27 @@ export const Header: React.FC<HeaderProps> = ({
     .toUpperCase();
 
   return (
-    <header className="sticky top-0 z-20 bg-white/85 dark:bg-slate-900/85 backdrop-blur-md border-b border-slate-200/80 dark:border-slate-800 px-4 md:px-8 py-3.5 flex items-center justify-between transition-colors">
+    <header className="sticky top-0 z-20 bg-[#000000]/90 backdrop-blur-md border-b border-[#292d30] px-4 md:px-8 py-3.5 flex items-center justify-between transition-colors">
       {/* Left: Mobile Menu & Page Title */}
       <div className="flex items-center gap-3.5">
         <button
           onClick={onOpenMobileMenu}
-          className="md:hidden p-2 rounded-xl text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition"
+          className="md:hidden p-2 rounded-[6px] text-[#a1a4a5] hover:text-[#ffffff] hover:bg-[#0b0e14] transition"
           aria-label="Open navigation menu"
         >
           <Menu size={20} />
         </button>
 
         <div>
-          <h1 className="text-lg md:text-xl font-bold text-slate-900 dark:text-white tracking-tight leading-none flex items-center gap-2">
+          <h1 className="text-lg md:text-xl font-medium text-[#ffffff] font-sans tracking-tight leading-none flex items-center gap-2">
             <span>{currentInfo.title}</span>
             {isDemo && (
-              <span className="px-2 py-0.5 rounded-md bg-amber-100 dark:bg-amber-950/60 text-amber-800 dark:text-amber-300 text-[10px] font-mono font-bold border border-amber-200 dark:border-amber-800">
+              <span className="px-2 py-0.5 rounded-[6px] bg-[#000000] text-[#ffca16] text-[10px] font-commit border border-[#292d30]">
                 SANDBOX DEMO
               </span>
             )}
           </h1>
-          <p className="text-xs text-slate-500 dark:text-slate-400 hidden sm:block mt-1">
+          <p className="text-xs text-[#a1a4a5] font-sans hidden sm:block mt-1">
             {currentInfo.subtitle}
           </p>
         </div>
@@ -139,16 +139,16 @@ export const Header: React.FC<HeaderProps> = ({
         <div className="relative">
           <button
             onClick={() => setStageMenuOpen(!stageMenuOpen)}
-            className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200/80 dark:hover:bg-slate-700/80 text-slate-700 dark:text-slate-200 text-xs font-semibold font-mono transition-colors"
+            className="flex items-center gap-2 px-3 py-1.5 rounded-[6px] bg-[#000000] border border-[#292d30] hover:border-[#ffffff] text-[#f0f0f0] text-xs font-commit transition-colors cursor-pointer"
           >
-            <span className="w-2 h-2 rounded-full bg-[#0052FF]" />
+            <span className="w-2 h-2 rounded-full bg-[#9281f7]" />
             <span>{profile.stage}</span>
-            <ChevronDown size={13} className="text-slate-400" />
+            <ChevronDown size={13} className="text-[#a1a4a5]" />
           </button>
 
           {stageMenuOpen && (
-            <div className="absolute right-0 mt-2 w-56 bg-white dark:bg-slate-900 rounded-2xl shadow-xl border border-slate-200/80 dark:border-slate-800 py-2 z-40 text-xs">
-              <div className="px-3.5 py-1.5 font-bold text-slate-400 dark:text-slate-500 text-[10px] uppercase font-mono tracking-wider border-b border-slate-100 dark:border-slate-800 mb-1">
+            <div className="absolute right-0 mt-2 w-56 bg-[#000000] rounded-[16px] border border-[#292d30] py-2 z-40 text-xs font-commit shadow-2xl">
+              <div className="px-3.5 py-1.5 font-medium text-[#a1a4a5] text-[10px] uppercase font-commit tracking-wider border-b border-[#292d30] mb-1">
                 CHANGE STARTUP STAGE
               </div>
               {stages.map((s) => (
@@ -158,12 +158,12 @@ export const Header: React.FC<HeaderProps> = ({
                     onUpdateStage(s);
                     setStageMenuOpen(false);
                   }}
-                  className={`w-full text-left px-3.5 py-2 flex items-center justify-between hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors font-medium ${
-                    profile.stage === s ? 'text-[#0052FF] dark:text-blue-400 font-semibold bg-blue-50/50 dark:bg-blue-950/40' : 'text-slate-700 dark:text-slate-300'
+                  className={`w-full text-left px-3.5 py-2 flex items-center justify-between hover:bg-[#0b0e14] transition-colors font-medium cursor-pointer ${
+                    profile.stage === s ? 'text-[#9281f7] bg-[#0b0e14]' : 'text-[#f0f0f0]'
                   }`}
                 >
                   <span>{s}</span>
-                  {profile.stage === s && <CheckCircle2 size={14} className="text-[#0052FF] dark:text-blue-400" />}
+                  {profile.stage === s && <CheckCircle2 size={14} className="text-[#9281f7]" />}
                 </button>
               ))}
             </div>
@@ -171,14 +171,14 @@ export const Header: React.FC<HeaderProps> = ({
         </div>
 
         {/* Savings Badge */}
-        <div className="hidden xl:flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200/80 dark:border-emerald-800 text-emerald-700 dark:text-emerald-300 text-xs font-semibold font-mono">
-          <DollarSign size={13} className="text-emerald-600 dark:text-emerald-400" />
+        <div className="hidden xl:flex items-center gap-1.5 px-3 py-1.5 rounded-[6px] bg-[#000000] border border-[#292d30] text-[#3ad389] text-xs font-commit">
+          <DollarSign size={13} className="text-[#3ad389]" />
           <span>₹{profile.monthlySavings.toLocaleString()}/mo saved</span>
         </div>
 
         {/* Founder Score Pill */}
-        <div className="hidden lg:flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-blue-50 dark:bg-blue-950/40 border border-blue-200/80 dark:border-blue-800 text-blue-700 dark:text-blue-300 text-xs font-semibold font-mono">
-          <TrendingUp size={13} className="text-[#0052FF] dark:text-blue-400" />
+        <div className="hidden lg:flex items-center gap-1.5 px-3 py-1.5 rounded-[6px] bg-[#000000] border border-[#292d30] text-[#70b8ff] text-xs font-commit">
+          <TrendingUp size={13} className="text-[#70b8ff]" />
           <span>Score: {profile.founderScore}/100</span>
         </div>
 
@@ -186,26 +186,23 @@ export const Header: React.FC<HeaderProps> = ({
         {onOpenSaveResource && (
           <button
             onClick={onOpenSaveResource}
-            className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-900 dark:bg-slate-100 hover:bg-slate-800 dark:hover:bg-white text-white dark:text-slate-900 text-xs font-bold transition shadow-xs"
+            className="btn-resend-ghost hidden sm:flex items-center gap-1.5 text-xs font-medium cursor-pointer"
             title="Save any URL to Founder Vault"
           >
-            <Bookmark size={13} className="text-blue-400 dark:text-blue-600" />
+            <Bookmark size={13} className="text-[#9281f7]" />
             <span>+ Save Resource</span>
           </button>
         )}
 
-        {/* Dark / Light Theme Toggle Button */}
-        <ThemeToggle />
-
         {/* Notifications Drawer Toggle */}
         <button
           onClick={onOpenNotifications}
-          className="relative p-2.5 rounded-xl text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-200/60 dark:border-slate-700/60 transition"
+          className="relative p-2 rounded-[6px] text-[#a1a4a5] hover:text-[#ffffff] bg-[#000000] border border-[#292d30] hover:border-[#ffffff] transition cursor-pointer"
           title="Notifications"
         >
           <Bell size={16} />
           {unreadCount > 0 && (
-            <span className="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-[#0052FF] text-white text-[10px] font-mono font-bold flex items-center justify-center shadow-xs">
+            <span className="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-[#9281f7] text-[#000000] text-[10px] font-commit font-bold flex items-center justify-center">
               {unreadCount}
             </span>
           )}
@@ -215,43 +212,44 @@ export const Header: React.FC<HeaderProps> = ({
         <div className="relative">
           <button
             onClick={() => setUserMenuOpen(!userMenuOpen)}
-            className="flex items-center gap-2 p-1.5 sm:px-2.5 sm:py-1.5 rounded-xl bg-slate-50 dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 border border-slate-200/80 dark:border-slate-700 transition"
+            className="flex items-center gap-2 p-1.5 sm:px-2.5 sm:py-1.5 rounded-[6px] bg-[#000000] border border-[#292d30] hover:border-[#ffffff] transition cursor-pointer"
           >
-            <div className="w-7 h-7 rounded-lg bg-gradient-to-tr from-[#0052FF] to-[#38BDF8] text-white font-bold text-xs flex items-center justify-center shadow-xs">
+            <div className="w-7 h-7 rounded-[6px] bg-[#000000] border border-[#292d30] text-[#ffffff] font-commit font-semibold text-xs flex items-center justify-center">
               {userInitials || 'F'}
             </div>
             <div className="hidden sm:flex flex-col text-left">
-              <span className="text-xs font-bold text-slate-800 dark:text-slate-200 leading-tight truncate max-w-[100px]">
+              <span className="text-xs font-medium text-[#ffffff] leading-tight truncate max-w-[100px] font-sans">
                 {userDisplayName}
               </span>
-              <span className="text-[10px] text-slate-500 dark:text-slate-400 font-mono leading-none">
+              <span className="text-[10px] text-[#a1a4a5] font-commit leading-none">
                 {isDemo ? 'Demo Mode' : 'Verified'}
               </span>
             </div>
-            <ChevronDown size={13} className="text-slate-400 hidden sm:block" />
+            <ChevronDown size={13} className="text-[#a1a4a5] hidden sm:block" />
           </button>
 
           {userMenuOpen && (
             <div
-              className="absolute right-0 mt-2 w-64 bg-white dark:bg-slate-900 rounded-2xl shadow-2xl border border-slate-200/90 dark:border-slate-800 py-2 z-50 text-xs animate-in zoom-in-95 duration-150"
+              className="absolute right-0 mt-2 w-64 bg-[#000000] rounded-[16px] border border-[#292d30] py-2 z-50 text-xs font-sans shadow-2xl"
               onMouseLeave={() => setUserMenuOpen(false)}
             >
               {/* Account Info Header */}
-              <div className="px-4 py-3 border-b border-slate-100 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/50">
+              <div className="px-4 py-3 border-b border-[#292d30] bg-[#0b0e14]">
                 <div className="flex items-center justify-between mb-1">
-                  <span className="font-bold text-slate-900 dark:text-white text-sm truncate">{userDisplayName}</span>
+                  <span className="font-medium text-[#ffffff] text-sm truncate">{userDisplayName}</span>
                   {isDemo ? (
-                    <span className="px-1.5 py-0.5 rounded text-[9px] font-mono bg-amber-100 dark:bg-amber-950/60 text-amber-800 dark:text-amber-300 font-bold border border-amber-200 dark:border-amber-800">
+                    <span className="px-1.5 py-0.5 rounded-[6px] text-[9px] font-commit bg-[#000000] text-[#ffca16] border border-[#292d30]">
                       SANDBOX
                     </span>
                   ) : (
-                    <span className="px-1.5 py-0.5 rounded text-[9px] font-mono bg-emerald-100 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 font-bold border border-emerald-200 dark:border-emerald-800 flex items-center gap-0.5">
+                    <span className="px-1.5 py-0.5 rounded-[6px] text-[9px] font-commit bg-[#000000] text-[#3ad389] border border-[#292d30] flex items-center gap-0.5">
                       <ShieldCheck size={10} />
                       VERIFIED
                     </span>
                   )}
                 </div>
-                <div className="text-slate-500 dark:text-slate-400 text-[11px] truncate font-mono">{userEmail}</div>
+                <div className="text-[#a1a4a5] text-[11px] truncate font-commit">{userEmail}</div>
+              </div>
                 <div className="text-slate-400 dark:text-slate-500 text-[10px] mt-1 flex items-center gap-1 font-mono">
                   <Building2 size={11} className="text-slate-400" />
                   <span>{profile.name} • {profile.stage}</span>

@@ -197,24 +197,24 @@ export const AuthPage: React.FC<AuthPageProps> = ({
   };
 
   return (
-    <div className="min-h-screen bg-slate-900 text-slate-100 flex flex-col justify-between p-4 md:p-8 font-sans selection:bg-blue-600 selection:text-white">
+    <div className="min-h-screen bg-[#000000] text-[#f0f0f0] flex flex-col justify-between p-4 md:p-8 font-sans selection:bg-[#9281f7] selection:text-[#000000]">
       {/* Top Bar */}
       <div className="max-w-6xl mx-auto w-full flex items-center justify-between py-2">
         <button
           onClick={onBackToLanding}
-          className="flex items-center gap-2 text-xs font-semibold text-slate-400 hover:text-white transition"
+          className="flex items-center gap-2 text-xs font-medium text-[#a1a4a5] hover:text-[#ffffff] transition cursor-pointer"
         >
           <ArrowLeft size={16} />
           <span>Back to Home</span>
         </button>
 
         <div className="flex items-center gap-2">
-          <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-[#0052FF] to-[#38BDF8] flex items-center justify-center text-white font-bold text-sm shadow-md shadow-blue-500/20">
+          <div className="w-8 h-8 rounded-[6px] bg-[#000000] border border-[#292d30] flex items-center justify-center text-[#ffffff] font-commit font-bold text-sm">
             0
           </div>
-          <span className="font-bold text-white tracking-tight">FounderZero</span>
-          <span className="inline-flex items-center gap-1 ml-1 px-2 py-0.5 rounded-full text-[10px] font-mono bg-amber-500/20 text-amber-300 font-bold border border-amber-400/30">
-            <Flame size={11} className="text-amber-400 fill-amber-400" />
+          <span className="font-semibold text-[#ffffff] tracking-tight">FounderZero</span>
+          <span className="inline-flex items-center gap-1 ml-1 px-2 py-0.5 rounded-[6px] text-[10px] font-commit bg-[#000000] text-[#ffca16] border border-[#292d30]">
+            <Flame size={11} className="text-[#ffca16]" />
             FIREBASE AUTH
           </span>
         </div>
@@ -224,19 +224,19 @@ export const AuthPage: React.FC<AuthPageProps> = ({
       <div className="max-w-4xl mx-auto w-full my-8 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
         {/* Left Pitch Column */}
         <div className="lg:col-span-6 space-y-6 text-left">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/30 text-blue-300 text-xs font-medium">
-            <Sparkles size={14} className="text-blue-400" />
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#000000] border border-[#292d30] text-[#9281f7] text-xs font-commit">
+            <Sparkles size={14} className="text-[#9281f7]" />
             <span>Official Firebase Authentication</span>
           </div>
 
-          <h1 className="text-3xl md:text-4xl font-extrabold text-white tracking-tight leading-tight">
+          <h1 className="text-3xl md:text-5xl font-favorit text-[#ffffff] font-normal tracking-[-2.8px] leading-tight">
             Stop guessing what to build next.{' '}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-sky-300">
+            <span className="text-[#9281f7] italic font-commit">
               Survive to Product-Market Fit.
             </span>
           </h1>
 
-          <p className="text-slate-400 text-sm leading-relaxed">
+          <p className="text-[#a1a4a5] text-sm leading-relaxed font-sans">
             FounderZero gives early-stage software founders a ruthless, zero-budget execution system:
             single-priority next actions, reality checks, and a ₹0 tech stack.
           </p>

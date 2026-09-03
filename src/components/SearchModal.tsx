@@ -70,29 +70,29 @@ export const SearchModal: React.FC<SearchModalProps> = ({
   const matchedActions = q ? state.nextActions.filter(a => a.title.toLowerCase().includes(q) || a.relatedBottleneck.toLowerCase().includes(q)) : state.nextActions.slice(0, 2);
 
   return (
-    <div className="fixed inset-0 z-50 bg-slate-900/50 backdrop-blur-xs flex items-start justify-center pt-20 px-4">
-      <div className="bg-white w-full max-w-2xl rounded-2xl shadow-2xl border border-slate-200/80 overflow-hidden flex flex-col max-h-[80vh] animate-in fade-in zoom-in-95 duration-150 font-sans">
+    <div className="fixed inset-0 z-50 bg-[#000000]/85 backdrop-blur-md flex items-start justify-center pt-20 px-4">
+      <div className="bg-[#000000] w-full max-w-2xl rounded-[16px] border border-[#292d30] overflow-hidden flex flex-col max-h-[80vh] font-sans shadow-2xl">
         {/* Search Bar Input */}
-        <div className="p-4 border-b border-slate-100 flex items-center gap-3 bg-slate-50/70">
-          <Search size={18} className="text-[#0052FF]" />
+        <div className="p-4 border-b border-[#292d30] flex items-center gap-3 bg-[#000000]">
+          <Search size={18} className="text-[#9281f7]" />
           <input
             type="text"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Search missions, experiments, feedback, actions..."
-            className="w-full text-sm font-medium outline-hidden bg-transparent text-slate-900 placeholder:text-slate-400"
+            className="w-full text-sm font-commit outline-hidden bg-transparent text-[#ffffff] placeholder:text-[#a1a4a5]"
             autoFocus
           />
           <button
             onClick={onClose}
-            className="p-1.5 rounded-lg text-slate-400 hover:text-slate-600 hover:bg-slate-200/60 transition"
+            className="p-1.5 rounded-[6px] text-[#a1a4a5] hover:text-[#ffffff] hover:bg-[#0b0e14] transition cursor-pointer"
           >
             <X size={18} />
           </button>
         </div>
 
         {/* Results Body */}
-        <div className="overflow-y-auto p-4 space-y-5 text-xs">
+        <div className="overflow-y-auto p-4 space-y-5 text-xs text-[#f0f0f0]">
           {/* Ask Copilot Quick Option */}
           {q && (
             <div

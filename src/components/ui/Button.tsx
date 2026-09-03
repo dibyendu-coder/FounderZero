@@ -21,22 +21,22 @@ export const Button: React.FC<ButtonProps> = ({
   disabled,
   ...props
 }) => {
-  const baseStyles = 'inline-flex items-center justify-center font-medium transition-all duration-150 active:scale-[0.98] disabled:opacity-50 disabled:pointer-events-none disabled:active:scale-100 cursor-pointer rounded-xl select-none';
+  const baseStyles = 'inline-flex items-center justify-center font-medium transition-all duration-150 disabled:opacity-40 disabled:pointer-events-none cursor-pointer rounded-[6px] select-none font-sans';
 
   const sizeStyles = {
     sm: 'text-xs px-3 py-1.5 gap-1.5 min-h-[34px]',
-    md: 'text-sm px-4 py-2.5 gap-2 min-h-[42px]',
-    lg: 'text-base px-6 py-3.5 gap-2.5 min-h-[50px] font-semibold'
+    md: 'text-sm px-4 py-2.5 gap-2 min-h-[40px]',
+    lg: 'text-base px-6 py-3.5 gap-2.5 min-h-[48px] font-medium'
   };
 
   const variantStyles = {
-    primary: 'bg-[#0052FF] hover:bg-[#0045D8] text-white shadow-sm hover:shadow-md hover:shadow-blue-500/20 active:bg-blue-800',
-    gradient: 'bg-gradient-to-r from-[#0052FF] to-[#3B82F6] hover:from-[#0045D8] hover:to-[#2563EB] text-white shadow-md shadow-blue-500/20 hover:shadow-lg hover:shadow-blue-500/30',
-    secondary: 'bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200 active:bg-slate-300 dark:active:bg-slate-600',
-    outline: 'bg-white dark:bg-slate-800/80 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-200 border border-slate-200 dark:border-slate-700 hover:border-slate-300 dark:hover:border-slate-600 shadow-2xs',
-    ghost: 'bg-transparent hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 active:bg-slate-200 dark:active:bg-slate-700',
-    danger: 'bg-rose-50 dark:bg-rose-950/40 hover:bg-rose-100 dark:hover:bg-rose-900/50 text-rose-700 dark:text-rose-300 border border-rose-200 dark:border-rose-800 active:bg-rose-200',
-    dark: 'bg-slate-900 dark:bg-slate-800 hover:bg-slate-800 dark:hover:bg-slate-700 text-white shadow-sm hover:shadow active:bg-black'
+    primary: 'bg-transparent border border-[#292d30] text-[#ffffff] hover:border-[#ffffff] hover:bg-white/5 active:bg-white/10',
+    gradient: 'bg-[#ffffff] text-[#000000] hover:bg-[#f0f0f0] font-medium shadow-none',
+    secondary: 'bg-[#000000] border border-[#292d30] text-[#f0f0f0] hover:text-[#ffffff] hover:border-[#ffffff]',
+    outline: 'bg-transparent border border-[#292d30] text-[#f0f0f0] hover:text-[#ffffff] hover:border-[#ffffff]',
+    ghost: 'bg-transparent border border-[#292d30] text-[#ffffff] hover:border-[#ffffff] hover:bg-white/5',
+    danger: 'bg-[#000000] text-[#ff9592] border border-[#ff9592]/40 hover:border-[#ff9592]',
+    dark: 'bg-[#000000] border border-[#292d30] text-[#ffffff] hover:border-[#ffffff]'
   };
 
   return (

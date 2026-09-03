@@ -15,35 +15,35 @@ export const Badge: React.FC<BadgeProps> = ({
   ...props
 }) => {
   const variantStyles = {
-    blue: 'bg-blue-50 dark:bg-blue-950/50 text-blue-700 dark:text-blue-300 border-blue-200/80 dark:border-blue-800',
-    emerald: 'bg-emerald-50 dark:bg-emerald-950/50 text-emerald-700 dark:text-emerald-300 border-emerald-200/80 dark:border-emerald-800',
-    amber: 'bg-amber-50 dark:bg-amber-950/50 text-amber-800 dark:text-amber-300 border-amber-200/80 dark:border-amber-800',
-    rose: 'bg-rose-50 dark:bg-rose-950/50 text-rose-700 dark:text-rose-300 border-rose-200/80 dark:border-rose-800',
-    indigo: 'bg-indigo-50 dark:bg-indigo-950/50 text-indigo-700 dark:text-indigo-300 border-indigo-200/80 dark:border-indigo-800',
-    neutral: 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border-slate-200/80 dark:border-slate-700',
-    dark: 'bg-slate-900 dark:bg-slate-800 text-slate-100 dark:text-slate-200 border-slate-800 dark:border-slate-700',
-    outline: 'bg-transparent text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-700'
+    blue: 'bg-[#000000] text-[#70b8ff] border-[#292d30]',
+    emerald: 'bg-[#000000] text-[#3ad389] border-[#292d30]',
+    amber: 'bg-[#000000] text-[#ffca16] border-[#292d30]',
+    rose: 'bg-[#000000] text-[#ff9592] border-[#292d30]',
+    indigo: 'bg-[#000000] text-[#9281f7] border-[#292d30]',
+    neutral: 'bg-[#000000] text-[#a1a4a5] border-[#292d30]',
+    dark: 'bg-[#000000] text-[#ffffff] border-[#292d30]',
+    outline: 'bg-transparent text-[#f0f0f0] border-[#292d30]'
   };
 
   const dotColors = {
-    blue: 'bg-[#0052FF]',
-    emerald: 'bg-emerald-500',
-    amber: 'bg-amber-500',
-    rose: 'bg-rose-500',
-    indigo: 'bg-indigo-500',
-    neutral: 'bg-slate-400',
-    dark: 'bg-blue-400',
-    outline: 'bg-slate-400'
+    blue: 'bg-[#70b8ff]',
+    emerald: 'bg-[#3ad389]',
+    amber: 'bg-[#ffca16]',
+    rose: 'bg-[#ff9592]',
+    indigo: 'bg-[#9281f7]',
+    neutral: 'bg-[#a1a4a5]',
+    dark: 'bg-[#ffffff]',
+    outline: 'bg-[#a1a4a5]'
   };
 
   const sizeStyles = {
-    sm: 'text-[11px] px-2 py-0.5 font-medium rounded-md gap-1',
-    md: 'text-xs px-2.5 py-1 font-semibold rounded-lg gap-1.5'
+    sm: 'text-[11px] px-2 py-0.5 font-medium rounded-[6px] gap-1.5',
+    md: 'text-xs px-2.5 py-1 font-semibold rounded-[6px] gap-1.5'
   };
 
   return (
     <span
-      className={`inline-flex items-center border font-mono whitespace-nowrap select-none ${sizeStyles[size]} ${variantStyles[variant]} ${className}`}
+      className={`inline-flex items-center border font-commit whitespace-nowrap select-none ${sizeStyles[size]} ${variantStyles[variant]} ${className}`}
       {...props}
     >
       {dot && <span className={`w-1.5 h-1.5 rounded-full ${dotColors[variant]} shrink-0`} />}

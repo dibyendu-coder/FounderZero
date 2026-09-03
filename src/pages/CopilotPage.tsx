@@ -567,10 +567,10 @@ export const CopilotPage: React.FC<CopilotPageProps> = ({
       />
 
       {/* Main 3-Pane Body Workspace */}
-      <div className="flex-1 flex overflow-hidden bg-slate-100/70">
+      <div className="flex-1 flex overflow-hidden bg-[#000000]">
         {/* 1. Left History Sidebar (Collapsible) */}
         {leftSidebarOpen && (
-          <aside className="w-72 sm:w-80 h-full shrink-0 shadow-xs z-10 transition-all">
+          <aside className="w-72 sm:w-80 h-full shrink-0 border-r border-[#292d30] z-10 transition-all bg-[#000000]">
             <ConversationSidebar
               conversations={conversations}
               activeConvId={activeConvId}
@@ -584,27 +584,27 @@ export const CopilotPage: React.FC<CopilotPageProps> = ({
         )}
 
         {/* 2. Center Chat & Console Canvas */}
-        <main className="flex-1 flex flex-col h-full overflow-hidden bg-slate-100/50">
+        <main className="flex-1 flex flex-col h-full overflow-hidden bg-[#000000]">
           {/* Messages Stream */}
           <div className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-4">
             {activeMessages.length === 0 ? (
               /* Empty State / Welcome Console */
               <div className="max-w-3xl mx-auto space-y-6 py-6 font-sans">
                 <div className="text-center space-y-2">
-                  <div className="inline-flex p-3 rounded-2xl bg-blue-600/10 text-blue-600 border border-blue-200/60 shadow-2xs mb-1">
+                  <div className="inline-flex p-3 rounded-[12px] bg-[#000000] text-[#9281f7] border border-[#292d30] mb-1">
                     <Sparkles size={26} />
                   </div>
-                  <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 font-mono tracking-tight">
+                  <h1 className="text-2xl sm:text-4xl font-favorit text-[#ffffff] tracking-[-2.8px]">
                     Founder Copilot
                   </h1>
-                  <p className="text-xs sm:text-sm text-slate-600 max-w-md mx-auto leading-relaxed">
+                  <p className="text-xs sm:text-sm text-[#a1a4a5] max-w-md mx-auto leading-relaxed font-sans">
                     Your startup thinking partner. Evidence-driven reasoning over your metrics, customer interviews, and bottleneck.
                   </p>
                 </div>
 
                 {/* Quick Slash Commands Grid */}
                 <div className="space-y-2">
-                  <div className="text-[11px] font-mono font-bold text-slate-500 uppercase tracking-wider px-1">
+                  <div className="text-[11px] font-commit text-[#a1a4a5] uppercase tracking-wider px-1">
                     Direct Slash Commands
                   </div>
 

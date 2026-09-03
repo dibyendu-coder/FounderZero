@@ -92,25 +92,25 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
   return (
     <div className="p-4 md:p-8 space-y-6 max-w-7xl mx-auto font-sans">
       {/* Top Welcome Card */}
-      <div className="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-2xs flex flex-col md:flex-row md:items-center justify-between gap-6">
+      <div className="bg-[#000000] rounded-[16px] p-6 border border-[#292d30] flex flex-col md:flex-row md:items-center justify-between gap-6">
         <div className="space-y-2">
           <div className="flex flex-wrap items-center gap-2">
             <SectionBadge label={`Stage: ${profile.stage}`} variant="blue" />
-            <span className="text-xs font-mono text-slate-400">•</span>
-            <span className="text-xs font-mono text-slate-700 font-bold">{profile.name}</span>
+            <span className="text-xs font-commit text-[#6e727a]">•</span>
+            <span className="text-xs font-commit text-[#ffffff]">{profile.name}</span>
             {profile.founderArchetype && (
-              <span className="text-[10px] font-mono px-2 py-0.5 rounded-md bg-blue-50 text-blue-700 font-semibold border border-blue-200/60">
+              <span className="text-[10px] font-commit px-2 py-0.5 rounded-[6px] bg-[#000000] text-[#9281f7] border border-[#292d30]">
                 {profile.founderArchetype}
               </span>
             )}
             {profile.category && (
-              <span className="text-[10px] font-mono px-2 py-0.5 rounded-md bg-slate-100 text-slate-600 font-semibold">
+              <span className="text-[10px] font-commit px-2 py-0.5 rounded-[6px] bg-[#000000] text-[#a1a4a5] border border-[#292d30]">
                 {profile.category}
               </span>
             )}
             <button
               onClick={() => navigate('profile')}
-              className="text-[11px] font-medium text-indigo-600 hover:text-indigo-700 bg-indigo-50 hover:bg-indigo-100 px-2.5 py-0.5 rounded-full border border-indigo-200/60 transition inline-flex items-center gap-1 cursor-pointer"
+              className="text-[11px] font-commit text-[#9281f7] hover:text-[#ffffff] bg-[#000000] hover:bg-[#0b0e14] px-2.5 py-0.5 rounded-[6px] border border-[#292d30] transition inline-flex items-center gap-1 cursor-pointer"
               title="View your Curated Founder Profile"
             >
               <Target size={11} />
@@ -118,40 +118,40 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
             </button>
             <button
               onClick={() => navigate('onboarding')}
-              className="text-[11px] font-medium text-blue-600 hover:text-blue-700 bg-blue-50 hover:bg-blue-100 px-2.5 py-0.5 rounded-full border border-blue-200/60 transition inline-flex items-center gap-1 cursor-pointer"
+              className="text-[11px] font-commit text-[#70b8ff] hover:text-[#ffffff] bg-[#000000] hover:bg-[#0b0e14] px-2.5 py-0.5 rounded-[6px] border border-[#292d30] transition inline-flex items-center gap-1 cursor-pointer"
               title="Re-calibrate onboarding and generate new growth recommendations"
             >
               <Sparkles size={11} />
               <span>Re-calibrate OS</span>
             </button>
           </div>
-          <h1 className="text-2xl md:text-3xl font-extrabold text-slate-900 tracking-tight">
+          <h1 className="text-2xl md:text-4xl font-favorit text-[#ffffff] font-normal tracking-[-2.8px]">
             Good morning, {(profile?.founderName || 'Founder').split(' ')[0]}.
           </h1>
-          <p className="text-xs sm:text-sm text-slate-500 max-w-2xl">
-            90-Day Target: <strong className="text-slate-800 font-semibold">{profile.goal90Days}</strong>
+          <p className="text-xs sm:text-sm text-[#a1a4a5] max-w-2xl font-sans">
+            90-Day Target: <strong className="text-[#f0f0f0] font-normal">{profile.goal90Days}</strong>
           </p>
         </div>
 
         {/* Quick Top Stats */}
-        <div className="flex items-center gap-4 sm:gap-6 border-t md:border-t-0 md:border-l border-slate-100 pt-4 md:pt-0 md:pl-6">
+        <div className="flex items-center gap-4 sm:gap-6 border-t md:border-t-0 md:border-l border-[#292d30] pt-4 md:pt-0 md:pl-6 font-commit">
           <div className="text-center sm:text-left">
             <div className="flex items-baseline gap-1">
-              <span className="text-3xl font-extrabold text-slate-900 font-mono">{profile.founderScore}</span>
-              <span className="text-xs text-slate-400 font-mono">/100</span>
+              <span className="text-3xl font-normal text-[#ffffff] font-commit">{profile.founderScore}</span>
+              <span className="text-xs text-[#a1a4a5] font-commit">/100</span>
             </div>
-            <div className="text-[11px] font-mono font-semibold text-blue-600 uppercase tracking-wider">
+            <div className="text-[11px] font-commit text-[#9281f7] uppercase tracking-wider">
               Founder Score
             </div>
           </div>
 
-          <div className="h-9 w-px bg-slate-200" />
+          <div className="h-9 w-px bg-[#292d30]" />
 
           <div className="text-center sm:text-left">
-            <div className="text-3xl font-extrabold text-emerald-600 font-mono">
+            <div className="text-3xl font-normal text-[#3ad389] font-commit">
               ₹{profile.monthlySavings.toLocaleString()}
             </div>
-            <div className="text-[11px] font-mono font-semibold text-slate-500 uppercase tracking-wider">
+            <div className="text-[11px] font-commit text-[#a1a4a5] uppercase tracking-wider">
               Saved / Month
             </div>
           </div>
@@ -178,17 +178,14 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
       />
 
       {/* 1. PRIMARY NEXT BEST ACTION HERO CARD */}
-      <div className="bg-[#0F172A] text-white rounded-2xl p-6 md:p-8 border border-slate-800 shadow-xl relative overflow-hidden space-y-6">
-        {/* Glow accent */}
-        <div className="absolute top-0 right-0 w-80 h-80 bg-blue-500/10 blur-3xl rounded-full pointer-events-none" />
-
-        <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-800 pb-4 relative z-10">
+      <div className="bg-[#000000] text-[#f0f0f0] rounded-[16px] p-6 md:p-8 border border-[#292d30] relative overflow-hidden space-y-6">
+        <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[#292d30] pb-4 relative z-10 font-commit">
           <div className="flex items-center gap-2.5">
             <Badge variant="blue" size="md">
               PRIMARY ACTION
             </Badge>
-            <span className="text-xs font-mono text-slate-400">
-              Bottleneck: <strong className="text-slate-200">{nextBestAction.relatedBottleneck}</strong>
+            <span className="text-xs text-[#a1a4a5]">
+              Bottleneck: <strong className="text-[#ffffff] font-normal">{nextBestAction.relatedBottleneck}</strong>
             </span>
           </div>
           <div className="flex items-center gap-2">
@@ -202,36 +199,36 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
         </div>
 
         <div className="space-y-3 relative z-10">
-          <h2 className="text-2xl md:text-3xl font-bold text-white tracking-tight leading-snug">
+          <h2 className="text-2xl md:text-3xl font-favorit text-[#ffffff] tracking-[-2.8px] leading-snug">
             {nextBestAction.title}
           </h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs pt-1">
-            <div className="p-4 rounded-xl bg-slate-800/60 border border-slate-700/60 space-y-1">
-              <span className="font-mono font-bold text-blue-400 uppercase text-[10px] tracking-wider block">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs pt-1 font-sans">
+            <div className="p-4 rounded-[6px] bg-[#0b0e14] border border-[#292d30] space-y-1">
+              <span className="font-commit text-[#70b8ff] uppercase text-[10px] tracking-wider block">
                 Why this matters right now
               </span>
-              <p className="text-slate-300 leading-relaxed font-normal">
+              <p className="text-[#a1a4a5] leading-relaxed">
                 {nextBestAction.whyItMatters}
               </p>
             </div>
 
-            <div className="p-4 rounded-xl bg-slate-800/60 border border-slate-700/60 space-y-1">
-              <span className="font-mono font-bold text-emerald-400 uppercase text-[10px] tracking-wider block">
+            <div className="p-4 rounded-[6px] bg-[#0b0e14] border border-[#292d30] space-y-1">
+              <span className="font-commit text-[#3ad389] uppercase text-[10px] tracking-wider block">
                 Expected outcome & impact
               </span>
-              <p className="text-slate-300 leading-relaxed font-normal">
+              <p className="text-[#f0f0f0] leading-relaxed">
                 {nextBestAction.expectedImpact}
               </p>
             </div>
           </div>
         </div>
 
-        <div className="flex flex-wrap items-center justify-between gap-4 pt-2 border-t border-slate-800 relative z-10">
-          <div className="flex items-center gap-4 text-xs font-mono text-slate-400">
-            <span>Est. Time: <strong className="text-slate-200">{nextBestAction.estimatedTime}</strong></span>
+        <div className="flex flex-wrap items-center justify-between gap-4 pt-2 border-t border-[#292d30] relative z-10">
+          <div className="flex items-center gap-4 text-xs font-commit text-[#a1a4a5]">
+            <span>Est. Time: <strong className="text-[#ffffff] font-normal">{nextBestAction.estimatedTime}</strong></span>
             <span>•</span>
-            <span>Difficulty: <strong className="text-slate-200">{nextBestAction.difficulty}</strong></span>
+            <span>Difficulty: <strong className="text-[#ffffff] font-normal">{nextBestAction.difficulty}</strong></span>
           </div>
 
           <div className="flex items-center gap-3">
@@ -239,7 +236,6 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
               variant="outline"
               size="md"
               onClick={() => setWhyModalOpen(true)}
-              className="bg-slate-800 text-slate-200 border-slate-700 hover:bg-slate-700"
             >
               Why this action?
             </Button>

@@ -14,24 +14,24 @@ export const SectionBadge: React.FC<SectionBadgeProps> = ({
   className = ''
 }) => {
   const styles = {
-    blue: 'bg-blue-50/80 border-blue-200/80 text-blue-700 shadow-2xs',
-    emerald: 'bg-emerald-50/80 border-emerald-200/80 text-emerald-700 shadow-2xs',
-    amber: 'bg-amber-50/80 border-amber-200/80 text-amber-800 shadow-2xs',
-    rose: 'bg-rose-50/80 border-rose-200/80 text-rose-700 shadow-2xs',
-    dark: 'bg-slate-800/90 border-slate-700 text-slate-200 shadow-2xs'
+    blue: 'bg-[#000000] border-[#292d30] text-[#70b8ff]',
+    emerald: 'bg-[#000000] border-[#292d30] text-[#3ad389]',
+    amber: 'bg-[#000000] border-[#292d30] text-[#ffca16]',
+    rose: 'bg-[#000000] border-[#292d30] text-[#ff9592]',
+    dark: 'bg-[#000000] border-[#292d30] text-[#ffffff]'
   };
 
   const dotStyles = {
-    blue: 'bg-[#0052FF]',
-    emerald: 'bg-emerald-500',
-    amber: 'bg-amber-500',
-    rose: 'bg-rose-500',
-    dark: 'bg-blue-400'
+    blue: 'bg-[#70b8ff]',
+    emerald: 'bg-[#3ad389]',
+    amber: 'bg-[#ffca16]',
+    rose: 'bg-[#ff9592]',
+    dark: 'bg-[#9281f7]'
   };
 
   return (
     <div
-      className={`inline-flex items-center gap-2 px-3 py-1 rounded-full border text-[11px] font-mono font-bold uppercase tracking-wider backdrop-blur-xs ${styles[variant]} ${className}`}
+      className={`inline-flex items-center gap-2 px-3 py-1 rounded-full border text-[11px] font-commit font-medium tracking-wide ${styles[variant]} ${className}`}
     >
       <span className="relative flex h-2 w-2">
         <span className={`animate-ping absolute inline-flex h-full w-full rounded-full ${dotStyles[variant]} opacity-75`}></span>

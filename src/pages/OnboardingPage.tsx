@@ -289,21 +289,21 @@ export const OnboardingPage: React.FC<OnboardingPageProps> = ({
 
   if (isGenerating) {
     return (
-      <div className="min-h-screen bg-slate-900 text-white flex flex-col items-center justify-center p-6">
+      <div className="min-h-screen bg-[#000000] text-[#f0f0f0] flex flex-col items-center justify-center p-6 font-sans">
         <div className="max-w-md w-full text-center space-y-6">
-          <div className="w-16 h-16 rounded-2xl bg-gradient-to-tr from-blue-600 to-indigo-500 text-white font-extrabold flex items-center justify-center text-2xl mx-auto shadow-xl shadow-blue-500/30 animate-pulse">
+          <div className="w-14 h-14 rounded-[12px] bg-[#000000] border border-[#292d30] text-[#ffffff] font-commit font-bold flex items-center justify-center text-xl mx-auto shadow-2xl">
             0
           </div>
           <div>
-            <h2 className="text-2xl font-bold tracking-tight text-white">
+            <h2 className="text-2xl font-medium tracking-tight text-[#ffffff] font-sans">
               Calibrating Your Growth OS
             </h2>
-            <p className="text-xs text-slate-400 mt-1">
-              Building customized zero-budget execution plan for <span className="text-blue-400 font-semibold">{formData.name || 'your startup'}</span>
+            <p className="text-xs text-[#a1a4a5] font-commit mt-1">
+              Building customized zero-budget execution plan for <span className="text-[#9281f7] font-semibold">{formData.name || 'your startup'}</span>
             </p>
           </div>
 
-          <div className="bg-slate-800/80 border border-slate-700/80 rounded-2xl p-5 text-left space-y-3">
+          <div className="bg-[#000000] border border-[#292d30] rounded-[16px] p-5 text-left space-y-3 font-commit">
             {generationSteps.map((stepText, idx) => {
               const isDone = idx < generationStepIndex;
               const isCurrent = idx === generationStepIndex;
@@ -312,10 +312,10 @@ export const OnboardingPage: React.FC<OnboardingPageProps> = ({
                   key={idx}
                   className={`flex items-center gap-3 text-xs transition-all duration-300 ${
                     isDone
-                      ? 'text-emerald-400 font-medium'
+                      ? 'text-[#3ad389] font-medium'
                       : isCurrent
-                      ? 'text-blue-300 font-semibold scale-102'
-                      : 'text-slate-500 opacity-50'
+                      ? 'text-[#9281f7] font-medium'
+                      : 'text-[#6e727a] opacity-40'
                   }`}
                 >
                   {isDone ? (

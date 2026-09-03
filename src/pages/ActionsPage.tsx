@@ -24,28 +24,28 @@ export const ActionsPage: React.FC<ActionsPageProps> = ({
   return (
     <div className="p-4 md:p-8 space-y-6 max-w-7xl mx-auto font-sans">
       {/* Header */}
-      <div className="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-2xs space-y-2">
+      <div className="bg-[#000000] rounded-[16px] p-6 border border-[#292d30] space-y-2">
         <SectionBadge label="Prioritized Bottleneck Navigation" variant="blue" />
-        <h1 className="text-2xl md:text-3xl font-extrabold text-slate-900 tracking-tight">
+        <h1 className="text-2xl md:text-4xl font-favorit text-[#ffffff] tracking-[-2.8px]">
           Next Actions & Execution Matrix
         </h1>
-        <p className="text-xs sm:text-sm text-slate-500 max-w-3xl leading-relaxed">
+        <p className="text-xs sm:text-sm text-[#a1a4a5] max-w-3xl leading-relaxed font-sans">
           Actions are dynamically prioritized by leverage, startup stage, and real customer evidence. Focus on completing your highest-leverage tasks before moving down the priority stack.
         </p>
       </div>
 
       {/* Modern Tabs */}
-      <div className="flex items-center gap-2 border-b border-slate-200 pb-3 overflow-x-auto">
+      <div className="flex items-center gap-2 border-b border-[#292d30] pb-3 overflow-x-auto">
         {(['Do Now', 'Do Next', 'Later', "Don't Do Yet"] as ActionPriority[]).map(tab => (
           <button
             key={tab}
             onClick={() => setActiveTab(tab)}
-            className={`px-4 py-2 rounded-xl text-xs font-semibold font-mono transition-all shrink-0 cursor-pointer ${
+            className={`px-4 py-2 rounded-[6px] text-xs font-commit transition-all shrink-0 cursor-pointer border ${
               activeTab === tab
                 ? tab === "Don't Do Yet"
-                  ? 'bg-rose-50 text-rose-700 border border-rose-200 shadow-2xs'
-                  : 'bg-[#0052FF] text-white shadow-md shadow-blue-500/20'
-                : 'bg-slate-100 text-slate-600 hover:bg-slate-200/70 border border-transparent'
+                  ? 'bg-[#000000] text-[#ff9592] border-[#ff9592]'
+                  : 'bg-[#000000] text-[#ffffff] border-[#ffffff]'
+                : 'bg-[#000000] text-[#a1a4a5] border-[#292d30] hover:border-[#6e727a] hover:text-[#ffffff]'
             }`}
           >
             {tab === "Don't Do Yet" ? `🚫 ${tab}` : tab === 'Do Now' ? `🔥 ${tab}` : tab}
