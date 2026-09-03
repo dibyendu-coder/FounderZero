@@ -47,29 +47,29 @@ export const RealityCheckPage: React.FC<RealityCheckPageProps> = ({
   };
 
   return (
-    <div className="p-4 md:p-8 space-y-6 max-w-7xl mx-auto font-sans">
+    <div className="p-4 md:p-8 space-y-6 max-w-7xl mx-auto font-sans text-[#EDEDEF]">
       {/* Header Banner */}
-      <div className="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-2xs space-y-2">
+      <div className="bg-[#0a0a0c] rounded-2xl p-6 border border-white/10 shadow-[0_4px_30px_rgba(0,0,0,0.5)] space-y-2">
         <SectionBadge label="Decision Rigor & Counterargument Engine" variant="rose" />
-        <h1 className="text-2xl md:text-3xl font-extrabold text-slate-900 tracking-tight">
+        <h1 className="text-2xl md:text-3xl font-semibold bg-gradient-to-b from-white via-white/95 to-white/70 bg-clip-text text-transparent tracking-tight">
           Founder Decision Reality Check
         </h1>
-        <p className="text-xs sm:text-sm text-slate-500 max-w-3xl leading-relaxed">
+        <p className="text-xs sm:text-sm text-[#8A8F98] max-w-3xl leading-relaxed font-sans">
           Before burning cash, time, or developer bandwidth on major moves, stress-test your claim against evidence. FounderZero delivers direct counterarguments to prevent premature scaling and capital drain.
         </p>
       </div>
 
       {/* Decision Input Section */}
-      <Card variant="default" className="p-6 space-y-4">
-        <div className="flex items-center justify-between border-b border-slate-100 pb-3">
+      <Card variant="default" className="p-6 space-y-4 bg-[#0a0a0c] border border-white/10 rounded-2xl shadow-[0_4px_30px_rgba(0,0,0,0.5)]">
+        <div className="flex items-center justify-between border-b border-white/[0.06] pb-3">
           <div className="flex items-center gap-2">
-            <Sparkles size={16} className="text-[#0052FF]" />
-            <h3 className="font-bold text-slate-900 text-sm">Test a Decision or Expense</h3>
+            <Sparkles size={16} className="text-[#5E6AD2]" />
+            <h3 className="font-semibold text-[#EDEDEF] text-sm">Test a Decision or Expense</h3>
           </div>
-          <span className="text-[11px] font-mono text-slate-400">Context: {profile.stage} • ₹{profile.monthlyRevenue} MRR</span>
+          <span className="text-[11px] font-mono text-[#8A8F98]">Context: {profile.stage} • ₹{profile.monthlyRevenue} MRR</span>
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-3">
+        <form onSubmit={handleSubmit} className="space-y-3 font-sans">
           <div className="flex flex-col sm:flex-row gap-3">
             <input
               type="text"
@@ -77,7 +77,7 @@ export const RealityCheckPage: React.FC<RealityCheckPageProps> = ({
               value={inputClaim}
               onChange={e => setInputClaim(e.target.value)}
               placeholder="e.g. 'I want to spend ₹50,000 on Facebook ads' or 'I want to hire a growth marketer'"
-              className="flex-1 px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm outline-none focus:border-[#0052FF] focus:bg-white transition"
+              className="flex-1 px-4 py-3 bg-white/[0.04] border border-white/10 rounded-xl text-sm text-[#EDEDEF] placeholder:text-[#8A8F98] outline-none focus:border-[#5E6AD2] transition"
             />
             <Button
               type="submit"
@@ -92,13 +92,13 @@ export const RealityCheckPage: React.FC<RealityCheckPageProps> = ({
           </div>
 
           <div className="flex flex-wrap items-center gap-2 pt-1">
-            <span className="font-mono text-[11px] font-semibold text-slate-400 uppercase">Presets:</span>
+            <span className="font-mono text-[11px] font-semibold text-[#8A8F98] uppercase">Presets:</span>
             {presets.map(p => (
               <button
                 key={p}
                 type="button"
                 onClick={() => setInputClaim(p)}
-                className="px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-medium transition cursor-pointer"
+                className="px-2.5 py-1 rounded-lg bg-white/[0.04] hover:bg-white/[0.08] border border-white/10 text-[#EDEDEF] text-xs font-medium transition cursor-pointer"
               >
                 {p}
               </button>
@@ -109,19 +109,19 @@ export const RealityCheckPage: React.FC<RealityCheckPageProps> = ({
 
       {/* Active Analysis View */}
       {currentAnalysis && (
-        <div className="bg-[#0F172A] text-white rounded-2xl p-6 md:p-8 border border-slate-800 shadow-xl space-y-6 animate-in fade-in duration-200">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-800 pb-4">
+        <div className="bg-[#0a0a0c] text-[#EDEDEF] rounded-2xl p-6 md:p-8 border border-white/10 shadow-[0_0_24px_rgba(94,106,210,0.2)] space-y-6 animate-in fade-in duration-200 font-sans">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-white/[0.06] pb-4">
             <div>
-              <span className="text-[10px] font-mono font-bold text-blue-400 uppercase tracking-wider">
+              <span className="text-[10px] font-mono font-bold text-indigo-300 uppercase tracking-wider">
                 Claim Under Analysis
               </span>
-              <h2 className="text-xl md:text-2xl font-bold text-white mt-1">
+              <h2 className="text-xl md:text-2xl font-semibold bg-gradient-to-b from-white via-white/95 to-white/70 bg-clip-text text-transparent mt-1">
                 "{currentAnalysis.decisionClaim}"
               </h2>
             </div>
 
             <div className="text-left sm:text-right">
-              <span className="text-[10px] font-mono uppercase text-slate-400 block">Verdict</span>
+              <span className="text-[10px] font-mono uppercase text-[#8A8F98] block">Verdict</span>
               <Badge variant="rose" size="md" className="mt-1 font-bold">
                 {currentAnalysis.recommendedDecision}
               </Badge>
@@ -129,38 +129,38 @@ export const RealityCheckPage: React.FC<RealityCheckPageProps> = ({
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
-            <div className="bg-slate-800/60 p-4 rounded-xl border border-slate-700/60 space-y-1">
-              <span className="font-mono font-bold text-blue-400 uppercase text-[10px] tracking-wider block">
+            <div className="bg-white/[0.03] p-4 rounded-xl border border-white/[0.06] space-y-1">
+              <span className="font-mono font-bold text-[#5E6AD2] uppercase text-[10px] tracking-wider block">
                 What Is Known (Real Evidence)
               </span>
-              <p className="text-slate-300 leading-relaxed font-normal">{currentAnalysis.actualEvidence}</p>
+              <p className="text-[#EDEDEF] leading-relaxed font-normal">{currentAnalysis.actualEvidence}</p>
             </div>
 
-            <div className="bg-slate-800/60 p-4 rounded-xl border border-slate-700/60 space-y-1">
+            <div className="bg-white/[0.03] p-4 rounded-xl border border-white/[0.06] space-y-1">
               <span className="font-mono font-bold text-amber-400 uppercase text-[10px] tracking-wider block">
                 What Is Missing (Unproven Assumptions)
               </span>
-              <p className="text-slate-300 leading-relaxed font-normal">{currentAnalysis.missingEvidence}</p>
+              <p className="text-[#EDEDEF] leading-relaxed font-normal">{currentAnalysis.missingEvidence}</p>
             </div>
           </div>
 
-          <div className="bg-rose-950/40 p-4 rounded-xl border border-rose-800/50 space-y-1.5 text-xs text-rose-200">
+          <div className="bg-rose-500/10 p-4 rounded-xl border border-rose-500/30 space-y-1.5 text-xs text-rose-200">
             <div className="font-mono font-bold text-rose-400 uppercase text-[10px] tracking-wider flex items-center gap-1.5">
               <ShieldAlert size={14} />
               <span>Strongest Counterargument</span>
             </div>
-            <p className="leading-relaxed text-sm text-slate-200">{currentAnalysis.counterargument}</p>
+            <p className="leading-relaxed text-sm text-[#EDEDEF]">{currentAnalysis.counterargument}</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
-            <div className="bg-slate-800/60 p-4 rounded-xl border border-slate-700/60 space-y-1">
+            <div className="bg-white/[0.03] p-4 rounded-xl border border-white/[0.06] space-y-1">
               <span className="font-mono font-bold text-rose-400 uppercase text-[10px] tracking-wider block">
                 Risk Profile & Downside
               </span>
-              <p className="text-slate-300 leading-relaxed">{currentAnalysis.risk}</p>
+              <p className="text-[#EDEDEF] leading-relaxed">{currentAnalysis.risk}</p>
             </div>
 
-            <div className="bg-emerald-950/40 p-4 rounded-xl border border-emerald-800/50 space-y-1">
+            <div className="bg-emerald-500/10 p-4 rounded-xl border border-emerald-500/30 space-y-1">
               <span className="font-mono font-bold text-emerald-400 uppercase text-[10px] tracking-wider block">
                 Better Zero-Budget Alternative
               </span>
@@ -171,33 +171,33 @@ export const RealityCheckPage: React.FC<RealityCheckPageProps> = ({
       )}
 
       {/* Past Reality Checks Log */}
-      <Card variant="default" className="p-6 space-y-4">
-        <div className="flex items-center gap-2 border-b border-slate-100 pb-3">
-          <History size={16} className="text-[#0052FF]" />
-          <h3 className="font-bold text-slate-900 text-sm">Previous Reality Checks</h3>
+      <Card variant="default" className="p-6 space-y-4 bg-[#0a0a0c] border border-white/10 rounded-2xl shadow-[0_4px_30px_rgba(0,0,0,0.5)]">
+        <div className="flex items-center gap-2 border-b border-white/[0.06] pb-3">
+          <History size={16} className="text-[#5E6AD2]" />
+          <h3 className="font-semibold text-[#EDEDEF] text-sm">Previous Reality Checks</h3>
         </div>
 
-        <div className="space-y-3">
+        <div className="space-y-3 font-sans">
           {realityChecks.map(rc => (
             <div
               key={rc.id}
               onClick={() => setCurrentAnalysis(rc)}
               className={`p-4 rounded-xl border transition cursor-pointer flex flex-col sm:flex-row sm:items-center justify-between gap-3 ${
                 currentAnalysis?.id === rc.id
-                  ? 'border-blue-300 bg-blue-50/40 shadow-xs'
-                  : 'border-slate-100 bg-slate-50/50 hover:bg-slate-100'
+                  ? 'border-[#5E6AD2] bg-[#5E6AD2]/15 shadow-xs'
+                  : 'border-white/[0.06] bg-white/[0.03] hover:bg-white/[0.06]'
               }`}
             >
               <div className="space-y-1">
-                <div className="text-sm font-semibold text-slate-900">"{rc.decisionClaim}"</div>
-                <div className="text-xs text-slate-500">Alternative: {rc.betterAlternative}</div>
+                <div className="text-sm font-semibold text-[#EDEDEF]">"{rc.decisionClaim}"</div>
+                <div className="text-xs text-[#8A8F98]">Alternative: {rc.betterAlternative}</div>
               </div>
 
               <div className="flex items-center gap-2.5 shrink-0">
                 <Badge variant="rose" size="sm">
                   {rc.recommendedDecision}
                 </Badge>
-                <span className="text-[10px] font-mono text-slate-400">{rc.createdAt}</span>
+                <span className="text-[10px] font-mono text-[#8A8F98]">{rc.createdAt}</span>
               </div>
             </div>
           ))}

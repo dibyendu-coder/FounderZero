@@ -442,13 +442,13 @@ export const NotepadEditor: React.FC<NotepadEditorProps> = ({
   const readingTime = Math.max(1, Math.ceil(wordCount / 200));
 
   return (
-    <div className="flex-1 flex flex-col bg-white min-h-[calc(100vh-80px)] overflow-hidden">
+    <div className="flex-1 flex flex-col bg-[#050506] text-[#EDEDEF] min-h-[calc(100vh-80px)] overflow-hidden">
       {/* Editor Header Navigation Bar */}
-      <div className="px-4 sm:px-8 py-3 border-b border-slate-100 flex items-center justify-between gap-3 sticky top-0 bg-white/95 backdrop-blur-xs z-20">
+      <div className="px-4 sm:px-8 py-3 border-b border-white/[0.06] flex items-center justify-between gap-3 sticky top-0 bg-[#050506]/90 backdrop-blur-xl z-20">
         <div className="flex items-center gap-2 sm:gap-3 min-w-0">
           <button
             onClick={onBack}
-            className="p-1.5 rounded-lg text-slate-500 hover:text-slate-900 hover:bg-slate-100 transition cursor-pointer"
+            className="p-1.5 rounded-lg text-[#8A8F98] hover:text-[#EDEDEF] hover:bg-white/[0.06] transition cursor-pointer"
             title="Back to notes list"
           >
             <ArrowLeft size={16} />
@@ -459,7 +459,7 @@ export const NotepadEditor: React.FC<NotepadEditorProps> = ({
             <select
               value={currentNote.collection}
               onChange={e => handleCollectionChange(e.target.value)}
-              className="text-xs font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200/80 px-2.5 py-1 rounded-lg border-0 focus:ring-1 focus:ring-blue-500 cursor-pointer appearance-none pr-6 font-mono"
+              className="text-xs font-semibold text-[#EDEDEF] bg-[#0a0a0c] hover:bg-white/[0.06] px-2.5 py-1 rounded-lg border border-white/10 focus:ring-1 focus:ring-[#5E6AD2] cursor-pointer appearance-none pr-6 font-mono"
             >
               {collections.map(col => (
                 <option key={col} value={col}>
@@ -467,16 +467,16 @@ export const NotepadEditor: React.FC<NotepadEditorProps> = ({
                 </option>
               ))}
             </select>
-            <ChevronDown size={12} className="absolute right-2 pointer-events-none text-slate-500" />
+            <ChevronDown size={12} className="absolute right-2 pointer-events-none text-[#8A8F98]" />
           </div>
 
-          {/* Save Status Indicator (Requirement 4) */}
-          <div className="flex items-center gap-1 text-[11px] font-mono text-slate-400">
+          {/* Save Status Indicator */}
+          <div className="flex items-center gap-1 text-[11px] font-mono text-[#8A8F98]">
             {saveStatus === 'saving' ? (
-              <span className="text-amber-600 font-medium animate-pulse">Saving...</span>
+              <span className="text-amber-400 font-medium animate-pulse">Saving...</span>
             ) : (
-              <span className="flex items-center gap-1 text-slate-400">
-                <Check size={11} className="text-emerald-500" />
+              <span className="flex items-center gap-1 text-[#8A8F98]">
+                <Check size={11} className="text-emerald-400" />
                 <span>Saved</span>
               </span>
             )}
@@ -491,29 +491,26 @@ export const NotepadEditor: React.FC<NotepadEditorProps> = ({
               setAiActionType('summarize');
               setAiActionModalOpen(true);
             }}
-            className="px-3 py-1.5 bg-blue-50 hover:bg-blue-100 text-blue-700 border border-blue-200/80 rounded-xl text-xs font-semibold transition flex items-center gap-1.5 cursor-pointer shadow-2xs"
+            className="px-3 py-1.5 bg-[#5E6AD2]/20 hover:bg-[#5E6AD2]/30 text-indigo-300 border border-[#5E6AD2]/40 rounded-xl text-xs font-semibold transition flex items-center gap-1.5 cursor-pointer shadow-xs"
           >
-            <Sparkles size={13} className="text-blue-600" />
+            <Sparkles size={13} className="text-[#5E6AD2]" />
             <span className="hidden sm:inline">Ask AI</span>
           </button>
 
-          {/* Workspace Connections Button (Requirement 9) */}
+          {/* Workspace Connections Button */}
           <button
             onClick={() => setConnectionsModalOpen(true)}
-            className={`px-3 py-1.5 rounded-xl text-xs font-semibold transition flex items-center gap-1.5 cursor-pointer border ${
+            className={`px-3 py-1.5 text-xs font-semibold rounded-xl border transition flex items-center gap-1.5 cursor-pointer ${
               (currentNote.connections || []).length > 0
-                ? 'bg-slate-900 text-white border-slate-900'
-                : 'bg-white text-slate-700 hover:bg-slate-100 border-slate-200'
+                ? 'bg-[#5E6AD2] text-white border-[#5E6AD2] shadow-[0_0_12px_rgba(94,106,210,0.3)]'
+                : 'bg-white/[0.03] text-[#EDEDEF] hover:bg-white/[0.06] border-white/[0.06]'
             }`}
-            title="Link note to Missions, Experiments, Metrics, etc."
           >
             <Link2 size={13} />
-            <span className="hidden sm:inline">Connect</span>
-            {(currentNote.connections || []).length > 0 && (
-              <span className="text-[10px] font-mono px-1.5 py-0.2 rounded-full bg-blue-500 text-white font-bold">
-                {currentNote.connections?.length}
-              </span>
-            )}
+            <span className="hidden sm:inline">Linked</span>
+            <span className="text-[10px] font-mono font-bold">
+              ({(currentNote.connections || []).length})
+            </span>
           </button>
 
           {/* Knowledge Base Sync Toggle (Requirement 13) */}

@@ -321,23 +321,23 @@ export const VaultPage: React.FC<VaultPageProps> = ({
   };
 
   return (
-    <div className="space-y-6 max-w-7xl mx-auto pb-16">
+    <div className="space-y-6 max-w-7xl mx-auto pb-16 text-[#EDEDEF] font-sans">
       {/* Top Banner / Hero Header */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-white rounded-2xl p-6 border border-slate-200/80 shadow-xs">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-[#0a0a0c] rounded-2xl p-6 border border-white/10 shadow-[0_4px_30px_rgba(0,0,0,0.5)]">
         <div className="space-y-1">
           <div className="flex items-center gap-2.5">
-            <div className="w-10 h-10 rounded-xl bg-blue-600/10 text-blue-600 flex items-center justify-center font-bold">
+            <div className="w-10 h-10 rounded-xl bg-[#5E6AD2]/20 text-indigo-300 flex items-center justify-center font-bold">
               <Bookmark size={22} />
             </div>
             <div>
-              <h1 className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight flex items-center gap-2">
+              <h1 className="text-xl sm:text-2xl font-semibold bg-gradient-to-b from-white via-white/95 to-white/70 bg-clip-text text-transparent tracking-tight flex items-center gap-2">
                 Founder Vault
-                <span className="text-xs px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 font-mono font-semibold border border-blue-200">
+                <span className="text-xs px-2.5 py-0.5 rounded-full bg-[#5E6AD2]/20 text-indigo-300 font-mono font-semibold border border-[#5E6AD2]/30">
                   {stats.total} Saved
                 </span>
               </h1>
-              <p className="text-xs sm:text-sm text-slate-500">
-                Your private knowledge and resource library. <span className="text-slate-700 font-medium italic">"I found it. Save it now. Find it when I need it."</span>
+              <p className="text-xs sm:text-sm text-[#8A8F98]">
+                Your private knowledge and resource library. <span className="text-[#EDEDEF] font-medium italic">"I found it. Save it now. Find it when I need it."</span>
               </p>
             </div>
           </div>
@@ -348,17 +348,17 @@ export const VaultPage: React.FC<VaultPageProps> = ({
             <button
               onClick={handleBatchOrganize}
               disabled={isOrganizingAi}
-              className="px-3.5 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold flex items-center gap-1.5 transition"
+              className="px-3.5 py-2 rounded-xl bg-white/[0.04] hover:bg-white/[0.08] text-[#EDEDEF] text-xs font-semibold flex items-center gap-1.5 transition border border-white/10 cursor-pointer"
               title="Auto-organize unsorted resources into categories and collections"
             >
               {isOrganizingAi ? (
                 <>
-                  <Loader2 size={14} className="animate-spin text-blue-600" />
+                  <Loader2 size={14} className="animate-spin text-[#5E6AD2]" />
                   <span>Organizing...</span>
                 </>
               ) : (
                 <>
-                  <Sparkles size={14} className="text-blue-600" />
+                  <Sparkles size={14} className="text-[#5E6AD2]" />
                   <span>AI Organize ({stats.unsorted})</span>
                 </>
               )}
@@ -370,7 +370,7 @@ export const VaultPage: React.FC<VaultPageProps> = ({
               setEditingResource(null);
               setIsSaveModalOpen(true);
             }}
-            className="px-4 py-2 rounded-xl bg-[#0052FF] hover:bg-blue-700 text-white text-xs font-bold flex items-center gap-1.5 shadow-sm shadow-blue-500/20 transition"
+            className="px-4 py-2 rounded-xl bg-[#5E6AD2] hover:bg-[#6872D9] text-white text-xs font-semibold flex items-center gap-1.5 shadow-[0_0_16px_rgba(94,106,210,0.3)] transition cursor-pointer"
           >
             <Plus size={15} />
             <span>+ Save Resource</span>

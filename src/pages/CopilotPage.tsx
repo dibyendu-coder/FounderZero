@@ -551,7 +551,7 @@ export const CopilotPage: React.FC<CopilotPageProps> = ({
   };
 
   return (
-    <div id="founder-copilot-container" className="h-[calc(100vh-4rem)] flex flex-col overflow-hidden bg-slate-900 text-slate-100 font-sans">
+    <div id="founder-copilot-container" className="h-[calc(100vh-4rem)] flex flex-col overflow-hidden bg-[#050506] text-[#EDEDEF] font-sans">
       {/* Claude Code Inspired Top Header */}
       <CopilotHeader
         profile={profile}
@@ -567,10 +567,10 @@ export const CopilotPage: React.FC<CopilotPageProps> = ({
       />
 
       {/* Main 3-Pane Body Workspace */}
-      <div className="flex-1 flex overflow-hidden bg-[#000000]">
+      <div className="flex-1 flex overflow-hidden bg-[#050506]">
         {/* 1. Left History Sidebar (Collapsible) */}
         {leftSidebarOpen && (
-          <aside className="w-72 sm:w-80 h-full shrink-0 border-r border-[#292d30] z-10 transition-all bg-[#000000]">
+          <aside className="w-72 sm:w-80 h-full shrink-0 border-r border-white/[0.06] z-10 transition-all bg-[#050506]">
             <ConversationSidebar
               conversations={conversations}
               activeConvId={activeConvId}
@@ -584,27 +584,27 @@ export const CopilotPage: React.FC<CopilotPageProps> = ({
         )}
 
         {/* 2. Center Chat & Console Canvas */}
-        <main className="flex-1 flex flex-col h-full overflow-hidden bg-[#000000]">
+        <main className="flex-1 flex flex-col h-full overflow-hidden bg-[#050506]">
           {/* Messages Stream */}
           <div className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-4">
             {activeMessages.length === 0 ? (
               /* Empty State / Welcome Console */
               <div className="max-w-3xl mx-auto space-y-6 py-6 font-sans">
                 <div className="text-center space-y-2">
-                  <div className="inline-flex p-3 rounded-[12px] bg-[#000000] text-[#9281f7] border border-[#292d30] mb-1">
+                  <div className="inline-flex p-3 rounded-2xl bg-[#5E6AD2]/15 text-indigo-300 border border-[#5E6AD2]/30 mb-1 shadow-[0_0_20px_rgba(94,106,210,0.2)]">
                     <Sparkles size={26} />
                   </div>
-                  <h1 className="text-2xl sm:text-4xl font-favorit text-[#ffffff] tracking-[-2.8px]">
+                  <h1 className="text-2xl sm:text-4xl font-semibold bg-gradient-to-b from-white via-white/95 to-white/70 bg-clip-text text-transparent tracking-tight">
                     Founder Copilot
                   </h1>
-                  <p className="text-xs sm:text-sm text-[#a1a4a5] max-w-md mx-auto leading-relaxed font-sans">
+                  <p className="text-xs sm:text-sm text-[#8A8F98] max-w-md mx-auto leading-relaxed font-sans">
                     Your startup thinking partner. Evidence-driven reasoning over your metrics, customer interviews, and bottleneck.
                   </p>
                 </div>
 
                 {/* Quick Slash Commands Grid */}
                 <div className="space-y-2">
-                  <div className="text-[11px] font-commit text-[#a1a4a5] uppercase tracking-wider px-1">
+                  <div className="text-[11px] font-mono text-[#8A8F98] uppercase tracking-widest px-1">
                     Direct Slash Commands
                   </div>
 
@@ -619,23 +619,23 @@ export const CopilotPage: React.FC<CopilotPageProps> = ({
                             setActiveMode(cmd.mode);
                             handleSendMessage(cmd.template, cmd.mode);
                           }}
-                          className="p-3.5 bg-white hover:bg-blue-50/60 rounded-xl border border-slate-200/90 hover:border-blue-300 text-left transition-all group shadow-2xs cursor-pointer flex flex-col justify-between"
+                          className="p-3.5 bg-white/[0.03] hover:bg-white/[0.06] rounded-xl border border-white/[0.06] hover:border-[#5E6AD2]/40 text-left transition-all group shadow-xs cursor-pointer flex flex-col justify-between"
                         >
                           <div className="flex items-start gap-2.5">
-                            <div className="p-2 rounded-lg bg-slate-100 text-slate-700 group-hover:bg-blue-600 group-hover:text-white transition shrink-0">
+                            <div className="p-2 rounded-lg bg-white/[0.06] text-[#EDEDEF] group-hover:bg-[#5E6AD2] group-hover:text-white transition shrink-0">
                               <Icon size={15} />
                             </div>
                             <div className="min-w-0">
-                              <div className="font-mono text-xs font-bold text-slate-900 group-hover:text-blue-700 transition">
-                                <span className="text-blue-600">/</span>{cmd.name}
+                              <div className="font-mono text-xs font-semibold text-[#EDEDEF] group-hover:text-indigo-300 transition">
+                                <span className="text-[#5E6AD2]">/</span>{cmd.name}
                               </div>
-                              <div className="text-[11px] text-slate-500 mt-0.5 leading-snug">
+                              <div className="text-[11px] text-[#8A8F98] mt-0.5 leading-snug font-sans">
                                 {cmd.description}
                               </div>
                             </div>
                           </div>
 
-                          <div className="flex items-center justify-end text-[10px] text-blue-600 font-semibold mt-2 pt-2 border-t border-slate-100 opacity-0 group-hover:opacity-100 transition-opacity">
+                          <div className="flex items-center justify-end text-[10px] font-mono text-[#5E6AD2] font-semibold mt-2 pt-2 border-t border-white/[0.06] opacity-0 group-hover:opacity-100 transition-opacity">
                             <span>Execute Command →</span>
                           </div>
                         </button>
@@ -675,7 +675,7 @@ export const CopilotPage: React.FC<CopilotPageProps> = ({
           </div>
 
           {/* Bottom Prompt Composer (claude-prompt) */}
-          <div className="p-4 bg-white/90 backdrop-blur-xs border-t border-slate-200/80 shrink-0">
+          <div className="p-4 bg-[#050506]/90 backdrop-blur-xl border-t border-white/[0.06] shrink-0">
             <CopilotPromptComposer
               inputText={inputText}
               onInputChange={setInputText}

@@ -15,15 +15,15 @@ export const RoadmapPage: React.FC<RoadmapPageProps> = ({ state, onToggleMilesto
   const { roadmapStages, profile } = state;
 
   return (
-    <div className="p-4 md:p-8 space-y-6 max-w-7xl mx-auto font-sans">
+    <div className="p-4 md:p-8 space-y-6 max-w-7xl mx-auto font-sans text-[#EDEDEF]">
       {/* Header */}
-      <div className="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-2xs space-y-2">
+      <div className="bg-[#0a0a0c] rounded-2xl p-6 border border-white/10 shadow-[0_4px_30px_rgba(0,0,0,0.5)] space-y-2">
         <SectionBadge label="Dynamic Startup Lifecycle Framework" variant="blue" />
-        <h1 className="text-2xl md:text-3xl font-extrabold text-slate-900 tracking-tight">
+        <h1 className="text-2xl md:text-3xl font-semibold bg-gradient-to-b from-white via-white/95 to-white/70 bg-clip-text text-transparent tracking-tight">
           Startup Execution Continuum
         </h1>
-        <p className="text-xs sm:text-sm text-slate-500 max-w-3xl leading-relaxed">
-          Current Stage: <strong className="text-[#0052FF]">{profile.stage}</strong>. Check off key milestones as you gather customer evidence to graduate into subsequent growth phases.
+        <p className="text-xs sm:text-sm text-[#8A8F98] max-w-3xl leading-relaxed font-sans">
+          Current Stage: <strong className="text-[#5E6AD2]">{profile.stage}</strong>. Check off key milestones as you gather customer evidence to graduate into subsequent growth phases.
         </p>
       </div>
 
@@ -37,15 +37,15 @@ export const RoadmapPage: React.FC<RoadmapPageProps> = ({ state, onToggleMilesto
               key={stage.id}
               className={`p-3 rounded-xl border text-center transition-all ${
                 isActive
-                  ? 'bg-[#0052FF] text-white border-[#0052FF] shadow-md shadow-blue-500/20 font-bold'
+                  ? 'bg-[#5E6AD2] text-white border-[#5E6AD2] shadow-[0_0_16px_rgba(94,106,210,0.4)] font-bold'
                   : isDone
-                  ? 'bg-slate-100 text-slate-800 border-slate-200'
-                  : 'bg-white text-slate-400 border-slate-200/80'
+                  ? 'bg-emerald-500/15 text-emerald-300 border-emerald-500/30 font-medium'
+                  : 'bg-white/[0.03] text-[#8A8F98] border-white/[0.06]'
               }`}
             >
-              <div className="text-[10px] uppercase font-bold opacity-75">Stage 0{idx + 1}</div>
-              <div className="font-sans font-bold text-xs mt-1 truncate">{stage.name}</div>
-              <div className="text-[9px] uppercase font-semibold mt-1">
+              <div className="text-[10px] uppercase font-mono font-bold opacity-75">Stage 0{idx + 1}</div>
+              <div className="font-sans font-semibold text-xs mt-1 truncate">{stage.name}</div>
+              <div className="text-[9px] uppercase font-mono font-semibold mt-1">
                 {isDone ? '✓ Done' : isActive ? '● Active' : 'Upcoming'}
               </div>
             </div>
@@ -64,14 +64,14 @@ export const RoadmapPage: React.FC<RoadmapPageProps> = ({ state, onToggleMilesto
             <Card
               key={stage.id}
               variant="default"
-              className={`p-6 space-y-4 ${
-                stage.status === 'active' ? 'border-blue-200 shadow-md shadow-blue-500/5' : ''
+              className={`p-6 space-y-4 bg-[#0a0a0c] border border-white/10 rounded-2xl shadow-[0_4px_30px_rgba(0,0,0,0.5)] ${
+                stage.status === 'active' ? 'border-[#5E6AD2]/50 shadow-[0_0_24px_rgba(94,106,210,0.15)]' : ''
               }`}
             >
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 pb-3">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-white/[0.06] pb-3">
                 <div className="space-y-1">
                   <div className="flex items-center gap-2">
-                    <h3 className="font-bold text-lg text-slate-900">{stage.name}</h3>
+                    <h3 className="font-semibold text-lg text-[#EDEDEF]">{stage.name}</h3>
                     <Badge
                       variant={stage.status === 'completed' ? 'emerald' : stage.status === 'active' ? 'blue' : 'neutral'}
                       size="sm"
@@ -79,15 +79,15 @@ export const RoadmapPage: React.FC<RoadmapPageProps> = ({ state, onToggleMilesto
                       {stage.status}
                     </Badge>
                   </div>
-                  <p className="text-xs text-slate-500">{stage.description}</p>
+                  <p className="text-xs text-[#8A8F98] font-sans">{stage.description}</p>
                 </div>
 
                 <div className="flex items-center gap-3">
                   <div className="text-right">
-                    <span className="text-xs font-mono font-bold text-slate-700">{percent}% Complete</span>
-                    <div className="w-32 bg-slate-100 h-2 rounded-full overflow-hidden mt-1">
+                    <span className="text-xs font-mono font-bold text-[#EDEDEF]">{percent}% Complete</span>
+                    <div className="w-32 bg-white/10 h-2 rounded-full overflow-hidden mt-1">
                       <div
-                        className="bg-[#0052FF] h-full rounded-full transition-all duration-300"
+                        className="bg-gradient-to-r from-[#5E6AD2] to-indigo-400 h-full rounded-full transition-all duration-300"
                         style={{ width: `${percent}%` }}
                       />
                     </div>
@@ -96,34 +96,34 @@ export const RoadmapPage: React.FC<RoadmapPageProps> = ({ state, onToggleMilesto
               </div>
 
               {/* Milestones Checklist */}
-              <div className="space-y-2">
+              <div className="space-y-2 font-sans">
                 {stage.milestones.map(m => (
                   <div
                     key={m.id}
                     onClick={() => onToggleMilestone(stage.id, m.id)}
                     className={`p-3.5 rounded-xl border flex items-center justify-between cursor-pointer transition-all ${
                       m.completed
-                        ? 'bg-slate-50 border-slate-200/80 text-slate-500'
-                        : 'bg-white border-slate-100 hover:border-blue-200 text-slate-900 shadow-2xs'
+                        ? 'bg-white/[0.02] border-white/[0.06] text-[#8A8F98]'
+                        : 'bg-white/[0.04] border-white/10 hover:border-[#5E6AD2]/50 text-[#EDEDEF] shadow-xs'
                     }`}
                   >
                     <div className="flex items-center gap-3">
                       {m.completed ? (
-                        <CheckCircle2 size={18} className="text-emerald-500 shrink-0" />
+                        <CheckCircle2 size={18} className="text-emerald-400 shrink-0" />
                       ) : (
-                        <Circle size={18} className="text-slate-300 hover:text-blue-500 shrink-0" />
+                        <Circle size={18} className="text-[#8A8F98] hover:text-[#5E6AD2] shrink-0" />
                       )}
                       <div>
-                        <div className={`text-xs font-semibold ${m.completed ? 'line-through text-slate-400' : 'text-slate-900'}`}>
+                        <div className={`text-xs font-semibold ${m.completed ? 'line-through text-[#8A8F98]' : 'text-[#EDEDEF]'}`}>
                           {m.title}
                         </div>
-                        <div className="text-[11px] font-mono text-slate-400 mt-0.5">
-                          Criteria: <strong className="text-slate-600">{m.successCriteria}</strong>
+                        <div className="text-[11px] font-mono text-[#8A8F98] mt-0.5">
+                          Criteria: <strong className="text-[#EDEDEF]">{m.successCriteria}</strong>
                         </div>
                       </div>
                     </div>
 
-                    <span className="text-[10px] font-mono font-semibold text-slate-400 uppercase">
+                    <span className="text-[10px] font-mono font-semibold text-[#8A8F98] uppercase">
                       {m.completed ? 'Done' : 'Click to toggle'}
                     </span>
                   </div>

@@ -362,20 +362,20 @@ export const NotepadPage: React.FC<NotepadPageProps> = ({
   }
 
   return (
-    <div className="flex-1 flex flex-col min-h-screen bg-slate-50">
-      {/* Top Banner Navigation Bar (Requirement 1: Notepad Home) */}
-      <div className="bg-white border-b border-slate-200/80 px-4 sm:px-8 py-4 sticky top-0 z-10">
+    <div className="flex-1 flex flex-col min-h-screen bg-[#050506] text-[#EDEDEF]">
+      {/* Top Banner Navigation Bar */}
+      <div className="bg-[#050506]/90 backdrop-blur-xl border-b border-white/[0.06] px-4 sm:px-8 py-4 sticky top-0 z-10">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div>
             <div className="flex items-center gap-2.5">
-              <h1 className="text-xl font-extrabold text-slate-900 tracking-tight">
+              <h1 className="text-xl font-semibold bg-gradient-to-b from-white via-white/95 to-white/70 bg-clip-text text-transparent tracking-tight">
                 My Notepad
               </h1>
-              <span className="text-xs font-mono px-2 py-0.5 rounded-full bg-blue-50 text-blue-700 font-bold border border-blue-200/60">
+              <span className="text-xs font-mono px-2 py-0.5 rounded-full bg-[#5E6AD2]/20 text-indigo-300 font-bold border border-[#5E6AD2]/30">
                 {nonTrashNotes.length} notes
               </span>
             </div>
-            <p className="text-xs text-slate-500 font-medium mt-0.5">
+            <p className="text-xs text-[#8A8F98] font-sans mt-0.5">
               Your startup&apos;s thinking space. Structured ideation, customer notes, and strategic roadmapping.
             </p>
           </div>
@@ -385,18 +385,18 @@ export const NotepadPage: React.FC<NotepadPageProps> = ({
             {/* AI Search / Query Shortcut */}
             <button
               onClick={() => setAiSearchModalOpen(true)}
-              className="px-3.5 py-2 bg-slate-100 hover:bg-blue-50 hover:text-blue-700 text-slate-700 text-xs font-semibold rounded-xl border border-slate-200 hover:border-blue-300 transition flex items-center gap-1.5 cursor-pointer shadow-2xs group"
+              className="px-3.5 py-2 bg-white/[0.04] hover:bg-white/[0.08] text-[#EDEDEF] text-xs font-semibold rounded-xl border border-white/10 hover:border-[#5E6AD2]/40 transition flex items-center gap-1.5 cursor-pointer shadow-xs group"
             >
-              <Sparkles size={14} className="text-blue-600 group-hover:scale-110 transition" />
+              <Sparkles size={14} className="text-[#5E6AD2] group-hover:scale-110 transition" />
               <span>Search Notes</span>
             </button>
 
             {/* Templates Library */}
             <button
               onClick={() => setTemplatesModalOpen(true)}
-              className="px-3.5 py-2 bg-white hover:bg-slate-50 text-slate-700 text-xs font-semibold rounded-xl border border-slate-200 transition flex items-center gap-1.5 cursor-pointer shadow-2xs"
+              className="px-3.5 py-2 bg-white/[0.03] hover:bg-white/[0.06] text-[#EDEDEF] text-xs font-semibold rounded-xl border border-white/[0.06] transition flex items-center gap-1.5 cursor-pointer"
             >
-              <BookOpen size={14} className="text-slate-500" />
+              <BookOpen size={14} className="text-[#8A8F98]" />
               <span>Templates</span>
             </button>
 
@@ -405,11 +405,11 @@ export const NotepadPage: React.FC<NotepadPageProps> = ({
               onClick={() => setSidebarFilter(sidebarFilter === 'favorites' ? 'all' : 'favorites')}
               className={`px-3 py-2 text-xs font-semibold rounded-xl border transition flex items-center gap-1.5 cursor-pointer ${
                 sidebarFilter === 'favorites'
-                  ? 'bg-amber-50 text-amber-700 border-amber-300 shadow-2xs'
-                  : 'bg-white text-slate-700 hover:bg-slate-50 border-slate-200'
+                  ? 'bg-amber-500/20 text-amber-300 border-amber-500/40'
+                  : 'bg-white/[0.03] text-[#EDEDEF] hover:bg-white/[0.06] border-white/[0.06]'
               }`}
             >
-              <Star size={14} className={sidebarFilter === 'favorites' ? 'fill-amber-500 text-amber-500' : 'text-slate-400'} />
+              <Star size={14} className={sidebarFilter === 'favorites' ? 'fill-amber-400 text-amber-400' : 'text-[#8A8F98]'} />
               <span className="hidden sm:inline">Favorites</span>
               <span className="text-[10px] font-mono font-bold">({favoriteNotes.length})</span>
             </button>
@@ -422,18 +422,18 @@ export const NotepadPage: React.FC<NotepadPageProps> = ({
               }}
               className={`px-3 py-2 text-xs font-semibold rounded-xl border transition flex items-center gap-1.5 cursor-pointer ${
                 sidebarFilter === 'recent'
-                  ? 'bg-blue-50 text-blue-700 border-blue-300 shadow-2xs'
-                  : 'bg-white text-slate-700 hover:bg-slate-50 border-slate-200'
+                  ? 'bg-[#5E6AD2]/20 text-indigo-300 border-[#5E6AD2]/40'
+                  : 'bg-white/[0.03] text-[#EDEDEF] hover:bg-white/[0.06] border-white/[0.06]'
               }`}
             >
-              <Clock size={14} className={sidebarFilter === 'recent' ? 'text-blue-600' : 'text-slate-400'} />
+              <Clock size={14} className={sidebarFilter === 'recent' ? 'text-[#5E6AD2]' : 'text-[#8A8F98]'} />
               <span className="hidden sm:inline">Recently Edited</span>
             </button>
 
             {/* New Note Main CTA */}
             <button
               onClick={() => handleCreateNote()}
-              className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold rounded-xl transition flex items-center gap-1.5 cursor-pointer shadow-xs"
+              className="px-4 py-2 bg-[#5E6AD2] hover:bg-[#6872D9] text-white text-xs font-semibold rounded-xl transition flex items-center gap-1.5 cursor-pointer shadow-[0_0_16px_rgba(94,106,210,0.3)]"
             >
               <Plus size={15} />
               <span>New Note</span>
@@ -444,11 +444,11 @@ export const NotepadPage: React.FC<NotepadPageProps> = ({
 
       {/* Main Workspace: Left Sidebar + Note Grid */}
       <div className="flex-1 grid grid-cols-1 md:grid-cols-12 max-w-7xl mx-auto w-full p-4 sm:p-6 gap-6">
-        {/* Left Filter & Collections Sidebar (Requirement 1: Sidebar Navigation) */}
+        {/* Left Filter & Collections Sidebar */}
         <div className="md:col-span-3 space-y-5">
           {/* Main Navigation Views */}
-          <div className="bg-white rounded-2xl border border-slate-200/90 p-3 shadow-2xs space-y-1">
-            <div className="text-[10px] font-mono uppercase tracking-wider font-semibold text-slate-400 px-3 py-1.5">
+          <div className="bg-[#0a0a0c] rounded-2xl border border-white/10 p-3 shadow-xs space-y-1">
+            <div className="text-[10px] font-mono uppercase tracking-wider font-semibold text-[#8A8F98] px-3 py-1.5">
               Views
             </div>
 
@@ -459,15 +459,15 @@ export const NotepadPage: React.FC<NotepadPageProps> = ({
               }}
               className={`w-full px-3 py-2 rounded-xl text-xs font-semibold flex items-center justify-between transition cursor-pointer ${
                 sidebarFilter === 'all' && !selectedTag
-                  ? 'bg-blue-50 text-blue-700'
-                  : 'text-slate-700 hover:bg-slate-50'
+                  ? 'bg-[#5E6AD2]/20 text-indigo-300 border border-[#5E6AD2]/30'
+                  : 'text-[#EDEDEF] hover:bg-white/[0.04]'
               }`}
             >
               <div className="flex items-center gap-2">
                 <FileText size={14} />
                 <span>All Notes</span>
               </div>
-              <span className="text-[10px] font-mono px-1.5 py-0.2 rounded-full bg-slate-100 text-slate-500 font-bold">
+              <span className="text-[10px] font-mono px-1.5 py-0.2 rounded-full bg-white/10 text-[#EDEDEF] font-bold">
                 {nonTrashNotes.length}
               </span>
             </button>
@@ -479,15 +479,15 @@ export const NotepadPage: React.FC<NotepadPageProps> = ({
               }}
               className={`w-full px-3 py-2 rounded-xl text-xs font-semibold flex items-center justify-between transition cursor-pointer ${
                 sidebarFilter === 'favorites'
-                  ? 'bg-amber-50 text-amber-800'
-                  : 'text-slate-700 hover:bg-slate-50'
+                  ? 'bg-amber-500/20 text-amber-300 border border-amber-500/30'
+                  : 'text-[#EDEDEF] hover:bg-white/[0.04]'
               }`}
             >
               <div className="flex items-center gap-2">
-                <Star size={14} className="text-amber-500" />
+                <Star size={14} className="text-amber-400" />
                 <span>Favorites</span>
               </div>
-              <span className="text-[10px] font-mono px-1.5 py-0.2 rounded-full bg-slate-100 text-slate-500 font-bold">
+              <span className="text-[10px] font-mono px-1.5 py-0.2 rounded-full bg-white/10 text-[#EDEDEF] font-bold">
                 {favoriteNotes.length}
               </span>
             </button>
@@ -499,8 +499,8 @@ export const NotepadPage: React.FC<NotepadPageProps> = ({
               }}
               className={`w-full px-3 py-2 rounded-xl text-xs font-semibold flex items-center justify-between transition cursor-pointer ${
                 sidebarFilter === 'recent'
-                  ? 'bg-blue-50 text-blue-700'
-                  : 'text-slate-700 hover:bg-slate-50'
+                  ? 'bg-[#5E6AD2]/20 text-indigo-300 border border-[#5E6AD2]/30'
+                  : 'text-[#EDEDEF] hover:bg-white/[0.04]'
               }`}
             >
               <div className="flex items-center gap-2">
@@ -516,29 +516,29 @@ export const NotepadPage: React.FC<NotepadPageProps> = ({
               }}
               className={`w-full px-3 py-2 rounded-xl text-xs font-semibold flex items-center justify-between transition cursor-pointer ${
                 sidebarFilter === 'trash'
-                  ? 'bg-rose-50 text-rose-700'
-                  : 'text-slate-700 hover:bg-slate-50'
+                  ? 'bg-rose-500/20 text-rose-300 border border-rose-500/30'
+                  : 'text-[#EDEDEF] hover:bg-white/[0.04]'
               }`}
             >
               <div className="flex items-center gap-2">
                 <Trash2 size={14} />
                 <span>Trash</span>
               </div>
-              <span className="text-[10px] font-mono px-1.5 py-0.2 rounded-full bg-slate-100 text-slate-500 font-bold">
+              <span className="text-[10px] font-mono px-1.5 py-0.2 rounded-full bg-white/10 text-[#EDEDEF] font-bold">
                 {trashNotes.length}
               </span>
             </button>
           </div>
 
           {/* Collections Section */}
-          <div className="bg-white rounded-2xl border border-slate-200/90 p-3 shadow-2xs space-y-1">
+          <div className="bg-[#0a0a0c] rounded-2xl border border-white/10 p-3 shadow-xs space-y-1">
             <div className="flex items-center justify-between px-3 py-1.5">
-              <span className="text-[10px] font-mono uppercase tracking-wider font-semibold text-slate-400">
+              <span className="text-[10px] font-mono uppercase tracking-wider font-semibold text-[#8A8F98]">
                 Collections
               </span>
               <button
                 onClick={() => setNewCollectionInputOpen(true)}
-                className="text-[11px] font-semibold text-blue-600 hover:text-blue-700 flex items-center gap-1 cursor-pointer"
+                className="text-[11px] font-semibold text-[#5E6AD2] hover:text-indigo-300 flex items-center gap-1 cursor-pointer"
                 title="Add custom collection"
               >
                 <Plus size={12} />
@@ -547,7 +547,7 @@ export const NotepadPage: React.FC<NotepadPageProps> = ({
             </div>
 
             {newCollectionInputOpen && (
-              <div className="px-2 py-1.5 bg-slate-50 rounded-xl mb-1 flex items-center gap-1">
+              <div className="px-2 py-1.5 bg-white/[0.04] rounded-xl mb-1 flex items-center gap-1 border border-white/10">
                 <input
                   type="text"
                   value={newCollectionName}
@@ -558,11 +558,11 @@ export const NotepadPage: React.FC<NotepadPageProps> = ({
                   }}
                   placeholder="Collection name..."
                   autoFocus
-                  className="w-full text-xs px-2 py-1 bg-white border border-slate-200 rounded-lg focus:outline-hidden focus:border-blue-500"
+                  className="w-full text-xs px-2 py-1 bg-white/[0.04] border border-white/10 rounded-lg text-[#EDEDEF] outline-none focus:border-[#5E6AD2]"
                 />
                 <button
                   onClick={handleAddCollection}
-                  className="px-2 py-1 bg-blue-600 text-white rounded-lg text-xs font-bold"
+                  className="px-2 py-1 bg-[#5E6AD2] text-white rounded-lg text-xs font-bold"
                 >
                   +
                 </button>
@@ -582,16 +582,16 @@ export const NotepadPage: React.FC<NotepadPageProps> = ({
                     }}
                     className={`w-full px-3 py-1.5 rounded-xl text-xs font-semibold flex items-center justify-between transition cursor-pointer ${
                       isSelected
-                        ? 'bg-blue-50 text-blue-700'
-                        : 'text-slate-600 hover:bg-slate-50'
+                        ? 'bg-[#5E6AD2]/20 text-indigo-300 border border-[#5E6AD2]/30'
+                        : 'text-[#8A8F98] hover:bg-white/[0.04] hover:text-[#EDEDEF]'
                     }`}
                   >
                     <div className="flex items-center gap-2 truncate">
-                      <Folder size={13} className={isSelected ? 'text-blue-600' : 'text-slate-400'} />
+                      <Folder size={13} className={isSelected ? 'text-[#5E6AD2]' : 'text-[#8A8F98]'} />
                       <span className="truncate">{col}</span>
                     </div>
                     {count > 0 && (
-                      <span className="text-[10px] font-mono px-1.5 py-0.2 rounded-full bg-slate-100 text-slate-500 font-bold">
+                      <span className="text-[10px] font-mono px-1.5 py-0.2 rounded-full bg-white/10 text-[#EDEDEF] font-bold">
                         {count}
                       </span>
                     )}
@@ -601,17 +601,17 @@ export const NotepadPage: React.FC<NotepadPageProps> = ({
             </div>
           </div>
 
-          {/* Tag Cloud Filter */}
+          {/* Tags Filter Pill Cloud */}
           {allTags.length > 0 && (
-            <div className="bg-white rounded-2xl border border-slate-200/90 p-4 shadow-2xs space-y-2">
-              <div className="flex items-center justify-between">
-                <span className="text-[10px] font-mono uppercase tracking-wider font-semibold text-slate-400">
-                  Filter by Tag
+            <div className="bg-[#0a0a0c] rounded-2xl border border-white/10 p-3 shadow-xs space-y-2">
+              <div className="flex items-center justify-between px-1">
+                <span className="text-[10px] font-mono uppercase tracking-wider font-semibold text-[#8A8F98]">
+                  Tags
                 </span>
                 {selectedTag && (
                   <button
                     onClick={() => setSelectedTag(null)}
-                    className="text-[10px] text-blue-600 hover:underline"
+                    className="text-[10px] text-[#5E6AD2] hover:underline"
                   >
                     Clear
                   </button>
@@ -622,10 +622,10 @@ export const NotepadPage: React.FC<NotepadPageProps> = ({
                   <button
                     key={tag}
                     onClick={() => setSelectedTag(selectedTag === tag ? null : tag)}
-                    className={`text-[11px] px-2 py-0.5 rounded-md font-medium transition cursor-pointer ${
+                    className={`text-[11px] px-2 py-0.5 rounded-md font-mono transition cursor-pointer ${
                       selectedTag === tag
-                        ? 'bg-blue-600 text-white'
-                        : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                        ? 'bg-[#5E6AD2] text-white'
+                        : 'bg-white/[0.04] text-[#8A8F98] hover:bg-white/[0.08] hover:text-[#EDEDEF]'
                     }`}
                   >
                     #{tag}
@@ -639,31 +639,31 @@ export const NotepadPage: React.FC<NotepadPageProps> = ({
         {/* Right Note Grid / List Container */}
         <div className="md:col-span-9 space-y-4">
           {/* Search, Filter & Layout Bar */}
-          <div className="bg-white rounded-2xl border border-slate-200/90 p-3 shadow-2xs flex flex-col sm:flex-row items-center justify-between gap-3">
+          <div className="bg-[#0a0a0c] rounded-2xl border border-white/10 p-3 shadow-xs flex flex-col sm:flex-row items-center justify-between gap-3">
             {/* Quick Search */}
             <div className="relative w-full sm:w-80">
               <Search
                 size={15}
-                className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"
+                className="absolute left-3 top-1/2 -translate-y-1/2 text-[#8A8F98]"
               />
               <input
                 type="text"
                 value={searchQuery}
                 onChange={e => setSearchQuery(e.target.value)}
                 placeholder="Filter current notes..."
-                className="w-full text-xs font-medium pl-9 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-xl focus:outline-hidden focus:border-blue-500 focus:bg-white transition"
+                className="w-full text-xs font-medium pl-9 pr-4 py-2 bg-white/[0.04] border border-white/10 rounded-xl text-[#EDEDEF] placeholder:text-[#8A8F98] focus:outline-none focus:border-[#5E6AD2] transition"
               />
             </div>
 
             {/* Sorting & Layout Toggles */}
             <div className="flex items-center gap-2 w-full sm:w-auto justify-between sm:justify-end">
               {/* Sort By Dropdown */}
-              <div className="flex items-center gap-1.5 text-xs text-slate-500">
-                <ArrowUpDown size={13} className="text-slate-400" />
+              <div className="flex items-center gap-1.5 text-xs text-[#8A8F98]">
+                <ArrowUpDown size={13} className="text-[#8A8F98]" />
                 <select
                   value={sortBy}
                   onChange={e => setSortBy(e.target.value as any)}
-                  className="text-xs font-medium text-slate-700 bg-slate-50 px-2.5 py-1.5 rounded-lg border border-slate-200 focus:outline-hidden cursor-pointer"
+                  className="text-xs font-medium text-[#EDEDEF] bg-[#0a0a0c] px-2.5 py-1.5 rounded-lg border border-white/10 focus:outline-none cursor-pointer"
                 >
                   <option value="updated">Recently Updated</option>
                   <option value="created">Date Created</option>
@@ -672,13 +672,13 @@ export const NotepadPage: React.FC<NotepadPageProps> = ({
               </div>
 
               {/* Grid / List Switch */}
-              <div className="flex items-center bg-slate-100 p-0.5 rounded-lg border border-slate-200">
+              <div className="flex items-center bg-white/[0.04] p-0.5 rounded-lg border border-white/10">
                 <button
                   onClick={() => setViewMode('grid')}
                   className={`p-1 rounded-md transition cursor-pointer ${
                     viewMode === 'grid'
-                      ? 'bg-white text-slate-900 shadow-2xs'
-                      : 'text-slate-400 hover:text-slate-600'
+                      ? 'bg-[#5E6AD2] text-white'
+                      : 'text-[#8A8F98] hover:text-[#EDEDEF]'
                   }`}
                   title="Grid view"
                 >
@@ -688,8 +688,8 @@ export const NotepadPage: React.FC<NotepadPageProps> = ({
                   onClick={() => setViewMode('list')}
                   className={`p-1 rounded-md transition cursor-pointer ${
                     viewMode === 'list'
-                      ? 'bg-white text-slate-900 shadow-2xs'
-                      : 'text-slate-400 hover:text-slate-600'
+                      ? 'bg-[#5E6AD2] text-white'
+                      : 'text-[#8A8F98] hover:text-[#EDEDEF]'
                   }`}
                   title="List view"
                 >
@@ -701,14 +701,14 @@ export const NotepadPage: React.FC<NotepadPageProps> = ({
 
           {/* Trash Empty Banner if on Trash view */}
           {sidebarFilter === 'trash' && trashNotes.length > 0 && (
-            <div className="p-4 bg-rose-50 border border-rose-200 rounded-2xl flex items-center justify-between gap-3">
-              <div className="flex items-center gap-2 text-xs font-bold text-rose-900">
+            <div className="p-4 bg-rose-500/10 border border-rose-500/30 rounded-2xl flex items-center justify-between gap-3">
+              <div className="flex items-center gap-2 text-xs font-semibold text-rose-300">
                 <Trash2 size={16} />
                 <span>Notes in trash will remain until cleared permanently.</span>
               </div>
               <button
                 onClick={handleEmptyTrash}
-                className="px-3 py-1.5 bg-rose-600 hover:bg-rose-700 text-white text-xs font-semibold rounded-xl transition cursor-pointer shadow-2xs"
+                className="px-3 py-1.5 bg-rose-600 hover:bg-rose-700 text-white text-xs font-semibold rounded-xl transition cursor-pointer shadow-xs"
               >
                 Empty Trash Permanently
               </button>
@@ -717,12 +717,12 @@ export const NotepadPage: React.FC<NotepadPageProps> = ({
 
           {/* Empty State */}
           {filteredNotes.length === 0 ? (
-            <div className="bg-white rounded-2xl border border-slate-200 p-12 text-center space-y-4">
-              <div className="w-12 h-12 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center mx-auto border border-blue-200">
+            <div className="bg-[#0a0a0c] rounded-2xl border border-white/10 p-12 text-center space-y-4">
+              <div className="w-12 h-12 rounded-2xl bg-[#5E6AD2]/20 text-indigo-300 flex items-center justify-center mx-auto border border-[#5E6AD2]/30">
                 <FileText size={24} />
               </div>
               <div className="space-y-1 max-w-sm mx-auto">
-                <h3 className="text-sm font-bold text-slate-900">
+                <h3 className="text-sm font-semibold text-[#EDEDEF]">
                   {sidebarFilter === 'trash'
                     ? 'Trash is empty'
                     : sidebarFilter === 'favorites'
@@ -731,7 +731,7 @@ export const NotepadPage: React.FC<NotepadPageProps> = ({
                     ? 'No notes match your filter'
                     : 'No notes in this collection'}
                 </h3>
-                <p className="text-xs text-slate-500">
+                <p className="text-xs text-[#8A8F98]">
                   {sidebarFilter === 'trash'
                     ? 'Deleted notes will appear here.'
                     : 'Create a new note or choose from one of the startup frameworks to begin.'}
@@ -741,16 +741,17 @@ export const NotepadPage: React.FC<NotepadPageProps> = ({
                 <div className="flex items-center justify-center gap-2 pt-2">
                   <button
                     onClick={() => handleCreateNote()}
-                    className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold rounded-xl transition flex items-center gap-1.5 cursor-pointer shadow-xs"
+                    className="px-4 py-2 bg-[#5E6AD2] hover:bg-[#6872D9] text-white text-xs font-semibold rounded-xl transition flex items-center gap-1.5 cursor-pointer shadow-xs"
                   >
                     <Plus size={14} />
                     <span>Create Note</span>
                   </button>
                   <button
                     onClick={() => setTemplatesModalOpen(true)}
-                    className="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-semibold rounded-xl transition cursor-pointer"
+                    className="px-4 py-2 bg-white/[0.04] hover:bg-white/[0.08] text-[#EDEDEF] text-xs font-semibold rounded-xl border border-white/10 transition flex items-center gap-1.5 cursor-pointer"
                   >
-                    Use Template
+                    <BookOpen size={14} />
+                    <span>Use Template</span>
                   </button>
                 </div>
               )}
@@ -763,7 +764,7 @@ export const NotepadPage: React.FC<NotepadPageProps> = ({
                   .map(b => b.content)
                   .filter(Boolean)
                   .join(' ')
-                  .slice(0, 140);
+                  .slice(0, 110);
 
                 const hasConnections = (note.connections || []).length > 0;
 
@@ -773,21 +774,21 @@ export const NotepadPage: React.FC<NotepadPageProps> = ({
                     onClick={() => {
                       if (!note.isTrash) setActiveNoteId(note.id);
                     }}
-                    className={`bg-white rounded-2xl border transition p-4 flex flex-col justify-between group shadow-2xs hover:shadow-md ${
+                    className={`bg-[#0a0a0c] rounded-2xl border transition p-4 flex flex-col justify-between group shadow-xs hover:shadow-lg ${
                       note.isTrash
-                        ? 'border-slate-200 opacity-80'
-                        : 'border-slate-200/90 hover:border-blue-400 cursor-pointer'
+                        ? 'border-white/10 opacity-70'
+                        : 'border-white/10 hover:border-[#5E6AD2]/50 cursor-pointer'
                     }`}
                   >
                     <div className="space-y-2.5">
                       {/* Top Badges */}
                       <div className="flex items-center justify-between gap-2">
                         <div className="flex items-center gap-1.5 flex-wrap">
-                          <span className="text-[10px] font-mono px-2 py-0.5 rounded-md bg-slate-100 text-slate-700 font-semibold">
+                          <span className="text-[10px] font-mono px-2 py-0.5 rounded-md bg-white/[0.06] text-[#EDEDEF] font-semibold">
                             {note.collection}
                           </span>
                           {note.isPinned && (
-                            <span className="text-[10px] font-mono px-1.5 py-0.5 rounded-md bg-blue-50 text-blue-700 font-bold flex items-center gap-1">
+                            <span className="text-[10px] font-mono px-1.5 py-0.5 rounded-md bg-[#5E6AD2]/20 text-indigo-300 font-bold flex items-center gap-1 border border-[#5E6AD2]/30">
                               <Pin size={10} />
                               Pinned
                             </span>
@@ -797,22 +798,22 @@ export const NotepadPage: React.FC<NotepadPageProps> = ({
                         <div className="flex items-center gap-1">
                           {note.includeInKnowledgeBase && (
                             <span title="Indexed in AI Knowledge Base">
-                              <Brain size={13} className="text-indigo-600" />
+                              <Brain size={13} className="text-indigo-400" />
                             </span>
                           )}
                           {note.isFavorite && (
-                            <Star size={13} className="fill-amber-500 text-amber-500" />
+                            <Star size={13} className="fill-amber-400 text-amber-400" />
                           )}
                         </div>
                       </div>
 
                       {/* Title & Excerpt */}
                       <div>
-                        <h3 className="text-sm font-bold text-slate-900 group-hover:text-blue-600 transition line-clamp-1">
+                        <h3 className="text-sm font-semibold text-[#EDEDEF] group-hover:text-indigo-300 transition line-clamp-1">
                           {note.title || 'Untitled Note'}
                         </h3>
-                        <p className="text-xs text-slate-500 mt-1 line-clamp-3 leading-relaxed font-normal">
-                          {excerpt || <span className="italic text-slate-400">Empty note...</span>}
+                        <p className="text-xs text-[#8A8F98] mt-1 line-clamp-3 leading-relaxed font-sans">
+                          {excerpt || <span className="italic text-[#8A8F98]/60">Empty note...</span>}
                         </p>
                       </div>
 
@@ -822,13 +823,13 @@ export const NotepadPage: React.FC<NotepadPageProps> = ({
                           {note.tags.slice(0, 3).map(tag => (
                             <span
                               key={tag}
-                              className="text-[10px] px-1.5 py-0.2 rounded bg-slate-50 text-slate-600 border border-slate-100"
+                              className="text-[10px] px-1.5 py-0.2 rounded bg-white/[0.04] text-[#8A8F98] border border-white/[0.06] font-mono"
                             >
                               #{tag}
                             </span>
                           ))}
                           {note.tags.length > 3 && (
-                            <span className="text-[10px] text-slate-400">
+                            <span className="text-[10px] text-[#8A8F98]">
                               +{note.tags.length - 3}
                             </span>
                           )}
@@ -837,11 +838,11 @@ export const NotepadPage: React.FC<NotepadPageProps> = ({
                     </div>
 
                     {/* Bottom Metadata & Connected Badges */}
-                    <div className="pt-3 mt-3 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-400">
+                    <div className="pt-3 mt-3 border-t border-white/[0.06] flex items-center justify-between text-[11px] text-[#8A8F98] font-mono">
                       <div className="flex items-center gap-2">
                         <span>{new Date(note.updatedAt).toLocaleDateString()}</span>
                         {hasConnections && (
-                          <span className="flex items-center gap-1 text-blue-600 font-medium">
+                          <span className="flex items-center gap-1 text-[#5E6AD2] font-semibold">
                             <Link2 size={11} />
                             {note.connections?.length} linked
                           </span>
@@ -852,14 +853,14 @@ export const NotepadPage: React.FC<NotepadPageProps> = ({
                         <div className="flex items-center gap-1.5" onClick={e => e.stopPropagation()}>
                           <button
                             onClick={() => handleRestoreNote(note.id)}
-                            className="p-1 text-slate-600 hover:text-blue-600 transition"
+                            className="p-1 text-[#8A8F98] hover:text-indigo-300 transition"
                             title="Restore note"
                           >
                             <RotateCcw size={13} />
                           </button>
                           <button
                             onClick={() => handlePermanentDelete(note.id)}
-                            className="p-1 text-rose-600 hover:text-rose-700 transition"
+                            className="p-1 text-rose-400 hover:text-rose-300 transition"
                             title="Delete permanently"
                           >
                             <Trash2 size={13} />
@@ -868,7 +869,7 @@ export const NotepadPage: React.FC<NotepadPageProps> = ({
                       ) : (
                         <ChevronRight
                           size={14}
-                          className="text-slate-300 group-hover:text-blue-600 group-hover:translate-x-0.5 transition"
+                          className="text-[#8A8F98] group-hover:text-[#5E6AD2] group-hover:translate-x-0.5 transition"
                         />
                       )}
                     </div>
@@ -878,7 +879,7 @@ export const NotepadPage: React.FC<NotepadPageProps> = ({
             </div>
           ) : (
             /* List View */
-            <div className="bg-white rounded-2xl border border-slate-200/90 divide-y divide-slate-100 overflow-hidden shadow-2xs">
+            <div className="bg-[#0a0a0c] rounded-2xl border border-white/10 divide-y divide-white/[0.06] overflow-hidden shadow-xs">
               {filteredNotes.map(note => {
                 const excerpt = (note.blocks || [])
                   .map(b => b.content)
@@ -892,66 +893,50 @@ export const NotepadPage: React.FC<NotepadPageProps> = ({
                     onClick={() => {
                       if (!note.isTrash) setActiveNoteId(note.id);
                     }}
-                    className={`p-3.5 flex items-center justify-between gap-4 hover:bg-slate-50 transition group ${
+                    className={`p-3.5 flex items-center justify-between gap-4 hover:bg-white/[0.04] transition group ${
                       note.isTrash ? 'opacity-70' : 'cursor-pointer'
                     }`}
                   >
                     <div className="flex items-center gap-3 min-w-0 flex-1">
                       <div className="shrink-0">
-                        {note.isFavorite ? (
-                          <Star size={15} className="fill-amber-500 text-amber-500" />
-                        ) : (
-                          <FileText size={15} className="text-slate-400 group-hover:text-blue-600" />
-                        )}
+                        <FileText size={16} className="text-[#5E6AD2]" />
                       </div>
-
                       <div className="min-w-0 flex-1">
                         <div className="flex items-center gap-2">
-                          <span className="text-xs font-bold text-slate-900 group-hover:text-blue-600 truncate">
+                          <h4 className="text-xs font-semibold text-[#EDEDEF] group-hover:text-indigo-300 truncate">
                             {note.title || 'Untitled Note'}
-                          </span>
-                          {note.isPinned && (
-                            <span className="text-[9px] font-mono px-1 py-0.2 rounded bg-blue-50 text-blue-700 font-bold">
-                              PIN
-                            </span>
-                          )}
-                          <span className="text-[10px] font-mono px-1.5 py-0.2 rounded bg-slate-100 text-slate-600">
+                          </h4>
+                          <span className="text-[10px] font-mono px-1.5 py-0.2 rounded bg-white/[0.06] text-[#8A8F98]">
                             {note.collection}
                           </span>
                         </div>
-                        <p className="text-[11px] text-slate-500 truncate mt-0.5">{excerpt}</p>
+                        <p className="text-[11px] text-[#8A8F98] truncate mt-0.5">
+                          {excerpt || 'Empty note...'}
+                        </p>
                       </div>
                     </div>
 
-                    <div className="flex items-center gap-4 text-xs text-slate-400 shrink-0">
-                      {note.connections && note.connections.length > 0 && (
-                        <span className="flex items-center gap-1 text-blue-600 font-medium text-[11px]">
-                          <Link2 size={11} />
-                          {note.connections.length}
-                        </span>
-                      )}
-                      <span className="text-[11px] font-mono">
-                        {new Date(note.updatedAt).toLocaleDateString()}
-                      </span>
+                    <div className="flex items-center gap-3 shrink-0 text-[11px] text-[#8A8F98] font-mono">
+                      <span>{new Date(note.updatedAt).toLocaleDateString()}</span>
                       {note.isTrash ? (
                         <div className="flex items-center gap-1" onClick={e => e.stopPropagation()}>
                           <button
                             onClick={() => handleRestoreNote(note.id)}
-                            className="p-1 hover:text-blue-600"
+                            className="p-1 hover:text-indigo-300"
                             title="Restore"
                           >
                             <RotateCcw size={13} />
                           </button>
                           <button
                             onClick={() => handlePermanentDelete(note.id)}
-                            className="p-1 hover:text-rose-600"
+                            className="p-1 hover:text-rose-400"
                             title="Delete"
                           >
                             <Trash2 size={13} />
                           </button>
                         </div>
                       ) : (
-                        <ChevronRight size={14} className="text-slate-300 group-hover:text-blue-600" />
+                        <ChevronRight size={14} className="text-[#8A8F98] group-hover:text-[#5E6AD2] transition" />
                       )}
                     </div>
                   </div>

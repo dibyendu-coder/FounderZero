@@ -15,34 +15,34 @@ export const InsightsPage: React.FC<InsightsPageProps> = ({ state, navigate }) =
   const { nextActions, realityChecks, customerFeedback, profile } = state;
 
   return (
-    <div className="p-4 md:p-8 space-y-6 max-w-7xl mx-auto font-sans">
+    <div className="p-4 md:p-8 space-y-6 max-w-7xl mx-auto font-sans text-[#EDEDEF]">
       {/* Header */}
-      <div className="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-2xs space-y-2">
+      <div className="bg-[#0a0a0c] rounded-2xl p-6 border border-white/10 shadow-[0_4px_30px_rgba(0,0,0,0.5)] space-y-2">
         <SectionBadge label="Continuous Qualitative & Quantitative Synthesis" variant="blue" />
-        <h1 className="text-2xl md:text-3xl font-extrabold text-slate-900 tracking-tight">
+        <h1 className="text-2xl md:text-3xl font-semibold bg-gradient-to-b from-white via-white/95 to-white/70 bg-clip-text text-transparent tracking-tight">
           Central Intelligence Feed
         </h1>
-        <p className="text-xs sm:text-sm text-slate-500 max-w-3xl leading-relaxed">
+        <p className="text-xs sm:text-sm text-[#8A8F98] max-w-3xl leading-relaxed font-sans">
           Aggregated strategic insights combining direct customer interviews, decision reality checks, bottleneck analysis, and zero-budget growth prescriptions.
         </p>
       </div>
 
       {/* Feed */}
-      <div className="space-y-4">
+      <div className="space-y-4 font-sans">
         {/* Next Action Insight */}
         {nextActions[0] && (
-          <div className="bg-[#0F172A] text-white rounded-2xl p-6 border border-slate-800 shadow-xl space-y-3 relative overflow-hidden">
+          <div className="bg-[#0a0a0c] text-[#EDEDEF] rounded-2xl p-6 border border-white/10 shadow-[0_0_24px_rgba(94,106,210,0.2)] space-y-3 relative overflow-hidden">
             <div className="flex items-center justify-between">
               <Badge variant="blue" size="sm">
                 Top Priority Prescription
               </Badge>
-              <span className="text-xs font-mono text-slate-400">Target: {nextActions[0].deadline}</span>
+              <span className="text-xs font-mono text-[#8A8F98]">Target: {nextActions[0].deadline}</span>
             </div>
-            <h3 className="text-xl font-bold text-white">{nextActions[0].title}</h3>
-            <p className="text-xs text-slate-300 leading-relaxed max-w-3xl">{nextActions[0].whyItMatters}</p>
+            <h3 className="text-xl font-semibold text-[#EDEDEF]">{nextActions[0].title}</h3>
+            <p className="text-xs text-[#8A8F98] leading-relaxed max-w-3xl font-sans">{nextActions[0].whyItMatters}</p>
             <div className="pt-2">
               <Button
-                variant="gradient"
+                variant="primary"
                 size="sm"
                 onClick={() => navigate('actions')}
                 rightIcon={<ArrowRight size={14} />}
@@ -55,9 +55,9 @@ export const InsightsPage: React.FC<InsightsPageProps> = ({ state, navigate }) =
 
         {/* Reality Check Insight */}
         {realityChecks[0] && (
-          <Card variant="default" className="p-6 border-rose-200/80 bg-rose-50/20 space-y-3">
+          <Card variant="default" className="p-6 border-rose-500/30 bg-rose-500/10 rounded-2xl space-y-3">
             <div className="flex items-center justify-between">
-              <div className="flex items-center gap-2 text-rose-700">
+              <div className="flex items-center gap-2 text-rose-300">
                 <ShieldAlert size={16} />
                 <span className="font-mono text-xs font-bold uppercase">Reality Check Counterargument</span>
               </div>
@@ -65,22 +65,22 @@ export const InsightsPage: React.FC<InsightsPageProps> = ({ state, navigate }) =
                 {realityChecks[0].recommendedDecision}
               </Badge>
             </div>
-            <h3 className="text-base font-bold text-slate-900">"{realityChecks[0].decisionClaim}"</h3>
-            <p className="text-xs text-slate-600 leading-relaxed">{realityChecks[0].counterargument}</p>
+            <h3 className="text-base font-semibold text-[#EDEDEF]">"{realityChecks[0].decisionClaim}"</h3>
+            <p className="text-xs text-[#EDEDEF] leading-relaxed">{realityChecks[0].counterargument}</p>
           </Card>
         )}
 
         {/* Customer Voice Insight */}
         {customerFeedback[0] && (
-          <Card variant="default" className="p-6 space-y-3">
-            <div className="flex items-center gap-2 text-[#0052FF]">
+          <Card variant="default" className="p-6 space-y-3 bg-[#0a0a0c] border border-white/10 rounded-2xl shadow-[0_4px_30px_rgba(0,0,0,0.5)]">
+            <div className="flex items-center gap-2 text-[#5E6AD2]">
               <Quote size={16} />
               <span className="font-mono text-xs font-bold uppercase">Voice of the Customer</span>
             </div>
-            <p className="text-xs text-slate-800 italic leading-relaxed bg-slate-50 p-4 rounded-xl border border-slate-100">
+            <p className="text-xs text-[#EDEDEF] italic leading-relaxed bg-white/[0.03] p-4 rounded-xl border border-white/[0.06] font-sans">
               "{customerFeedback[0].content}"
             </p>
-            <div className="text-xs font-semibold text-slate-600">
+            <div className="text-xs font-semibold text-[#8A8F98]">
               — {customerFeedback[0].customerName} ({customerFeedback[0].type}) • Focus: {customerFeedback[0].keyPainPoint}
             </div>
           </Card>
