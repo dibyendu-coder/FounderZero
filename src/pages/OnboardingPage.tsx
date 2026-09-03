@@ -289,21 +289,22 @@ export const OnboardingPage: React.FC<OnboardingPageProps> = ({
 
   if (isGenerating) {
     return (
-      <div className="min-h-screen bg-[#000000] text-[#f0f0f0] flex flex-col items-center justify-center p-6 font-sans">
-        <div className="max-w-md w-full text-center space-y-6">
-          <div className="w-14 h-14 rounded-[12px] bg-[#000000] border border-[#292d30] text-[#ffffff] font-commit font-bold flex items-center justify-center text-xl mx-auto shadow-2xl">
+      <div className="min-h-screen bg-[#050506] bg-[radial-gradient(ellipse_at_top,#0a0a0f_0%,#050506_50%,#020203_100%)] text-[#EDEDEF] flex flex-col items-center justify-center p-6 font-sans relative overflow-hidden">
+        <div className="fixed -top-40 left-1/2 -translate-x-1/2 w-[900px] h-[500px] bg-[#5E6AD2]/15 blur-[140px] pointer-events-none rounded-full" />
+        <div className="max-w-md w-full text-center space-y-6 relative z-10">
+          <div className="w-14 h-14 rounded-2xl bg-[#5E6AD2] text-white font-mono font-bold flex items-center justify-center text-xl mx-auto shadow-[0_0_24px_rgba(94,106,210,0.4)]">
             0
           </div>
           <div>
-            <h2 className="text-2xl font-medium tracking-tight text-[#ffffff] font-sans">
+            <h2 className="text-2xl font-semibold bg-gradient-to-b from-white via-white/95 to-white/70 bg-clip-text text-transparent font-sans tracking-tight">
               Calibrating Your Growth OS
             </h2>
-            <p className="text-xs text-[#a1a4a5] font-commit mt-1">
-              Building customized zero-budget execution plan for <span className="text-[#9281f7] font-semibold">{formData.name || 'your startup'}</span>
+            <p className="text-xs text-[#8A8F98] font-mono mt-1">
+              Building customized zero-budget execution plan for <span className="text-[#5E6AD2] font-semibold">{formData.name || 'your startup'}</span>
             </p>
           </div>
 
-          <div className="bg-[#000000] border border-[#292d30] rounded-[16px] p-5 text-left space-y-3 font-commit">
+          <div className="bg-[#0a0a0c] border border-white/10 rounded-2xl p-5 text-left space-y-3 font-mono shadow-[0_8px_32px_rgba(0,0,0,0.7)]">
             {generationSteps.map((stepText, idx) => {
               const isDone = idx < generationStepIndex;
               const isCurrent = idx === generationStepIndex;
@@ -312,18 +313,18 @@ export const OnboardingPage: React.FC<OnboardingPageProps> = ({
                   key={idx}
                   className={`flex items-center gap-3 text-xs transition-all duration-300 ${
                     isDone
-                      ? 'text-[#3ad389] font-medium'
+                      ? 'text-emerald-400 font-medium'
                       : isCurrent
-                      ? 'text-[#9281f7] font-medium'
-                      : 'text-[#6e727a] opacity-40'
+                      ? 'text-indigo-300 font-medium'
+                      : 'text-[#8A8F98] opacity-40'
                   }`}
                 >
                   {isDone ? (
                     <CheckCircle2 size={16} className="text-emerald-400 shrink-0" />
                   ) : isCurrent ? (
-                    <Loader2 size={16} className="text-blue-400 animate-spin shrink-0" />
+                    <Loader2 size={16} className="text-[#5E6AD2] animate-spin shrink-0" />
                   ) : (
-                    <div className="w-4 h-4 rounded-full border border-slate-600 shrink-0" />
+                    <div className="w-4 h-4 rounded-full border border-white/20 shrink-0" />
                   )}
                   <span>{stepText}</span>
                 </div>
@@ -331,7 +332,7 @@ export const OnboardingPage: React.FC<OnboardingPageProps> = ({
             })}
           </div>
 
-          <p className="text-[11px] text-slate-500 font-mono">
+          <p className="text-[11px] text-[#8A8F98] font-mono">
             Zero-Budget Operating System • Initializing workspace...
           </p>
         </div>
@@ -340,39 +341,42 @@ export const OnboardingPage: React.FC<OnboardingPageProps> = ({
   }
 
   return (
-    <div className="min-h-screen bg-slate-50/70 text-slate-900 flex flex-col justify-between p-4 md:p-8 font-sans">
+    <div className="min-h-screen bg-[#050506] bg-[radial-gradient(ellipse_at_top,#0a0a0f_0%,#050506_50%,#020203_100%)] text-[#EDEDEF] flex flex-col justify-between p-4 md:p-8 font-sans relative overflow-hidden">
+      {/* Ambient Lighting Blob */}
+      <div className="fixed -top-40 left-1/2 -translate-x-1/2 w-[900px] h-[500px] bg-[#5E6AD2]/15 blur-[140px] pointer-events-none rounded-full" />
+
       {/* Header */}
-      <div className="max-w-5xl mx-auto w-full flex items-center justify-between py-3 border-b border-slate-200">
+      <div className="max-w-5xl mx-auto w-full flex items-center justify-between py-3 border-b border-white/[0.06] relative z-10">
         <div className="flex items-center gap-2.5">
-          <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-[#0052FF] to-[#4D7CFF] text-white font-extrabold flex items-center justify-center text-sm shadow-md shadow-blue-500/20">
+          <div className="w-8 h-8 rounded-lg bg-[#5E6AD2] text-white font-mono font-bold flex items-center justify-center text-sm shadow-[0_0_16px_rgba(94,106,210,0.4)]">
             0
           </div>
           <div>
-            <span className="font-extrabold text-lg tracking-tight text-slate-900">FounderZero</span>
-            <span className="ml-2 text-[10px] uppercase font-mono px-2 py-0.5 rounded-full bg-blue-100 text-blue-700 font-bold">
+            <span className="font-semibold text-lg tracking-tight text-[#EDEDEF]">FounderZero</span>
+            <span className="ml-2 text-[10px] uppercase font-mono px-2 py-0.5 rounded-full bg-[#5E6AD2]/20 text-indigo-300 font-medium border border-[#5E6AD2]/30">
               OS Diagnostic
             </span>
           </div>
         </div>
-        <div className="text-xs font-mono font-semibold text-slate-500 flex items-center gap-2">
+        <div className="text-xs font-mono font-medium text-[#8A8F98] flex items-center gap-2">
           <span>Step 0{step} of 06</span>
-          <span className="text-slate-300">•</span>
-          <span className="text-blue-600 font-bold">{Math.round((step / 6) * 100)}%</span>
+          <span className="text-[#8A8F98]">•</span>
+          <span className="text-[#5E6AD2] font-semibold">{Math.round((step / 6) * 100)}%</span>
         </div>
       </div>
 
       {/* Progress Bar */}
-      <div className="max-w-5xl mx-auto w-full my-3 bg-slate-200/80 h-2 rounded-full overflow-hidden">
+      <div className="max-w-5xl mx-auto w-full my-3 bg-white/[0.06] h-1.5 rounded-full overflow-hidden relative z-10">
         <div
-          className="bg-gradient-to-r from-blue-600 to-indigo-600 h-full rounded-full transition-all duration-300"
+          className="bg-gradient-to-r from-[#5E6AD2] to-indigo-400 h-full rounded-full transition-all duration-300 shadow-[0_0_12px_rgba(94,106,210,0.5)]"
           style={{ width: `${(step / 6) * 100}%` }}
         />
       </div>
 
       {/* Main Body */}
-      <div className="max-w-5xl mx-auto w-full grid grid-cols-1 md:grid-cols-3 gap-6 my-auto py-2">
+      <div className="max-w-5xl mx-auto w-full grid grid-cols-1 md:grid-cols-3 gap-6 my-auto py-2 relative z-10">
         {/* Step Forms */}
-        <Card variant="default" className="md:col-span-2 p-6 md:p-8 space-y-6 shadow-sm border border-slate-200">
+        <div className="md:col-span-2 p-6 md:p-8 space-y-6 border border-white/10 bg-[#0a0a0c] text-[#EDEDEF] rounded-2xl shadow-[0_0_0_1px_rgba(255,255,255,0.06),0_4px_30px_rgba(0,0,0,0.5)]">
           {/* Step 1: Startup Concept & Value Proposition */}
           {step === 1 && (
             <div className="space-y-4">
@@ -382,7 +386,7 @@ export const OnboardingPage: React.FC<OnboardingPageProps> = ({
                   type="button"
                   onClick={handleAiSuggestPitch}
                   disabled={isAiRefining}
-                  className="inline-flex items-center gap-1.5 text-xs font-semibold text-blue-600 bg-blue-50 hover:bg-blue-100 px-3 py-1.5 rounded-lg transition-all cursor-pointer border border-blue-200"
+                  className="inline-flex items-center gap-1.5 text-xs font-semibold text-indigo-300 bg-[#5E6AD2]/15 hover:bg-[#5E6AD2]/25 px-3 py-1.5 rounded-lg transition-all cursor-pointer border border-[#5E6AD2]/40"
                 >
                   {isAiRefining ? (
                     <>
@@ -399,24 +403,24 @@ export const OnboardingPage: React.FC<OnboardingPageProps> = ({
               </div>
 
               <div>
-                <h2 className="text-2xl md:text-3xl font-extrabold text-slate-900 tracking-tight">
+                <h2 className="text-2xl md:text-3xl font-semibold bg-gradient-to-b from-white via-white/95 to-white/70 bg-clip-text text-transparent tracking-tight">
                   What are you building?
                 </h2>
-                <p className="text-xs sm:text-sm text-slate-500 mt-1">
+                <p className="text-xs sm:text-sm text-[#8A8F98] mt-1 font-sans">
                   FounderZero will calibrate your initial next action, anti-slop safeguards, and zero-cost stack.
                 </p>
               </div>
 
               {aiMessage && (
-                <div className="p-2.5 bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs rounded-xl flex items-center gap-2">
-                  <CheckCircle2 size={14} className="text-emerald-600 shrink-0" />
+                <div className="p-2.5 bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-xs rounded-xl flex items-center gap-2 font-sans">
+                  <CheckCircle2 size={14} className="text-emerald-400 shrink-0" />
                   <span>{aiMessage}</span>
                 </div>
               )}
 
-              <div className="space-y-4 pt-1 text-xs">
+              <div className="space-y-4 pt-1 text-xs font-sans">
                 <div>
-                  <label className="block font-semibold text-slate-700 mb-1">
+                  <label className="block font-medium text-[#EDEDEF] mb-1">
                     Startup Name *
                   </label>
                   <input
@@ -424,12 +428,12 @@ export const OnboardingPage: React.FC<OnboardingPageProps> = ({
                     value={formData.name}
                     onChange={e => updateField('name', e.target.value)}
                     placeholder="e.g. DocuAgent, DevPulse, MarketLens"
-                    className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm outline-none focus:border-[#0052FF] focus:bg-white transition-all"
+                    className="w-full px-3.5 py-2.5 bg-white/[0.04] border border-white/10 rounded-xl text-sm outline-none text-[#EDEDEF] placeholder:text-[#8A8F98] focus:border-[#5E6AD2] transition-all"
                   />
                 </div>
 
                 <div>
-                  <label className="block font-semibold text-slate-700 mb-1">
+                  <label className="block font-medium text-[#EDEDEF] mb-1">
                     One-Line Pitch / Core Promise *
                   </label>
                   <input
@@ -437,19 +441,19 @@ export const OnboardingPage: React.FC<OnboardingPageProps> = ({
                     value={formData.description}
                     onChange={e => updateField('description', e.target.value)}
                     placeholder="e.g. Autonomous document workflows for lean legal teams with ₹0 server cost"
-                    className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm outline-none focus:border-[#0052FF] focus:bg-white transition-all"
+                    className="w-full px-3.5 py-2.5 bg-white/[0.04] border border-white/10 rounded-xl text-sm outline-none text-[#EDEDEF] placeholder:text-[#8A8F98] focus:border-[#5E6AD2] transition-all"
                   />
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="block font-semibold text-slate-700 mb-1">
+                    <label className="block font-medium text-[#EDEDEF] mb-1">
                       Category
                     </label>
                     <select
                       value={formData.category}
                       onChange={e => updateField('category', e.target.value)}
-                      className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm outline-none focus:border-[#0052FF] focus:bg-white"
+                      className="w-full px-3.5 py-2.5 bg-[#0a0a0c] border border-white/10 rounded-xl text-sm outline-none text-[#EDEDEF] focus:border-[#5E6AD2]"
                     >
                       {categories.map(c => (
                         <option key={c} value={c}>{c}</option>
@@ -458,13 +462,13 @@ export const OnboardingPage: React.FC<OnboardingPageProps> = ({
                   </div>
 
                   <div>
-                    <label className="block font-semibold text-slate-700 mb-1">
+                    <label className="block font-medium text-[#EDEDEF] mb-1">
                       Monetization Model
                     </label>
                     <select
                       value={formData.monetizationModel}
                       onChange={e => updateField('monetizationModel', e.target.value)}
-                      className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm outline-none focus:border-[#0052FF] focus:bg-white"
+                      className="w-full px-3.5 py-2.5 bg-[#0a0a0c] border border-white/10 rounded-xl text-sm outline-none text-[#EDEDEF] focus:border-[#5E6AD2]"
                     >
                       {monetizationModels.map(m => (
                         <option key={m} value={m}>{m}</option>
@@ -475,7 +479,7 @@ export const OnboardingPage: React.FC<OnboardingPageProps> = ({
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="block font-semibold text-slate-700 mb-1">
+                    <label className="block font-medium text-[#EDEDEF] mb-1">
                       Target Customer ICP *
                     </label>
                     <input
@@ -483,12 +487,12 @@ export const OnboardingPage: React.FC<OnboardingPageProps> = ({
                       value={formData.targetCustomer}
                       onChange={e => updateField('targetCustomer', e.target.value)}
                       placeholder="e.g. Solo SaaS founders, early B2B engineering leads"
-                      className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm outline-none focus:border-[#0052FF] focus:bg-white"
+                      className="w-full px-3.5 py-2.5 bg-white/[0.04] border border-white/10 rounded-xl text-sm outline-none text-[#EDEDEF] placeholder:text-[#8A8F98] focus:border-[#5E6AD2]"
                     />
                   </div>
 
                   <div>
-                    <label className="block font-semibold text-slate-700 mb-1">
+                    <label className="block font-medium text-[#EDEDEF] mb-1">
                       Acute Customer Pain Point *
                     </label>
                     <input
@@ -496,7 +500,7 @@ export const OnboardingPage: React.FC<OnboardingPageProps> = ({
                       value={formData.problem}
                       onChange={e => updateField('problem', e.target.value)}
                       placeholder="e.g. Wasting 15 hours/week on manual contract parsing"
-                      className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm outline-none focus:border-[#0052FF] focus:bg-white"
+                      className="w-full px-3.5 py-2.5 bg-white/[0.04] border border-white/10 rounded-xl text-sm outline-none text-[#EDEDEF] placeholder:text-[#8A8F98] focus:border-[#5E6AD2]"
                     />
                   </div>
                 </div>
@@ -509,10 +513,10 @@ export const OnboardingPage: React.FC<OnboardingPageProps> = ({
             <div className="space-y-4">
               <SectionBadge label="Step 2 of 6 — Maturity Stage Calibration" variant="blue" />
               <div>
-                <h2 className="text-2xl md:text-3xl font-extrabold text-slate-900 tracking-tight">
+                <h2 className="text-2xl md:text-3xl font-semibold bg-gradient-to-b from-white via-white/95 to-white/70 bg-clip-text text-transparent tracking-tight">
                   Where is your startup right now?
                 </h2>
-                <p className="text-xs sm:text-sm text-slate-500 mt-1">
+                <p className="text-xs sm:text-sm text-[#8A8F98] mt-1 font-sans">
                   Be authentic. FounderZero uses your stage to safeguard against premature scaling and unnecessary costs.
                 </p>
               </div>
@@ -526,20 +530,20 @@ export const OnboardingPage: React.FC<OnboardingPageProps> = ({
                       onClick={() => updateField('stage', s.stage)}
                       className={`p-4 rounded-xl border cursor-pointer transition-all flex flex-col justify-between ${
                         isSelected
-                          ? 'border-[#0052FF] bg-blue-50/70 shadow-sm ring-1 ring-blue-500'
-                          : 'border-slate-200 bg-slate-50/80 hover:bg-white hover:border-slate-300'
+                          ? 'border-[#5E6AD2] bg-[#5E6AD2]/15 shadow-[0_0_16px_rgba(94,106,210,0.2)]'
+                          : 'border-white/[0.06] bg-white/[0.03] hover:bg-white/[0.06] hover:border-white/[0.12]'
                       }`}
                     >
                       <div>
                         <div className="flex items-center justify-between">
-                          <div className="font-bold text-sm text-slate-900">{s.title}</div>
-                          {isSelected && <CheckCircle2 size={16} className="text-[#0052FF]" />}
+                          <div className="font-semibold text-sm text-[#EDEDEF] font-sans">{s.title}</div>
+                          {isSelected && <CheckCircle2 size={16} className="text-[#5E6AD2]" />}
                         </div>
-                        <div className="text-xs text-slate-600 mt-1 leading-relaxed">
+                        <div className="text-xs text-[#8A8F98] mt-1 leading-relaxed font-sans">
                           {s.desc}
                         </div>
                       </div>
-                      <div className="mt-3 pt-2 border-t border-slate-200/60 text-[11px] font-mono text-slate-500">
+                      <div className="mt-3 pt-2 border-t border-white/[0.06] text-[11px] font-mono text-[#8A8F98]">
                         {s.criteria}
                       </div>
                     </div>
@@ -554,17 +558,17 @@ export const OnboardingPage: React.FC<OnboardingPageProps> = ({
             <div className="space-y-4">
               <SectionBadge label="Step 3 of 6 — Tech Stack & Founder Skills" variant="emerald" />
               <div>
-                <h2 className="text-2xl md:text-3xl font-extrabold text-slate-900 tracking-tight">
+                <h2 className="text-2xl md:text-3xl font-semibold bg-gradient-to-b from-white via-white/95 to-white/70 bg-clip-text text-transparent tracking-tight">
                   What is your skillset & tech stack?
                 </h2>
-                <p className="text-xs sm:text-sm text-slate-500 mt-1">
+                <p className="text-xs sm:text-sm text-[#8A8F98] mt-1 font-sans">
                   We customize coding agent recommendations (OpenCode, Cline) and starter templates to your stack.
                 </p>
               </div>
 
-              <div className="space-y-4 pt-1">
+              <div className="space-y-4 pt-1 font-sans">
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-2">
+                  <label className="block text-xs font-medium text-[#EDEDEF] mb-2">
                     Founder Core Skillsets (Select all that apply)
                   </label>
                   <div className="flex flex-wrap gap-2">
@@ -577,8 +581,8 @@ export const OnboardingPage: React.FC<OnboardingPageProps> = ({
                           onClick={() => toggleSkill(skill)}
                           className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all cursor-pointer border ${
                             isSelected
-                              ? 'bg-blue-600 text-white border-blue-600 shadow-xs'
-                              : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100'
+                              ? 'bg-[#5E6AD2] text-white border-[#5E6AD2] shadow-[0_0_12px_rgba(94,106,210,0.3)]'
+                              : 'bg-white/[0.03] text-[#EDEDEF] border-white/[0.08] hover:bg-white/[0.06]'
                           }`}
                         >
                           {isSelected ? '✓ ' : '+ '}{skill}
@@ -589,7 +593,7 @@ export const OnboardingPage: React.FC<OnboardingPageProps> = ({
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-2">
+                  <label className="block text-xs font-medium text-[#EDEDEF] mb-2">
                     Preferred Zero-Budget Tech Stack
                   </label>
                   <div className="flex flex-wrap gap-2">
@@ -600,10 +604,10 @@ export const OnboardingPage: React.FC<OnboardingPageProps> = ({
                           key={tech}
                           type="button"
                           onClick={() => toggleTech(tech)}
-                          className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all cursor-pointer border ${
+                          className={`px-3 py-1.5 rounded-lg text-xs font-mono transition-all cursor-pointer border ${
                             isSelected
-                              ? 'bg-emerald-600 text-white border-emerald-600 shadow-xs'
-                              : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100'
+                              ? 'bg-[#5E6AD2] text-white border-[#5E6AD2] shadow-[0_0_12px_rgba(94,106,210,0.3)]'
+                              : 'bg-white/[0.03] text-[#EDEDEF] border-white/[0.08] hover:bg-white/[0.06]'
                           }`}
                         >
                           {isSelected ? '✓ ' : '+ '}{tech}
@@ -621,17 +625,17 @@ export const OnboardingPage: React.FC<OnboardingPageProps> = ({
             <div className="space-y-4">
               <SectionBadge label="Step 4 of 6 — Runway, Budget & Bandwidth" variant="amber" />
               <div>
-                <h2 className="text-2xl md:text-3xl font-extrabold text-slate-900 tracking-tight">
+                <h2 className="text-2xl md:text-3xl font-semibold bg-gradient-to-b from-white via-white/95 to-white/70 bg-clip-text text-transparent tracking-tight">
                   What resources do you have?
                 </h2>
-                <p className="text-xs sm:text-sm text-slate-500 mt-1">
+                <p className="text-xs sm:text-sm text-[#8A8F98] mt-1 font-sans">
                   Be honest about your actual hours and cash. FounderZero is specifically optimized for ₹0 spend.
                 </p>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-1 text-xs">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-1 text-xs font-sans">
                 <div>
-                  <label className="block font-semibold text-slate-700 mb-1">
+                  <label className="block font-medium text-[#EDEDEF] mb-1">
                     Team Size (Founders + Core)
                   </label>
                   <input
@@ -639,12 +643,12 @@ export const OnboardingPage: React.FC<OnboardingPageProps> = ({
                     min={1}
                     value={formData.teamSize}
                     onChange={e => updateField('teamSize', Math.max(1, parseInt(e.target.value) || 1))}
-                    className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm font-mono outline-none focus:border-[#0052FF] focus:bg-white"
+                    className="w-full px-3.5 py-2.5 bg-white/[0.04] border border-white/10 rounded-xl text-sm font-mono outline-none text-[#EDEDEF] focus:border-[#5E6AD2]"
                   />
                 </div>
 
                 <div>
-                  <label className="block font-semibold text-slate-700 mb-1">
+                  <label className="block font-medium text-[#EDEDEF] mb-1">
                     Monthly Software Budget (₹)
                   </label>
                   <input
@@ -653,7 +657,7 @@ export const OnboardingPage: React.FC<OnboardingPageProps> = ({
                     value={formData.monthlyBudget}
                     onChange={e => updateField('monthlyBudget', Math.max(0, parseInt(e.target.value) || 0))}
                     placeholder="0"
-                    className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm font-mono outline-none focus:border-[#0052FF] focus:bg-white"
+                    className="w-full px-3.5 py-2.5 bg-white/[0.04] border border-white/10 rounded-xl text-sm font-mono outline-none text-[#EDEDEF] focus:border-[#5E6AD2]"
                   />
                   <div className="flex gap-2 mt-1.5">
                     {[0, 2000, 5000].map(b => (
@@ -661,7 +665,7 @@ export const OnboardingPage: React.FC<OnboardingPageProps> = ({
                         key={b}
                         type="button"
                         onClick={() => updateField('monthlyBudget', b)}
-                        className="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-100 hover:bg-slate-200 text-slate-700"
+                        className="text-[10px] font-mono px-2 py-0.5 rounded bg-white/[0.06] hover:bg-white/[0.10] text-[#EDEDEF] border border-white/10"
                       >
                         ₹{b}
                       </button>
@@ -670,7 +674,7 @@ export const OnboardingPage: React.FC<OnboardingPageProps> = ({
                 </div>
 
                 <div>
-                  <label className="block font-semibold text-slate-700 mb-1">
+                  <label className="block font-medium text-[#EDEDEF] mb-1">
                     Available Founder Hours / Week
                   </label>
                   <input
@@ -679,12 +683,12 @@ export const OnboardingPage: React.FC<OnboardingPageProps> = ({
                     max={100}
                     value={formData.availableHoursPerWeek}
                     onChange={e => updateField('availableHoursPerWeek', Math.max(5, parseInt(e.target.value) || 10))}
-                    className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm font-mono outline-none focus:border-[#0052FF] focus:bg-white"
+                    className="w-full px-3.5 py-2.5 bg-white/[0.04] border border-white/10 rounded-xl text-sm font-mono outline-none text-[#EDEDEF] focus:border-[#5E6AD2]"
                   />
                 </div>
 
                 <div>
-                  <label className="block font-semibold text-slate-700 mb-1">
+                  <label className="block font-medium text-[#EDEDEF] mb-1">
                     Current Registered Users / Waitlist
                   </label>
                   <input
@@ -692,12 +696,12 @@ export const OnboardingPage: React.FC<OnboardingPageProps> = ({
                     min={0}
                     value={formData.currentUsers}
                     onChange={e => updateField('currentUsers', Math.max(0, parseInt(e.target.value) || 0))}
-                    className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm font-mono outline-none focus:border-[#0052FF] focus:bg-white"
+                    className="w-full px-3.5 py-2.5 bg-white/[0.04] border border-white/10 rounded-xl text-sm font-mono outline-none text-[#EDEDEF] focus:border-[#5E6AD2]"
                   />
                 </div>
 
                 <div className="sm:col-span-2">
-                  <label className="block font-semibold text-slate-700 mb-1">
+                  <label className="block font-medium text-[#EDEDEF] mb-1">
                     Current Monthly Revenue (₹)
                   </label>
                   <input
@@ -705,7 +709,7 @@ export const OnboardingPage: React.FC<OnboardingPageProps> = ({
                     min={0}
                     value={formData.monthlyRevenue}
                     onChange={e => updateField('monthlyRevenue', Math.max(0, parseInt(e.target.value) || 0))}
-                    className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm font-mono outline-none focus:border-[#0052FF] focus:bg-white"
+                    className="w-full px-3.5 py-2.5 bg-white/[0.04] border border-white/10 rounded-xl text-sm font-mono outline-none text-[#EDEDEF] focus:border-[#5E6AD2]"
                   />
                 </div>
               </div>
@@ -717,10 +721,10 @@ export const OnboardingPage: React.FC<OnboardingPageProps> = ({
             <div className="space-y-4">
               <SectionBadge label="Step 5 of 6 — Acute Bottleneck & Core Risk" variant="amber" />
               <div>
-                <h2 className="text-2xl md:text-3xl font-extrabold text-slate-900 tracking-tight">
+                <h2 className="text-2xl md:text-3xl font-semibold bg-gradient-to-b from-white via-white/95 to-white/70 bg-clip-text text-transparent tracking-tight">
                   What is your biggest uncertainty?
                 </h2>
-                <p className="text-xs sm:text-sm text-slate-500 mt-1">
+                <p className="text-xs sm:text-sm text-[#8A8F98] mt-1 font-sans">
                   We will prioritize your #1 Next Best Action directly at mitigating this risk.
                 </p>
               </div>
@@ -735,12 +739,12 @@ export const OnboardingPage: React.FC<OnboardingPageProps> = ({
                       onClick={() => updateField('biggestUncertainty', u.value)}
                       className={`p-3.5 rounded-xl border text-left transition-all cursor-pointer ${
                         isSelected
-                          ? 'border-[#0052FF] bg-[#0052FF] text-white shadow-sm ring-1 ring-blue-500'
-                          : 'border-slate-200 bg-slate-50 hover:bg-slate-100 text-slate-800'
+                          ? 'border-[#5E6AD2] bg-[#5E6AD2] text-white shadow-[0_0_16px_rgba(94,106,210,0.3)]'
+                          : 'border-white/[0.06] bg-white/[0.03] hover:bg-white/[0.06] text-[#EDEDEF]'
                       }`}
                     >
-                      <div className="font-bold text-xs">{u.value}</div>
-                      <div className={`text-[11px] mt-1 leading-snug ${isSelected ? 'text-blue-100' : 'text-slate-500'}`}>
+                      <div className="font-semibold text-xs font-sans">{u.value}</div>
+                      <div className={`text-[11px] mt-1 leading-snug font-sans ${isSelected ? 'text-indigo-100' : 'text-[#8A8F98]'}`}>
                         {u.desc}
                       </div>
                     </button>
@@ -750,31 +754,36 @@ export const OnboardingPage: React.FC<OnboardingPageProps> = ({
             </div>
           )}
 
-          {/* Step 6: 90-Day North Star Target */}
+          {/* Step 6: 90-Day Primary Goal */}
           {step === 6 && (
             <div className="space-y-4">
-              <SectionBadge label="Step 6 of 6 — 90-Day North Star Target" variant="emerald" />
+              <SectionBadge label="Step 6 of 6 — 90-Day North Star Objective" variant="dark" />
               <div>
-                <h2 className="text-2xl md:text-3xl font-extrabold text-slate-900 tracking-tight">
-                  What is your 90-day North Star?
+                <h2 className="text-2xl md:text-3xl font-semibold bg-gradient-to-b from-white via-white/95 to-white/70 bg-clip-text text-transparent tracking-tight">
+                  What is your core 90-day goal?
                 </h2>
-                <p className="text-xs sm:text-sm text-slate-500 mt-1">
-                  Choose a clear milestone to anchor your roadmap and metric goals.
+                <p className="text-xs sm:text-sm text-[#8A8F98] mt-1 font-sans">
+                  Select a single high-leverage objective. Everything else becomes "Don't Do Yet".
                 </p>
               </div>
 
-              <div className="space-y-2 pt-1">
-                {goalPresets.map(g => {
+              <div className="space-y-2 pt-1 font-sans">
+                {[
+                  'Conduct 10 problem validation interviews & ship lean MVP',
+                  'Acquire 100 active waitlist users via cold outreach & community',
+                  'Sign first 3 paying customers ($50+ MRR)',
+                  'Ship core product overhaul & reduce 7-day churn below 15%'
+                ].map(g => {
                   const isSelected = formData.goal90Days === g;
                   return (
                     <button
                       key={g}
                       type="button"
                       onClick={() => updateField('goal90Days', g)}
-                      className={`w-full p-3 rounded-xl border text-left text-xs font-semibold transition-all cursor-pointer flex items-center justify-between ${
+                      className={`w-full p-3 rounded-xl border text-left text-xs font-medium transition-all cursor-pointer flex items-center justify-between ${
                         isSelected
-                          ? 'border-[#0052FF] bg-[#0052FF] text-white shadow-sm'
-                          : 'border-slate-200 bg-slate-50 hover:bg-slate-100 text-slate-800'
+                          ? 'border-[#5E6AD2] bg-[#5E6AD2] text-white shadow-[0_0_16px_rgba(94,106,210,0.3)]'
+                          : 'border-white/[0.06] bg-white/[0.03] hover:bg-white/[0.06] text-[#EDEDEF]'
                       }`}
                     >
                       <span>{g}</span>
@@ -784,14 +793,14 @@ export const OnboardingPage: React.FC<OnboardingPageProps> = ({
                 })}
 
                 <div className="pt-2">
-                  <label className="block text-xs font-semibold text-slate-700 mb-1">
+                  <label className="block text-xs font-medium text-[#EDEDEF] mb-1">
                     Or custom 90-day objective:
                   </label>
                   <input
                     type="text"
                     value={formData.goal90Days}
                     onChange={e => updateField('goal90Days', e.target.value)}
-                    className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm outline-none focus:border-[#0052FF] focus:bg-white"
+                    className="w-full px-3.5 py-2.5 bg-white/[0.04] border border-white/10 rounded-xl text-sm outline-none text-[#EDEDEF] focus:border-[#5E6AD2]"
                   />
                 </div>
               </div>
@@ -799,7 +808,7 @@ export const OnboardingPage: React.FC<OnboardingPageProps> = ({
           )}
 
           {/* Navigation Buttons */}
-          <div className="pt-6 border-t border-slate-100 flex items-center justify-between">
+          <div className="pt-6 border-t border-white/[0.06] flex items-center justify-between">
             {step > 1 ? (
               <Button
                 variant="outline"
@@ -812,7 +821,7 @@ export const OnboardingPage: React.FC<OnboardingPageProps> = ({
             ) : <div />}
 
             <Button
-              variant="gradient"
+              variant="primary"
               size="md"
               onClick={handleNext}
               disabled={step === 1 && (!formData.name.trim() || !formData.targetCustomer.trim() || !formData.problem.trim())}
@@ -821,14 +830,14 @@ export const OnboardingPage: React.FC<OnboardingPageProps> = ({
               {step === 6 ? 'Generate My Growth Dashboard' : 'Continue'}
             </Button>
           </div>
-        </Card>
+        </div>
 
         {/* Live Calibration Radar Preview Pane */}
-        <div className="bg-[#0F172A] text-white rounded-2xl p-6 border border-slate-800 shadow-xl space-y-5 flex flex-col justify-between">
+        <div className="bg-[#0a0a0c] text-[#EDEDEF] rounded-2xl p-6 border border-white/10 shadow-[0_4px_30px_rgba(0,0,0,0.5)] space-y-5 flex flex-col justify-between">
           <div>
-            <div className="flex items-center justify-between border-b border-slate-800 pb-3">
-              <div className="flex items-center gap-2 text-blue-400 font-mono font-bold text-xs uppercase tracking-wider">
-                <Sparkles size={14} />
+            <div className="flex items-center justify-between border-b border-white/[0.06] pb-3">
+              <div className="flex items-center gap-2 text-indigo-300 font-mono font-bold text-xs uppercase tracking-wider">
+                <Sparkles size={14} className="text-[#5E6AD2]" />
                 <span>Live OS Calibration</span>
               </div>
               <Badge variant="blue">
@@ -836,59 +845,59 @@ export const OnboardingPage: React.FC<OnboardingPageProps> = ({
               </Badge>
             </div>
 
-            <div className="mt-4 space-y-4 text-xs">
+            <div className="mt-4 space-y-4 text-xs font-sans">
               {/* Projected Founder Score */}
-              <div className="p-3 bg-slate-800/80 rounded-xl border border-slate-700/80 flex items-center justify-between">
+              <div className="p-3 bg-white/[0.03] rounded-xl border border-white/[0.06] flex items-center justify-between">
                 <div>
-                  <span className="text-[10px] text-slate-400 uppercase font-mono block">Projected Founder Score</span>
-                  <span className="text-xl font-extrabold text-white font-mono">{dynamicScore}/100</span>
+                  <span className="text-[10px] text-[#8A8F98] uppercase font-mono block">Projected Founder Score</span>
+                  <span className="text-xl font-extrabold text-[#EDEDEF] font-mono">{dynamicScore}/100</span>
                 </div>
-                <div className="w-9 h-9 rounded-lg bg-blue-600/20 text-blue-400 flex items-center justify-center font-bold">
+                <div className="w-9 h-9 rounded-lg bg-[#5E6AD2]/20 text-indigo-300 flex items-center justify-center font-bold">
                   <TrendingUp size={18} />
                 </div>
               </div>
 
               {/* Monthly Savings */}
-              <div className="p-3 bg-emerald-950/40 rounded-xl border border-emerald-800/40 flex items-center justify-between">
+              <div className="p-3 bg-emerald-500/10 rounded-xl border border-emerald-500/30 flex items-center justify-between">
                 <div>
                   <span className="text-[10px] text-emerald-400 uppercase font-mono block">Zero-Budget Savings</span>
                   <span className="text-base font-extrabold text-emerald-400 font-mono">
                     ~₹{calculatedSavings.toLocaleString()}/mo
                   </span>
                 </div>
-                <div className="w-9 h-9 rounded-lg bg-emerald-600/20 text-emerald-400 flex items-center justify-center font-bold">
+                <div className="w-9 h-9 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold">
                   <DollarSign size={18} />
                 </div>
               </div>
 
               {/* Startup details */}
-              <div className="space-y-2 pt-1 border-t border-slate-800 text-[11px]">
+              <div className="space-y-2 pt-1 border-t border-white/[0.06] text-[11px]">
                 <div>
-                  <span className="text-[10px] text-slate-400 uppercase font-mono block">Startup</span>
-                  <p className="font-bold text-white truncate">{formData.name || 'Untitled Venture'}</p>
+                  <span className="text-[10px] text-[#8A8F98] uppercase font-mono block">Startup</span>
+                  <p className="font-bold text-[#EDEDEF] truncate">{formData.name || 'Untitled Venture'}</p>
                 </div>
 
                 <div>
-                  <span className="text-[10px] text-slate-400 uppercase font-mono block">Target ICP</span>
-                  <p className="text-slate-300 truncate">{formData.targetCustomer || 'Defining ICP...'}</p>
+                  <span className="text-[10px] text-[#8A8F98] uppercase font-mono block">Target ICP</span>
+                  <p className="text-[#8A8F98] truncate">{formData.targetCustomer || 'Defining ICP...'}</p>
                 </div>
 
                 <div>
-                  <span className="text-[10px] text-slate-400 uppercase font-mono block">Acute Uncertainty</span>
+                  <span className="text-[10px] text-[#8A8F98] uppercase font-mono block">Acute Uncertainty</span>
                   <p className="text-amber-400 font-medium">{formData.biggestUncertainty}</p>
                 </div>
               </div>
             </div>
           </div>
 
-          <div className="p-3 bg-blue-950/40 rounded-xl border border-blue-800/40 text-[11px] text-blue-300 leading-relaxed">
+          <div className="p-3 bg-[#5E6AD2]/10 rounded-xl border border-[#5E6AD2]/30 text-[11px] text-indigo-300 leading-relaxed font-sans">
             ⚡ FounderZero automatically synchronizes with your Firebase workspace and generates your 6-stage roadmap.
           </div>
         </div>
       </div>
 
       {/* Footer */}
-      <div className="text-center font-mono text-xs text-slate-400 pt-3 border-t border-slate-200">
+      <div className="text-center font-mono text-xs text-[#8A8F98] pt-3 border-t border-white/[0.06] relative z-10">
         FounderZero • Zero-Budget Startup Growth Operating System
       </div>
     </div>

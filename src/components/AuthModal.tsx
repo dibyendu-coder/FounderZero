@@ -216,57 +216,57 @@ export const AuthModal: React.FC<AuthModalProps> = ({
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-xs animate-in fade-in duration-200"
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#050506]/85 backdrop-blur-xl animate-in fade-in duration-200"
       onClick={onClose}
     >
       <div
-        className="bg-white rounded-3xl shadow-2xl border border-slate-200/80 w-full max-w-md overflow-hidden animate-in zoom-in-95 duration-200 max-h-[90vh] flex flex-col"
+        className="bg-[#0a0a0c] rounded-2xl shadow-[0_8px_32px_rgba(0,0,0,0.7)] border border-white/10 w-full max-w-md overflow-hidden animate-in zoom-in-95 duration-200 max-h-[90vh] flex flex-col font-sans"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header Ribbon */}
-        <div className="bg-[#0F172A] p-6 text-white relative shrink-0">
+        <div className="bg-[#050506] p-6 text-[#EDEDEF] relative shrink-0 border-b border-white/[0.06]">
           <button
             onClick={onClose}
-            className="absolute top-5 right-5 p-1.5 rounded-full text-slate-400 hover:text-white hover:bg-slate-800 transition"
+            className="absolute top-5 right-5 p-1.5 rounded-lg text-[#8A8F98] hover:text-[#EDEDEF] hover:bg-white/[0.06] transition"
             aria-label="Close modal"
           >
             <X size={18} />
           </button>
 
           <div className="flex items-center gap-2.5 mb-2">
-            <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-[#0052FF] to-[#38BDF8] flex items-center justify-center text-white font-bold text-sm shadow-md shadow-blue-500/20">
+            <div className="w-8 h-8 rounded-lg bg-[#5E6AD2] text-white font-mono font-bold text-sm flex items-center justify-center shadow-[0_0_16px_rgba(94,106,210,0.4)]">
               0
             </div>
             <div className="flex items-center gap-1.5">
-              <span className="font-bold text-white text-base tracking-tight">FounderZero</span>
-              <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-mono bg-amber-500/20 text-amber-300 font-bold border border-amber-400/30">
-                <Flame size={11} className="text-amber-400 fill-amber-400" />
+              <span className="font-semibold text-[#EDEDEF] text-base tracking-tight">FounderZero</span>
+              <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-mono bg-amber-500/10 text-amber-300 border border-amber-500/30">
+                <Flame size={11} className="text-amber-400" />
                 FIREBASE AUTH
               </span>
             </div>
           </div>
 
-          <h2 className="text-xl font-bold text-white tracking-tight">
+          <h2 className="text-xl font-semibold bg-gradient-to-b from-white via-white/95 to-white/70 bg-clip-text text-transparent tracking-tight">
             {mode === 'signin' ? 'Sign In to Your Workspace' : 'Create Your Founder Account'}
           </h2>
-          <p className="text-xs text-slate-400 mt-1">
+          <p className="text-xs text-[#8A8F98] mt-1 font-sans">
             {mode === 'signin'
               ? 'Access your zero-budget roadmap and live startup diagnostics'
               : 'Start tracking real metrics, customer feedback, and zero-budget stack'}
           </p>
 
           {/* Mode Switch Tabs */}
-          <div className="flex items-center p-1 bg-slate-900/90 rounded-xl mt-5 border border-slate-800">
+          <div className="flex items-center p-1 bg-white/[0.03] rounded-xl mt-5 border border-white/[0.06]">
             <button
               type="button"
               onClick={() => {
                 setMode('signin');
                 setError(null);
               }}
-              className={`flex-1 py-2 text-xs font-semibold rounded-lg transition-all ${
+              className={`flex-1 py-2 text-xs font-semibold rounded-lg transition-all cursor-pointer ${
                 mode === 'signin'
-                  ? 'bg-[#0052FF] text-white shadow-xs'
-                  : 'text-slate-400 hover:text-slate-200'
+                  ? 'bg-[#5E6AD2] text-white shadow-[0_0_12px_rgba(94,106,210,0.4)]'
+                  : 'text-[#8A8F98] hover:text-[#EDEDEF]'
               }`}
             >
               Sign In
@@ -277,10 +277,10 @@ export const AuthModal: React.FC<AuthModalProps> = ({
                 setMode('signup');
                 setError(null);
               }}
-              className={`flex-1 py-2 text-xs font-semibold rounded-lg transition-all ${
+              className={`flex-1 py-2 text-xs font-semibold rounded-lg transition-all cursor-pointer ${
                 mode === 'signup'
-                  ? 'bg-[#0052FF] text-white shadow-xs'
-                  : 'text-slate-400 hover:text-slate-200'
+                  ? 'bg-[#5E6AD2] text-white shadow-[0_0_12px_rgba(94,106,210,0.4)]'
+                  : 'text-[#8A8F98] hover:text-[#EDEDEF]'
               }`}
             >
               Create Account
@@ -289,10 +289,10 @@ export const AuthModal: React.FC<AuthModalProps> = ({
         </div>
 
         {/* Modal Body / Form */}
-        <div className="p-6 overflow-y-auto flex-1">
+        <div className="p-6 overflow-y-auto flex-1 bg-[#0a0a0c]">
           {error && (
-            <div className="mb-4 p-3 rounded-xl bg-rose-50 border border-rose-200/80 text-rose-800 text-xs flex items-start gap-2 animate-in fade-in">
-              <AlertCircle size={16} className="text-rose-600 shrink-0 mt-0.5" />
+            <div className="mb-4 p-3 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-300 text-xs flex items-start gap-2 animate-in fade-in font-sans">
+              <AlertCircle size={16} className="text-rose-400 shrink-0 mt-0.5" />
               <span>{error}</span>
             </div>
           )}
@@ -302,10 +302,10 @@ export const AuthModal: React.FC<AuthModalProps> = ({
             type="button"
             onClick={handleGoogleSignIn}
             disabled={googleLoading || loading}
-            className="w-full py-2.5 px-4 bg-white border border-slate-300 hover:bg-slate-50 text-slate-800 rounded-xl text-xs font-semibold flex items-center justify-center gap-3 transition shadow-xs hover:border-slate-400 disabled:opacity-60"
+            className="w-full py-2.5 px-4 bg-white/[0.05] hover:bg-white/[0.08] border border-white/10 text-[#EDEDEF] rounded-xl text-xs font-medium flex items-center justify-center gap-3 transition shadow-xs disabled:opacity-60 cursor-pointer"
           >
             {googleLoading ? (
-              <span className="w-4 h-4 border-2 border-slate-400 border-t-blue-600 rounded-full animate-spin" />
+              <span className="w-4 h-4 border-2 border-[#8A8F98] border-t-[#5E6AD2] rounded-full animate-spin" />
             ) : (
               <svg className="w-4 h-4" viewBox="0 0 24 24">
                 <path
@@ -331,52 +331,52 @@ export const AuthModal: React.FC<AuthModalProps> = ({
 
           <div className="relative my-4">
             <div className="absolute inset-0 flex items-center">
-              <div className="w-full border-t border-slate-200"></div>
+              <div className="w-full border-t border-white/[0.08]"></div>
             </div>
-            <div className="relative flex justify-center text-[11px] uppercase tracking-wider text-slate-400">
-              <span className="bg-white px-2">or with Firebase email</span>
+            <div className="relative flex justify-center text-[11px] uppercase tracking-widest text-[#8A8F98] font-mono">
+              <span className="bg-[#0a0a0c] px-2">or with Firebase email</span>
             </div>
           </div>
 
-          <form onSubmit={handleSubmit} className="space-y-3.5 text-xs">
+          <form onSubmit={handleSubmit} className="space-y-3.5 text-xs font-sans">
             {mode === 'signup' && (
               <>
                 <div>
-                  <label className="block font-semibold text-slate-700 mb-1">Founder Full Name</label>
+                  <label className="block font-medium text-[#EDEDEF] mb-1">Founder Full Name</label>
                   <div className="relative">
-                    <UserIcon size={15} className="absolute left-3.5 top-3 text-slate-400" />
+                    <UserIcon size={15} className="absolute left-3.5 top-3 text-[#8A8F98]" />
                     <input
                       type="text"
                       required
                       placeholder="e.g. Elena Rostova"
                       value={name}
                       onChange={(e) => setName(e.target.value)}
-                      className="w-full pl-10 pr-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm outline-none focus:border-[#0052FF] focus:bg-white transition"
+                      className="w-full pl-10 pr-3.5 py-2.5 bg-white/[0.04] border border-white/10 rounded-xl text-sm outline-none text-[#EDEDEF] placeholder:text-[#8A8F98] focus:border-[#5E6AD2] transition"
                     />
                   </div>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <div>
-                    <label className="block font-semibold text-slate-700 mb-1">Startup / App Name</label>
+                    <label className="block font-medium text-[#EDEDEF] mb-1">Startup / App Name</label>
                     <div className="relative">
-                      <Building2 size={15} className="absolute left-3.5 top-3 text-slate-400" />
+                      <Building2 size={15} className="absolute left-3.5 top-3 text-[#8A8F98]" />
                       <input
                         type="text"
                         placeholder="e.g. ApexMetrics"
                         value={startupName}
                         onChange={(e) => setStartupName(e.target.value)}
-                        className="w-full pl-10 pr-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm outline-none focus:border-[#0052FF] focus:bg-white transition"
+                        className="w-full pl-10 pr-3.5 py-2.5 bg-white/[0.04] border border-white/10 rounded-xl text-sm outline-none text-[#EDEDEF] placeholder:text-[#8A8F98] focus:border-[#5E6AD2] transition"
                       />
                     </div>
                   </div>
 
                   <div>
-                    <label className="block font-semibold text-slate-700 mb-1">Current Stage</label>
+                    <label className="block font-medium text-[#EDEDEF] mb-1">Current Stage</label>
                     <select
                       value={stage}
                       onChange={(e) => setStage(e.target.value as StartupStage)}
-                      className="w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm outline-none focus:border-[#0052FF] focus:bg-white transition"
+                      className="w-full px-3 py-2.5 bg-[#0a0a0c] border border-white/10 rounded-xl text-sm outline-none text-[#EDEDEF] focus:border-[#5E6AD2] transition"
                     >
                       <option value="Idea">Idea Stage</option>
                       <option value="Validating">Validating</option>
@@ -391,47 +391,47 @@ export const AuthModal: React.FC<AuthModalProps> = ({
             )}
 
             <div>
-              <label className="block font-semibold text-slate-700 mb-1">Email Address</label>
+              <label className="block font-medium text-[#EDEDEF] mb-1">Email Address</label>
               <div className="relative">
-                <Mail size={15} className="absolute left-3.5 top-3 text-slate-400" />
+                <Mail size={15} className="absolute left-3.5 top-3 text-[#8A8F98]" />
                 <input
                   type="email"
                   required
                   placeholder="founder@startup.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full pl-10 pr-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm outline-none focus:border-[#0052FF] focus:bg-white transition"
+                  className="w-full pl-10 pr-3.5 py-2.5 bg-white/[0.04] border border-white/10 rounded-xl text-sm outline-none text-[#EDEDEF] placeholder:text-[#8A8F98] focus:border-[#5E6AD2] transition"
                 />
               </div>
             </div>
 
             <div>
               <div className="flex items-center justify-between mb-1">
-                <label className="font-semibold text-slate-700">Password</label>
+                <label className="font-medium text-[#EDEDEF]">Password</label>
                 {mode === 'signin' && (
                   <button
                     type="button"
                     onClick={handleFillDemo}
-                    className="text-[11px] text-[#0052FF] hover:underline font-mono"
+                    className="text-[11px] text-[#5E6AD2] hover:underline font-mono cursor-pointer"
                   >
                     Use Demo Sandbox
                   </button>
                 )}
               </div>
               <div className="relative">
-                <Lock size={15} className="absolute left-3.5 top-3 text-slate-400" />
+                <Lock size={15} className="absolute left-3.5 top-3 text-[#8A8F98]" />
                 <input
                   type={showPassword ? 'text' : 'password'}
                   required
                   placeholder={mode === 'signup' ? 'Min 6 characters' : 'Enter your password'}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="w-full pl-10 pr-10 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm outline-none focus:border-[#0052FF] focus:bg-white transition font-mono"
+                  className="w-full pl-10 pr-10 py-2.5 bg-white/[0.04] border border-white/10 rounded-xl text-sm outline-none text-[#EDEDEF] placeholder:text-[#8A8F98] focus:border-[#5E6AD2] transition font-mono"
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3.5 top-3 text-slate-400 hover:text-slate-600"
+                  className="absolute right-3.5 top-3 text-[#8A8F98] hover:text-[#EDEDEF] cursor-pointer"
                 >
                   {showPassword ? <EyeOff size={15} /> : <Eye size={15} />}
                 </button>
@@ -440,9 +440,9 @@ export const AuthModal: React.FC<AuthModalProps> = ({
 
             <Button
               type="submit"
-              variant="gradient"
+              variant="primary"
               size="lg"
-              className="w-full mt-2 font-semibold shadow-md shadow-blue-500/20"
+              className="w-full mt-2 font-semibold"
               disabled={loading || googleLoading}
             >
               {loading ? (
@@ -465,22 +465,22 @@ export const AuthModal: React.FC<AuthModalProps> = ({
           </form>
 
           {/* Bottom Sandbox Divider */}
-          <div className="mt-5 pt-4 border-t border-slate-100 flex flex-col gap-2.5">
-            <div className="flex items-center justify-between text-xs text-slate-500">
+          <div className="mt-5 pt-4 border-t border-white/[0.08] flex flex-col gap-2.5">
+            <div className="flex items-center justify-between text-xs text-[#8A8F98]">
               <span>Want to inspect first?</span>
               <button
                 onClick={() => {
                   onClose();
                   onEnterDemo();
                 }}
-                className="text-[#0052FF] font-semibold hover:underline flex items-center gap-1"
+                className="text-[#5E6AD2] font-semibold hover:underline flex items-center gap-1 cursor-pointer font-mono"
               >
                 <Sparkles size={12} />
                 <span>Explore Demo Sandbox →</span>
               </button>
             </div>
-            <div className="text-[11px] text-slate-400 text-center flex items-center justify-center gap-1">
-              <ShieldCheck size={13} className="text-emerald-600" />
+            <div className="text-[11px] text-[#8A8F98] text-center flex items-center justify-center gap-1 font-mono">
+              <ShieldCheck size={13} className="text-emerald-400" />
               <span>Firebase Auth & Firestore database rules deployed.</span>
             </div>
           </div>

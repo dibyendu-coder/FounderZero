@@ -253,50 +253,50 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
 
       {/* Why Recommendation Modal */}
       {whyModalOpen && (
-        <div className="fixed inset-0 z-50 bg-slate-900/50 backdrop-blur-xs flex items-center justify-center p-4">
-          <div className="bg-white rounded-2xl shadow-2xl border border-slate-200 max-w-lg w-full p-6 space-y-5 animate-in fade-in zoom-in-95 duration-150">
-            <div className="flex items-center justify-between border-b border-slate-100 pb-3">
+        <div className="fixed inset-0 z-50 bg-[#050506]/85 backdrop-blur-xl flex items-center justify-center p-4">
+          <div className="bg-[#0a0a0c] rounded-2xl shadow-[0_8px_32px_rgba(0,0,0,0.7)] border border-white/10 max-w-lg w-full p-6 space-y-5 animate-in fade-in zoom-in-95 duration-150 font-sans">
+            <div className="flex items-center justify-between border-b border-white/[0.06] pb-3">
               <div className="flex items-center gap-2">
-                <HelpCircle size={18} className="text-[#0052FF]" />
-                <h3 className="font-bold text-slate-900 text-sm">Algorithmic Diagnosis Logic</h3>
+                <HelpCircle size={18} className="text-[#5E6AD2]" />
+                <h3 className="font-semibold text-[#EDEDEF] text-sm tracking-tight">Algorithmic Diagnosis Logic</h3>
               </div>
               <button
                 onClick={() => setWhyModalOpen(false)}
-                className="p-1 rounded-lg text-slate-400 hover:text-slate-600 hover:bg-slate-100 transition"
+                className="p-1 rounded-lg text-[#8A8F98] hover:text-[#EDEDEF] hover:bg-white/[0.06] transition"
               >
                 <X size={18} />
               </button>
             </div>
 
             <div className="space-y-3.5 text-xs">
-              <div className="p-3 bg-slate-50 rounded-xl space-y-1">
-                <span className="font-mono font-bold text-slate-400 uppercase text-[10px] tracking-wider block">
+              <div className="p-3 bg-white/[0.03] rounded-xl border border-white/[0.06] space-y-1">
+                <span className="font-mono font-medium text-[#8A8F98] uppercase text-[10px] tracking-widest block">
                   Current Startup Stage
                 </span>
-                <p className="text-slate-800 font-medium">
+                <p className="text-[#EDEDEF] font-medium">
                   {profile.name} is in {profile.stage} stage with {profile.currentUsers} users and ₹{profile.monthlyRevenue} MRR.
                 </p>
               </div>
 
-              <div className="p-3 bg-slate-50 rounded-xl space-y-1">
-                <span className="font-mono font-bold text-slate-400 uppercase text-[10px] tracking-wider block">
+              <div className="p-3 bg-white/[0.03] rounded-xl border border-white/[0.06] space-y-1">
+                <span className="font-mono font-medium text-[#8A8F98] uppercase text-[10px] tracking-widest block">
                   Identified Bottleneck
                 </span>
-                <p className="text-slate-800 font-medium">{nextBestAction.relatedBottleneck}</p>
+                <p className="text-[#EDEDEF] font-medium">{nextBestAction.relatedBottleneck}</p>
               </div>
 
-              <div className="p-3 bg-slate-50 rounded-xl space-y-1">
-                <span className="font-mono font-bold text-slate-400 uppercase text-[10px] tracking-wider block">
+              <div className="p-3 bg-white/[0.03] rounded-xl border border-white/[0.06] space-y-1">
+                <span className="font-mono font-medium text-[#8A8F98] uppercase text-[10px] tracking-widest block">
                   Quantitative Evidence
                 </span>
-                <p className="text-slate-800 font-medium">{nextBestAction.evidence}</p>
+                <p className="text-[#EDEDEF] font-medium">{nextBestAction.evidence}</p>
               </div>
 
-              <div className="p-3 bg-slate-50 rounded-xl space-y-1">
-                <span className="font-mono font-bold text-slate-400 uppercase text-[10px] tracking-wider block">
+              <div className="p-3 bg-white/[0.03] rounded-xl border border-white/[0.06] space-y-1">
+                <span className="font-mono font-medium text-[#8A8F98] uppercase text-[10px] tracking-widest block">
                   Why other actions were de-prioritized
                 </span>
-                <p className="text-slate-800 font-medium">{nextBestAction.reason}</p>
+                <p className="text-[#EDEDEF] font-medium">{nextBestAction.reason}</p>
               </div>
             </div>
 
@@ -319,11 +319,11 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
       />
 
       {/* 3. DO NOT DO THIS YET (WARNING CARD) */}
-      <Card variant="default" className="border-rose-200/80 bg-rose-50/30 p-6 space-y-4">
+      <Card variant="default" className="border-rose-500/30 bg-rose-500/10 p-6 space-y-4 text-[#EDEDEF]">
         <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2 text-rose-700">
+          <div className="flex items-center gap-2 text-rose-400">
             <ShieldAlert size={18} />
-            <span className="font-mono text-xs font-bold uppercase tracking-wider">
+            <span className="font-mono text-xs font-medium uppercase tracking-widest">
               Premature Scaling Warning — Do NOT Do This Yet
             </span>
           </div>
@@ -332,42 +332,42 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
           </Badge>
         </div>
 
-        <h3 className="text-lg md:text-xl font-bold text-slate-900">
+        <h3 className="text-lg md:text-xl font-semibold text-[#EDEDEF]">
           {dontDo.action}
         </h3>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs pt-1">
-          <div className="bg-white p-4 rounded-xl border border-rose-100 space-y-1 shadow-2xs">
-            <span className="font-mono font-bold text-rose-600 text-[10px] uppercase tracking-wider block">
+          <div className="bg-white/[0.03] p-4 rounded-xl border border-rose-500/20 space-y-1">
+            <span className="font-mono font-medium text-rose-400 text-[10px] uppercase tracking-widest block">
               Reasoning
             </span>
-            <p className="text-slate-600 leading-relaxed">{dontDo.reason}</p>
+            <p className="text-[#8A8F98] leading-relaxed">{dontDo.reason}</p>
           </div>
 
-          <div className="bg-white p-4 rounded-xl border border-rose-100 space-y-1 shadow-2xs">
-            <span className="font-mono font-bold text-rose-600 text-[10px] uppercase tracking-wider block">
+          <div className="bg-white/[0.03] p-4 rounded-xl border border-rose-500/20 space-y-1">
+            <span className="font-mono font-medium text-rose-400 text-[10px] uppercase tracking-widest block">
               Risk Profile
             </span>
-            <p className="text-slate-600 leading-relaxed">{dontDo.risk}</p>
+            <p className="text-[#8A8F98] leading-relaxed">{dontDo.risk}</p>
           </div>
 
-          <div className="bg-white p-4 rounded-xl border border-emerald-200 space-y-1 shadow-2xs">
-            <span className="font-mono font-bold text-emerald-700 text-[10px] uppercase tracking-wider block">
+          <div className="bg-white/[0.03] p-4 rounded-xl border border-rose-500/20 space-y-1">
+            <span className="font-mono font-medium text-emerald-400 text-[10px] uppercase tracking-widest block">
               Recommended ₹0 Alternative
             </span>
-            <p className="text-slate-800 font-semibold leading-relaxed">{dontDo.betterAlternative}</p>
+            <p className="text-[#EDEDEF] font-medium leading-relaxed">{dontDo.betterAlternative}</p>
           </div>
         </div>
       </Card>
 
       {/* 3. AI QUERY COPILOT BAR */}
-      <Card variant="default" className="p-6 space-y-4 shadow-2xs">
-        <div className="flex items-center justify-between border-b border-slate-100 pb-3">
+      <Card variant="default" className="p-6 space-y-4">
+        <div className="flex items-center justify-between border-b border-white/[0.06] pb-3">
           <div className="flex items-center gap-2">
-            <Sparkles size={16} className="text-[#0052FF]" />
-            <h3 className="font-bold text-slate-900 text-sm">Ask FounderZero Copilot</h3>
+            <Sparkles size={16} className="text-[#5E6AD2]" />
+            <h3 className="font-semibold text-[#EDEDEF] text-sm tracking-tight">Ask FounderZero Copilot</h3>
           </div>
-          <span className="text-[11px] font-mono text-slate-400">Context: {profile.stage} • {profile.currentUsers} Users</span>
+          <span className="text-[11px] font-mono text-[#8A8F98]">Context: {profile.stage} • {profile.currentUsers} Users</span>
         </div>
 
         <form onSubmit={handleQuerySubmit} className="flex flex-col sm:flex-row items-center gap-3">
@@ -376,7 +376,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
             value={queryInput}
             onChange={e => setQueryInput(e.target.value)}
             placeholder="e.g. 'Why is my retention low?' or 'How should I price my beta tier?'"
-            className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm outline-none focus:border-[#0052FF] focus:bg-white transition"
+            className="w-full px-4 py-3 bg-white/[0.04] border border-white/10 rounded-xl text-sm outline-none text-[#EDEDEF] placeholder:text-[#8A8F98] focus:border-[#5E6AD2] transition"
           />
           <Button
             type="submit"
@@ -391,8 +391,8 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
         </form>
 
         {queryAnswer && (
-          <div className="p-4 bg-blue-50/60 rounded-xl border border-blue-100 text-xs text-slate-800 space-y-2 leading-relaxed animate-in fade-in duration-200">
-            <div className="font-mono font-bold text-[#0052FF] uppercase text-[10px] flex items-center gap-1.5">
+          <div className="p-4 bg-[#5E6AD2]/10 rounded-xl border border-[#5E6AD2]/30 text-xs text-[#EDEDEF] space-y-2 leading-relaxed animate-in fade-in duration-200">
+            <div className="font-mono font-medium text-indigo-300 uppercase text-[10px] flex items-center gap-1.5">
               <Sparkles size={13} />
               <span>Copilot Recommendation</span>
             </div>
@@ -405,12 +405,12 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
       <div className="space-y-4">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <Activity size={18} className="text-[#0052FF]" />
-            <h3 className="font-bold text-slate-900 text-base">Startup Health Matrix</h3>
+            <Activity size={18} className="text-[#5E6AD2]" />
+            <h3 className="font-semibold text-[#EDEDEF] text-base tracking-tight">Startup Health Matrix</h3>
           </div>
           <button
             onClick={() => navigate('health')}
-            className="text-xs font-semibold text-[#0052FF] hover:underline flex items-center gap-1"
+            className="text-xs font-semibold text-[#5E6AD2] hover:underline flex items-center gap-1 cursor-pointer font-mono"
           >
             <span>Full 8-Dimension Audit</span>
             <ArrowRight size={13} />
@@ -422,13 +422,13 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
             <div
               key={dim.id}
               onClick={() => navigate('health')}
-              className="p-4 bg-white rounded-2xl border border-slate-200/80 hover:border-blue-300 hover:shadow-md transition-all cursor-pointer space-y-2.5 group"
+              className="p-4 bg-[#0a0a0c] rounded-2xl border border-white/[0.06] hover:border-[#5E6AD2]/40 hover:shadow-[0_0_20px_rgba(94,106,210,0.15)] transition-all cursor-pointer space-y-2.5 group"
             >
-              <div className="text-xs font-semibold text-slate-600 truncate group-hover:text-blue-600 transition-colors">
+              <div className="text-xs font-medium text-[#8A8F98] truncate group-hover:text-[#EDEDEF] transition-colors font-sans">
                 {dim.name}
               </div>
               <div className="flex items-center justify-between">
-                <span className="text-2xl font-extrabold font-mono text-slate-900">
+                <span className="text-2xl font-semibold font-mono text-[#EDEDEF]">
                   {dim.score !== null ? `${dim.score}%` : 'N/A'}
                 </span>
                 <Badge
@@ -456,14 +456,14 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
       {/* 5. RECENT ACTIVITY & QUICK LAUNCHPAD */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <Card variant="default" className="md:col-span-2 p-6 space-y-4">
-          <div className="flex items-center justify-between border-b border-slate-100 pb-3">
+          <div className="flex items-center justify-between border-b border-white/[0.06] pb-3">
             <div className="flex items-center gap-2">
-              <TrendingUp size={16} className="text-[#0052FF]" />
-              <h3 className="font-bold text-slate-900 text-sm">Recent Execution Timeline</h3>
+              <TrendingUp size={16} className="text-[#5E6AD2]" />
+              <h3 className="font-semibold text-[#EDEDEF] text-sm tracking-tight">Recent Execution Timeline</h3>
             </div>
             <button
               onClick={() => navigate('actions')}
-              className="text-xs text-blue-600 hover:underline font-medium"
+              className="text-xs text-[#5E6AD2] hover:underline font-mono"
             >
               View Actions →
             </button>
@@ -473,14 +473,14 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
             {activities.slice(0, 4).map(act => (
               <div
                 key={act.id}
-                className="flex items-start gap-3 p-3 rounded-xl bg-slate-50 border border-slate-100 text-xs"
+                className="flex items-start gap-3 p-3 rounded-xl bg-white/[0.03] border border-white/[0.06] text-xs font-sans"
               >
-                <div className="w-2 h-2 rounded-full bg-[#0052FF] mt-1.5 shrink-0" />
+                <div className="w-2 h-2 rounded-full bg-[#5E6AD2] mt-1.5 shrink-0" />
                 <div className="flex-1 min-w-0">
-                  <div className="font-semibold text-slate-900 truncate">{act.title}</div>
-                  <div className="text-slate-500 mt-0.5">{act.description}</div>
+                  <div className="font-medium text-[#EDEDEF] truncate">{act.title}</div>
+                  <div className="text-[#8A8F98] mt-0.5">{act.description}</div>
                 </div>
-                <span className="font-mono text-[10px] text-slate-400 shrink-0">{act.timestamp}</span>
+                <span className="font-mono text-[10px] text-[#8A8F98] shrink-0">{act.timestamp}</span>
               </div>
             ))}
           </div>
@@ -488,64 +488,64 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
 
         {/* Quick Tools Launchpad */}
         <Card variant="default" className="p-6 space-y-3">
-          <div className="border-b border-slate-100 pb-3">
-            <h3 className="font-bold text-slate-900 text-sm">Quick Launchpad</h3>
+          <div className="border-b border-white/[0.06] pb-3">
+            <h3 className="font-semibold text-[#EDEDEF] text-sm tracking-tight">Quick Launchpad</h3>
           </div>
 
           <div className="space-y-2">
             <button
               onClick={() => navigate('vault')}
-              className="w-full p-3 rounded-xl bg-blue-50/70 hover:bg-blue-100/70 border border-blue-200/80 text-left text-xs font-bold text-[#0052FF] flex items-center justify-between transition group"
+              className="w-full p-3 rounded-xl bg-[#5E6AD2]/10 hover:bg-[#5E6AD2]/20 border border-[#5E6AD2]/30 text-left text-xs font-semibold text-indigo-300 flex items-center justify-between transition group cursor-pointer"
             >
               <div className="flex items-center gap-2.5">
-                <Bookmark size={15} className="text-[#0052FF]" />
+                <Bookmark size={15} className="text-[#5E6AD2]" />
                 <span>Founder Vault ({state.savedResources?.length || 0})</span>
               </div>
-              <ArrowRight size={14} className="text-blue-500 group-hover:translate-x-0.5 transition-transform" />
+              <ArrowRight size={14} className="text-indigo-300 group-hover:translate-x-0.5 transition-transform" />
             </button>
 
             <button
               onClick={() => navigate('reality-check')}
-              className="w-full p-3 rounded-xl bg-slate-50 hover:bg-blue-50/60 border border-slate-100 hover:border-blue-200 text-left text-xs font-semibold text-slate-800 hover:text-blue-700 flex items-center justify-between transition group"
+              className="w-full p-3 rounded-xl bg-white/[0.03] hover:bg-white/[0.06] border border-white/[0.06] text-left text-xs font-medium text-[#EDEDEF] flex items-center justify-between transition group cursor-pointer"
             >
               <div className="flex items-center gap-2.5">
-                <ShieldAlert size={15} className="text-rose-500" />
+                <ShieldAlert size={15} className="text-rose-400" />
                 <span>Decision Reality Check</span>
               </div>
-              <ArrowRight size={14} className="text-slate-400 group-hover:text-blue-600 transition" />
+              <ArrowRight size={14} className="text-[#8A8F98] group-hover:text-white transition" />
             </button>
 
             <button
               onClick={() => navigate('stack')}
-              className="w-full p-3 rounded-xl bg-slate-50 hover:bg-emerald-50/60 border border-slate-100 hover:border-emerald-200 text-left text-xs font-semibold text-slate-800 hover:text-emerald-700 flex items-center justify-between transition group"
+              className="w-full p-3 rounded-xl bg-white/[0.03] hover:bg-white/[0.06] border border-white/[0.06] text-left text-xs font-medium text-[#EDEDEF] flex items-center justify-between transition group cursor-pointer"
             >
               <div className="flex items-center gap-2.5">
-                <Layers size={15} className="text-emerald-600" />
+                <Layers size={15} className="text-emerald-400" />
                 <span>Zero-Budget Tool Stack</span>
               </div>
-              <ArrowRight size={14} className="text-slate-400 group-hover:text-emerald-600 transition" />
+              <ArrowRight size={14} className="text-[#8A8F98] group-hover:text-emerald-400 transition" />
             </button>
 
             <button
               onClick={() => navigate('experiments')}
-              className="w-full p-3 rounded-xl bg-slate-50 hover:bg-blue-50/60 border border-slate-100 hover:border-blue-200 text-left text-xs font-semibold text-slate-800 hover:text-blue-700 flex items-center justify-between transition group"
+              className="w-full p-3 rounded-xl bg-white/[0.03] hover:bg-white/[0.06] border border-white/[0.06] text-left text-xs font-medium text-[#EDEDEF] flex items-center justify-between transition group cursor-pointer"
             >
               <div className="flex items-center gap-2.5">
-                <FlaskConical size={15} className="text-blue-600" />
+                <FlaskConical size={15} className="text-[#5E6AD2]" />
                 <span>Growth Experiments</span>
               </div>
-              <ArrowRight size={14} className="text-slate-400 group-hover:text-blue-600 transition" />
+              <ArrowRight size={14} className="text-[#8A8F98] group-hover:text-[#5E6AD2] transition" />
             </button>
 
             <button
               onClick={() => navigate('customers')}
-              className="w-full p-3 rounded-xl bg-slate-50 hover:bg-blue-50/60 border border-slate-100 hover:border-blue-200 text-left text-xs font-semibold text-slate-800 hover:text-blue-700 flex items-center justify-between transition group"
+              className="w-full p-3 rounded-xl bg-white/[0.03] hover:bg-white/[0.06] border border-white/[0.06] text-left text-xs font-medium text-[#EDEDEF] flex items-center justify-between transition group cursor-pointer"
             >
               <div className="flex items-center gap-2.5">
-                <Compass size={15} className="text-indigo-600" />
+                <Compass size={15} className="text-purple-400" />
                 <span>Customer Feedback</span>
               </div>
-              <ArrowRight size={14} className="text-slate-400 group-hover:text-blue-600 transition" />
+              <ArrowRight size={14} className="text-[#8A8F98] group-hover:text-purple-400 transition" />
             </button>
           </div>
         </Card>

@@ -197,46 +197,49 @@ export const AuthPage: React.FC<AuthPageProps> = ({
   };
 
   return (
-    <div className="min-h-screen bg-[#000000] text-[#f0f0f0] flex flex-col justify-between p-4 md:p-8 font-sans selection:bg-[#9281f7] selection:text-[#000000]">
+    <div className="min-h-screen bg-[#050506] bg-[radial-gradient(ellipse_at_top,#0a0a0f_0%,#050506_50%,#020203_100%)] text-[#EDEDEF] flex flex-col justify-between p-4 md:p-8 font-sans selection:bg-[#5E6AD2] selection:text-white relative overflow-hidden">
+      {/* Ambient Lighting Blob */}
+      <div className="fixed -top-40 left-1/2 -translate-x-1/2 w-[900px] h-[500px] bg-[#5E6AD2]/15 blur-[140px] pointer-events-none rounded-full" />
+
       {/* Top Bar */}
-      <div className="max-w-6xl mx-auto w-full flex items-center justify-between py-2">
+      <div className="max-w-6xl mx-auto w-full flex items-center justify-between py-2 relative z-10">
         <button
           onClick={onBackToLanding}
-          className="flex items-center gap-2 text-xs font-medium text-[#a1a4a5] hover:text-[#ffffff] transition cursor-pointer"
+          className="flex items-center gap-2 text-xs font-medium text-[#8A8F98] hover:text-[#EDEDEF] transition cursor-pointer"
         >
           <ArrowLeft size={16} />
           <span>Back to Home</span>
         </button>
 
         <div className="flex items-center gap-2">
-          <div className="w-8 h-8 rounded-[6px] bg-[#000000] border border-[#292d30] flex items-center justify-center text-[#ffffff] font-commit font-bold text-sm">
+          <div className="w-8 h-8 rounded-lg bg-[#5E6AD2] text-white font-mono font-bold text-sm flex items-center justify-center shadow-[0_0_16px_rgba(94,106,210,0.4)]">
             0
           </div>
-          <span className="font-semibold text-[#ffffff] tracking-tight">FounderZero</span>
-          <span className="inline-flex items-center gap-1 ml-1 px-2 py-0.5 rounded-[6px] text-[10px] font-commit bg-[#000000] text-[#ffca16] border border-[#292d30]">
-            <Flame size={11} className="text-[#ffca16]" />
+          <span className="font-semibold text-[#EDEDEF] tracking-tight">FounderZero</span>
+          <span className="inline-flex items-center gap-1 ml-1 px-2 py-0.5 rounded-full text-[10px] font-mono bg-amber-500/10 text-amber-300 border border-amber-500/30">
+            <Flame size={11} className="text-amber-400" />
             FIREBASE AUTH
           </span>
         </div>
       </div>
 
       {/* Main Container */}
-      <div className="max-w-4xl mx-auto w-full my-8 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+      <div className="max-w-4xl mx-auto w-full my-8 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
         {/* Left Pitch Column */}
         <div className="lg:col-span-6 space-y-6 text-left">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#000000] border border-[#292d30] text-[#9281f7] text-xs font-commit">
-            <Sparkles size={14} className="text-[#9281f7]" />
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#5E6AD2]/10 border border-[#5E6AD2]/30 text-indigo-300 text-xs font-mono">
+            <Sparkles size={14} className="text-[#5E6AD2]" />
             <span>Official Firebase Authentication</span>
           </div>
 
-          <h1 className="text-3xl md:text-5xl font-favorit text-[#ffffff] font-normal tracking-[-2.8px] leading-tight">
+          <h1 className="text-3xl md:text-5xl font-semibold bg-gradient-to-b from-white via-white/95 to-white/70 bg-clip-text text-transparent tracking-tight leading-tight">
             Stop guessing what to build next.{' '}
-            <span className="text-[#9281f7] italic font-commit">
+            <span className="text-[#5E6AD2] italic font-mono">
               Survive to Product-Market Fit.
             </span>
           </h1>
 
-          <p className="text-[#a1a4a5] text-sm leading-relaxed font-sans">
+          <p className="text-[#8A8F98] text-sm leading-relaxed font-sans">
             FounderZero gives early-stage software founders a ruthless, zero-budget execution system:
             single-priority next actions, reality checks, and a ₹0 tech stack.
           </p>
@@ -257,12 +260,12 @@ export const AuthPage: React.FC<AuthPageProps> = ({
               }
             ].map((feature, i) => (
               <div key={i} className="flex items-start gap-3 text-xs">
-                <div className="w-5 h-5 rounded-full bg-blue-500/20 border border-blue-400/30 flex items-center justify-center text-blue-400 shrink-0 mt-0.5">
+                <div className="w-5 h-5 rounded-full bg-[#5E6AD2]/20 border border-[#5E6AD2]/40 flex items-center justify-center text-indigo-300 shrink-0 mt-0.5">
                   <CheckCircle2 size={12} />
                 </div>
                 <div>
-                  <div className="font-semibold text-slate-200">{feature.title}</div>
-                  <div className="text-slate-400 text-[11px]">{feature.desc}</div>
+                  <div className="font-medium text-[#EDEDEF]">{feature.title}</div>
+                  <div className="text-[#8A8F98] text-[11px]">{feature.desc}</div>
                 </div>
               </div>
             ))}
@@ -271,19 +274,19 @@ export const AuthPage: React.FC<AuthPageProps> = ({
 
         {/* Right Form Card */}
         <div className="lg:col-span-6">
-          <div className="bg-white text-slate-900 rounded-3xl p-6 sm:p-8 shadow-2xl border border-slate-200/80">
+          <div className="bg-[#0a0a0c] text-[#EDEDEF] rounded-2xl p-6 sm:p-8 shadow-[0_0_0_1px_rgba(255,255,255,0.06),0_8px_40px_rgba(0,0,0,0.6),0_0_80px_rgba(94,106,210,0.1)] border border-white/10">
             {/* Mode Switcher */}
-            <div className="flex items-center p-1 bg-slate-100 rounded-xl mb-6 border border-slate-200">
+            <div className="flex items-center p-1 bg-white/[0.03] rounded-xl mb-6 border border-white/[0.06]">
               <button
                 type="button"
                 onClick={() => {
                   setMode('signin');
                   setError(null);
                 }}
-                className={`flex-1 py-2 text-xs font-semibold rounded-lg transition-all ${
+                className={`flex-1 py-2 text-xs font-semibold rounded-lg transition-all cursor-pointer ${
                   mode === 'signin'
-                    ? 'bg-[#0052FF] text-white shadow-xs'
-                    : 'text-slate-500 hover:text-slate-800'
+                    ? 'bg-[#5E6AD2] text-white shadow-[0_0_12px_rgba(94,106,210,0.4)]'
+                    : 'text-[#8A8F98] hover:text-[#EDEDEF]'
                 }`}
               >
                 Sign In
@@ -294,10 +297,10 @@ export const AuthPage: React.FC<AuthPageProps> = ({
                   setMode('signup');
                   setError(null);
                 }}
-                className={`flex-1 py-2 text-xs font-semibold rounded-lg transition-all ${
+                className={`flex-1 py-2 text-xs font-semibold rounded-lg transition-all cursor-pointer ${
                   mode === 'signup'
-                    ? 'bg-[#0052FF] text-white shadow-xs'
-                    : 'text-slate-500 hover:text-slate-800'
+                    ? 'bg-[#5E6AD2] text-white shadow-[0_0_12px_rgba(94,106,210,0.4)]'
+                    : 'text-[#8A8F98] hover:text-[#EDEDEF]'
                 }`}
               >
                 Create Account
@@ -305,8 +308,8 @@ export const AuthPage: React.FC<AuthPageProps> = ({
             </div>
 
             {error && (
-              <div className="mb-4 p-3 rounded-xl bg-rose-50 border border-rose-200/80 text-rose-800 text-xs flex items-start gap-2 animate-in fade-in">
-                <AlertCircle size={16} className="text-rose-600 shrink-0 mt-0.5" />
+              <div className="mb-4 p-3 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-300 text-xs flex items-start gap-2 animate-in fade-in font-sans">
+                <AlertCircle size={16} className="text-rose-400 shrink-0 mt-0.5" />
                 <span>{error}</span>
               </div>
             )}
@@ -316,10 +319,10 @@ export const AuthPage: React.FC<AuthPageProps> = ({
               type="button"
               onClick={handleGoogleSignIn}
               disabled={googleLoading || loading}
-              className="w-full py-2.5 px-4 bg-white border border-slate-300 hover:bg-slate-50 text-slate-800 rounded-xl text-xs font-semibold flex items-center justify-center gap-3 transition shadow-xs hover:border-slate-400 disabled:opacity-60 mb-4"
+              className="w-full py-2.5 px-4 bg-white/[0.05] hover:bg-white/[0.08] border border-white/10 text-[#EDEDEF] rounded-xl text-xs font-medium flex items-center justify-center gap-3 transition shadow-xs disabled:opacity-60 mb-4 cursor-pointer"
             >
               {googleLoading ? (
-                <span className="w-4 h-4 border-2 border-slate-400 border-t-blue-600 rounded-full animate-spin" />
+                <span className="w-4 h-4 border-2 border-[#8A8F98] border-t-[#5E6AD2] rounded-full animate-spin" />
               ) : (
                 <svg className="w-4 h-4" viewBox="0 0 24 24">
                   <path
@@ -345,52 +348,52 @@ export const AuthPage: React.FC<AuthPageProps> = ({
 
             <div className="relative my-4">
               <div className="absolute inset-0 flex items-center">
-                <div className="w-full border-t border-slate-200"></div>
+                <div className="w-full border-t border-white/[0.08]"></div>
               </div>
-              <div className="relative flex justify-center text-[11px] uppercase tracking-wider text-slate-400">
-                <span className="bg-white px-2">or with Firebase email</span>
+              <div className="relative flex justify-center text-[11px] uppercase tracking-widest text-[#8A8F98] font-mono">
+                <span className="bg-[#0a0a0c] px-2">or with Firebase email</span>
               </div>
             </div>
 
-            <form onSubmit={handleSubmit} className="space-y-3.5 text-xs">
+            <form onSubmit={handleSubmit} className="space-y-3.5 text-xs font-sans">
               {mode === 'signup' && (
                 <>
                   <div>
-                    <label className="block font-semibold text-slate-700 mb-1">Founder Full Name</label>
+                    <label className="block font-medium text-[#EDEDEF] mb-1">Founder Full Name</label>
                     <div className="relative">
-                      <UserIcon size={15} className="absolute left-3.5 top-3 text-slate-400" />
+                      <UserIcon size={15} className="absolute left-3.5 top-3 text-[#8A8F98]" />
                       <input
                         type="text"
                         required
                         placeholder="e.g. Maya Chen"
                         value={name}
                         onChange={(e) => setName(e.target.value)}
-                        className="w-full pl-10 pr-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm outline-none focus:border-[#0052FF] focus:bg-white transition"
+                        className="w-full pl-10 pr-3.5 py-2.5 bg-white/[0.04] border border-white/10 rounded-xl text-sm outline-none text-[#EDEDEF] placeholder:text-[#8A8F98] focus:border-[#5E6AD2] transition"
                       />
                     </div>
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <div>
-                      <label className="block font-semibold text-slate-700 mb-1">Startup / App Name</label>
+                      <label className="block font-medium text-[#EDEDEF] mb-1">Startup / App Name</label>
                       <div className="relative">
-                        <Building2 size={15} className="absolute left-3.5 top-3 text-slate-400" />
+                        <Building2 size={15} className="absolute left-3.5 top-3 text-[#8A8F98]" />
                         <input
                           type="text"
                           placeholder="e.g. LogiFlow"
                           value={startupName}
                           onChange={(e) => setStartupName(e.target.value)}
-                          className="w-full pl-10 pr-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm outline-none focus:border-[#0052FF] focus:bg-white transition"
+                          className="w-full pl-10 pr-3.5 py-2.5 bg-white/[0.04] border border-white/10 rounded-xl text-sm outline-none text-[#EDEDEF] placeholder:text-[#8A8F98] focus:border-[#5E6AD2] transition"
                         />
                       </div>
                     </div>
 
                     <div>
-                      <label className="block font-semibold text-slate-700 mb-1">Stage</label>
+                      <label className="block font-medium text-[#EDEDEF] mb-1">Stage</label>
                       <select
                         value={stage}
                         onChange={(e) => setStage(e.target.value as StartupStage)}
-                        className="w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm outline-none focus:border-[#0052FF] focus:bg-white transition"
+                        className="w-full px-3 py-2.5 bg-[#0a0a0c] border border-white/10 rounded-xl text-sm outline-none text-[#EDEDEF] focus:border-[#5E6AD2] transition"
                       >
                         <option value="Idea">Idea Stage</option>
                         <option value="Validating">Validating</option>
@@ -405,47 +408,47 @@ export const AuthPage: React.FC<AuthPageProps> = ({
               )}
 
               <div>
-                <label className="block font-semibold text-slate-700 mb-1">Email Address</label>
+                <label className="block font-medium text-[#EDEDEF] mb-1">Email Address</label>
                 <div className="relative">
-                  <Mail size={15} className="absolute left-3.5 top-3 text-slate-400" />
+                  <Mail size={15} className="absolute left-3.5 top-3 text-[#8A8F98]" />
                   <input
                     type="email"
                     required
                     placeholder="founder@company.com"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="w-full pl-10 pr-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm outline-none focus:border-[#0052FF] focus:bg-white transition"
+                    className="w-full pl-10 pr-3.5 py-2.5 bg-white/[0.04] border border-white/10 rounded-xl text-sm outline-none text-[#EDEDEF] placeholder:text-[#8A8F98] focus:border-[#5E6AD2] transition"
                   />
                 </div>
               </div>
 
               <div>
                 <div className="flex items-center justify-between mb-1">
-                  <label className="font-semibold text-slate-700">Password</label>
+                  <label className="font-medium text-[#EDEDEF]">Password</label>
                   {mode === 'signin' && (
                     <button
                       type="button"
                       onClick={handleFillDemo}
-                      className="text-[11px] text-[#0052FF] hover:underline font-mono"
+                      className="text-[11px] text-[#5E6AD2] hover:underline font-mono cursor-pointer"
                     >
                       Use Demo Sandbox
                     </button>
                   )}
                 </div>
                 <div className="relative">
-                  <Lock size={15} className="absolute left-3.5 top-3 text-slate-400" />
+                  <Lock size={15} className="absolute left-3.5 top-3 text-[#8A8F98]" />
                   <input
                     type={showPassword ? 'text' : 'password'}
                     required
                     placeholder={mode === 'signup' ? 'Min 6 characters' : 'Enter your password'}
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    className="w-full pl-10 pr-10 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm outline-none focus:border-[#0052FF] focus:bg-white transition font-mono"
+                    className="w-full pl-10 pr-10 py-2.5 bg-white/[0.04] border border-white/10 rounded-xl text-sm outline-none text-[#EDEDEF] placeholder:text-[#8A8F98] focus:border-[#5E6AD2] transition font-mono"
                   />
                   <button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-3.5 top-3 text-slate-400 hover:text-slate-600"
+                    className="absolute right-3.5 top-3 text-[#8A8F98] hover:text-[#EDEDEF] cursor-pointer"
                   >
                     {showPassword ? <EyeOff size={15} /> : <Eye size={15} />}
                   </button>
@@ -454,9 +457,9 @@ export const AuthPage: React.FC<AuthPageProps> = ({
 
               <Button
                 type="submit"
-                variant="gradient"
+                variant="primary"
                 size="lg"
-                className="w-full mt-3 font-semibold shadow-md shadow-blue-500/20"
+                className="w-full mt-3 font-semibold"
                 disabled={loading || googleLoading}
               >
                 {loading ? (
@@ -478,11 +481,11 @@ export const AuthPage: React.FC<AuthPageProps> = ({
               </Button>
             </form>
 
-            <div className="mt-5 pt-4 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+            <div className="mt-5 pt-4 border-t border-white/[0.08] flex items-center justify-between text-xs text-[#8A8F98]">
               <span>Looking for demo inspection?</span>
               <button
                 onClick={onEnterDemo}
-                className="text-[#0052FF] font-semibold hover:underline flex items-center gap-1"
+                className="text-[#5E6AD2] font-semibold hover:underline flex items-center gap-1 cursor-pointer font-mono"
               >
                 <Sparkles size={12} />
                 <span>Launch Demo Sandbox →</span>
@@ -493,7 +496,7 @@ export const AuthPage: React.FC<AuthPageProps> = ({
       </div>
 
       {/* Footer Ribbon */}
-      <div className="max-w-6xl mx-auto w-full text-center text-xs text-slate-500 py-2">
+      <div className="max-w-6xl mx-auto w-full text-center text-xs text-[#8A8F98] py-2 relative z-10 font-mono">
         <span>FounderZero • Secured by Firebase Authentication & Firestore Security Rules</span>
       </div>
     </div>
