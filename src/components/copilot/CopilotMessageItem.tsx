@@ -62,14 +62,14 @@ export const CopilotMessageItem: React.FC<CopilotMessageItemProps> = ({
   // 1. User Message Layout
   if (message.role === 'user') {
     return (
-      <div id={`msg-${message.id}`} className="flex justify-end my-4 group">
-        <div className="max-w-[85%] sm:max-w-[75%] bg-slate-900 text-slate-100 rounded-2xl rounded-tr-xs px-4 py-3 shadow-xs space-y-1">
+      <div id={`msg-${message.id}`} className="flex justify-end my-4 group font-sans">
+        <div className="max-w-[85%] sm:max-w-[75%] bg-[#5E6AD2] text-white rounded-2xl rounded-tr-xs px-4 py-3 shadow-[0_0_16px_rgba(94,106,210,0.3)] space-y-1">
           <div className="text-xs sm:text-sm leading-relaxed whitespace-pre-wrap font-sans">
             {message.content}
           </div>
-          <div className="flex items-center justify-end gap-2 pt-0.5 text-[10px] text-slate-400 font-mono">
+          <div className="flex items-center justify-end gap-2 pt-0.5 text-[10px] text-white/70 font-mono">
             {message.mode && message.mode !== 'default' && (
-              <span className="uppercase tracking-wider text-blue-400 font-semibold">
+              <span className="uppercase tracking-wider text-indigo-200 font-semibold">
                 /{message.mode}
               </span>
             )}
@@ -85,8 +85,8 @@ export const CopilotMessageItem: React.FC<CopilotMessageItemProps> = ({
   // 2. System Message Layout
   if (message.role === 'system') {
     return (
-      <div id={`msg-${message.id}`} className="flex justify-center my-3">
-        <div className="bg-slate-100 text-slate-600 rounded-full px-3.5 py-1 text-[11px] font-mono border border-slate-200">
+      <div id={`msg-${message.id}`} className="flex justify-center my-3 font-sans">
+        <div className="bg-white/[0.04] text-[#EDEDEF] rounded-full px-3.5 py-1 text-[11px] font-mono border border-white/10">
           {message.content}
         </div>
       </div>
@@ -95,23 +95,23 @@ export const CopilotMessageItem: React.FC<CopilotMessageItemProps> = ({
 
   // 3. Assistant / Copilot Response Layout
   return (
-    <div id={`msg-${message.id}`} className="my-5 space-y-3 font-sans group">
+    <div id={`msg-${message.id}`} className="my-5 space-y-3 font-sans group text-[#EDEDEF]">
       {/* Assistant Card Container */}
-      <div className="w-full bg-white rounded-2xl p-5 sm:p-6 border border-slate-200/90 shadow-2xs space-y-4">
+      <div className="w-full bg-[#0a0a0c] rounded-2xl p-5 sm:p-6 border border-white/10 shadow-[0_4px_30px_rgba(0,0,0,0.5)] space-y-4">
         {/* Header Bar */}
-        <div className="flex items-center justify-between pb-3 border-b border-slate-100">
+        <div className="flex items-center justify-between pb-3 border-b border-white/[0.06]">
           <div className="flex items-center gap-2">
-            <div className="w-6 h-6 rounded-md bg-blue-600 flex items-center justify-center text-white text-xs font-bold shadow-2xs">
+            <div className="w-6 h-6 rounded-md bg-[#5E6AD2] flex items-center justify-center text-white text-xs font-bold shadow-[0_0_12px_rgba(94,106,210,0.4)]">
               <Sparkles size={13} />
             </div>
-            <span className="text-xs font-bold text-slate-900 font-mono">Founder Copilot</span>
-            <span className="text-[10px] font-mono text-slate-400">•</span>
-            <span className="text-[10px] font-mono text-blue-700 bg-blue-50 px-2 py-0.5 rounded font-semibold border border-blue-100">
+            <span className="text-xs font-semibold text-[#EDEDEF] font-mono">Founder Copilot</span>
+            <span className="text-[10px] font-mono text-[#8A8F98]">•</span>
+            <span className="text-[10px] font-mono text-indigo-300 bg-[#5E6AD2]/20 px-2 py-0.5 rounded font-semibold border border-[#5E6AD2]/30">
               Evidence-First
             </span>
           </div>
 
-          <div className="flex items-center gap-2 text-slate-400 text-[10px] font-mono">
+          <div className="flex items-center gap-2 text-[#8A8F98] text-[10px] font-mono">
             <span>
               {new Date(message.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
             </span>
@@ -139,20 +139,20 @@ export const CopilotMessageItem: React.FC<CopilotMessageItemProps> = ({
 
         {/* Insufficient Evidence Warning Banner */}
         {message.insufficientEvidenceWarning && (
-          <div className="bg-amber-50 border border-amber-200 rounded-xl p-3 flex items-start gap-2.5 text-xs text-amber-900">
-            <AlertTriangle size={16} className="text-amber-600 shrink-0 mt-0.5" />
+          <div className="bg-amber-500/10 border border-amber-500/30 rounded-xl p-3 flex items-start gap-2.5 text-xs text-amber-200 font-sans">
+            <AlertTriangle size={16} className="text-amber-400 shrink-0 mt-0.5" />
             <div>
-              <strong className="font-semibold">Low Data Confidence</strong>: More real-world telemetry (customer interviews, analytics metrics) is recommended before committing significant capital or pivoting.
+              <strong className="font-semibold text-amber-300">Low Data Confidence</strong>: More real-world telemetry (customer interviews, analytics metrics) is recommended before committing significant capital or pivoting.
             </div>
           </div>
         )}
 
         {/* Retrieved Context Summary */}
         {message.retrievedContextSummary && message.retrievedContextSummary.length > 0 && (
-          <div className="flex flex-wrap items-center gap-1.5 text-[10px] font-mono text-slate-500 bg-slate-50 px-3 py-1.5 rounded-lg border border-slate-100">
-            <span className="text-slate-400 font-semibold uppercase tracking-wider">Context in scope:</span>
+          <div className="flex flex-wrap items-center gap-1.5 text-[10px] font-mono text-[#8A8F98] bg-white/[0.03] px-3 py-1.5 rounded-lg border border-white/[0.06]">
+            <span className="text-[#8A8F98] font-semibold uppercase tracking-wider">Context in scope:</span>
             {message.retrievedContextSummary.map((c, i) => (
-              <span key={i} className="bg-white px-2 py-0.5 rounded border border-slate-200 text-slate-700 font-semibold">
+              <span key={i} className="bg-white/[0.06] px-2 py-0.5 rounded border border-white/10 text-[#EDEDEF] font-semibold">
                 {c.label}
               </span>
             ))}
@@ -160,7 +160,7 @@ export const CopilotMessageItem: React.FC<CopilotMessageItemProps> = ({
         )}
 
         {/* Rich Markdown Body */}
-        <div className="prose prose-sm max-w-none text-slate-800 leading-relaxed text-xs sm:text-sm font-sans space-y-2">
+        <div className="prose prose-invert max-w-none text-[#EDEDEF] leading-relaxed text-xs sm:text-sm font-sans space-y-2">
           <ReactMarkdown>{message.content}</ReactMarkdown>
         </div>
 
@@ -204,15 +204,15 @@ export const CopilotMessageItem: React.FC<CopilotMessageItemProps> = ({
         )}
 
         {/* Interactive Message Actions Footer */}
-        <div className="pt-2 border-t border-slate-100 flex items-center justify-between text-xs text-slate-400">
+        <div className="pt-2 border-t border-white/[0.06] flex items-center justify-between text-xs text-[#8A8F98] font-sans">
           <div className="flex items-center gap-1">
             <button
               type="button"
               onClick={handleCopy}
-              className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md hover:bg-slate-100 text-slate-500 hover:text-slate-800 text-[11px] font-mono transition cursor-pointer"
+              className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md hover:bg-white/[0.06] text-[#8A8F98] hover:text-[#EDEDEF] text-[11px] font-mono transition cursor-pointer"
               title="Copy message text"
             >
-              {copied ? <Check size={12} className="text-emerald-600" /> : <Copy size={12} />}
+              {copied ? <Check size={12} className="text-emerald-400" /> : <Copy size={12} />}
               <span>{copied ? 'Copied' : 'Copy'}</span>
             </button>
           </div>
@@ -222,7 +222,7 @@ export const CopilotMessageItem: React.FC<CopilotMessageItemProps> = ({
               type="button"
               onClick={() => setFeedback(feedback === 'up' ? null : 'up')}
               className={`p-1.5 rounded-md transition cursor-pointer ${
-                feedback === 'up' ? 'bg-emerald-50 text-emerald-600' : 'hover:bg-slate-100 text-slate-400 hover:text-slate-600'
+                feedback === 'up' ? 'bg-emerald-500/20 text-emerald-300' : 'hover:bg-white/[0.06] text-[#8A8F98] hover:text-[#EDEDEF]'
               }`}
               title="Helpful insight"
             >
@@ -232,7 +232,7 @@ export const CopilotMessageItem: React.FC<CopilotMessageItemProps> = ({
               type="button"
               onClick={() => setFeedback(feedback === 'down' ? null : 'down')}
               className={`p-1.5 rounded-md transition cursor-pointer ${
-                feedback === 'down' ? 'bg-rose-50 text-rose-600' : 'hover:bg-slate-100 text-slate-400 hover:text-slate-600'
+                feedback === 'down' ? 'bg-rose-500/20 text-rose-300' : 'hover:bg-white/[0.06] text-[#8A8F98] hover:text-[#EDEDEF]'
               }`}
               title="Unhelpful"
             >

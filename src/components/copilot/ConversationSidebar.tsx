@@ -98,8 +98,8 @@ export const ConversationSidebar: React.FC<ConversationSidebarProps> = ({
         }}
         className={`group relative flex items-center justify-between p-2.5 rounded-xl cursor-pointer text-xs transition-all ${
           isActive
-            ? 'bg-blue-50/90 text-blue-950 font-semibold border border-blue-200/80 shadow-2xs'
-            : 'hover:bg-slate-100/80 text-slate-700'
+            ? 'bg-[#5E6AD2]/20 text-indigo-200 font-semibold border border-[#5E6AD2]/40 shadow-xs'
+            : 'hover:bg-white/[0.04] text-[#EDEDEF]'
         }`}
       >
         <div className="truncate flex-1 pr-2">
@@ -109,24 +109,24 @@ export const ConversationSidebar: React.FC<ConversationSidebarProps> = ({
                 type="text"
                 value={editText}
                 onChange={e => setEditText(e.target.value)}
-                className="w-full bg-white border border-blue-400 rounded px-1.5 py-0.5 text-xs focus:outline-hidden"
+                className="w-full bg-[#0a0a0c] border border-[#5E6AD2] rounded px-1.5 py-0.5 text-xs text-[#EDEDEF] focus:outline-none font-sans"
                 autoFocus
                 onKeyDown={e => {
                   if (e.key === 'Enter') handleSaveRename(c.id);
                   if (e.key === 'Escape') setEditingId(null);
                 }}
               />
-              <button onClick={() => handleSaveRename(c.id)} className="text-emerald-600 p-0.5">
+              <button onClick={() => handleSaveRename(c.id)} className="text-emerald-400 p-0.5 cursor-pointer">
                 <Check size={12} />
               </button>
             </div>
           ) : (
             <>
-              <div className="truncate text-[12px] font-medium leading-tight">
+              <div className="truncate text-[12px] font-medium leading-tight text-[#EDEDEF]">
                 {c.title}
               </div>
               {c.lastMessagePreview && (
-                <div className="text-[10px] text-slate-400 truncate mt-0.5 font-normal">
+                <div className="text-[10px] text-[#8A8F98] truncate mt-0.5 font-normal">
                   {c.lastMessagePreview}
                 </div>
               )}
@@ -139,21 +139,21 @@ export const ConversationSidebar: React.FC<ConversationSidebarProps> = ({
           <button
             onClick={e => onTogglePin(c.id, e)}
             title={c.pinned ? "Unpin conversation" : "Pin conversation"}
-            className="p-1 text-slate-400 hover:text-blue-600 rounded"
+            className="p-1 text-[#8A8F98] hover:text-[#5E6AD2] rounded"
           >
-            <Pin size={12} className={c.pinned ? "fill-blue-500 text-blue-500" : ""} />
+            <Pin size={12} className={c.pinned ? "fill-[#5E6AD2] text-[#5E6AD2]" : ""} />
           </button>
           <button
             onClick={e => handleStartRename(c, e)}
             title="Rename discussion"
-            className="p-1 text-slate-400 hover:text-slate-700 rounded"
+            className="p-1 text-[#8A8F98] hover:text-[#EDEDEF] rounded"
           >
             <Edit2 size={12} />
           </button>
           <button
             onClick={e => onDeleteConversation(c.id, e)}
             title="Delete conversation"
-            className="p-1 text-slate-400 hover:text-rose-600 rounded"
+            className="p-1 text-[#8A8F98] hover:text-rose-400 rounded"
           >
             <Trash2 size={12} />
           </button>
@@ -165,19 +165,19 @@ export const ConversationSidebar: React.FC<ConversationSidebarProps> = ({
   return (
     <div
       id="conversation-sidebar"
-      className="w-full h-full bg-white border-r border-slate-200/90 flex flex-col justify-between overflow-hidden text-xs font-sans select-none"
+      className="w-full h-full bg-[#050506] border-r border-white/[0.06] flex flex-col justify-between overflow-hidden text-xs font-sans select-none text-[#EDEDEF]"
     >
       {/* Top Search & Actions */}
-      <div className="p-3.5 border-b border-slate-100 space-y-2.5 shrink-0">
+      <div className="p-3.5 border-b border-white/[0.06] space-y-2.5 shrink-0">
         <div className="flex items-center justify-between">
-          <div className="flex items-center gap-1.5 font-mono font-bold text-slate-800 text-xs">
-            <MessageSquare size={13} className="text-blue-600" />
+          <div className="flex items-center gap-1.5 font-mono font-bold text-[#EDEDEF] text-xs">
+            <MessageSquare size={13} className="text-[#5E6AD2]" />
             <span>Discussions</span>
           </div>
 
           <button
             onClick={() => onCreateNewConversation()}
-            className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-blue-50 text-blue-600 hover:bg-blue-100 text-xs font-semibold transition cursor-pointer"
+            className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-[#5E6AD2]/20 text-indigo-300 hover:bg-[#5E6AD2]/30 border border-[#5E6AD2]/30 text-xs font-semibold transition cursor-pointer font-sans"
             title="New Chat"
           >
             <Plus size={13} />
@@ -187,24 +187,24 @@ export const ConversationSidebar: React.FC<ConversationSidebarProps> = ({
 
         {/* Search Input */}
         <div className="relative">
-          <Search size={13} className="absolute left-2.5 top-1/2 -translate-y-1/2 text-slate-400" />
+          <Search size={13} className="absolute left-2.5 top-1/2 -translate-y-1/2 text-[#8A8F98]" />
           <input
             type="text"
             placeholder="Search discussions..."
             value={searchQuery}
             onChange={e => setSearchQuery(e.target.value)}
-            className="w-full pl-8 pr-3 py-1.5 bg-slate-50 border border-slate-200 rounded-lg text-xs focus:outline-hidden focus:ring-1 focus:ring-blue-500 transition"
+            className="w-full pl-8 pr-3 py-1.5 bg-white/[0.04] border border-white/10 text-[#EDEDEF] placeholder:text-[#8A8F98] rounded-lg text-xs focus:outline-none focus:border-[#5E6AD2] transition font-sans"
           />
         </div>
       </div>
 
       {/* Conversation List Groups */}
-      <div className="flex-1 overflow-y-auto p-2 space-y-4">
+      <div className="flex-1 overflow-y-auto p-2 space-y-4 font-sans">
         {/* Pinned */}
         {pinned.length > 0 && (
           <div className="space-y-1">
-            <div className="px-2 text-[10px] font-mono uppercase tracking-wider font-semibold text-slate-400 flex items-center gap-1">
-              <Pin size={10} className="fill-slate-400" />
+            <div className="px-2 text-[10px] font-mono uppercase tracking-wider font-semibold text-[#8A8F98] flex items-center gap-1">
+              <Pin size={10} className="fill-[#8A8F98]" />
               <span>Pinned</span>
             </div>
             {pinned.map(renderConversationItem)}
@@ -214,7 +214,7 @@ export const ConversationSidebar: React.FC<ConversationSidebarProps> = ({
         {/* Today */}
         {todayList.length > 0 && (
           <div className="space-y-1">
-            <div className="px-2 text-[10px] font-mono uppercase tracking-wider font-semibold text-slate-400">
+            <div className="px-2 text-[10px] font-mono uppercase tracking-wider font-semibold text-[#8A8F98]">
               Today
             </div>
             {todayList.map(renderConversationItem)}
@@ -224,7 +224,7 @@ export const ConversationSidebar: React.FC<ConversationSidebarProps> = ({
         {/* Yesterday */}
         {yesterdayList.length > 0 && (
           <div className="space-y-1">
-            <div className="px-2 text-[10px] font-mono uppercase tracking-wider font-semibold text-slate-400">
+            <div className="px-2 text-[10px] font-mono uppercase tracking-wider font-semibold text-[#8A8F98]">
               Yesterday
             </div>
             {yesterdayList.map(renderConversationItem)}
@@ -234,7 +234,7 @@ export const ConversationSidebar: React.FC<ConversationSidebarProps> = ({
         {/* Previous 7 Days */}
         {last7DaysList.length > 0 && (
           <div className="space-y-1">
-            <div className="px-2 text-[10px] font-mono uppercase tracking-wider font-semibold text-slate-400">
+            <div className="px-2 text-[10px] font-mono uppercase tracking-wider font-semibold text-[#8A8F98]">
               Previous 7 Days
             </div>
             {last7DaysList.map(renderConversationItem)}
@@ -244,7 +244,7 @@ export const ConversationSidebar: React.FC<ConversationSidebarProps> = ({
         {/* Older */}
         {olderList.length > 0 && (
           <div className="space-y-1">
-            <div className="px-2 text-[10px] font-mono uppercase tracking-wider font-semibold text-slate-400">
+            <div className="px-2 text-[10px] font-mono uppercase tracking-wider font-semibold text-[#8A8F98]">
               Older
             </div>
             {olderList.map(renderConversationItem)}
@@ -252,16 +252,16 @@ export const ConversationSidebar: React.FC<ConversationSidebarProps> = ({
         )}
 
         {filtered.length === 0 && (
-          <div className="text-center py-8 px-4 text-slate-400 text-xs">
+          <div className="text-center py-8 px-4 text-[#8A8F98] text-xs font-mono">
             {searchQuery ? 'No matching conversations' : 'No discussions yet. Ask Founder Copilot anything to begin.'}
           </div>
         )}
       </div>
 
       {/* Footer Info */}
-      <div className="p-3 bg-slate-50 border-t border-slate-200/70 text-[10px] font-mono text-slate-500 flex items-center justify-between">
+      <div className="p-3 bg-[#050506] border-t border-white/[0.06] text-[10px] font-mono text-[#8A8F98] flex items-center justify-between">
         <span>{conversations.length} Discussions saved</span>
-        <span className="text-blue-600">Encrypted / RLS</span>
+        <span className="text-[#5E6AD2]">Encrypted / RLS</span>
       </div>
     </div>
   );

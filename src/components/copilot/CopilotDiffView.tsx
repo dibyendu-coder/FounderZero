@@ -28,14 +28,14 @@ export const CopilotDiffView: React.FC<CopilotDiffViewProps> = ({
   return (
     <div
       id={`diff-view-${diff.id}`}
-      className="my-3 rounded-xl border border-slate-200/90 bg-white overflow-hidden shadow-2xs text-xs font-sans transition-all"
+      className="my-3 rounded-xl border border-white/10 bg-[#0a0a0c] overflow-hidden shadow-md text-xs font-sans transition-all text-[#EDEDEF]"
     >
       {/* Header */}
-      <div className="px-4 py-2.5 bg-slate-900 text-slate-100 flex items-center justify-between">
+      <div className="px-4 py-2.5 bg-[#050506] text-[#EDEDEF] flex items-center justify-between border-b border-white/[0.06]">
         <div className="flex items-center gap-2">
-          <GitCompare size={14} className="text-blue-400" />
+          <GitCompare size={14} className="text-[#5E6AD2]" />
           <span className="font-mono font-bold text-xs">{diff.title || 'Proposed Startup Updates'}</span>
-          <span className="text-[10px] font-mono uppercase bg-slate-800 text-slate-300 px-1.5 py-0.5 rounded">
+          <span className="text-[10px] font-mono uppercase bg-white/[0.06] text-indigo-300 px-1.5 py-0.5 rounded border border-white/10">
             {diff.target || 'Profile'}
           </span>
         </div>
@@ -57,7 +57,7 @@ export const CopilotDiffView: React.FC<CopilotDiffViewProps> = ({
       </div>
 
       {diff.description && (
-        <div className="px-4 py-2 bg-slate-50 border-b border-slate-100 text-[11px] text-slate-600">
+        <div className="px-4 py-2 bg-white/[0.03] border-b border-white/[0.06] text-[11px] text-[#8A8F98]">
           {diff.description}
         </div>
       )}
@@ -67,19 +67,19 @@ export const CopilotDiffView: React.FC<CopilotDiffViewProps> = ({
         {diff.changes.map((change, idx) => (
           <div key={idx} className="space-y-1">
             {change.label && (
-              <div className="text-[11px] font-sans font-bold text-slate-700">
+              <div className="text-[11px] font-sans font-semibold text-[#EDEDEF]">
                 {change.label}:
               </div>
             )}
-            <div className="rounded-lg border border-slate-200 overflow-hidden text-[11px] leading-relaxed">
+            <div className="rounded-lg border border-white/10 overflow-hidden text-[11px] leading-relaxed">
               {/* Old Value */}
-              <div className="bg-rose-50/70 text-rose-900 px-3 py-1.5 border-b border-rose-100/60 flex items-start gap-2">
-                <span className="text-rose-500 font-bold select-none">-</span>
+              <div className="bg-rose-500/10 text-rose-200 px-3 py-1.5 border-b border-rose-500/20 flex items-start gap-2">
+                <span className="text-rose-400 font-bold select-none">-</span>
                 <div className="line-through opacity-80 whitespace-pre-wrap">{change.oldValue}</div>
               </div>
               {/* New Value */}
-              <div className="bg-emerald-50/70 text-emerald-900 px-3 py-1.5 flex items-start gap-2">
-                <span className="text-emerald-600 font-bold select-none">+</span>
+              <div className="bg-emerald-500/10 text-emerald-200 px-3 py-1.5 flex items-start gap-2">
+                <span className="text-emerald-400 font-bold select-none">+</span>
                 <div className="font-semibold whitespace-pre-wrap">{change.newValue}</div>
               </div>
             </div>
@@ -89,21 +89,20 @@ export const CopilotDiffView: React.FC<CopilotDiffViewProps> = ({
 
       {/* Action Footer */}
       {status === 'pending' && (
-        <div className="px-4 py-2.5 bg-slate-50 border-t border-slate-200/70 flex items-center justify-end gap-2">
+        <div className="px-4 py-2.5 bg-[#050506] border-t border-white/[0.06] flex items-center justify-end gap-2 font-sans">
           <button
             type="button"
             onClick={handleReject}
-            className="px-3 py-1.5 rounded-lg border border-slate-300 text-slate-700 hover:bg-slate-100 font-semibold text-xs transition cursor-pointer"
+            className="px-3 py-1.5 rounded-lg border border-white/10 text-[#8A8F98] hover:text-[#EDEDEF] hover:bg-white/[0.06] font-semibold text-xs transition cursor-pointer"
           >
             Dismiss
           </button>
           <button
             type="button"
             onClick={handleAccept}
-            className="px-3.5 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs transition cursor-pointer flex items-center gap-1.5 shadow-2xs"
+            className="px-3 py-1.5 rounded-lg bg-[#5E6AD2] hover:bg-[#6872D9] text-white font-semibold text-xs shadow-[0_0_12px_rgba(94,106,210,0.3)] transition cursor-pointer"
           >
-            <Check size={13} />
-            <span>Accept & Update</span>
+            Accept Updates
           </button>
         </div>
       )}

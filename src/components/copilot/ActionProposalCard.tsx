@@ -103,73 +103,73 @@ export const ActionProposalCard: React.FC<ActionProposalCardProps> = ({
   };
 
   return (
-    <div className="mt-4 rounded-xl border border-slate-200/90 bg-gradient-to-b from-white to-slate-50/70 p-4 shadow-xs transition-all">
+    <div className="my-3 rounded-xl border border-white/10 bg-[#0a0a0c] p-4 shadow-[0_4px_30px_rgba(0,0,0,0.5)] transition-all font-sans text-[#EDEDEF]">
       {/* Header */}
-      <div className="flex items-start justify-between gap-3 pb-3 border-b border-slate-100">
+      <div className="flex items-start justify-between gap-3 pb-3 border-b border-white/[0.06]">
         <div className="flex items-center gap-2.5">
-          <div className="w-8 h-8 rounded-lg bg-blue-50 text-[#0052FF] flex items-center justify-center shrink-0 border border-blue-100/80">
+          <div className="w-8 h-8 rounded-lg bg-[#5E6AD2]/20 text-indigo-300 flex items-center justify-center shrink-0 border border-[#5E6AD2]/30 font-bold">
             <Icon size={16} />
           </div>
           <div>
             <div className="flex items-center gap-2">
-              <span className="text-[10px] font-mono uppercase tracking-wider font-bold text-blue-600 bg-blue-50/80 px-2 py-0.5 rounded border border-blue-200/50">
+              <span className="text-[10px] font-mono uppercase tracking-wider font-bold text-indigo-300 bg-[#5E6AD2]/20 px-2 py-0.5 rounded border border-[#5E6AD2]/30">
                 Action Proposal
               </span>
               {isConfirmed && (
-                <span className="text-[10px] font-mono font-semibold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200 flex items-center gap-1">
+                <span className="text-[10px] font-mono font-semibold text-emerald-300 bg-emerald-500/20 px-2 py-0.5 rounded border border-emerald-500/30 flex items-center gap-1">
                   <CheckCircle2 size={10} />
                   Confirmed & Applied
                 </span>
               )}
             </div>
-            <h4 className="text-sm font-bold text-slate-900 mt-0.5">{proposal.title}</h4>
+            <h4 className="text-sm font-semibold text-[#EDEDEF] mt-0.5">{proposal.title}</h4>
           </div>
         </div>
       </div>
 
       {/* Description */}
       {proposal.description && (
-        <p className="text-xs text-slate-600 mt-2.5 leading-relaxed">{proposal.description}</p>
+        <p className="text-xs text-[#8A8F98] mt-2.5 leading-relaxed font-sans">{proposal.description}</p>
       )}
 
       {/* Structured Details Preview */}
       {proposal.type === 'notepad_draft' && proposal.draftNote && (
-        <div className="mt-3 bg-white rounded-lg p-3 border border-slate-200/70 text-xs space-y-2">
-          <div className="flex items-center justify-between text-[11px] text-slate-500">
+        <div className="mt-3 bg-white/[0.03] rounded-lg p-3 border border-white/[0.06] text-xs space-y-2 font-sans">
+          <div className="flex items-center justify-between text-[11px] text-[#8A8F98]">
             <span>
-              Collection: <strong className="text-slate-800 font-semibold">{proposal.draftNote.collection}</strong>
+              Collection: <strong className="text-[#EDEDEF] font-semibold">{proposal.draftNote.collection}</strong>
             </span>
             <div className="flex gap-1">
               {(proposal.draftNote.tags || []).slice(0, 3).map(tag => (
-                <span key={tag} className="bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded text-[10px]">
+                <span key={tag} className="bg-white/[0.06] text-[#8A8F98] px-1.5 py-0.5 rounded text-[10px] font-mono">
                   #{tag}
                 </span>
               ))}
             </div>
           </div>
-          <div className="text-slate-700 font-medium border-l-2 border-blue-500 pl-2">
+          <div className="text-[#EDEDEF] font-medium border-l-2 border-[#5E6AD2] pl-2">
             "{proposal.draftNote.title}"
           </div>
-          <div className="text-[11px] text-slate-500">
+          <div className="text-[11px] text-[#8A8F98]">
             Includes {proposal.draftNote.blocks?.length || 0} formatted blocks (checklists, callouts, objectives).
           </div>
         </div>
       )}
 
       {proposal.type === 'create_mission' && proposal.missionData && (
-        <div className="mt-3 bg-white rounded-lg p-3 border border-slate-200/70 text-xs space-y-2">
+        <div className="mt-3 bg-white/[0.03] rounded-lg p-3 border border-white/[0.06] text-xs space-y-2 font-sans">
           <div className="flex items-center justify-between text-[11px]">
-            <span className="font-semibold text-slate-800">{proposal.missionData.title}</span>
-            <span className="font-mono text-slate-500">Est. Time: {proposal.missionData.estimatedTime}</span>
+            <span className="font-semibold text-[#EDEDEF]">{proposal.missionData.title}</span>
+            <span className="font-mono text-[#8A8F98]">Est. Time: {proposal.missionData.estimatedTime}</span>
           </div>
-          <p className="text-slate-600 text-[11px]">{proposal.missionData.objective}</p>
-          <div className="space-y-1 pt-1 border-t border-slate-100">
+          <p className="text-[#8A8F98] text-[11px]">{proposal.missionData.objective}</p>
+          <div className="space-y-1 pt-1 border-t border-white/[0.06]">
             {(proposal.missionData.steps || []).slice(0, 3).map((step, idx) => (
-              <div key={idx} className="flex items-center gap-2 text-[11px] text-slate-600">
-                <span className="w-4 h-4 rounded-full bg-slate-100 text-slate-500 flex items-center justify-center text-[9px] font-mono">
+              <div key={idx} className="flex items-center gap-2 text-[11px] text-[#8A8F98]">
+                <span className="w-4 h-4 rounded-full bg-white/[0.06] text-[#EDEDEF] flex items-center justify-center text-[9px] font-mono">
                   {idx + 1}
                 </span>
-                <span>{step.text}</span>
+                <span className="text-[#EDEDEF]">{step.text}</span>
               </div>
             ))}
           </div>
@@ -177,17 +177,17 @@ export const ActionProposalCard: React.FC<ActionProposalCardProps> = ({
       )}
 
       {proposal.type === 'create_experiment' && proposal.experimentData && (
-        <div className="mt-3 bg-white rounded-lg p-3 border border-slate-200/70 text-xs space-y-2">
+        <div className="mt-3 bg-white/[0.03] rounded-lg p-3 border border-white/[0.06] text-xs space-y-2 font-sans">
           <div className="flex items-center justify-between text-[11px]">
-            <span className="font-semibold text-slate-800">{proposal.experimentData.title}</span>
-            <span className="font-mono text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded border border-emerald-200">
+            <span className="font-semibold text-[#EDEDEF]">{proposal.experimentData.title}</span>
+            <span className="font-mono text-emerald-300 bg-emerald-500/20 px-1.5 py-0.5 rounded border border-emerald-500/30">
               Target: {proposal.experimentData.targetValue}
             </span>
           </div>
-          <div className="text-[11px] text-slate-600 bg-slate-50 p-2 rounded border border-slate-100">
-            <strong>Hypothesis</strong>: {proposal.experimentData.hypothesis}
+          <div className="text-[11px] text-[#EDEDEF] bg-white/[0.04] p-2 rounded border border-white/10">
+            <strong className="text-indigo-300">Hypothesis</strong>: {proposal.experimentData.hypothesis}
           </div>
-          <div className="flex items-center justify-between text-[10px] text-slate-500 font-mono">
+          <div className="flex items-center justify-between text-[10px] text-[#8A8F98] font-mono">
             <span>Metric: {proposal.experimentData.metric}</span>
             <span>Duration: {proposal.experimentData.duration} • Budget: {proposal.experimentData.budget}</span>
           </div>
@@ -195,25 +195,25 @@ export const ActionProposalCard: React.FC<ActionProposalCardProps> = ({
       )}
 
       {proposal.type === 'decision_matrix' && proposal.decisionData && (
-        <div className="mt-3 grid grid-cols-2 gap-2 text-xs">
-          <div className="bg-white rounded-lg p-2.5 border border-slate-200 space-y-1">
-            <div className="font-bold text-slate-800 text-[11px]">{proposal.decisionData.optionA.name}</div>
-            <div className="text-[10px] text-slate-500">Impact: {proposal.decisionData.optionA.impact} • Effort: {proposal.decisionData.optionA.effort}</div>
-            <p className="text-[10px] text-slate-600 leading-snug">{proposal.decisionData.optionA.evidence}</p>
+        <div className="mt-3 grid grid-cols-2 gap-2 text-xs font-sans">
+          <div className="bg-white/[0.03] rounded-lg p-2.5 border border-white/[0.06] space-y-1">
+            <div className="font-semibold text-[#EDEDEF] text-[11px]">{proposal.decisionData.optionA.name}</div>
+            <div className="text-[10px] text-[#8A8F98] font-mono">Impact: {proposal.decisionData.optionA.impact} • Effort: {proposal.decisionData.optionA.effort}</div>
+            <p className="text-[10px] text-[#8A8F98] leading-snug">{proposal.decisionData.optionA.evidence}</p>
           </div>
-          <div className="bg-white rounded-lg p-2.5 border border-slate-200 space-y-1">
-            <div className="font-bold text-slate-800 text-[11px]">{proposal.decisionData.optionB.name}</div>
-            <div className="text-[10px] text-slate-500">Impact: {proposal.decisionData.optionB.impact} • Effort: {proposal.decisionData.optionB.effort}</div>
-            <p className="text-[10px] text-slate-600 leading-snug">{proposal.decisionData.optionB.evidence}</p>
+          <div className="bg-white/[0.03] rounded-lg p-2.5 border border-white/[0.06] space-y-1">
+            <div className="font-semibold text-[#EDEDEF] text-[11px]">{proposal.decisionData.optionB.name}</div>
+            <div className="text-[10px] text-[#8A8F98] font-mono">Impact: {proposal.decisionData.optionB.impact} • Effort: {proposal.decisionData.optionB.effort}</div>
+            <p className="text-[10px] text-[#8A8F98] leading-snug">{proposal.decisionData.optionB.evidence}</p>
           </div>
         </div>
       )}
 
       {/* Action Trigger Buttons */}
-      <div className="mt-3.5 flex items-center justify-between gap-3 pt-2">
-        <div className="text-[11px] text-slate-500">
+      <div className="mt-3.5 flex items-center justify-between gap-3 pt-2 font-sans">
+        <div className="text-[11px] text-[#8A8F98]">
           {isConfirmed ? (
-            <span className="text-emerald-700 font-medium flex items-center gap-1">
+            <span className="text-emerald-400 font-medium flex items-center gap-1">
               <CheckCircle2 size={12} />
               Saved to your startup workspace
             </span>
@@ -226,7 +226,7 @@ export const ActionProposalCard: React.FC<ActionProposalCardProps> = ({
           {isConfirmed ? (
             <button
               onClick={() => onNavigate && onNavigate(getTargetRoute())}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-blue-50 text-[#0052FF] hover:bg-blue-100 transition cursor-pointer"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-[#5E6AD2]/20 text-indigo-300 hover:bg-[#5E6AD2]/30 border border-[#5E6AD2]/30 transition cursor-pointer font-sans"
             >
               <span>View in {getTargetRoute()}</span>
               <ArrowRight size={12} />
@@ -235,7 +235,7 @@ export const ActionProposalCard: React.FC<ActionProposalCardProps> = ({
             <button
               onClick={handleConfirm}
               disabled={loading}
-              className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-bold bg-[#0052FF] text-white hover:bg-blue-700 shadow-xs hover:shadow transition cursor-pointer disabled:opacity-50"
+              className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-[#5E6AD2] text-white hover:bg-[#6872D9] shadow-[0_0_12px_rgba(94,106,210,0.3)] transition cursor-pointer disabled:opacity-50 font-sans"
             >
               {loading ? (
                 <>
