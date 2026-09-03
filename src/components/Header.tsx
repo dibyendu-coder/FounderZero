@@ -249,14 +249,11 @@ export const Header: React.FC<HeaderProps> = ({
                   )}
                 </div>
                 <div className="text-[#a1a4a5] text-[11px] truncate font-commit">{userEmail}</div>
-              </div>
-                <div className="text-slate-400 dark:text-slate-500 text-[10px] mt-1 flex items-center gap-1 font-mono">
-                  <Building2 size={11} className="text-slate-400" />
+                <div className="text-[#a1a4a5] text-[10px] mt-1 flex items-center gap-1 font-commit">
+                  <Building2 size={11} className="text-[#a1a4a5]" />
                   <span>{profile.name} • {profile.stage}</span>
                 </div>
               </div>
-
-
 
               {/* Menu Links */}
               <div className="py-1">
@@ -267,9 +264,9 @@ export const Header: React.FC<HeaderProps> = ({
                         onNavigate('profile');
                         setUserMenuOpen(false);
                       }}
-                      className="w-full text-left px-4 py-2 flex items-center gap-2.5 text-slate-900 dark:text-slate-100 font-semibold hover:bg-slate-50 dark:hover:bg-slate-800 transition"
+                      className="w-full text-left px-4 py-2 flex items-center gap-2.5 text-[#ffffff] font-medium hover:bg-[#0b0e14] transition cursor-pointer"
                     >
-                      <UserIcon size={14} className="text-[#0052FF]" />
+                      <UserIcon size={14} className="text-[#9281f7]" />
                       <span>Curated Founder Profile</span>
                     </button>
                     <button
@@ -277,9 +274,9 @@ export const Header: React.FC<HeaderProps> = ({
                         onNavigate('settings');
                         setUserMenuOpen(false);
                       }}
-                      className="w-full text-left px-4 py-2 flex items-center gap-2.5 text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition"
+                      className="w-full text-left px-4 py-2 flex items-center gap-2.5 text-[#f0f0f0] hover:bg-[#0b0e14] transition cursor-pointer"
                     >
-                      <Settings size={14} className="text-slate-400" />
+                      <Settings size={14} className="text-[#a1a4a5]" />
                       <span>Startup Settings & Calibration</span>
                     </button>
                     <button
@@ -287,9 +284,9 @@ export const Header: React.FC<HeaderProps> = ({
                         onNavigate('onboarding');
                         setUserMenuOpen(false);
                       }}
-                      className="w-full text-left px-4 py-2 flex items-center gap-2.5 text-blue-600 dark:text-blue-400 font-medium hover:bg-blue-50 dark:hover:bg-blue-950/40 transition"
+                      className="w-full text-left px-4 py-2 flex items-center gap-2.5 text-[#70b8ff] font-medium hover:bg-[#0b0e14] transition cursor-pointer font-commit text-xs"
                     >
-                      <Sparkles size={14} className="text-blue-500" />
+                      <Sparkles size={14} className="text-[#70b8ff]" />
                       <span>Re-calibrate Onboarding OS</span>
                     </button>
                   </>
@@ -301,25 +298,25 @@ export const Header: React.FC<HeaderProps> = ({
                       onOpenAuth();
                       setUserMenuOpen(false);
                     }}
-                    className="w-full text-left px-4 py-2 flex items-center gap-2.5 text-[#0052FF] dark:text-blue-400 font-semibold hover:bg-blue-50 dark:hover:bg-blue-950/40 transition"
+                    className="w-full text-left px-4 py-2 flex items-center gap-2.5 text-[#9281f7] font-medium hover:bg-[#0b0e14] transition cursor-pointer font-commit text-xs"
                   >
-                    <Sparkles size={14} className="text-[#0052FF]" />
+                    <Sparkles size={14} className="text-[#9281f7]" />
                     <span>Create Real Account</span>
                   </button>
                 )}
               </div>
 
               {/* Sign Out / Exit */}
-              <div className="pt-1 border-t border-slate-100 dark:border-slate-800">
+              <div className="pt-1 border-t border-[#292d30]">
                 {onLogout && (
                   <button
                     onClick={() => {
                       setUserMenuOpen(false);
                       onLogout();
                     }}
-                    className="w-full text-left px-4 py-2 flex items-center gap-2.5 text-rose-600 dark:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-950/40 transition font-medium"
+                    className="w-full text-left px-4 py-2 flex items-center gap-2.5 text-[#ff9592] hover:bg-[#0b0e14] transition font-medium cursor-pointer"
                   >
-                    <LogOut size={14} className="text-rose-500" />
+                    <LogOut size={14} className="text-[#ff9592]" />
                     <span>Sign Out of Session</span>
                   </button>
                 )}
