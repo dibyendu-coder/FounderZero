@@ -20,40 +20,40 @@ export const EvidenceBreakdownAccordion: React.FC<EvidenceBreakdownAccordionProp
   if (!hasData) return null;
 
   return (
-    <div className="mt-3 rounded-lg border border-slate-200/80 bg-slate-50/70 overflow-hidden text-xs">
+    <div className="mt-3 rounded-lg border border-white/10 bg-[#0a0a0c] overflow-hidden text-xs text-[#EDEDEF]">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full px-3 py-2 flex items-center justify-between text-slate-700 hover:bg-slate-100/80 transition cursor-pointer font-medium"
+        className="w-full px-3 py-2 flex items-center justify-between text-[#EDEDEF] hover:bg-white/[0.04] transition cursor-pointer font-medium"
       >
-        <div className="flex items-center gap-2">
-          <Database size={13} className="text-blue-600" />
-          <span className="font-mono text-[11px] font-semibold text-slate-800">
+        <div className="flex items-center gap-2 font-sans">
+          <Database size={13} className="text-[#5E6AD2]" />
+          <span className="font-mono text-[11px] font-semibold text-[#EDEDEF]">
             Evidence & Reasoning Breakdown
           </span>
-          <span className="text-[10px] text-slate-500">
+          <span className="text-[10px] text-[#8A8F98]">
             ({(evidence.knownData?.length || 0) + (evidence.founderAssumptions?.length || 0)} signals)
           </span>
         </div>
-        <div className="flex items-center gap-1 text-[11px] text-slate-500 font-mono">
+        <div className="flex items-center gap-1 text-[11px] text-[#8A8F98] font-mono">
           <span>{isOpen ? 'Hide' : 'Inspect'}</span>
           {isOpen ? <ChevronUp size={13} /> : <ChevronDown size={13} />}
         </div>
       </button>
 
       {isOpen && (
-        <div className="p-3 pt-1 border-t border-slate-200/60 space-y-3 bg-white">
+        <div className="p-3 pt-2 border-t border-white/[0.06] space-y-3 bg-[#050506] font-sans text-[#EDEDEF]">
           {/* Known Data */}
           {evidence.knownData && evidence.knownData.length > 0 && (
-            <div className="space-y-1">
-              <div className="flex items-center gap-1.5 text-[11px] font-bold text-emerald-700">
-                <span className="w-2 h-2 rounded-full bg-emerald-500" />
+            <div className="space-y-1 font-sans">
+              <div className="flex items-center gap-1.5 text-[11px] font-bold text-emerald-400">
+                <span className="w-2 h-2 rounded-full bg-emerald-400" />
                 <span>Known Data (from Telemetry & Interviews)</span>
               </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5 pl-3.5">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5 pl-3.5 font-sans">
                 {evidence.knownData.map((item, idx) => (
-                  <div key={idx} className="bg-emerald-50/60 rounded px-2 py-1 border border-emerald-100 text-[11px]">
-                    <span className="text-slate-600">{item.label}: </span>
-                    <strong className="text-emerald-900 font-mono font-semibold">{item.value}</strong>
+                  <div key={idx} className="bg-emerald-500/10 rounded px-2 py-1 border border-emerald-500/30 text-[11px]">
+                    <span className="text-[#8A8F98]">{item.label}: </span>
+                    <strong className="text-emerald-200 font-mono font-semibold">{item.value}</strong>
                   </div>
                 ))}
               </div>
@@ -62,12 +62,12 @@ export const EvidenceBreakdownAccordion: React.FC<EvidenceBreakdownAccordionProp
 
           {/* Founder Assumptions */}
           {evidence.founderAssumptions && evidence.founderAssumptions.length > 0 && (
-            <div className="space-y-1">
-              <div className="flex items-center gap-1.5 text-[11px] font-bold text-amber-700">
-                <span className="w-2 h-2 rounded-full bg-amber-500" />
+            <div className="space-y-1 font-sans">
+              <div className="flex items-center gap-1.5 text-[11px] font-bold text-amber-400">
+                <span className="w-2 h-2 rounded-full bg-amber-400" />
                 <span>Founder Assumptions (Unverified Beliefs)</span>
               </div>
-              <ul className="list-disc list-inside space-y-0.5 pl-3.5 text-[11px] text-amber-900">
+              <ul className="list-disc list-inside space-y-0.5 pl-3.5 text-[11px] text-amber-200">
                 {evidence.founderAssumptions.map((assump, idx) => (
                   <li key={idx} className="leading-snug">{assump}</li>
                 ))}
@@ -77,12 +77,12 @@ export const EvidenceBreakdownAccordion: React.FC<EvidenceBreakdownAccordionProp
 
           {/* AI Inferences */}
           {evidence.inferences && evidence.inferences.length > 0 && (
-            <div className="space-y-1">
-              <div className="flex items-center gap-1.5 text-[11px] font-bold text-blue-700">
-                <Brain size={12} className="text-blue-500" />
+            <div className="space-y-1 font-sans">
+              <div className="flex items-center gap-1.5 text-[11px] font-bold text-indigo-300">
+                <Brain size={12} className="text-[#5E6AD2]" />
                 <span>AI Inferences (Pattern Deductions)</span>
               </div>
-              <ul className="list-disc list-inside space-y-0.5 pl-3.5 text-[11px] text-blue-900">
+              <ul className="list-disc list-inside space-y-0.5 pl-3.5 text-[11px] text-indigo-200">
                 {evidence.inferences.map((inf, idx) => (
                   <li key={idx} className="leading-snug">{inf}</li>
                 ))}
@@ -92,12 +92,12 @@ export const EvidenceBreakdownAccordion: React.FC<EvidenceBreakdownAccordionProp
 
           {/* General Knowledge */}
           {evidence.generalKnowledge && evidence.generalKnowledge.length > 0 && (
-            <div className="space-y-1">
-              <div className="flex items-center gap-1.5 text-[11px] font-bold text-slate-600">
-                <BookOpen size={12} className="text-slate-400" />
+            <div className="space-y-1 font-sans">
+              <div className="flex items-center gap-1.5 text-[11px] font-bold text-[#8A8F98]">
+                <BookOpen size={12} className="text-[#8A8F98]" />
                 <span>General Knowledge (Startup Base Rates)</span>
               </div>
-              <ul className="list-disc list-inside space-y-0.5 pl-3.5 text-[11px] text-slate-600">
+              <ul className="list-disc list-inside space-y-0.5 pl-3.5 text-[11px] text-[#8A8F98]">
                 {evidence.generalKnowledge.map((gk, idx) => (
                   <li key={idx} className="leading-snug">{gk}</li>
                 ))}

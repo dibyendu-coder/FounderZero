@@ -159,19 +159,19 @@ export const CopilotPromptComposer: React.FC<CopilotPromptComposerProps> = ({
               key={c.id}
               type="button"
               onClick={() => onToggleContext(c.id)}
-              className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-md text-[11px] font-mono transition cursor-pointer shrink-0 border ${
+              className={`px-2.5 py-1 rounded-lg text-[11px] font-mono transition cursor-pointer shrink-0 border ${
                 c.active
-                  ? 'bg-blue-50 text-blue-900 border-blue-200 font-semibold shadow-2xs'
-                  : 'bg-white text-slate-400 border-slate-200/80 hover:text-slate-600 hover:border-slate-300'
+                  ? 'bg-[#5E6AD2]/20 text-indigo-300 border-[#5E6AD2]/40 font-semibold'
+                  : 'bg-white/[0.03] text-[#8A8F98] border-white/[0.06] hover:text-[#EDEDEF] hover:bg-white/[0.06]'
               }`}
               title={c.active ? `Click to exclude ${c.label} from AI context` : `Click to include ${c.label} in AI context`}
             >
-              <Icon size={11} className={c.active ? 'text-blue-600' : 'text-slate-400'} />
+              <Icon size={11} className={c.active ? 'text-indigo-300' : 'text-[#8A8F98]'} />
               <span>{c.label}</span>
               {c.active ? (
-                <span className="text-blue-500 hover:text-blue-700 ml-0.5">✕</span>
+                <span className="text-[#5E6AD2] hover:text-indigo-300 ml-0.5">✕</span>
               ) : (
-                <span className="text-slate-300 ml-0.5">+</span>
+                <span className="text-[#8A8F98] ml-0.5">+</span>
               )}
             </button>
           );
@@ -179,7 +179,7 @@ export const CopilotPromptComposer: React.FC<CopilotPromptComposerProps> = ({
       </div>
 
       {/* Primary Composer Box */}
-      <div className="relative bg-white border border-slate-300/90 rounded-2xl p-3 shadow-sm focus-within:ring-2 focus-within:ring-blue-600/20 focus-within:border-blue-600 transition-all">
+      <div className="relative bg-[#0a0a0c] border border-white/10 rounded-2xl p-3 shadow-lg focus-within:ring-1 focus-within:ring-[#5E6AD2] focus-within:border-[#5E6AD2] transition-all">
         <textarea
           ref={textareaRef}
           id="copilot-prompt-textarea"
@@ -188,11 +188,11 @@ export const CopilotPromptComposer: React.FC<CopilotPromptComposerProps> = ({
           onKeyDown={handleKeyDown}
           placeholder="Ask anything about your startup... (Type / for commands)"
           rows={1}
-          className="w-full bg-transparent border-0 resize-none text-xs sm:text-sm text-slate-900 placeholder:text-slate-400 focus:outline-hidden leading-relaxed max-h-48 min-h-[44px]"
+          className="w-full bg-transparent border-0 resize-none text-xs sm:text-sm text-[#EDEDEF] placeholder:text-[#8A8F98] focus:outline-none leading-relaxed max-h-48 min-h-[44px] font-sans"
         />
 
         {/* Action Controls Bar */}
-        <div className="flex items-center justify-between pt-2 border-t border-slate-100 mt-1">
+        <div className="flex items-center justify-between pt-2 border-t border-white/[0.06] mt-1">
           <div className="flex items-center gap-2">
             <button
               type="button"
@@ -201,15 +201,15 @@ export const CopilotPromptComposer: React.FC<CopilotPromptComposerProps> = ({
                 setSlashFilter('/');
                 if (textareaRef.current) textareaRef.current.focus();
               }}
-              className="px-2 py-1 rounded bg-slate-100 hover:bg-slate-200 text-slate-600 text-[11px] font-mono font-semibold transition cursor-pointer flex items-center gap-1"
+              className="px-2 py-1 rounded-lg bg-white/[0.06] hover:bg-white/[0.10] text-[#EDEDEF] text-[11px] font-mono font-semibold transition cursor-pointer flex items-center gap-1 border border-white/10"
               title="Browse slash commands"
             >
-              <span className="text-blue-600 font-bold">/</span>
+              <span className="text-[#5E6AD2] font-bold">/</span>
               <span>Commands</span>
             </button>
 
-            <span className="text-[11px] font-mono text-slate-400 hidden sm:inline">
-              <kbd className="bg-slate-100 px-1 py-0.5 rounded border border-slate-200 text-slate-500 font-semibold text-[10px]">Enter</kbd> to send
+            <span className="text-[11px] font-mono text-[#8A8F98] hidden sm:inline">
+              <kbd className="bg-white/10 px-1 py-0.5 rounded border border-white/10 text-[#EDEDEF] font-semibold text-[10px]">Enter</kbd> to send
             </span>
           </div>
 
@@ -218,10 +218,10 @@ export const CopilotPromptComposer: React.FC<CopilotPromptComposerProps> = ({
               <button
                 type="button"
                 onClick={onStop}
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold transition cursor-pointer shadow-xs"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-rose-600/20 text-rose-300 border border-rose-500/40 text-xs font-bold transition cursor-pointer shadow-xs"
                 title="Stop generation"
               >
-                <Square size={11} className="fill-white" />
+                <Square size={11} className="fill-rose-300" />
                 <span>Stop</span>
               </button>
             ) : (
@@ -230,7 +230,7 @@ export const CopilotPromptComposer: React.FC<CopilotPromptComposerProps> = ({
                 id="copilot-send-btn"
                 onClick={() => onSend()}
                 disabled={!inputText.trim()}
-                className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-700 disabled:opacity-40 disabled:hover:bg-blue-600 text-white text-xs font-bold transition cursor-pointer shadow-xs disabled:cursor-not-allowed"
+                className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-lg bg-[#5E6AD2] hover:bg-[#6872D9] disabled:opacity-40 disabled:hover:bg-[#5E6AD2] text-white text-xs font-semibold transition cursor-pointer shadow-[0_0_12px_rgba(94,106,210,0.3)] disabled:cursor-not-allowed"
                 title="Send message"
               >
                 <span>Ask</span>

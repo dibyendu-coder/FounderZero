@@ -335,50 +335,50 @@ export const SaveResourceModal: React.FC<SaveResourceModalProps> = ({
   ];
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-xs overflow-y-auto">
-      <div className="bg-white rounded-2xl w-full max-w-2xl border border-slate-200/80 shadow-2xl overflow-hidden my-8 animate-in fade-in zoom-in-95 duration-150">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#050506]/85 backdrop-blur-xl overflow-y-auto font-sans text-[#EDEDEF]">
+      <div className="bg-[#0a0a0c] text-[#EDEDEF] rounded-2xl w-full max-w-2xl border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.8)] overflow-hidden my-8 animate-in fade-in zoom-in-95 duration-150">
         {/* Header */}
-        <div className="px-6 py-4 border-b border-slate-100 flex items-center justify-between bg-slate-50/70">
+        <div className="px-6 py-4 border-b border-white/[0.06] flex items-center justify-between bg-[#050506]">
           <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-xl bg-blue-600/10 text-blue-600 flex items-center justify-center font-bold">
+            <div className="w-8 h-8 rounded-xl bg-[#5E6AD2]/20 text-indigo-300 flex items-center justify-center font-bold">
               <Bookmark size={17} />
             </div>
             <div>
-              <h2 className="text-base font-bold text-slate-900">Save to Founder Vault</h2>
-              <p className="text-xs text-slate-500 font-mono">Found it? Save it now, find it when you need it.</p>
+              <h2 className="text-base font-semibold text-[#EDEDEF]">Save to Founder Vault</h2>
+              <p className="text-xs text-[#8A8F98] font-mono">Found it? Save it now, find it when you need it.</p>
             </div>
           </div>
           <button
             onClick={onClose}
-            className="p-1.5 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition"
+            className="p-1.5 rounded-lg text-[#8A8F98] hover:text-[#EDEDEF] hover:bg-white/[0.06] transition"
           >
             <X size={18} />
           </button>
         </div>
 
         {/* Form Body */}
-        <form onSubmit={handleSubmit} className="p-6 space-y-5 max-h-[75vh] overflow-y-auto">
+        <form onSubmit={handleSubmit} className="p-6 space-y-5 max-h-[75vh] overflow-y-auto font-sans">
           {saveSuccess && (
-            <div className="p-3.5 bg-emerald-50 border border-emerald-200 rounded-xl flex items-center gap-3 text-emerald-800 text-xs font-semibold">
-              <CheckCircle2 size={18} className="text-emerald-600 shrink-0" />
+            <div className="p-3.5 bg-emerald-500/10 border border-emerald-500/30 rounded-xl flex items-center gap-3 text-emerald-300 text-xs font-semibold">
+              <CheckCircle2 size={18} className="text-emerald-400 shrink-0" />
               <span>✓ Saved to Founder Vault! Your library has been synchronized.</span>
             </div>
           )}
 
           {duplicateWarning && (
-            <div className="p-3.5 bg-amber-50 border border-amber-200 rounded-xl flex items-center gap-3 text-amber-900 text-xs">
-              <AlertTriangle size={18} className="text-amber-600 shrink-0" />
+            <div className="p-3.5 bg-amber-500/10 border border-amber-500/30 rounded-xl flex items-center gap-3 text-amber-200 text-xs">
+              <AlertTriangle size={18} className="text-amber-400 shrink-0" />
               <div>
                 <p className="font-semibold">{duplicateWarning}</p>
-                <p className="text-[11px] text-amber-700 mt-0.5">You can update notes, priority, or assign it to additional collections below.</p>
+                <p className="text-[11px] text-amber-300/80 mt-0.5">You can update notes, priority, or assign it to additional collections below.</p>
               </div>
             </div>
           )}
 
           {/* URL Input with Smart Auto-Extract */}
           <div className="space-y-1.5">
-            <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider font-mono">
-              Resource URL <span className="text-blue-600">*</span>
+            <label className="block text-xs font-bold text-[#8A8F98] uppercase tracking-wider font-mono">
+              Resource URL <span className="text-[#5E6AD2]">*</span>
             </label>
             <div className="flex gap-2">
               <div className="relative flex-1">
@@ -392,7 +392,7 @@ export const SaveResourceModal: React.FC<SaveResourceModalProps> = ({
                     }
                   }}
                   placeholder="https://github.com/... or https://..."
-                  className="w-full pl-3 pr-3 py-2 text-xs font-mono bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white transition"
+                  className="w-full pl-3 pr-3 py-2 text-xs font-mono bg-white/[0.04] border border-white/10 text-[#EDEDEF] placeholder:text-[#8A8F98] rounded-xl focus:outline-none focus:border-[#5E6AD2] transition"
                   required
                 />
               </div>
@@ -400,23 +400,23 @@ export const SaveResourceModal: React.FC<SaveResourceModalProps> = ({
                 type="button"
                 onClick={() => handleExtract()}
                 disabled={isExtracting || !url.trim()}
-                className="px-3.5 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 disabled:opacity-50 text-white text-xs font-semibold flex items-center gap-1.5 transition shrink-0"
+                className="px-3.5 py-2 rounded-xl bg-[#5E6AD2] hover:bg-[#6872D9] disabled:opacity-50 text-white text-xs font-semibold flex items-center gap-1.5 transition shrink-0 cursor-pointer"
               >
                 {isExtracting ? (
                   <>
-                    <Loader2 size={13} className="animate-spin text-blue-400" />
+                    <Loader2 size={13} className="animate-spin text-white" />
                     <span>Detecting...</span>
                   </>
                 ) : (
                   <>
-                    <Sparkles size={13} className="text-blue-400" />
+                    <Sparkles size={13} className="text-white" />
                     <span>Auto-Detect</span>
                   </>
                 )}
               </button>
             </div>
             {aiOrganizeSuggested && (
-              <p className="text-[11px] text-blue-600 flex items-center gap-1">
+              <p className="text-[11px] text-[#5E6AD2] flex items-center gap-1">
                 <Sparkles size={12} /> Auto-detected title, tags, and suggested collections based on URL.
               </p>
             )}
@@ -425,24 +425,24 @@ export const SaveResourceModal: React.FC<SaveResourceModalProps> = ({
           {/* Title & Description */}
           <div className="grid grid-cols-1 gap-4">
             <div className="space-y-1">
-              <label className="block text-xs font-bold text-slate-700">Title</label>
+              <label className="block text-xs font-medium text-[#EDEDEF]">Title</label>
               <input
                 type="text"
                 value={title}
                 onChange={e => setTitle(e.target.value)}
                 placeholder="e.g. OpenCode — Autonomous Coding Agent"
-                className="w-full px-3 py-2 text-xs text-slate-900 bg-white border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 font-medium"
+                className="w-full px-3 py-2 text-xs text-[#EDEDEF] bg-white/[0.04] border border-white/10 rounded-xl focus:outline-none focus:border-[#5E6AD2] font-medium"
                 required
               />
             </div>
             <div className="space-y-1">
-              <label className="block text-xs font-bold text-slate-700">Description / Summary</label>
+              <label className="block text-xs font-medium text-[#EDEDEF]">Description / Summary</label>
               <textarea
                 value={description}
                 onChange={e => setDescription(e.target.value)}
                 rows={2}
                 placeholder="What does this resource do for your startup?"
-                className="w-full px-3 py-2 text-xs text-slate-700 bg-white border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
+                className="w-full px-3 py-2 text-xs text-[#EDEDEF] bg-white/[0.04] border border-white/10 rounded-xl focus:outline-none focus:border-[#5E6AD2] resize-none"
               />
             </div>
           </div>
@@ -450,11 +450,11 @@ export const SaveResourceModal: React.FC<SaveResourceModalProps> = ({
           {/* Resource Type & Category Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="space-y-1">
-              <label className="block text-xs font-bold text-slate-700">Resource Type</label>
+              <label className="block text-xs font-medium text-[#EDEDEF]">Resource Type</label>
               <select
                 value={resourceType}
                 onChange={e => setResourceType(e.target.value as VaultResourceType)}
-                className="w-full px-3 py-2 text-xs bg-white border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 text-slate-800 font-medium"
+                className="w-full px-3 py-2 text-xs bg-[#0a0a0c] border border-white/10 rounded-xl focus:outline-none focus:border-[#5E6AD2] text-[#EDEDEF] font-medium"
               >
                 {resourceTypes.map(t => (
                   <option key={t.id} value={t.id}>
@@ -465,11 +465,11 @@ export const SaveResourceModal: React.FC<SaveResourceModalProps> = ({
             </div>
 
             <div className="space-y-1">
-              <label className="block text-xs font-bold text-slate-700">Category</label>
+              <label className="block text-xs font-medium text-[#EDEDEF]">Category</label>
               <select
                 value={category}
                 onChange={e => setCategory(e.target.value)}
-                className="w-full px-3 py-2 text-xs bg-white border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 text-slate-800 font-medium"
+                className="w-full px-3 py-2 text-xs bg-[#0a0a0c] border border-white/10 rounded-xl focus:outline-none focus:border-[#5E6AD2] text-[#EDEDEF] font-medium"
               >
                 {categories.map(c => (
                   <option key={c} value={c}>
@@ -483,29 +483,29 @@ export const SaveResourceModal: React.FC<SaveResourceModalProps> = ({
           {/* Folders & Collections */}
           <div className="space-y-2">
             <div className="flex items-center justify-between">
-              <label className="block text-xs font-bold text-slate-700">Assign to Collections / Folders</label>
+              <label className="block text-xs font-medium text-[#EDEDEF]">Assign to Collections / Folders</label>
               <button
                 type="button"
                 onClick={() => setShowAddCollection(!showAddCollection)}
-                className="text-[11px] font-semibold text-blue-600 hover:text-blue-800 flex items-center gap-1"
+                className="text-[11px] font-semibold text-[#5E6AD2] hover:text-indigo-300 flex items-center gap-1 cursor-pointer"
               >
                 <Plus size={12} /> New Folder
               </button>
             </div>
 
             {showAddCollection && (
-              <div className="flex gap-2 p-2.5 bg-slate-50 border border-slate-200 rounded-xl">
+              <div className="flex gap-2 p-2.5 bg-white/[0.03] border border-white/[0.06] rounded-xl">
                 <input
                   type="text"
                   value={newCollectionName}
                   onChange={e => setNewCollectionName(e.target.value)}
                   placeholder="e.g. AI Tools, Read Later, MVP Tools"
-                  className="flex-1 px-3 py-1.5 text-xs bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-500"
+                  className="flex-1 px-3 py-1.5 text-xs bg-white/[0.04] border border-white/10 text-[#EDEDEF] rounded-lg focus:outline-none focus:border-[#5E6AD2]"
                 />
                 <button
                   type="button"
                   onClick={handleCreateCollection}
-                  className="px-3 py-1.5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-xs font-semibold transition"
+                  className="px-3 py-1.5 bg-[#5E6AD2] hover:bg-[#6872D9] text-white rounded-lg text-xs font-semibold transition cursor-pointer"
                 >
                   Add
                 </button>
@@ -520,18 +520,18 @@ export const SaveResourceModal: React.FC<SaveResourceModalProps> = ({
                     key={col.id || col.name}
                     type="button"
                     onClick={() => handleToggleCollection(col.name)}
-                    className={`px-2.5 py-1 rounded-lg text-xs font-medium border transition flex items-center gap-1.5 ${
+                    className={`px-2.5 py-1 rounded-lg text-xs font-medium border transition flex items-center gap-1.5 cursor-pointer ${
                       isSelected
-                        ? 'bg-blue-50 border-blue-400 text-blue-700 font-semibold'
-                        : 'bg-white border-slate-200 text-slate-600 hover:border-slate-300'
+                        ? 'bg-[#5E6AD2]/20 border-[#5E6AD2]/50 text-indigo-300 font-semibold'
+                        : 'bg-white/[0.03] border-white/10 text-[#8A8F98] hover:border-white/20'
                     }`}
                   >
                     <span
                       className="w-2 h-2 rounded-full"
-                      style={{ backgroundColor: col.color || '#0052FF' }}
+                      style={{ backgroundColor: col.color || '#5E6AD2' }}
                     />
                     <span>{col.name}</span>
-                    {isSelected && <span className="text-blue-600 text-[10px]">✓</span>}
+                    {isSelected && <span className="text-[#5E6AD2] text-[10px]">✓</span>}
                   </button>
                 );
               })}
@@ -541,11 +541,11 @@ export const SaveResourceModal: React.FC<SaveResourceModalProps> = ({
           {/* Tags & Reading / Priority */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
             <div className="sm:col-span-1 space-y-1">
-              <label className="block text-xs font-bold text-slate-700">Reading Status</label>
+              <label className="block text-xs font-medium text-[#EDEDEF]">Reading Status</label>
               <select
                 value={status}
                 onChange={e => setStatus(e.target.value as ReadLaterStatus)}
-                className="w-full px-3 py-2 text-xs bg-white border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-3 py-2 text-xs bg-[#0a0a0c] border border-white/10 text-[#EDEDEF] rounded-xl focus:outline-none focus:border-[#5E6AD2]"
               >
                 <option value="unread">Unread</option>
                 <option value="reading">Reading</option>
@@ -555,11 +555,11 @@ export const SaveResourceModal: React.FC<SaveResourceModalProps> = ({
             </div>
 
             <div className="sm:col-span-1 space-y-1">
-              <label className="block text-xs font-bold text-slate-700">Priority</label>
+              <label className="block text-xs font-medium text-[#EDEDEF]">Priority</label>
               <select
                 value={priority}
                 onChange={e => setPriority(e.target.value as VaultPriority)}
-                className="w-full px-3 py-2 text-xs bg-white border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-3 py-2 text-xs bg-[#0a0a0c] border border-white/10 text-[#EDEDEF] rounded-xl focus:outline-none focus:border-[#5E6AD2]"
               >
                 <option value="high">🔥 High Priority</option>
                 <option value="medium">⚡ Medium Priority</option>
@@ -568,74 +568,74 @@ export const SaveResourceModal: React.FC<SaveResourceModalProps> = ({
             </div>
 
             <div className="sm:col-span-1 space-y-1">
-              <label className="block text-xs font-bold text-slate-700">Read Time (mins)</label>
+              <label className="block text-xs font-medium text-[#EDEDEF]">Read Time (mins)</label>
               <input
                 type="number"
                 min="1"
                 max="180"
                 value={readingTime}
                 onChange={e => setReadingTime(Number(e.target.value))}
-                className="w-full px-3 py-2 text-xs bg-white border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-3 py-2 text-xs bg-white/[0.04] border border-white/10 text-[#EDEDEF] rounded-xl focus:outline-none focus:border-[#5E6AD2]"
               />
             </div>
           </div>
 
           {/* Tags */}
           <div className="space-y-1">
-            <label className="block text-xs font-bold text-slate-700">Tags (comma separated)</label>
+            <label className="block text-xs font-medium text-[#EDEDEF]">Tags (comma separated)</label>
             <input
               type="text"
               value={tagsInput}
               onChange={e => setTagsInput(e.target.value)}
               placeholder="e.g. AI, Open Source, Retention, Customer Discovery"
-              className="w-full px-3 py-2 text-xs bg-white border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 font-mono"
+              className="w-full px-3 py-2 text-xs bg-white/[0.04] border border-white/10 text-[#EDEDEF] rounded-xl focus:outline-none focus:border-[#5E6AD2] font-mono"
             />
           </div>
 
           {/* Personal Founder Notes */}
           <div className="space-y-1">
-            <label className="block text-xs font-bold text-slate-700">
-              Personal Founder Notes <span className="text-slate-400 font-normal">(Private to you)</span>
+            <label className="block text-xs font-medium text-[#EDEDEF]">
+              Personal Founder Notes <span className="text-[#8A8F98] font-normal">(Private to you)</span>
             </label>
             <textarea
               value={notes}
               onChange={e => setNotes(e.target.value)}
               rows={2}
               placeholder="e.g. 'Try this when current coding workflow becomes too slow' or 'Use questions during next week interviews'"
-              className="w-full px-3 py-2 text-xs text-slate-800 bg-white border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none font-sans"
+              className="w-full px-3 py-2 text-xs text-[#EDEDEF] bg-white/[0.04] border border-white/10 rounded-xl focus:outline-none focus:border-[#5E6AD2] resize-none font-sans"
             />
           </div>
 
           {/* Remind Me Later Option */}
-          <div className="p-3.5 bg-slate-50 border border-slate-200 rounded-xl space-y-3">
+          <div className="p-3.5 bg-white/[0.03] border border-white/[0.06] rounded-xl space-y-3 font-sans">
             <div className="flex items-center justify-between">
-              <label className="flex items-center gap-2 cursor-pointer text-xs font-bold text-slate-800">
+              <label className="flex items-center gap-2 cursor-pointer text-xs font-medium text-[#EDEDEF]">
                 <input
                   type="checkbox"
                   checked={reminderEnabled}
                   onChange={e => setReminderEnabled(e.target.checked)}
-                  className="rounded text-blue-600 focus:ring-blue-500"
+                  className="rounded text-[#5E6AD2] focus:ring-[#5E6AD2]"
                 />
-                <Bell size={14} className="text-amber-600" />
+                <Bell size={14} className="text-amber-400" />
                 <span>Set a Reminder for this Resource</span>
               </label>
               {reminderEnabled && (
-                <span className="text-[11px] font-mono text-slate-500 font-medium">Optional</span>
+                <span className="text-[11px] font-mono text-[#8A8F98] font-medium">Optional</span>
               )}
             </div>
 
             {reminderEnabled && (
-              <div className="space-y-2 pt-1">
+              <div className="space-y-2 pt-1 font-sans">
                 <div className="flex flex-wrap gap-2">
                   {(['Tomorrow', 'This week', 'Next week', 'Custom'] as const).map(p => (
                     <button
                       key={p}
                       type="button"
                       onClick={() => setReminderPeriod(p)}
-                      className={`px-2.5 py-1 rounded-lg text-xs font-medium border transition ${
+                      className={`px-2.5 py-1 rounded-lg text-xs font-medium border transition cursor-pointer ${
                         reminderPeriod === p
-                          ? 'bg-amber-100 border-amber-400 text-amber-900 font-bold'
-                          : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-100'
+                          ? 'bg-amber-500/20 border-amber-500/40 text-amber-300 font-bold'
+                          : 'bg-white/[0.04] border-white/10 text-[#8A8F98] hover:bg-white/[0.08]'
                       }`}
                     >
                       {p}
@@ -648,7 +648,7 @@ export const SaveResourceModal: React.FC<SaveResourceModalProps> = ({
                     type="date"
                     value={reminderCustomDate}
                     onChange={e => setReminderCustomDate(e.target.value)}
-                    className="px-3 py-1.5 text-xs bg-white border border-slate-200 rounded-lg text-slate-800"
+                    className="px-3 py-1.5 text-xs bg-white/[0.04] border border-white/10 rounded-lg text-[#EDEDEF]"
                   />
                 )}
 
@@ -657,25 +657,25 @@ export const SaveResourceModal: React.FC<SaveResourceModalProps> = ({
                   value={reminderNote}
                   onChange={e => setReminderNote(e.target.value)}
                   placeholder="Reminder note (e.g. 'Test this tool when building sprint 3 MVP')"
-                  className="w-full px-3 py-1.5 text-xs bg-white border border-slate-200 rounded-lg text-slate-800"
+                  className="w-full px-3 py-1.5 text-xs bg-white/[0.04] border border-white/10 rounded-lg text-[#EDEDEF]"
                 />
               </div>
             )}
           </div>
 
           {/* Footer Actions */}
-          <div className="pt-2 flex items-center justify-end gap-3 border-t border-slate-100">
+          <div className="pt-2 flex items-center justify-end gap-3 border-t border-white/[0.06]">
             <button
               type="button"
               onClick={onClose}
-              className="px-4 py-2 rounded-xl text-xs font-semibold text-slate-600 hover:bg-slate-100 transition"
+              className="px-4 py-2 rounded-xl text-xs font-semibold text-[#8A8F98] hover:bg-white/[0.06] transition cursor-pointer"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={isSaving || (!url.trim() && !title.trim())}
-              className="px-5 py-2 rounded-xl bg-[#0052FF] hover:bg-blue-700 disabled:opacity-50 text-white text-xs font-bold shadow-md shadow-blue-500/20 flex items-center gap-1.5 transition"
+              className="px-5 py-2 rounded-xl bg-[#5E6AD2] hover:bg-[#6872D9] disabled:opacity-50 text-white text-xs font-semibold shadow-[0_0_16px_rgba(94,106,210,0.3)] flex items-center gap-1.5 transition cursor-pointer"
             >
               {isSaving ? (
                 <>

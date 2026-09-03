@@ -59,8 +59,8 @@ export const SourcesBar: React.FC<SourcesBarProps> = ({ sources, onNavigate }) =
   };
 
   return (
-    <div className="mt-2.5 pt-2 border-t border-slate-100 flex flex-wrap items-center gap-1.5 text-xs">
-      <span className="text-[10px] font-mono uppercase tracking-wider font-semibold text-slate-400 mr-1">
+    <div className="mt-2.5 pt-2 border-t border-white/[0.06] flex flex-wrap items-center gap-1.5 text-xs font-sans text-[#EDEDEF]">
+      <span className="text-[10px] font-mono uppercase tracking-wider font-semibold text-[#8A8F98] mr-1">
         Sources:
       </span>
       {sources.map((src, idx) => {
@@ -70,12 +70,12 @@ export const SourcesBar: React.FC<SourcesBarProps> = ({ sources, onNavigate }) =
             key={idx}
             onClick={() => handleClick(src)}
             title={src.subtitle || src.title}
-            className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-slate-100/90 hover:bg-blue-50 text-slate-700 hover:text-blue-700 border border-slate-200/80 hover:border-blue-200 transition text-[11px] font-medium cursor-pointer group"
+            className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-white/[0.04] hover:bg-white/[0.08] text-[#EDEDEF] hover:text-indigo-300 border border-white/10 hover:border-[#5E6AD2]/50 transition text-[11px] font-medium cursor-pointer group"
           >
-            <Icon size={11} className="text-slate-500 group-hover:text-blue-600 shrink-0" />
+            <Icon size={11} className="text-[#8A8F98] group-hover:text-indigo-300 shrink-0" />
             <span className="truncate max-w-[170px]">{src.title}</span>
             {src.value && (
-              <span className="font-mono text-[10px] font-bold text-slate-900 group-hover:text-blue-800 ml-0.5">
+              <span className="font-mono text-[10px] font-bold text-[#EDEDEF] group-hover:text-indigo-200 ml-0.5">
                 ({src.value})
               </span>
             )}
