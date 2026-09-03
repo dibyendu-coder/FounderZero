@@ -14,24 +14,24 @@ export const SectionBadge: React.FC<SectionBadgeProps> = ({
   className = ''
 }) => {
   const styles = {
-    blue: 'bg-[#000000] border-[#292d30] text-[#70b8ff]',
-    emerald: 'bg-[#000000] border-[#292d30] text-[#3ad389]',
-    amber: 'bg-[#000000] border-[#292d30] text-[#ffca16]',
-    rose: 'bg-[#000000] border-[#292d30] text-[#ff9592]',
-    dark: 'bg-[#000000] border-[#292d30] text-[#ffffff]'
+    blue: 'bg-[#5E6AD2]/10 border-[#5E6AD2]/30 text-indigo-300',
+    emerald: 'bg-emerald-500/10 border-emerald-500/30 text-emerald-300',
+    amber: 'bg-amber-500/10 border-amber-500/30 text-amber-300',
+    rose: 'bg-rose-500/10 border-rose-500/30 text-rose-300',
+    dark: 'bg-white/[0.05] border-white/10 text-[#EDEDEF]'
   };
 
   const dotStyles = {
-    blue: 'bg-[#70b8ff]',
-    emerald: 'bg-[#3ad389]',
-    amber: 'bg-[#ffca16]',
-    rose: 'bg-[#ff9592]',
-    dark: 'bg-[#9281f7]'
+    blue: 'bg-[#5E6AD2]',
+    emerald: 'bg-emerald-400',
+    amber: 'bg-amber-400',
+    rose: 'bg-rose-400',
+    dark: 'bg-[#5E6AD2]'
   };
 
   return (
     <div
-      className={`inline-flex items-center gap-2 px-3 py-1 rounded-full border text-[11px] font-commit font-medium tracking-wide ${styles[variant]} ${className}`}
+      className={`inline-flex items-center gap-2 px-3 py-1 rounded-full border text-[11px] font-mono tracking-widest uppercase ${styles[variant]} ${className}`}
     >
       <span className="relative flex h-2 w-2">
         <span className={`animate-ping absolute inline-flex h-full w-full rounded-full ${dotStyles[variant]} opacity-75`}></span>

@@ -881,7 +881,10 @@ export function App() {
   }
 
   return (
-    <div className="min-h-screen bg-[#F8F9FA] text-gray-900 flex flex-col md:flex-row antialiased selection:bg-[#0052FF] selection:text-white">
+    <div className="min-h-screen bg-[#050506] bg-[radial-gradient(ellipse_at_top,#0a0a0f_0%,#050506_50%,#020203_100%)] text-[#EDEDEF] flex flex-col md:flex-row antialiased selection:bg-[#5E6AD2] selection:text-white relative overflow-hidden font-sans">
+      {/* Ambient Lighting Blob Overlay */}
+      <div className="fixed -top-40 left-1/2 -translate-x-1/2 w-[1000px] h-[600px] bg-[#5E6AD2]/15 blur-[140px] pointer-events-none rounded-full" />
+
       {/* Sidebar Navigation */}
       <Sidebar
         currentRoute={currentRoute}

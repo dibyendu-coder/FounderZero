@@ -4,67 +4,55 @@
 
 @layer base {
   :root {
-    /* Resend Style Reference Tokens */
-    --color-void-black: #000000;
-    --color-graphite-hairline: #292d30;
-    --color-white: #ffffff;
-    --color-bone-white: #f0f0f0;
-    --color-ash-gray: #a1a4a5;
-    --color-smoke-gray: #abafb4;
-    --color-iron: #6e727a;
-    --color-charcoal: #464a4d;
-    --color-iris-violet: #9281f7;
-    --color-iris-violet-glow: #baa7ff;
-    --color-signal-blue: #3b9eff;
-    --color-sky-blue: #70b8ff;
-    --color-pulse-green: #3ad389;
-    --color-alarm-red: #ff9592;
-    --color-crimson: #ff6465;
-    --color-amber: #ffca16;
-    --color-amber-glow: #ffd60a;
-    --color-surface-gradient: #0b0e14;
+    /* Linear / Modern Design System Tokens */
+    --background-deep: #020203;
+    --background-base: #050506;
+    --background-elevated: #0a0a0c;
+    --surface-glass: rgba(255, 255, 255, 0.05);
+    --surface-glass-hover: rgba(255, 255, 255, 0.08);
+    --foreground-linear: #EDEDEF;
+    --foreground-muted: #8A8F98;
+    --foreground-subtle: rgba(255, 255, 255, 0.60);
+    --accent-linear: #5E6AD2;
+    --accent-bright: #6872D9;
+    --accent-glow: rgba(94, 106, 210, 0.3);
+    --border-linear: rgba(255, 255, 255, 0.06);
+    --border-linear-hover: rgba(255, 255, 255, 0.10);
+    --border-accent: rgba(94, 106, 210, 0.30);
 
-    --font-inter: 'Inter', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    --font-domaine: 'Playfair Display', 'Instrument Serif', Georgia, serif;
-    --font-abc-favorit: 'Inter', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    --font-commit-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-
-    --primary: #9281f7;
-    --primary-hover: #baa7ff;
-    --primary-light: #0b0e14;
-    --accent: #38BDF8;
-    --background: #000000;
-    --foreground: #f0f0f0;
-    --card: #000000;
-    --card-foreground: #ffffff;
-    --border: #292d30;
-    --muted: #a1a4a5;
-    --muted-light: #0b0e14;
-    --dark-surface: #000000;
-    --dark-surface-elevated: #0b0e14;
+    /* Fallback tokens */
+    --primary: #5E6AD2;
+    --primary-hover: #6872D9;
+    --primary-light: #0a0a0c;
+    --accent: #5E6AD2;
+    --background: #050506;
+    --foreground: #EDEDEF;
+    --card: #0a0a0c;
+    --card-foreground: #EDEDEF;
+    --border: rgba(255, 255, 255, 0.06);
+    --muted: #8A8F98;
+    --muted-light: #0a0a0c;
   }
 
   .dark {
-    --primary: #9281f7;
-    --primary-hover: #baa7ff;
-    --primary-light: #0b0e14;
-    --accent: #38BDF8;
-    --background: #000000;
-    --foreground: #f0f0f0;
-    --card: #000000;
-    --card-foreground: #ffffff;
-    --border: #292d30;
-    --muted: #a1a4a5;
-    --muted-light: #0b0e14;
-    --dark-surface: #000000;
-    --dark-surface-elevated: #0b0e14;
+    --primary: #5E6AD2;
+    --primary-hover: #6872D9;
+    --primary-light: #0a0a0c;
+    --accent: #5E6AD2;
+    --background: #050506;
+    --foreground: #EDEDEF;
+    --card: #0a0a0c;
+    --card-foreground: #EDEDEF;
+    --border: rgba(255, 255, 255, 0.06);
+    --muted: #8A8F98;
+    --muted-light: #0a0a0c;
   }
 
   body {
-    background-color: #000000;
-    color: #f0f0f0;
-    font-family: var(--font-inter);
-    transition: background-color 0.2s ease, color 0.2s ease;
+    background-color: #050506;
+    color: #EDEDEF;
+    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    transition: background-color 0.2s cubic-bezier(0.16, 1, 0.3, 1), color 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   }
 }
 

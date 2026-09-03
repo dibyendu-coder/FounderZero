@@ -107,27 +107,27 @@ export const Header: React.FC<HeaderProps> = ({
     .toUpperCase();
 
   return (
-    <header className="sticky top-0 z-20 bg-[#000000]/90 backdrop-blur-md border-b border-[#292d30] px-4 md:px-8 py-3.5 flex items-center justify-between transition-colors">
+    <header className="sticky top-0 z-20 bg-[#050506]/90 backdrop-blur-xl border-b border-white/[0.06] px-4 md:px-8 py-3.5 flex items-center justify-between transition-colors">
       {/* Left: Mobile Menu & Page Title */}
       <div className="flex items-center gap-3.5">
         <button
           onClick={onOpenMobileMenu}
-          className="md:hidden p-2 rounded-[6px] text-[#a1a4a5] hover:text-[#ffffff] hover:bg-[#0b0e14] transition"
+          className="md:hidden p-2 rounded-lg text-[#8A8F98] hover:text-[#EDEDEF] hover:bg-white/[0.06] transition"
           aria-label="Open navigation menu"
         >
           <Menu size={20} />
         </button>
 
         <div>
-          <h1 className="text-lg md:text-xl font-medium text-[#ffffff] font-sans tracking-tight leading-none flex items-center gap-2">
-            <span>{currentInfo.title}</span>
+          <h1 className="text-lg md:text-xl font-semibold tracking-tight leading-none flex items-center gap-2">
+            <span className="bg-gradient-to-b from-white via-white/95 to-white/70 bg-clip-text text-transparent font-sans">{currentInfo.title}</span>
             {isDemo && (
-              <span className="px-2 py-0.5 rounded-[6px] bg-[#000000] text-[#ffca16] text-[10px] font-commit border border-[#292d30]">
+              <span className="px-2 py-0.5 rounded-full bg-amber-500/10 text-amber-300 text-[10px] font-mono border border-amber-500/30">
                 SANDBOX DEMO
               </span>
             )}
           </h1>
-          <p className="text-xs text-[#a1a4a5] font-sans hidden sm:block mt-1">
+          <p className="text-xs text-[#8A8F98] font-sans hidden sm:block mt-1">
             {currentInfo.subtitle}
           </p>
         </div>
@@ -139,16 +139,16 @@ export const Header: React.FC<HeaderProps> = ({
         <div className="relative">
           <button
             onClick={() => setStageMenuOpen(!stageMenuOpen)}
-            className="flex items-center gap-2 px-3 py-1.5 rounded-[6px] bg-[#000000] border border-[#292d30] hover:border-[#ffffff] text-[#f0f0f0] text-xs font-commit transition-colors cursor-pointer"
+            className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white/[0.04] border border-white/10 hover:border-[#5E6AD2]/50 text-[#EDEDEF] text-xs font-mono transition-all cursor-pointer"
           >
-            <span className="w-2 h-2 rounded-full bg-[#9281f7]" />
+            <span className="w-2 h-2 rounded-full bg-[#5E6AD2]" />
             <span>{profile.stage}</span>
-            <ChevronDown size={13} className="text-[#a1a4a5]" />
+            <ChevronDown size={13} className="text-[#8A8F98]" />
           </button>
 
           {stageMenuOpen && (
-            <div className="absolute right-0 mt-2 w-56 bg-[#000000] rounded-[16px] border border-[#292d30] py-2 z-40 text-xs font-commit shadow-2xl">
-              <div className="px-3.5 py-1.5 font-medium text-[#a1a4a5] text-[10px] uppercase font-commit tracking-wider border-b border-[#292d30] mb-1">
+            <div className="absolute right-0 mt-2 w-56 bg-[#0a0a0c] rounded-xl border border-white/10 py-2 z-40 text-xs font-mono shadow-[0_8px_32px_rgba(0,0,0,0.6)]">
+              <div className="px-3.5 py-1.5 font-bold text-[#8A8F98] text-[10px] uppercase font-mono tracking-wider border-b border-white/[0.06] mb-1">
                 CHANGE STARTUP STAGE
               </div>
               {stages.map((s) => (
@@ -158,12 +158,12 @@ export const Header: React.FC<HeaderProps> = ({
                     onUpdateStage(s);
                     setStageMenuOpen(false);
                   }}
-                  className={`w-full text-left px-3.5 py-2 flex items-center justify-between hover:bg-[#0b0e14] transition-colors font-medium cursor-pointer ${
-                    profile.stage === s ? 'text-[#9281f7] bg-[#0b0e14]' : 'text-[#f0f0f0]'
+                  className={`w-full text-left px-3.5 py-2 flex items-center justify-between hover:bg-white/[0.06] transition-colors font-medium cursor-pointer ${
+                    profile.stage === s ? 'text-[#5E6AD2] bg-white/[0.04]' : 'text-[#EDEDEF]'
                   }`}
                 >
                   <span>{s}</span>
-                  {profile.stage === s && <CheckCircle2 size={14} className="text-[#9281f7]" />}
+                  {profile.stage === s && <CheckCircle2 size={14} className="text-[#5E6AD2]" />}
                 </button>
               ))}
             </div>
@@ -171,14 +171,14 @@ export const Header: React.FC<HeaderProps> = ({
         </div>
 
         {/* Savings Badge */}
-        <div className="hidden xl:flex items-center gap-1.5 px-3 py-1.5 rounded-[6px] bg-[#000000] border border-[#292d30] text-[#3ad389] text-xs font-commit">
-          <DollarSign size={13} className="text-[#3ad389]" />
+        <div className="hidden xl:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-xs font-mono">
+          <DollarSign size={13} className="text-emerald-400" />
           <span>₹{profile.monthlySavings.toLocaleString()}/mo saved</span>
         </div>
 
         {/* Founder Score Pill */}
-        <div className="hidden lg:flex items-center gap-1.5 px-3 py-1.5 rounded-[6px] bg-[#000000] border border-[#292d30] text-[#70b8ff] text-xs font-commit">
-          <TrendingUp size={13} className="text-[#70b8ff]" />
+        <div className="hidden lg:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#5E6AD2]/10 border border-[#5E6AD2]/30 text-indigo-300 text-xs font-mono">
+          <TrendingUp size={13} className="text-[#5E6AD2]" />
           <span>Score: {profile.founderScore}/100</span>
         </div>
 
@@ -186,10 +186,10 @@ export const Header: React.FC<HeaderProps> = ({
         {onOpenSaveResource && (
           <button
             onClick={onOpenSaveResource}
-            className="btn-resend-ghost hidden sm:flex items-center gap-1.5 text-xs font-medium cursor-pointer"
+            className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#5E6AD2] hover:bg-[#6872D9] text-[#EDEDEF] text-xs font-semibold transition shadow-[0_0_0_1px_rgba(94,106,210,0.5),0_4px_12px_rgba(94,106,210,0.3)] cursor-pointer"
             title="Save any URL to Founder Vault"
           >
-            <Bookmark size={13} className="text-[#9281f7]" />
+            <Bookmark size={13} className="text-[#EDEDEF]" />
             <span>+ Save Resource</span>
           </button>
         )}
@@ -197,12 +197,12 @@ export const Header: React.FC<HeaderProps> = ({
         {/* Notifications Drawer Toggle */}
         <button
           onClick={onOpenNotifications}
-          className="relative p-2 rounded-[6px] text-[#a1a4a5] hover:text-[#ffffff] bg-[#000000] border border-[#292d30] hover:border-[#ffffff] transition cursor-pointer"
+          className="relative p-2 rounded-lg text-[#8A8F98] hover:text-[#EDEDEF] bg-white/[0.04] border border-white/10 hover:border-white/20 transition cursor-pointer"
           title="Notifications"
         >
           <Bell size={16} />
           {unreadCount > 0 && (
-            <span className="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-[#9281f7] text-[#000000] text-[10px] font-commit font-bold flex items-center justify-center">
+            <span className="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-[#5E6AD2] text-white text-[10px] font-mono font-bold flex items-center justify-center shadow-xs">
               {unreadCount}
             </span>
           )}
@@ -212,45 +212,45 @@ export const Header: React.FC<HeaderProps> = ({
         <div className="relative">
           <button
             onClick={() => setUserMenuOpen(!userMenuOpen)}
-            className="flex items-center gap-2 p-1.5 sm:px-2.5 sm:py-1.5 rounded-[6px] bg-[#000000] border border-[#292d30] hover:border-[#ffffff] transition cursor-pointer"
+            className="flex items-center gap-2 p-1.5 sm:px-2.5 sm:py-1.5 rounded-lg bg-white/[0.04] border border-white/10 hover:border-white/20 transition cursor-pointer"
           >
-            <div className="w-7 h-7 rounded-[6px] bg-[#000000] border border-[#292d30] text-[#ffffff] font-commit font-semibold text-xs flex items-center justify-center">
+            <div className="w-7 h-7 rounded-lg bg-[#5E6AD2]/20 border border-[#5E6AD2]/40 text-[#EDEDEF] font-mono font-bold text-xs flex items-center justify-center">
               {userInitials || 'F'}
             </div>
             <div className="hidden sm:flex flex-col text-left">
-              <span className="text-xs font-medium text-[#ffffff] leading-tight truncate max-w-[100px] font-sans">
+              <span className="text-xs font-medium text-[#EDEDEF] leading-tight truncate max-w-[100px] font-sans">
                 {userDisplayName}
               </span>
-              <span className="text-[10px] text-[#a1a4a5] font-commit leading-none">
+              <span className="text-[10px] text-[#8A8F98] font-mono leading-none">
                 {isDemo ? 'Demo Mode' : 'Verified'}
               </span>
             </div>
-            <ChevronDown size={13} className="text-[#a1a4a5] hidden sm:block" />
+            <ChevronDown size={13} className="text-[#8A8F98] hidden sm:block" />
           </button>
 
           {userMenuOpen && (
             <div
-              className="absolute right-0 mt-2 w-64 bg-[#000000] rounded-[16px] border border-[#292d30] py-2 z-50 text-xs font-sans shadow-2xl"
+              className="absolute right-0 mt-2 w-64 bg-[#0a0a0c] rounded-xl border border-white/10 py-2 z-50 text-xs font-sans shadow-[0_8px_32px_rgba(0,0,0,0.7)]"
               onMouseLeave={() => setUserMenuOpen(false)}
             >
               {/* Account Info Header */}
-              <div className="px-4 py-3 border-b border-[#292d30] bg-[#0b0e14]">
+              <div className="px-4 py-3 border-b border-white/[0.06] bg-white/[0.02]">
                 <div className="flex items-center justify-between mb-1">
-                  <span className="font-medium text-[#ffffff] text-sm truncate">{userDisplayName}</span>
+                  <span className="font-medium text-[#EDEDEF] text-sm truncate">{userDisplayName}</span>
                   {isDemo ? (
-                    <span className="px-1.5 py-0.5 rounded-[6px] text-[9px] font-commit bg-[#000000] text-[#ffca16] border border-[#292d30]">
+                    <span className="px-1.5 py-0.5 rounded text-[9px] font-mono bg-amber-500/10 text-amber-300 border border-amber-500/30">
                       SANDBOX
                     </span>
                   ) : (
-                    <span className="px-1.5 py-0.5 rounded-[6px] text-[9px] font-commit bg-[#000000] text-[#3ad389] border border-[#292d30] flex items-center gap-0.5">
+                    <span className="px-1.5 py-0.5 rounded text-[9px] font-mono bg-emerald-500/10 text-emerald-300 border border-emerald-500/30 flex items-center gap-0.5">
                       <ShieldCheck size={10} />
                       VERIFIED
                     </span>
                   )}
                 </div>
-                <div className="text-[#a1a4a5] text-[11px] truncate font-commit">{userEmail}</div>
-                <div className="text-[#a1a4a5] text-[10px] mt-1 flex items-center gap-1 font-commit">
-                  <Building2 size={11} className="text-[#a1a4a5]" />
+                <div className="text-[#8A8F98] text-[11px] truncate font-mono">{userEmail}</div>
+                <div className="text-[#8A8F98] text-[10px] mt-1 flex items-center gap-1 font-mono">
+                  <Building2 size={11} className="text-[#8A8F98]" />
                   <span>{profile.name} • {profile.stage}</span>
                 </div>
               </div>
@@ -264,9 +264,9 @@ export const Header: React.FC<HeaderProps> = ({
                         onNavigate('profile');
                         setUserMenuOpen(false);
                       }}
-                      className="w-full text-left px-4 py-2 flex items-center gap-2.5 text-[#ffffff] font-medium hover:bg-[#0b0e14] transition cursor-pointer"
+                      className="w-full text-left px-4 py-2 flex items-center gap-2.5 text-[#EDEDEF] font-medium hover:bg-white/[0.06] transition cursor-pointer"
                     >
-                      <UserIcon size={14} className="text-[#9281f7]" />
+                      <UserIcon size={14} className="text-[#5E6AD2]" />
                       <span>Curated Founder Profile</span>
                     </button>
                     <button
@@ -274,9 +274,9 @@ export const Header: React.FC<HeaderProps> = ({
                         onNavigate('settings');
                         setUserMenuOpen(false);
                       }}
-                      className="w-full text-left px-4 py-2 flex items-center gap-2.5 text-[#f0f0f0] hover:bg-[#0b0e14] transition cursor-pointer"
+                      className="w-full text-left px-4 py-2 flex items-center gap-2.5 text-[#EDEDEF] hover:bg-white/[0.06] transition cursor-pointer"
                     >
-                      <Settings size={14} className="text-[#a1a4a5]" />
+                      <Settings size={14} className="text-[#8A8F98]" />
                       <span>Startup Settings & Calibration</span>
                     </button>
                     <button
@@ -284,9 +284,9 @@ export const Header: React.FC<HeaderProps> = ({
                         onNavigate('onboarding');
                         setUserMenuOpen(false);
                       }}
-                      className="w-full text-left px-4 py-2 flex items-center gap-2.5 text-[#70b8ff] font-medium hover:bg-[#0b0e14] transition cursor-pointer font-commit text-xs"
+                      className="w-full text-left px-4 py-2 flex items-center gap-2.5 text-indigo-300 font-medium hover:bg-white/[0.06] transition cursor-pointer font-mono text-xs"
                     >
-                      <Sparkles size={14} className="text-[#70b8ff]" />
+                      <Sparkles size={14} className="text-[#5E6AD2]" />
                       <span>Re-calibrate Onboarding OS</span>
                     </button>
                   </>
@@ -298,25 +298,25 @@ export const Header: React.FC<HeaderProps> = ({
                       onOpenAuth();
                       setUserMenuOpen(false);
                     }}
-                    className="w-full text-left px-4 py-2 flex items-center gap-2.5 text-[#9281f7] font-medium hover:bg-[#0b0e14] transition cursor-pointer font-commit text-xs"
+                    className="w-full text-left px-4 py-2 flex items-center gap-2.5 text-[#5E6AD2] font-medium hover:bg-white/[0.06] transition cursor-pointer font-mono text-xs"
                   >
-                    <Sparkles size={14} className="text-[#9281f7]" />
+                    <Sparkles size={14} className="text-[#5E6AD2]" />
                     <span>Create Real Account</span>
                   </button>
                 )}
               </div>
 
               {/* Sign Out / Exit */}
-              <div className="pt-1 border-t border-[#292d30]">
+              <div className="pt-1 border-t border-white/[0.06]">
                 {onLogout && (
                   <button
                     onClick={() => {
                       setUserMenuOpen(false);
                       onLogout();
                     }}
-                    className="w-full text-left px-4 py-2 flex items-center gap-2.5 text-[#ff9592] hover:bg-[#0b0e14] transition font-medium cursor-pointer"
+                    className="w-full text-left px-4 py-2 flex items-center gap-2.5 text-rose-400 hover:bg-rose-500/10 transition font-medium cursor-pointer"
                   >
-                    <LogOut size={14} className="text-[#ff9592]" />
+                    <LogOut size={14} className="text-rose-400" />
                     <span>Sign Out of Session</span>
                   </button>
                 )}

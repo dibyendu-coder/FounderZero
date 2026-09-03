@@ -70,29 +70,29 @@ export const SearchModal: React.FC<SearchModalProps> = ({
   const matchedActions = q ? state.nextActions.filter(a => a.title.toLowerCase().includes(q) || a.relatedBottleneck.toLowerCase().includes(q)) : state.nextActions.slice(0, 2);
 
   return (
-    <div className="fixed inset-0 z-50 bg-[#000000]/85 backdrop-blur-md flex items-start justify-center pt-20 px-4">
-      <div className="bg-[#000000] w-full max-w-2xl rounded-[16px] border border-[#292d30] overflow-hidden flex flex-col max-h-[80vh] font-sans shadow-2xl">
+    <div className="fixed inset-0 z-50 bg-[#050506]/85 backdrop-blur-xl flex items-start justify-center pt-20 px-4">
+      <div className="bg-[#0a0a0c] w-full max-w-2xl rounded-2xl border border-white/10 overflow-hidden flex flex-col max-h-[80vh] font-sans shadow-[0_8px_32px_rgba(0,0,0,0.7)]">
         {/* Search Bar Input */}
-        <div className="p-4 border-b border-[#292d30] flex items-center gap-3 bg-[#000000]">
-          <Search size={18} className="text-[#9281f7]" />
+        <div className="p-4 border-b border-white/[0.06] flex items-center gap-3 bg-[#0a0a0c]">
+          <Search size={18} className="text-[#5E6AD2]" />
           <input
             type="text"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Search missions, experiments, feedback, actions..."
-            className="w-full text-sm font-commit outline-hidden bg-transparent text-[#ffffff] placeholder:text-[#a1a4a5]"
+            className="w-full text-sm font-mono outline-hidden bg-transparent text-[#EDEDEF] placeholder:text-[#8A8F98]"
             autoFocus
           />
           <button
             onClick={onClose}
-            className="p-1.5 rounded-[6px] text-[#a1a4a5] hover:text-[#ffffff] hover:bg-[#0b0e14] transition cursor-pointer"
+            className="p-1.5 rounded-lg text-[#8A8F98] hover:text-[#EDEDEF] hover:bg-white/[0.06] transition cursor-pointer"
           >
             <X size={18} />
           </button>
         </div>
 
         {/* Results Body */}
-        <div className="overflow-y-auto p-4 space-y-5 text-xs text-[#f0f0f0]">
+        <div className="overflow-y-auto p-4 space-y-5 text-xs text-[#EDEDEF]">
           {/* Ask Copilot Quick Option */}
           {q && (
             <div
@@ -100,31 +100,31 @@ export const SearchModal: React.FC<SearchModalProps> = ({
                 navigate('copilot');
                 onClose();
               }}
-              className="p-3.5 rounded-xl border border-blue-200 bg-gradient-to-r from-blue-50 to-indigo-50/50 flex items-center justify-between cursor-pointer group transition-all shadow-2xs hover:shadow-xs"
+              className="p-3.5 rounded-xl border border-[#5E6AD2]/40 bg-[#5E6AD2]/10 flex items-center justify-between cursor-pointer group transition-all shadow-[0_0_16px_rgba(94,106,210,0.15)] hover:border-[#5E6AD2]"
             >
               <div className="flex items-center gap-3">
-                <div className="w-8 h-8 rounded-lg bg-[#0052FF] text-white flex items-center justify-center shadow-xs">
+                <div className="w-8 h-8 rounded-lg bg-[#5E6AD2] text-white flex items-center justify-center shadow-xs">
                   <Sparkles size={16} />
                 </div>
                 <div>
-                  <div className="font-bold text-blue-900 text-sm flex items-center gap-1.5">
+                  <div className="font-semibold text-[#EDEDEF] text-sm flex items-center gap-1.5 font-sans">
                     <span>Ask Founder Copilot:</span>
-                    <span className="text-blue-700 italic">"{query}"</span>
+                    <span className="text-indigo-300 italic">"{query}"</span>
                   </div>
-                  <div className="text-blue-600/80 text-[11px] mt-0.5">
+                  <div className="text-[#8A8F98] text-[11px] mt-0.5 font-sans">
                     Query startup telemetry, customer feedback, notes & playbooks
                   </div>
                 </div>
               </div>
-              <ArrowRight size={16} className="text-[#0052FF] group-hover:translate-x-1 transition-transform" />
+              <ArrowRight size={16} className="text-[#5E6AD2] group-hover:translate-x-1 transition-transform" />
             </div>
           )}
 
           {/* Copilot Conversations */}
           {matchedCopilot.length > 0 && (
             <div>
-              <div className="font-mono text-[11px] font-semibold text-slate-400 uppercase tracking-wider mb-2 flex items-center gap-1.5">
-                <Sparkles size={13} className="text-blue-600" />
+              <div className="font-mono text-[11px] font-medium text-[#8A8F98] uppercase tracking-widest mb-2 flex items-center gap-1.5">
+                <Sparkles size={13} className="text-[#5E6AD2]" />
                 <span>Founder Copilot Conversations</span>
               </div>
               <div className="space-y-1.5">
@@ -132,19 +132,19 @@ export const SearchModal: React.FC<SearchModalProps> = ({
                   <div
                     key={c.id}
                     onClick={() => { navigate('copilot'); onClose(); }}
-                    className="p-3 rounded-xl border border-slate-100 bg-white hover:border-blue-200 hover:bg-blue-50/40 flex items-center justify-between cursor-pointer group transition-all"
+                    className="p-3 rounded-xl border border-white/[0.06] bg-white/[0.03] hover:border-[#5E6AD2]/40 hover:bg-white/[0.06] flex items-center justify-between cursor-pointer group transition-all"
                   >
                     <div>
-                      <div className="font-semibold text-slate-900 text-sm group-hover:text-blue-600 transition-colors">
+                      <div className="font-medium text-[#EDEDEF] text-sm group-hover:text-[#6872D9] transition-colors">
                         {c.title}
                       </div>
                       {c.lastMessagePreview && (
-                        <div className="text-slate-500 text-xs truncate max-w-md mt-0.5">
+                        <div className="text-[#8A8F98] text-xs truncate max-w-md mt-0.5">
                           {c.lastMessagePreview}
                         </div>
                       )}
                     </div>
-                    <ArrowRight size={14} className="text-slate-400 group-hover:text-blue-600 group-hover:translate-x-0.5 transition-all" />
+                    <ArrowRight size={14} className="text-[#8A8F98] group-hover:text-[#5E6AD2] group-hover:translate-x-0.5 transition-all" />
                   </div>
                 ))}
               </div>
@@ -154,8 +154,8 @@ export const SearchModal: React.FC<SearchModalProps> = ({
           {/* Founder Notes */}
           {matchedNotes.length > 0 && (
             <div>
-              <div className="font-mono text-[11px] font-semibold text-slate-400 uppercase tracking-wider mb-2 flex items-center gap-1.5">
-                <PenLine size={13} className="text-blue-600" />
+              <div className="font-mono text-[11px] font-medium text-[#8A8F98] uppercase tracking-widest mb-2 flex items-center gap-1.5">
+                <PenLine size={13} className="text-[#5E6AD2]" />
                 <span>Founder Notepad</span>
               </div>
               <div className="space-y-1.5">
@@ -163,20 +163,20 @@ export const SearchModal: React.FC<SearchModalProps> = ({
                   <div
                     key={n.id}
                     onClick={() => { navigate('notepad'); onClose(); }}
-                    className="p-3 rounded-xl border border-slate-100 bg-white hover:border-blue-200 hover:bg-blue-50/40 flex items-center justify-between cursor-pointer group transition-all"
+                    className="p-3 rounded-xl border border-white/[0.06] bg-white/[0.03] hover:border-[#5E6AD2]/40 hover:bg-white/[0.06] flex items-center justify-between cursor-pointer group transition-all"
                   >
                     <div>
-                      <div className="font-semibold text-slate-900 text-sm group-hover:text-blue-600 transition-colors flex items-center gap-2">
+                      <div className="font-medium text-[#EDEDEF] text-sm group-hover:text-[#6872D9] transition-colors flex items-center gap-2">
                         <span>{n.title}</span>
-                        <span className="px-1.5 py-0.5 rounded text-[10px] font-mono bg-blue-100 text-blue-700">
+                        <span className="px-1.5 py-0.5 rounded text-[10px] font-mono bg-[#5E6AD2]/20 text-indigo-300 border border-[#5E6AD2]/30">
                           {n.collection}
                         </span>
                       </div>
-                      <div className="text-slate-500 text-xs truncate max-w-md mt-0.5">
+                      <div className="text-[#8A8F98] text-xs truncate max-w-md mt-0.5">
                         {(n.blocks || []).map(b => b.content).filter(Boolean).join(' ').slice(0, 100) || 'Empty note'}
                       </div>
                     </div>
-                    <ArrowRight size={14} className="text-slate-400 group-hover:text-blue-600 group-hover:translate-x-0.5 transition-all" />
+                    <ArrowRight size={14} className="text-[#8A8F98] group-hover:text-[#5E6AD2] group-hover:translate-x-0.5 transition-all" />
                   </div>
                 ))}
               </div>
@@ -186,8 +186,8 @@ export const SearchModal: React.FC<SearchModalProps> = ({
           {/* Resources */}
           {matchedResources.length > 0 && (
             <div>
-              <div className="font-mono text-[11px] font-semibold text-slate-400 uppercase tracking-wider mb-2 flex items-center gap-1.5">
-                <BookOpen size={13} className="text-purple-600" />
+              <div className="font-mono text-[11px] font-medium text-[#8A8F98] uppercase tracking-widest mb-2 flex items-center gap-1.5">
+                <BookOpen size={13} className="text-purple-400" />
                 <span>Zero-Budget Resources & Agents</span>
               </div>
               <div className="space-y-1.5">
@@ -195,18 +195,18 @@ export const SearchModal: React.FC<SearchModalProps> = ({
                   <div
                     key={r.id}
                     onClick={() => { navigate('resources'); onClose(); }}
-                    className="p-3 rounded-xl border border-slate-100 bg-white hover:border-purple-200 hover:bg-purple-50/40 flex items-center justify-between cursor-pointer group transition-all"
+                    className="p-3 rounded-xl border border-white/[0.06] bg-white/[0.03] hover:border-purple-500/40 hover:bg-white/[0.06] flex items-center justify-between cursor-pointer group transition-all"
                   >
                     <div>
-                      <div className="font-semibold text-slate-900 text-sm group-hover:text-purple-600 transition-colors flex items-center gap-2">
+                      <div className="font-medium text-[#EDEDEF] text-sm group-hover:text-purple-300 transition-colors flex items-center gap-2">
                         <span>{r.title}</span>
-                        <span className="px-1.5 py-0.5 rounded text-[10px] font-mono bg-purple-100 text-purple-700">
+                        <span className="px-1.5 py-0.5 rounded text-[10px] font-mono bg-purple-500/20 text-purple-300 border border-purple-500/30">
                           {r.subcategory}
                         </span>
                       </div>
-                      <div className="text-slate-500 text-xs truncate max-w-md mt-0.5">{r.description}</div>
+                      <div className="text-[#8A8F98] text-xs truncate max-w-md mt-0.5">{r.description}</div>
                     </div>
-                    <ArrowRight size={14} className="text-slate-400 group-hover:text-purple-600 group-hover:translate-x-0.5 transition-all" />
+                    <ArrowRight size={14} className="text-[#8A8F98] group-hover:text-purple-400 group-hover:translate-x-0.5 transition-all" />
                   </div>
                 ))}
               </div>
@@ -216,8 +216,8 @@ export const SearchModal: React.FC<SearchModalProps> = ({
           {/* Actions */}
           {matchedActions.length > 0 && (
             <div>
-              <div className="font-mono text-[11px] font-semibold text-slate-400 uppercase tracking-wider mb-2 flex items-center gap-1.5">
-                <CheckSquare size={13} className="text-[#0052FF]" />
+              <div className="font-mono text-[11px] font-medium text-[#8A8F98] uppercase tracking-widest mb-2 flex items-center gap-1.5">
+                <CheckSquare size={13} className="text-[#5E6AD2]" />
                 <span>Next Actions</span>
               </div>
               <div className="space-y-1.5">
@@ -225,13 +225,13 @@ export const SearchModal: React.FC<SearchModalProps> = ({
                   <div
                     key={a.id}
                     onClick={() => { navigate('actions'); onClose(); }}
-                    className="p-3 rounded-xl border border-slate-100 bg-white hover:border-blue-200 hover:bg-blue-50/40 flex items-center justify-between cursor-pointer group transition-all"
+                    className="p-3 rounded-xl border border-white/[0.06] bg-white/[0.03] hover:border-[#5E6AD2]/40 hover:bg-white/[0.06] flex items-center justify-between cursor-pointer group transition-all"
                   >
                     <div>
-                      <div className="font-semibold text-slate-900 text-sm group-hover:text-[#0052FF] transition-colors">{a.title}</div>
-                      <div className="font-mono text-[11px] text-slate-500 mt-0.5">{a.relatedBottleneck} • <span className="font-semibold text-blue-600">{a.priority}</span></div>
+                      <div className="font-medium text-[#EDEDEF] text-sm group-hover:text-[#5E6AD2] transition-colors">{a.title}</div>
+                      <div className="font-mono text-[11px] text-[#8A8F98] mt-0.5">{a.relatedBottleneck} • <span className="font-medium text-indigo-300">{a.priority}</span></div>
                     </div>
-                    <ArrowRight size={14} className="text-slate-400 group-hover:text-[#0052FF] group-hover:translate-x-0.5 transition-all" />
+                    <ArrowRight size={14} className="text-[#8A8F98] group-hover:text-[#5E6AD2] group-hover:translate-x-0.5 transition-all" />
                   </div>
                 ))}
               </div>
