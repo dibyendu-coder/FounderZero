@@ -35,6 +35,7 @@ import { CopilotMessageItem } from '../components/copilot/CopilotMessageItem';
 import { CopilotThinking } from '../components/copilot/CopilotThinking';
 import { SLASH_COMMANDS } from '../components/copilot/CopilotSlashMenu';
 import { generateSmartCopilotReply } from '../../server/copilotEngine';
+import { ClaudeHeader } from '../components/brainless/claude/claude-header';
 
 interface CopilotPageProps {
   state: AppState;
@@ -588,23 +589,27 @@ export const CopilotPage: React.FC<CopilotPageProps> = ({
           {/* Messages Stream */}
           <div className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-4">
             {activeMessages.length === 0 ? (
-              /* Empty State / Welcome Console */
-              <div className="max-w-3xl mx-auto space-y-6 py-6 font-sans">
-                <div className="text-center space-y-2">
-                  <div className="inline-flex p-3 rounded-2xl bg-[#5E6AD2]/15 text-indigo-300 border border-[#5E6AD2]/30 mb-1 shadow-[0_0_20px_rgba(94,106,210,0.2)]">
-                    <Sparkles size={26} />
-                  </div>
-                  <h1 className="text-2xl sm:text-4xl font-semibold bg-gradient-to-b from-white via-white/95 to-white/70 bg-clip-text text-transparent tracking-tight">
-                    Founder Copilot
-                  </h1>
-                  <p className="text-xs sm:text-sm text-[#8A8F98] max-w-md mx-auto leading-relaxed font-sans">
-                    Your startup thinking partner. Evidence-driven reasoning over your metrics, customer interviews, and bottleneck.
-                  </p>
-                </div>
+              /* Empty State / Welcome Console with ClaudeHeader */
+              <div className="max-w-3xl mx-auto space-y-6 py-6 font-mono">
+                <ClaudeHeader
+                  version="v2.1.206"
+                  user={state.user?.name || "Founder"}
+                  model="Gemini 2.5 Flash · Founder Copilot"
+                  org={profile.name ? `${profile.name}'s Startup` : "Founder Zero Workspace"}
+                  cwd="~/startup/workspace"
+                  tips={[
+                    "Ask Copilot to analyze your metrics, validate ideas, or plan weekly sprints",
+                    "Type / to trigger direct founder commands like /analyze or /reality"
+                  ]}
+                  whatsNew={[
+                    "Integrated Claude Code terminal UI interface",
+                    "Added slash command shortcuts (/analyze, /reality, /metrics)"
+                  ]}
+                />
 
                 {/* Quick Slash Commands Grid */}
                 <div className="space-y-2">
-                  <div className="text-[11px] font-mono text-[#8A8F98] uppercase tracking-widest px-1">
+                  <div className="text-[11px] font-mono text-[#cd694a] uppercase tracking-widest px-1 font-bold">
                     Direct Slash Commands
                   </div>
 
@@ -619,23 +624,23 @@ export const CopilotPage: React.FC<CopilotPageProps> = ({
                             setActiveMode(cmd.mode);
                             handleSendMessage(cmd.template, cmd.mode);
                           }}
-                          className="p-3.5 bg-white/[0.03] hover:bg-white/[0.06] rounded-xl border border-white/[0.06] hover:border-[#5E6AD2]/40 text-left transition-all group shadow-xs cursor-pointer flex flex-col justify-between"
+                          className="p-3 bg-[#08080a] hover:bg-[#121216] rounded border border-[#3a3a3e] hover:border-[#cd694a]/60 text-left transition-all group cursor-pointer flex flex-col justify-between font-mono"
                         >
                           <div className="flex items-start gap-2.5">
-                            <div className="p-2 rounded-lg bg-white/[0.06] text-[#EDEDEF] group-hover:bg-[#5E6AD2] group-hover:text-white transition shrink-0">
-                              <Icon size={15} />
+                            <div className="p-1.5 rounded bg-[#cd694a]/20 text-[#cd694a] group-hover:bg-[#cd694a] group-hover:text-white transition shrink-0">
+                              <Icon size={14} />
                             </div>
                             <div className="min-w-0">
-                              <div className="font-mono text-xs font-semibold text-[#EDEDEF] group-hover:text-indigo-300 transition">
-                                <span className="text-[#5E6AD2]">/</span>{cmd.name}
+                              <div className="font-mono text-xs font-bold text-[#EDEDEF] group-hover:text-[#e79475] transition">
+                                <span className="text-[#cd694a]">/</span>{cmd.name}
                               </div>
-                              <div className="text-[11px] text-[#8A8F98] mt-0.5 leading-snug font-sans">
+                              <div className="text-[11px] text-[#8A8F98] mt-0.5 leading-snug font-mono">
                                 {cmd.description}
                               </div>
                             </div>
                           </div>
 
-                          <div className="flex items-center justify-end text-[10px] font-mono text-[#5E6AD2] font-semibold mt-2 pt-2 border-t border-white/[0.06] opacity-0 group-hover:opacity-100 transition-opacity">
+                          <div className="flex items-center justify-end text-[10px] font-mono text-[#cd694a] font-semibold mt-2 pt-1 border-t border-[#3a3a3e] opacity-0 group-hover:opacity-100 transition-opacity">
                             <span>Execute Command →</span>
                           </div>
                         </button>

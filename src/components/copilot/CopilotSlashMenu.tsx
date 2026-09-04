@@ -1,21 +1,20 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import {
   Sparkles,
   BarChart2,
   Users,
   Target,
   FlaskConical,
-  CheckSquare,
   ShieldAlert,
   BookOpen,
   FileText,
   Bookmark,
-  MapPin,
   Calendar,
   Lightbulb,
   Compass
 } from 'lucide-react';
 import { CopilotMode } from '../../types';
+import { ClaudeSlashMenu, SlashCommand as ClaudeCommand } from '../brainless/claude/claude-slash-menu';
 
 export interface SlashCommand {
   id: string;
@@ -135,86 +134,28 @@ interface CopilotSlashMenuProps {
 
 export const CopilotSlashMenu: React.FC<CopilotSlashMenuProps> = ({
   filterText,
-  selectedIndex,
-  onSelectCommand,
-  onClose
+  onSelectCommand
 }) => {
-  const menuRef = useRef<HTMLDivElement>(null);
+  const commandsList = SLASH_COMMANDS.map(c => ({
+    name: `/${c.name}`,
+    description: c.description
+  }));
 
-  // Filter commands
-  const cleanFilter = filterText.startsWith('/') ? filterText.slice(1).toLowerCase() : filterText.toLowerCase();
-  const filteredCommands = SLASH_COMMANDS.filter(cmd =>
-    cmd.name.toLowerCase().includes(cleanFilter) ||
-    cmd.description.toLowerCase().includes(cleanFilter)
-  );
-
-  // Auto-scroll selected into view
-  useEffect(() => {
-    if (menuRef.current) {
-      const activeEl = menuRef.current.querySelector('[data-selected="true"]');
-      if (activeEl) {
-        activeEl.scrollIntoView({ block: 'nearest' });
-      }
+  const handleSelect = (cmd: ClaudeCommand) => {
+    const matched = SLASH_COMMANDS.find(c => `/${c.name}` === cmd.name);
+    if (matched) {
+      onSelectCommand(matched);
     }
-  }, [selectedIndex]);
-
-  if (filteredCommands.length === 0) return null;
+  };
 
   return (
-    <div
-      ref={menuRef}
-      id="copilot-slash-menu"
-      className="absolute bottom-full left-0 mb-2 w-full max-w-md bg-[#0a0a0c] border border-white/10 rounded-xl shadow-[0_8px_32px_rgba(0,0,0,0.8)] overflow-hidden z-30 font-sans text-xs animate-in fade-in slide-in-from-bottom-2 duration-150 text-[#EDEDEF]"
-    >
-      <div className="px-3 py-2 bg-[#050506] border-b border-white/[0.06] flex items-center justify-between text-[#8A8F98] font-mono text-[11px]">
-        <div className="flex items-center gap-1.5 font-bold text-[#EDEDEF]">
-          <span className="text-[#5E6AD2]">/</span>
-          <span>Founder Commands</span>
-        </div>
-        <div className="flex items-center gap-2 text-[10px] text-[#8A8F98]">
-          <span>↑↓ to navigate</span>
-          <span>•</span>
-          <span>↵ to select</span>
-        </div>
-      </div>
-
-      <div className="max-h-64 overflow-y-auto p-1.5 space-y-0.5">
-        {filteredCommands.map((cmd, idx) => {
-          const Icon = cmd.icon;
-          const isSelected = idx === selectedIndex % filteredCommands.length;
-          return (
-            <button
-              key={cmd.id}
-              type="button"
-              data-selected={isSelected}
-              onClick={() => onSelectCommand(cmd)}
-              className={`w-full flex items-center justify-between p-2 rounded-lg text-left transition-colors cursor-pointer ${
-                isSelected
-                  ? 'bg-[#5E6AD2]/20 text-indigo-200 font-semibold border border-[#5E6AD2]/40'
-                  : 'hover:bg-white/[0.04] text-[#EDEDEF]'
-              }`}
-            >
-              <div className="flex items-center gap-2.5 min-w-0">
-                <div className={`p-1.5 rounded-md ${isSelected ? 'bg-[#5E6AD2] text-white' : 'bg-white/[0.06] text-[#8A8F98]'}`}>
-                  <Icon size={13} />
-                </div>
-                <div className="truncate">
-                  <div className="font-mono text-[12px] font-bold">
-                    <span className="text-[#5E6AD2]">/</span>{cmd.name}
-                  </div>
-                  <div className="text-[11px] text-[#8A8F98] truncate font-normal">
-                    {cmd.description}
-                  </div>
-                </div>
-              </div>
-
-              <span className="text-[10px] font-mono text-slate-400 uppercase tracking-wider shrink-0 ml-2">
-                {cmd.mode === 'default' ? '' : cmd.mode}
-              </span>
-            </button>
-          );
-        })}
-      </div>
+    <div className="absolute bottom-full left-0 mb-2 w-full max-w-md z-30 font-mono">
+      <ClaudeSlashMenu
+        commands={commandsList}
+        value={filterText}
+        onSelectCommand={handleSelect}
+      />
     </div>
   );
 };
+
