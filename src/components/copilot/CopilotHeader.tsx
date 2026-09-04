@@ -87,16 +87,6 @@ export const CopilotHeader: React.FC<CopilotHeaderProps> = ({
 
       {/* Right: Actions */}
       <div className="flex items-center gap-2">
-        {/* Model Indicator Pill */}
-        <button
-          onClick={() => onNavigate('profile')}
-          className="hidden md:flex items-center gap-1.5 px-2 py-1 rounded bg-[#cd694a]/20 border border-[#cd694a]/30 text-[#e79475] text-[11px] font-mono hover:bg-[#cd694a]/30 transition cursor-pointer"
-          title="Powered by Gemini 2.5 Flash"
-        >
-          <span className="w-1.5 h-1.5 rounded-full bg-[#cd694a] animate-pulse" />
-          <span>Claude Max · Gemini 2.5</span>
-        </button>
-
         {/* New Chat Button */}
         <button
           id="header-new-chat-btn"
