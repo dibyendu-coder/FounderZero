@@ -205,12 +205,12 @@ export const SettingsPage: React.FC<SettingsPageProps> = ({
   return (
     <div className="p-4 md:p-8 space-y-6 max-w-7xl mx-auto font-sans">
       {/* Header */}
-      <div className="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-2xs space-y-2">
+      <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-md space-y-2">
         <SectionBadge label="Account & Startup Configuration" variant="blue" />
-        <h1 className="text-2xl md:text-3xl font-extrabold text-slate-900 tracking-tight">
+        <h1 className="text-2xl md:text-3xl font-extrabold text-white tracking-tight">
           Settings & Account Calibration
         </h1>
-        <p className="text-xs sm:text-sm text-slate-500 max-w-3xl leading-relaxed">
+        <p className="text-xs sm:text-sm text-slate-400 max-w-3xl leading-relaxed">
           Manage your verified founder identity, authentication credentials, startup parameters, and 90-day targets.
         </p>
       </div>
