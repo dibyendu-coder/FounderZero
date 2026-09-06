@@ -608,10 +608,10 @@ export const NotepadEditor: React.FC<NotepadEditorProps> = ({
 
       {/* Actionable Intent Banner (Requirements 10 & 11) */}
       {(hasActionableIntent || hasHypothesisIntent) && (
-        <div className="px-4 sm:px-8 py-2 bg-gradient-to-r from-blue-50 via-indigo-50/70 to-slate-50 border-b border-blue-100 flex flex-wrap items-center justify-between gap-2">
+        <div className="px-4 sm:px-8 py-2.5 bg-slate-900 border-b border-slate-800 flex flex-wrap items-center justify-between gap-2 shadow-sm">
           <div className="flex items-center gap-2">
-            <Sparkles size={14} className="text-blue-600 shrink-0" />
-            <span className="text-xs text-slate-800 font-medium">
+            <Sparkles size={14} className="text-blue-400 shrink-0" />
+            <span className="text-xs text-slate-200 font-medium">
               {hasHypothesisIntent
                 ? 'Hypothesis detected in this note: Convert into an empirical experiment?'
                 : 'Actionable deadline detected: Convert into a Founder Mission?'}
@@ -624,7 +624,7 @@ export const NotepadEditor: React.FC<NotepadEditorProps> = ({
                   setConvertTargetType('mission');
                   setConvertModalOpen(true);
                 }}
-                className="px-2.5 py-1 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-xs font-semibold flex items-center gap-1 transition cursor-pointer shadow-2xs"
+                className="px-3 py-1 bg-blue-600 hover:bg-blue-500 text-white rounded-lg text-xs font-semibold flex items-center gap-1 transition cursor-pointer shadow-sm"
               >
                 <Compass size={12} />
                 <span>Turn into Mission</span>
@@ -636,7 +636,7 @@ export const NotepadEditor: React.FC<NotepadEditorProps> = ({
                   setConvertTargetType('experiment');
                   setConvertModalOpen(true);
                 }}
-                className="px-2.5 py-1 bg-amber-600 hover:bg-amber-700 text-white rounded-lg text-xs font-semibold flex items-center gap-1 transition cursor-pointer shadow-2xs"
+                className="px-3 py-1 bg-amber-600 hover:bg-amber-500 text-white rounded-lg text-xs font-semibold flex items-center gap-1 transition cursor-pointer shadow-sm"
               >
                 <FlaskConical size={12} />
                 <span>Turn into Experiment</span>
@@ -655,36 +655,36 @@ export const NotepadEditor: React.FC<NotepadEditorProps> = ({
             value={currentNote.title}
             onChange={e => handleTitleChange(e.target.value)}
             placeholder="Untitled Founder Note..."
-            className="w-full text-2xl sm:text-3xl font-extrabold text-slate-900 placeholder:text-slate-300 border-0 focus:outline-hidden focus:ring-0 p-0 leading-tight bg-transparent"
+            className="w-full text-2xl sm:text-3xl font-extrabold text-white placeholder:text-slate-600 border-0 focus:outline-hidden focus:ring-0 p-0 leading-tight bg-transparent"
           />
         </div>
 
         {/* Metadata & Tag Ribbon */}
-        <div className="flex flex-wrap items-center gap-3 py-2 border-y border-slate-100 text-xs text-slate-500">
+        <div className="flex flex-wrap items-center gap-3 py-2 border-y border-slate-800/80 text-xs text-slate-400">
           <div className="flex items-center gap-1.5">
             <Calendar size={13} className="text-slate-400" />
             <span>Updated {new Date(currentNote.updatedAt).toLocaleDateString()}</span>
           </div>
-          <span className="text-slate-300">•</span>
+          <span className="text-slate-600">•</span>
           <div className="flex items-center gap-1.5 font-mono text-[11px]">
             <Clock size={13} className="text-slate-400" />
             <span>{wordCount} words</span>
             <span>({readingTime} min read)</span>
           </div>
 
-          <span className="text-slate-300">•</span>
+          <span className="text-slate-600">•</span>
 
           {/* Tags List */}
           <div className="flex flex-wrap items-center gap-1.5">
             {(currentNote.tags || []).map(tag => (
               <span
                 key={tag}
-                className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-slate-100 text-slate-700 text-[11px] font-medium group"
+                className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-slate-800/90 text-slate-200 border border-slate-700/60 text-[11px] font-medium group"
               >
                 <span>#{tag}</span>
                 <button
                   onClick={() => handleRemoveTag(tag)}
-                  className="text-slate-400 hover:text-rose-500 transition cursor-pointer"
+                  className="text-slate-400 hover:text-rose-400 transition cursor-pointer"
                 >
                   <X size={10} />
                 </button>
@@ -703,11 +703,11 @@ export const NotepadEditor: React.FC<NotepadEditorProps> = ({
                   }}
                   placeholder="tag name..."
                   autoFocus
-                  className="w-24 text-[11px] px-1.5 py-0.5 border border-blue-400 rounded bg-white"
+                  className="w-24 text-[11px] px-1.5 py-0.5 border border-blue-500 rounded bg-slate-900 text-slate-100"
                 />
                 <button
                   onClick={() => handleAddTag(newTagText)}
-                  className="text-xs text-blue-600 font-bold px-1"
+                  className="text-xs text-blue-400 font-bold px-1"
                 >
                   +
                 </button>
@@ -715,7 +715,7 @@ export const NotepadEditor: React.FC<NotepadEditorProps> = ({
             ) : (
               <button
                 onClick={() => setTagInputOpen(true)}
-                className="inline-flex items-center gap-1 text-[11px] font-medium text-slate-400 hover:text-blue-600 px-1.5 py-0.5 rounded border border-dashed border-slate-200 hover:border-blue-300 transition cursor-pointer"
+                className="inline-flex items-center gap-1 text-[11px] font-medium text-slate-400 hover:text-blue-400 px-1.5 py-0.5 rounded border border-dashed border-slate-700 hover:border-blue-500 transition cursor-pointer"
               >
                 <Tag size={10} />
                 <span>Add tag</span>
@@ -726,8 +726,8 @@ export const NotepadEditor: React.FC<NotepadEditorProps> = ({
 
         {/* Connected Entities Chips */}
         {currentNote.connections && currentNote.connections.length > 0 && (
-          <div className="flex flex-wrap items-center gap-2 p-3 bg-slate-50 rounded-xl border border-slate-200/80">
-            <span className="text-[10px] font-mono font-semibold uppercase text-slate-500 flex items-center gap-1">
+          <div className="flex flex-wrap items-center gap-2 p-3 bg-slate-900/90 rounded-xl border border-slate-800">
+            <span className="text-[10px] font-mono font-semibold uppercase text-slate-400 flex items-center gap-1">
               <Link2 size={12} />
               Connected Items:
             </span>
@@ -744,13 +744,13 @@ export const NotepadEditor: React.FC<NotepadEditorProps> = ({
                     else if (c.entityType === 'goal') navigate('settings');
                   }
                 }}
-                className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-semibold bg-white text-slate-800 border border-slate-200 hover:border-blue-400 hover:text-blue-700 shadow-2xs transition cursor-pointer group"
+                className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-semibold bg-slate-950 text-slate-100 border border-slate-800 hover:border-blue-500 hover:text-blue-300 transition cursor-pointer group"
               >
-                <span className="text-[9px] font-mono uppercase px-1 rounded bg-slate-100 group-hover:bg-blue-100 text-slate-500 group-hover:text-blue-700">
+                <span className="text-[9px] font-mono uppercase px-1.5 py-0.5 rounded bg-slate-800 group-hover:bg-blue-900/50 text-slate-300 group-hover:text-blue-300 border border-slate-700/50">
                   {c.entityType}
                 </span>
-                <span className="truncate max-w-[160px]">{c.entityTitle}</span>
-                <ExternalLink size={10} className="text-slate-400 group-hover:text-blue-600" />
+                <span className="truncate max-w-[160px] text-slate-100">{c.entityTitle}</span>
+                <ExternalLink size={10} className="text-slate-400 group-hover:text-blue-400" />
               </button>
             ))}
           </div>
@@ -764,11 +764,11 @@ export const NotepadEditor: React.FC<NotepadEditorProps> = ({
               className="group relative flex items-start gap-2 pl-6 sm:pl-8 -ml-6 sm:-ml-8 transition-colors rounded-lg"
             >
               {/* Block Drag / Action Handle */}
-              <div className="absolute left-0 top-1 opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-0.5 bg-white border border-slate-200 rounded-md shadow-2xs px-0.5 py-0.5 z-10">
+              <div className="absolute left-0 top-1 opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-0.5 bg-slate-900 border border-slate-800 rounded-md shadow-sm px-0.5 py-0.5 z-10">
                 <button
                   onClick={() => handleMoveBlock(index, 'up')}
                   disabled={index === 0}
-                  className="text-slate-400 hover:text-slate-700 p-0.5 disabled:opacity-30 cursor-pointer"
+                  className="text-slate-400 hover:text-slate-200 p-0.5 disabled:opacity-30 cursor-pointer"
                   title="Move up"
                 >
                   <ChevronDown size={11} className="rotate-180" />
@@ -776,21 +776,21 @@ export const NotepadEditor: React.FC<NotepadEditorProps> = ({
                 <button
                   onClick={() => handleMoveBlock(index, 'down')}
                   disabled={index === currentNote.blocks.length - 1}
-                  className="text-slate-400 hover:text-slate-700 p-0.5 disabled:opacity-30 cursor-pointer"
+                  className="text-slate-400 hover:text-slate-200 p-0.5 disabled:opacity-30 cursor-pointer"
                   title="Move down"
                 >
                   <ChevronDown size={11} />
                 </button>
                 <button
                   onClick={() => handleDuplicateBlock(index)}
-                  className="text-slate-400 hover:text-slate-700 p-0.5 cursor-pointer"
+                  className="text-slate-400 hover:text-slate-200 p-0.5 cursor-pointer"
                   title="Duplicate block"
                 >
                   <Copy size={11} />
                 </button>
                 <button
                   onClick={() => handleDeleteBlock(index)}
-                  className="text-slate-400 hover:text-rose-500 p-0.5 cursor-pointer"
+                  className="text-slate-400 hover:text-rose-400 p-0.5 cursor-pointer"
                   title="Delete block"
                 >
                   <Trash2 size={11} />
@@ -818,7 +818,7 @@ export const NotepadEditor: React.FC<NotepadEditorProps> = ({
                       }
                     }}
                     placeholder="Type '/' for commands or start writing..."
-                    className="w-full text-sm text-slate-800 placeholder:text-slate-300 border-0 focus:outline-hidden focus:ring-0 p-0 leading-relaxed bg-transparent resize-none font-normal"
+                    className="w-full text-sm text-slate-200 placeholder:text-slate-500 border-0 focus:outline-hidden focus:ring-0 p-0 leading-relaxed bg-transparent resize-none font-normal"
                   />
                 )}
 
@@ -841,7 +841,7 @@ export const NotepadEditor: React.FC<NotepadEditorProps> = ({
                       }
                     }}
                     placeholder="Heading 1"
-                    className="w-full text-xl font-bold text-slate-900 placeholder:text-slate-300 border-0 focus:outline-hidden focus:ring-0 p-0 leading-tight bg-transparent"
+                    className="w-full text-xl font-bold text-white placeholder:text-slate-600 border-0 focus:outline-hidden focus:ring-0 p-0 leading-tight bg-transparent"
                   />
                 )}
 
@@ -864,7 +864,7 @@ export const NotepadEditor: React.FC<NotepadEditorProps> = ({
                       }
                     }}
                     placeholder="Heading 2"
-                    className="w-full text-base font-bold text-slate-900 placeholder:text-slate-300 border-0 focus:outline-hidden focus:ring-0 p-0 leading-tight bg-transparent mt-2"
+                    className="w-full text-base font-bold text-white placeholder:text-slate-600 border-0 focus:outline-hidden focus:ring-0 p-0 leading-tight bg-transparent mt-2"
                   />
                 )}
 
@@ -887,7 +887,7 @@ export const NotepadEditor: React.FC<NotepadEditorProps> = ({
                       }
                     }}
                     placeholder="Heading 3"
-                    className="w-full text-sm font-bold text-slate-800 placeholder:text-slate-300 border-0 focus:outline-hidden focus:ring-0 p-0 leading-tight bg-transparent mt-1"
+                    className="w-full text-sm font-bold text-slate-200 placeholder:text-slate-600 border-0 focus:outline-hidden focus:ring-0 p-0 leading-tight bg-transparent mt-1"
                   />
                 )}
 
@@ -896,12 +896,12 @@ export const NotepadEditor: React.FC<NotepadEditorProps> = ({
                   <div className="flex items-start gap-2.5">
                     <button
                       onClick={() => handleToggleChecklist(index)}
-                      className="mt-0.5 text-blue-600 hover:text-blue-700 transition cursor-pointer shrink-0"
+                      className="mt-0.5 text-blue-400 hover:text-blue-300 transition cursor-pointer shrink-0"
                     >
                       {block.checked ? (
-                        <CheckSquare size={16} className="text-blue-600" />
+                        <CheckSquare size={16} className="text-blue-400" />
                       ) : (
-                        <Square size={16} className="text-slate-400" />
+                        <Square size={16} className="text-slate-500" />
                       )}
                     </button>
                     <input
@@ -922,7 +922,7 @@ export const NotepadEditor: React.FC<NotepadEditorProps> = ({
                       }}
                       placeholder="To-do item..."
                       className={`w-full text-sm border-0 focus:outline-hidden focus:ring-0 p-0 leading-relaxed bg-transparent ${
-                        block.checked ? 'line-through text-slate-400' : 'text-slate-800'
+                        block.checked ? 'line-through text-slate-500' : 'text-slate-100'
                       }`}
                     />
                   </div>
@@ -931,7 +931,7 @@ export const NotepadEditor: React.FC<NotepadEditorProps> = ({
                 {/* Bullet List Block */}
                 {block.type === 'bulletList' && (
                   <div className="flex items-start gap-2.5">
-                    <span className="text-blue-500 font-bold select-none">•</span>
+                    <span className="text-blue-400 font-bold select-none">•</span>
                     <input
                       ref={el => {
                         blockInputRefs.current[index] = el;
@@ -949,7 +949,7 @@ export const NotepadEditor: React.FC<NotepadEditorProps> = ({
                         }
                       }}
                       placeholder="List item..."
-                      className="w-full text-sm text-slate-800 placeholder:text-slate-300 border-0 focus:outline-hidden focus:ring-0 p-0 leading-relaxed bg-transparent"
+                      className="w-full text-sm text-slate-100 placeholder:text-slate-500 border-0 focus:outline-hidden focus:ring-0 p-0 leading-relaxed bg-transparent"
                     />
                   </div>
                 )}
@@ -977,7 +977,7 @@ export const NotepadEditor: React.FC<NotepadEditorProps> = ({
                         }
                       }}
                       placeholder="Sequential step..."
-                      className="w-full text-sm text-slate-800 placeholder:text-slate-300 border-0 focus:outline-hidden focus:ring-0 p-0 leading-relaxed bg-transparent"
+                      className="w-full text-sm text-slate-100 placeholder:text-slate-500 border-0 focus:outline-hidden focus:ring-0 p-0 leading-relaxed bg-transparent"
                     />
                   </div>
                 )}
@@ -993,14 +993,14 @@ export const NotepadEditor: React.FC<NotepadEditorProps> = ({
                       value={block.content}
                       onChange={e => handleUpdateBlockContent(index, e.target.value)}
                       placeholder="Customer quote or takeaway..."
-                      className="w-full text-sm italic text-slate-700 placeholder:text-slate-300 border-0 focus:outline-hidden focus:ring-0 p-0 leading-relaxed bg-transparent resize-none"
+                      className="w-full text-sm italic text-slate-200 placeholder:text-slate-500 border-0 focus:outline-hidden focus:ring-0 p-0 leading-relaxed bg-transparent resize-none"
                     />
                   </div>
                 )}
 
                 {/* Code Block */}
                 {block.type === 'code' && (
-                  <div className="rounded-xl bg-slate-900 p-3.5 text-slate-100 font-mono text-xs shadow-inner">
+                  <div className="rounded-xl bg-slate-950 p-3.5 text-slate-100 font-mono text-xs border border-slate-800 shadow-inner">
                     <div className="flex items-center justify-between pb-2 mb-2 border-b border-slate-800 text-[10px] text-slate-400">
                       <span className="uppercase">{block.language || 'typescript'}</span>
                       <button
@@ -1029,23 +1029,23 @@ export const NotepadEditor: React.FC<NotepadEditorProps> = ({
                   <div
                     className={`p-3.5 rounded-xl border flex items-start gap-3 ${
                       block.calloutVariant === 'idea'
-                        ? 'bg-amber-50/80 border-amber-200/80 text-amber-950'
+                        ? 'bg-amber-950/40 border-amber-800/60 text-amber-200'
                         : block.calloutVariant === 'warning'
-                        ? 'bg-rose-50/80 border-rose-200/80 text-rose-950'
+                        ? 'bg-rose-950/40 border-rose-800/60 text-rose-200'
                         : block.calloutVariant === 'success'
-                        ? 'bg-emerald-50/80 border-emerald-200/80 text-emerald-950'
+                        ? 'bg-emerald-950/40 border-emerald-800/60 text-emerald-200'
                         : block.calloutVariant === 'founder'
-                        ? 'bg-indigo-50/80 border-indigo-200/80 text-indigo-950'
-                        : 'bg-blue-50/80 border-blue-200/80 text-blue-950'
+                        ? 'bg-indigo-950/40 border-indigo-800/60 text-indigo-200'
+                        : 'bg-blue-950/40 border-blue-800/60 text-blue-200'
                     }`}
                   >
                     <div className="shrink-0 mt-0.5">
-                      {block.calloutVariant === 'idea' && <Lightbulb size={16} className="text-amber-600" />}
-                      {block.calloutVariant === 'warning' && <AlertTriangle size={16} className="text-rose-600" />}
-                      {block.calloutVariant === 'success' && <CheckCircle2 size={16} className="text-emerald-600" />}
-                      {block.calloutVariant === 'founder' && <Compass size={16} className="text-indigo-600" />}
+                      {block.calloutVariant === 'idea' && <Lightbulb size={16} className="text-amber-400" />}
+                      {block.calloutVariant === 'warning' && <AlertTriangle size={16} className="text-rose-400" />}
+                      {block.calloutVariant === 'success' && <CheckCircle2 size={16} className="text-emerald-400" />}
+                      {block.calloutVariant === 'founder' && <Compass size={16} className="text-indigo-400" />}
                       {(!block.calloutVariant || block.calloutVariant === 'info') && (
-                        <Info size={16} className="text-blue-600" />
+                        <Info size={16} className="text-blue-400" />
                       )}
                     </div>
                     <div className="flex-1 min-w-0">
@@ -1065,28 +1065,28 @@ export const NotepadEditor: React.FC<NotepadEditorProps> = ({
 
                 {/* Table Block */}
                 {block.type === 'table' && block.tableData && (
-                  <div className="border border-slate-200 rounded-xl overflow-hidden bg-white shadow-2xs my-2">
+                  <div className="border border-slate-800 rounded-xl overflow-hidden bg-slate-900 shadow-2xs my-2">
                     <div className="overflow-x-auto">
                       <table className="w-full text-xs text-left border-collapse">
                         <thead>
-                          <tr className="bg-slate-50 border-b border-slate-200 text-slate-700 font-mono font-semibold">
+                          <tr className="bg-slate-950 border-b border-slate-800 text-slate-300 font-mono font-semibold">
                             {block.tableData.headers.map((header, hIdx) => (
-                              <th key={hIdx} className="p-2.5 border-r border-slate-200 last:border-r-0">
+                              <th key={hIdx} className="p-2.5 border-r border-slate-800 last:border-r-0">
                                 <input
                                   type="text"
                                   value={header}
                                   onChange={e => handleUpdateTableHeader(index, hIdx, e.target.value)}
-                                  className="w-full bg-transparent font-bold border-0 focus:outline-hidden p-0 text-slate-800"
+                                  className="w-full bg-transparent font-bold border-0 focus:outline-hidden p-0 text-slate-100"
                                 />
                               </th>
                             ))}
                           </tr>
                         </thead>
-                        <tbody className="divide-y divide-slate-100">
+                        <tbody className="divide-y divide-slate-800">
                           {block.tableData.rows.map((row, rIdx) => (
-                            <tr key={rIdx} className="hover:bg-slate-50/50">
+                            <tr key={rIdx} className="hover:bg-slate-800/40">
                               {row.map((cell, cIdx) => (
-                                <td key={cIdx} className="p-2.5 border-r border-slate-100 last:border-r-0">
+                                <td key={cIdx} className="p-2.5 border-r border-slate-800 last:border-r-0">
                                   <input
                                     type="text"
                                     value={cell}
@@ -1094,7 +1094,7 @@ export const NotepadEditor: React.FC<NotepadEditorProps> = ({
                                       handleUpdateTableCell(index, rIdx, cIdx, e.target.value)
                                     }
                                     placeholder="—"
-                                    className="w-full bg-transparent border-0 focus:outline-hidden p-0 text-slate-700"
+                                    className="w-full bg-transparent border-0 focus:outline-hidden p-0 text-slate-200"
                                   />
                                 </td>
                               ))}
@@ -1103,17 +1103,17 @@ export const NotepadEditor: React.FC<NotepadEditorProps> = ({
                         </tbody>
                       </table>
                     </div>
-                    <div className="p-2 bg-slate-50/80 border-t border-slate-100 flex items-center justify-between text-[11px]">
+                    <div className="p-2 bg-slate-950/80 border-t border-slate-800 flex items-center justify-between text-[11px]">
                       <button
                         onClick={() => handleAddTableRow(index)}
-                        className="text-blue-600 hover:text-blue-700 font-semibold flex items-center gap-1 cursor-pointer"
+                        className="text-blue-400 hover:text-blue-300 font-semibold flex items-center gap-1 cursor-pointer"
                       >
                         <Plus size={12} />
                         <span>Add Row</span>
                       </button>
                       <button
                         onClick={() => handleAddTableColumn(index)}
-                        className="text-slate-600 hover:text-slate-800 font-semibold flex items-center gap-1 cursor-pointer"
+                        className="text-slate-400 hover:text-slate-200 font-semibold flex items-center gap-1 cursor-pointer"
                       >
                         <Plus size={12} />
                         <span>Add Column</span>
@@ -1125,7 +1125,7 @@ export const NotepadEditor: React.FC<NotepadEditorProps> = ({
                 {/* Divider Block */}
                 {block.type === 'divider' && (
                   <div className="py-3 flex items-center">
-                    <hr className="w-full border-slate-200" />
+                    <hr className="w-full border-slate-800" />
                   </div>
                 )}
               </div>
@@ -1136,13 +1136,13 @@ export const NotepadEditor: React.FC<NotepadEditorProps> = ({
           <div className="pt-4 flex items-center gap-2">
             <button
               onClick={() => handleInsertBlockAfter(currentNote.blocks.length - 1, 'paragraph')}
-              className="px-3 py-1.5 rounded-xl text-xs font-semibold text-slate-500 hover:text-slate-900 hover:bg-slate-100 border border-dashed border-slate-300 transition flex items-center gap-1.5 cursor-pointer"
+              className="px-3 py-1.5 rounded-xl text-xs font-semibold text-slate-400 hover:text-slate-100 hover:bg-slate-800/80 border border-dashed border-slate-700 transition flex items-center gap-1.5 cursor-pointer"
             >
               <Plus size={13} />
               <span>Add Block</span>
             </button>
-            <span className="text-[11px] font-mono text-slate-400">
-              or type <code className="bg-slate-100 px-1 py-0.5 rounded text-slate-600">/</code> anywhere to insert
+            <span className="text-[11px] font-mono text-slate-500">
+              or type <code className="bg-slate-900 border border-slate-800 px-1 py-0.5 rounded text-slate-300">/</code> anywhere to insert
             </span>
           </div>
 
