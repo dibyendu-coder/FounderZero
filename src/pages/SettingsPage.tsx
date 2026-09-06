@@ -348,45 +348,7 @@ export const SettingsPage: React.FC<SettingsPageProps> = ({
             </form>
           </Card>
 
-          {/* Groq AI Engine Card */}
-          <Card variant="default" className="p-6 space-y-4 border border-slate-800 bg-slate-900/90">
-            <div className="flex items-center justify-between border-b border-slate-800/80 pb-3">
-              <div className="flex items-center gap-2">
-                <div className="w-8 h-8 rounded-lg bg-purple-950/60 border border-purple-800/40 text-purple-400 flex items-center justify-center">
-                  <Sparkles size={18} />
-                </div>
-                <div>
-                  <h3 className="font-bold text-base text-white">
-                    Groq LLM Engine (Server-Side)
-                  </h3>
-                  <p className="text-xs text-slate-400">Powered by llama-3.3-70b-versatile for Founder Copilot & AI features</p>
-                </div>
-              </div>
-              <span className="px-2.5 py-1 rounded-full bg-purple-950/80 text-purple-300 border border-purple-800/50 text-xs font-mono font-semibold flex items-center gap-1.5">
-                <span className="w-2 h-2 rounded-full bg-purple-400 animate-pulse" />
-                Vercel Env Configured
-              </span>
-            </div>
 
-            <div className="space-y-3 text-xs">
-              <p className="text-slate-300 leading-relaxed">
-                Founder Copilot and all AI diagnostic tools are powered by Groq LLM API. To configure your API key for deployments (such as Vercel), add your <code className="font-mono bg-slate-950 border border-slate-800 px-1.5 py-0.5 rounded text-purple-300 font-semibold">GROQ_API_KEY</code> environment variable in your Vercel project settings.
-              </p>
-
-              <div className="flex items-center justify-between pt-2">
-                <span className="text-slate-400 font-mono text-[11px]">Console & Key Management:</span>
-                <a
-                  href="https://console.groq.com"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="text-purple-400 hover:text-purple-300 hover:underline font-semibold flex items-center gap-1"
-                >
-                  <span>console.groq.com</span>
-                  <ExternalLink size={10} />
-                </a>
-              </div>
-            </div>
-          </Card>
 
           {/* Reset Demo Data Box */}
           {isDemo && (

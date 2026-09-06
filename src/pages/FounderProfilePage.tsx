@@ -41,7 +41,9 @@ import {
   Key,
   Eye,
   EyeOff,
-  CheckCircle
+  CheckCircle,
+  Upload,
+  Camera
 } from 'lucide-react';
 import { AppState, StartupProfile, User, FounderBadge, FounderSkillRating } from '../types';
 import { Card } from '../components/ui/Card';
@@ -816,52 +818,7 @@ Verified via FounderZero AI Operating System`;
         </div>
       </div>
 
-      {/* 4. FOUNDER AI INTELLIGENCE & GROQ LLM API */}
-      <div className="rounded-2xl bg-gradient-to-b from-slate-900 via-slate-900 to-slate-950 border border-slate-800 p-6 md:p-8 space-y-6 shadow-xl relative overflow-hidden">
-        {/* Glow */}
-        <div className="absolute top-0 right-0 w-80 h-80 bg-purple-600/10 blur-3xl pointer-events-none" />
 
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-800/80 pb-5">
-          <div className="space-y-1">
-            <div className="flex items-center gap-2">
-              <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-purple-600 to-indigo-600 text-white flex items-center justify-center shadow-lg shadow-purple-500/20">
-                <Sparkles size={16} />
-              </div>
-              <h3 className="text-lg font-bold text-white tracking-tight">
-                Groq LLM Engine (Server-Side)
-              </h3>
-            </div>
-            <p className="text-xs text-slate-400">
-              Founder Copilot and all AI diagnostics are powered by Groq LLM API (llama-3.3-70b-versatile).
-            </p>
-          </div>
-
-          <div className="flex items-center gap-2 self-start md:self-auto">
-            <span className="px-3 py-1 rounded-full bg-purple-500/15 border border-purple-500/30 text-purple-400 text-xs font-mono font-semibold flex items-center gap-1.5 shadow-sm">
-              <span className="w-2 h-2 rounded-full bg-purple-400 animate-pulse" />
-              Vercel Env Configured
-            </span>
-          </div>
-        </div>
-
-        <div className="space-y-3 text-xs text-slate-300 leading-relaxed">
-          <p>
-            To configure your Groq API key for Vercel deployments, add your <code className="font-mono bg-slate-900 px-1.5 py-0.5 rounded text-purple-300 border border-slate-800">GROQ_API_KEY</code> environment variable in your Vercel project settings.
-          </p>
-          <div className="flex items-center justify-between pt-2">
-            <span className="text-slate-400 font-mono text-[11px]">Console & Key Management:</span>
-            <a
-              href="https://console.groq.com"
-              target="_blank"
-              rel="noreferrer"
-              className="text-purple-400 hover:text-purple-300 font-semibold flex items-center gap-1 transition underline-offset-2 hover:underline"
-            >
-              <span>console.groq.com</span>
-              <ExternalLink size={11} />
-            </a>
-          </div>
-        </div>
-      </div>
 
       {/* 5. EDIT PROFILE MODAL */}
       {isEditing && (
@@ -888,12 +845,15 @@ Verified via FounderZero AI Operating System`;
 
             {/* Modal Form Body */}
             <form onSubmit={handleSaveProfile} className="p-6 overflow-y-auto space-y-5 flex-1">
-              {/* Avatar Selector */}
-              <div className="space-y-2">
+              {/* Avatar Selector & Photo Upload */}
+              <div className="space-y-3">
                 <label className="block text-xs font-mono text-slate-300 font-bold uppercase">
-                  Founder Avatar
+                  Founder Avatar / Profile Photo
                 </label>
+
+                {/* Custom Uploaded Preview & Preset Avatars */}
                 <div className="flex items-center gap-3 flex-wrap">
+                  {/* Preset Avatars */}
                   {DEFAULT_AVATARS.map((av, i) => (
                     <div
                       key={i}
@@ -905,7 +865,48 @@ Verified via FounderZero AI Operating System`;
                       <img src={av} alt="Avatar option" className="w-full h-full object-cover" />
                     </div>
                   ))}
+
+                  {/* Upload Custom Photo Option */}
+                  <label className="w-12 h-12 rounded-xl border-2 border-dashed border-slate-700 hover:border-blue-500 bg-slate-900/60 hover:bg-blue-950/40 flex flex-col items-center justify-center text-slate-400 hover:text-blue-400 cursor-pointer transition relative group">
+                    <Upload size={18} />
+                    <span className="text-[9px] font-mono font-semibold mt-0.5">Upload</span>
+                    <input
+                      type="file"
+                      accept="image/*"
+                      className="hidden"
+                      onChange={(e) => {
+                        const file = e.target.files?.[0];
+                        if (file) {
+                          const reader = new FileReader();
+                          reader.onloadend = () => {
+                            if (typeof reader.result === 'string') {
+                              setEditAvatar(reader.result);
+                            }
+                          };
+                          reader.readAsDataURL(file);
+                        }
+                      }}
+                    />
+                  </label>
                 </div>
+
+                {/* Show active custom avatar preview or URL input */}
+                {!DEFAULT_AVATARS.includes(editAvatar) && editAvatar && (
+                  <div className="flex items-center gap-3 p-2.5 bg-blue-950/30 border border-blue-800/40 rounded-xl">
+                    <img src={editAvatar} alt="Custom avatar preview" className="w-10 h-10 rounded-lg object-cover border border-blue-500/50 shrink-0" />
+                    <div className="flex-1 min-w-0">
+                      <p className="text-xs font-semibold text-blue-300">Custom Photo Active</p>
+                      <p className="text-[10px] text-slate-400 truncate">Your uploaded image will be saved as your founder profile photo.</p>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => setEditAvatar(DEFAULT_AVATARS[0])}
+                      className="text-xs text-rose-400 hover:text-rose-300 font-semibold px-2 py-1 bg-rose-950/50 border border-rose-800/40 rounded-lg cursor-pointer"
+                    >
+                      Reset
+                    </button>
+                  </div>
+                )}
               </div>
 
               {/* Basic Fields */}
