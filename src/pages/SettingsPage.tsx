@@ -247,10 +247,10 @@ export const SettingsPage: React.FC<SettingsPageProps> = ({
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
         {/* Left: Startup Profile Calibration */}
         <div className="lg:col-span-7 space-y-6">
-          <Card variant="default" className="p-6 space-y-4">
-            <div className="flex items-center justify-between border-b border-slate-100 pb-3">
-              <h3 className="font-bold text-base text-slate-900 flex items-center gap-2">
-                <Building size={18} className="text-[#0052FF]" />
+          <Card variant="default" className="p-6 space-y-4 border border-slate-800 bg-slate-900/90">
+            <div className="flex items-center justify-between border-b border-slate-800/80 pb-3">
+              <h3 className="font-bold text-base text-white flex items-center gap-2">
+                <Building size={18} className="text-blue-400" />
                 <span>Startup Profile & Scope</span>
               </h3>
               <Badge variant="blue">{stage} Stage</Badge>
@@ -259,73 +259,73 @@ export const SettingsPage: React.FC<SettingsPageProps> = ({
             <form onSubmit={handleSave} className="space-y-4 text-xs">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block font-semibold text-slate-700 mb-1">Startup / App Name</label>
+                  <label className="block font-semibold text-slate-300 mb-1">Startup / App Name</label>
                   <input
                     type="text"
                     value={name}
                     onChange={e => setName(e.target.value)}
-                    className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm outline-none focus:border-[#0052FF] focus:bg-white"
+                    className="w-full px-3.5 py-2.5 bg-slate-950/80 border border-slate-800 rounded-xl text-sm text-slate-100 placeholder-slate-500 outline-none focus:border-blue-500 focus:bg-slate-900 transition"
                   />
                 </div>
 
                 <div>
-                  <label className="block font-semibold text-slate-700 mb-1">Founder Display Name</label>
+                  <label className="block font-semibold text-slate-300 mb-1">Founder Display Name</label>
                   <input
                     type="text"
                     value={founderName}
                     onChange={e => setFounderName(e.target.value)}
-                    className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm outline-none focus:border-[#0052FF] focus:bg-white"
+                    className="w-full px-3.5 py-2.5 bg-slate-950/80 border border-slate-800 rounded-xl text-sm text-slate-100 placeholder-slate-500 outline-none focus:border-blue-500 focus:bg-slate-900 transition"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block font-semibold text-slate-700 mb-1">One-Line Problem / Pitch</label>
+                <label className="block font-semibold text-slate-300 mb-1">One-Line Problem / Pitch</label>
                 <input
                   type="text"
                   value={description}
                   onChange={e => setDescription(e.target.value)}
                   placeholder="e.g. Real-time diagnostic OS for bootstrapped solo founders"
-                  className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm outline-none focus:border-[#0052FF] focus:bg-white"
+                  className="w-full px-3.5 py-2.5 bg-slate-950/80 border border-slate-800 rounded-xl text-sm text-slate-100 placeholder-slate-500 outline-none focus:border-blue-500 focus:bg-slate-900 transition"
                 />
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block font-semibold text-slate-700 mb-1">Startup Stage</label>
+                  <label className="block font-semibold text-slate-300 mb-1">Startup Stage</label>
                   <select
                     value={stage}
                     onChange={e => setStage(e.target.value as any)}
-                    className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm outline-none focus:border-[#0052FF] focus:bg-white"
+                    className="w-full px-3.5 py-2.5 bg-slate-950/80 border border-slate-800 rounded-xl text-sm text-slate-100 outline-none focus:border-blue-500 focus:bg-slate-900 transition"
                   >
-                    <option value="Idea">Idea</option>
-                    <option value="Validating">Validating</option>
-                    <option value="Building MVP">Building MVP</option>
-                    <option value="Launched">Launched</option>
-                    <option value="First Revenue">First Revenue</option>
-                    <option value="Growing">Growing</option>
+                    <option value="Idea" className="bg-slate-900 text-slate-100">Idea</option>
+                    <option value="Validating" className="bg-slate-900 text-slate-100">Validating</option>
+                    <option value="Building MVP" className="bg-slate-900 text-slate-100">Building MVP</option>
+                    <option value="Launched" className="bg-slate-900 text-slate-100">Launched</option>
+                    <option value="First Revenue" className="bg-slate-900 text-slate-100">First Revenue</option>
+                    <option value="Growing" className="bg-slate-900 text-slate-100">Growing</option>
                   </select>
                 </div>
 
                 <div>
-                  <label className="block font-semibold text-slate-700 mb-1">Founder Bandwidth (Hours / Week)</label>
+                  <label className="block font-semibold text-slate-300 mb-1">Founder Bandwidth (Hours / Week)</label>
                   <input
                     type="number"
                     value={hours}
                     onChange={e => setHours(parseInt(e.target.value) || 10)}
-                    className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm font-mono outline-none focus:border-[#0052FF] focus:bg-white"
+                    className="w-full px-3.5 py-2.5 bg-slate-950/80 border border-slate-800 rounded-xl text-sm font-mono text-slate-100 outline-none focus:border-blue-500 focus:bg-slate-900 transition"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block font-semibold text-slate-700 mb-1">90-Day North Star Objective</label>
+                <label className="block font-semibold text-slate-300 mb-1">90-Day North Star Objective</label>
                 <input
                   type="text"
                   value={goal}
                   onChange={e => setGoal(e.target.value)}
                   placeholder="e.g. Reach ₹50,000 MRR with 50 paying customers"
-                  className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm outline-none focus:border-[#0052FF] focus:bg-white"
+                  className="w-full px-3.5 py-2.5 bg-slate-950/80 border border-slate-800 rounded-xl text-sm text-slate-100 placeholder-slate-500 outline-none focus:border-blue-500 focus:bg-slate-900 transition"
                 />
               </div>
 
@@ -340,7 +340,7 @@ export const SettingsPage: React.FC<SettingsPageProps> = ({
                 </Button>
 
                 {saved && (
-                  <span className="text-emerald-600 font-semibold text-xs flex items-center gap-1">
+                  <span className="text-emerald-400 font-semibold text-xs flex items-center gap-1">
                     <CheckCircle2 size={15} /> Saved successfully!
                   </span>
                 )}
@@ -349,37 +349,37 @@ export const SettingsPage: React.FC<SettingsPageProps> = ({
           </Card>
 
           {/* Groq AI Engine Card */}
-          <Card variant="default" className="p-6 space-y-4">
-            <div className="flex items-center justify-between border-b border-slate-100 pb-3">
+          <Card variant="default" className="p-6 space-y-4 border border-slate-800 bg-slate-900/90">
+            <div className="flex items-center justify-between border-b border-slate-800/80 pb-3">
               <div className="flex items-center gap-2">
-                <div className="w-8 h-8 rounded-lg bg-purple-50 text-purple-600 flex items-center justify-center">
+                <div className="w-8 h-8 rounded-lg bg-purple-950/60 border border-purple-800/40 text-purple-400 flex items-center justify-center">
                   <Sparkles size={18} />
                 </div>
                 <div>
-                  <h3 className="font-bold text-base text-slate-900">
+                  <h3 className="font-bold text-base text-white">
                     Groq LLM Engine (Server-Side)
                   </h3>
-                  <p className="text-xs text-slate-500">Powered by llama-3.3-70b-versatile for Founder Copilot & AI features</p>
+                  <p className="text-xs text-slate-400">Powered by llama-3.3-70b-versatile for Founder Copilot & AI features</p>
                 </div>
               </div>
-              <span className="px-2.5 py-1 rounded-full bg-purple-50 text-purple-700 border border-purple-200 text-xs font-mono font-semibold flex items-center gap-1.5">
-                <span className="w-2 h-2 rounded-full bg-purple-500 animate-pulse" />
+              <span className="px-2.5 py-1 rounded-full bg-purple-950/80 text-purple-300 border border-purple-800/50 text-xs font-mono font-semibold flex items-center gap-1.5">
+                <span className="w-2 h-2 rounded-full bg-purple-400 animate-pulse" />
                 Vercel Env Configured
               </span>
             </div>
 
             <div className="space-y-3 text-xs">
-              <p className="text-slate-600 leading-relaxed">
-                Founder Copilot and all AI diagnostic tools are powered by Groq LLM API. To configure your API key for deployments (such as Vercel), add your <code className="font-mono bg-slate-100 px-1 py-0.5 rounded text-slate-800">GROQ_API_KEY</code> environment variable in your Vercel project settings.
+              <p className="text-slate-300 leading-relaxed">
+                Founder Copilot and all AI diagnostic tools are powered by Groq LLM API. To configure your API key for deployments (such as Vercel), add your <code className="font-mono bg-slate-950 border border-slate-800 px-1.5 py-0.5 rounded text-purple-300 font-semibold">GROQ_API_KEY</code> environment variable in your Vercel project settings.
               </p>
 
               <div className="flex items-center justify-between pt-2">
-                <span className="text-slate-500 font-mono text-[11px]">Console & Key Management:</span>
+                <span className="text-slate-400 font-mono text-[11px]">Console & Key Management:</span>
                 <a
                   href="https://console.groq.com"
                   target="_blank"
                   rel="noreferrer"
-                  className="text-purple-600 hover:underline font-semibold flex items-center gap-1"
+                  className="text-purple-400 hover:text-purple-300 hover:underline font-semibold flex items-center gap-1"
                 >
                   <span>console.groq.com</span>
                   <ExternalLink size={10} />
@@ -390,15 +390,15 @@ export const SettingsPage: React.FC<SettingsPageProps> = ({
 
           {/* Reset Demo Data Box */}
           {isDemo && (
-            <Card variant="flat" className="p-6 space-y-3 border border-amber-200 bg-amber-50/50">
+            <Card variant="flat" className="p-6 space-y-3 border border-amber-800/50 bg-amber-950/30">
               <div className="flex items-center justify-between">
-                <h3 className="font-bold text-amber-900 text-sm flex items-center gap-2">
-                  <Sparkles size={16} className="text-amber-600" />
+                <h3 className="font-bold text-amber-300 text-sm flex items-center gap-2">
+                  <Sparkles size={16} className="text-amber-400" />
                   <span>Sandbox Demo Mode Active</span>
                 </h3>
                 <Badge variant="amber">Demo</Badge>
               </div>
-              <p className="text-xs text-amber-800 leading-relaxed">
+              <p className="text-xs text-amber-200/80 leading-relaxed">
                 You are currently running in the demo sandbox. You can reset demo state back to defaults or create a real private workspace.
               </p>
               <div className="flex items-center gap-3 pt-1">
@@ -407,7 +407,7 @@ export const SettingsPage: React.FC<SettingsPageProps> = ({
                   size="sm"
                   onClick={onResetDemo}
                   leftIcon={<RotateCcw size={14} />}
-                  className="text-amber-900 border-amber-300 hover:bg-amber-100"
+                  className="text-amber-300 border-amber-800 hover:bg-amber-900/50"
                 >
                   Reset Demo Data
                 </Button>
@@ -429,18 +429,18 @@ export const SettingsPage: React.FC<SettingsPageProps> = ({
         {/* Right: User Authentication & Security */}
         <div className="lg:col-span-5 space-y-6">
           {/* Account Profile Card */}
-          <Card variant="default" className="p-6 space-y-4">
-            <div className="flex items-center justify-between border-b border-slate-100 pb-3">
-              <h3 className="font-bold text-base text-slate-900 flex items-center gap-2">
-                <UserIcon size={18} className="text-[#0052FF]" />
+          <Card variant="default" className="p-6 space-y-4 border border-slate-800 bg-slate-900/90">
+            <div className="flex items-center justify-between border-b border-slate-800/80 pb-3">
+              <h3 className="font-bold text-base text-white flex items-center gap-2">
+                <UserIcon size={18} className="text-blue-400" />
                 <span>Founder Account Details</span>
               </h3>
               {isDemo ? (
-                <span className="px-2 py-0.5 rounded bg-amber-100 text-amber-800 text-[10px] font-mono font-bold">
+                <span className="px-2 py-0.5 rounded bg-amber-950/80 text-amber-300 border border-amber-800/50 text-[10px] font-mono font-bold">
                   DEMO
                 </span>
               ) : (
-                <span className="px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 text-[10px] font-mono font-bold flex items-center gap-1">
+                <span className="px-2 py-0.5 rounded bg-emerald-950/80 text-emerald-300 border border-emerald-800/50 text-[10px] font-mono font-bold flex items-center gap-1">
                   <ShieldCheck size={11} />
                   REAL USER
                 </span>
@@ -448,42 +448,42 @@ export const SettingsPage: React.FC<SettingsPageProps> = ({
             </div>
 
             {profileError && (
-              <div className="p-3 rounded-xl bg-rose-50 border border-rose-200 text-rose-800 text-xs flex items-start gap-2">
-                <AlertCircle size={15} className="text-rose-600 shrink-0 mt-0.5" />
+              <div className="p-3 rounded-xl bg-rose-950/60 border border-rose-800/60 text-rose-200 text-xs flex items-start gap-2">
+                <AlertCircle size={15} className="text-rose-400 shrink-0 mt-0.5" />
                 <span>{profileError}</span>
               </div>
             )}
 
             {profileSuccess && (
-              <div className="p-3 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs flex items-center gap-2">
-                <CheckCircle2 size={15} className="text-emerald-600 shrink-0" />
+              <div className="p-3 rounded-xl bg-emerald-950/60 border border-emerald-800/60 text-emerald-200 text-xs flex items-center gap-2">
+                <CheckCircle2 size={15} className="text-emerald-400 shrink-0" />
                 <span>Account information updated successfully!</span>
               </div>
             )}
 
             <form onSubmit={handleUpdateAccount} className="space-y-3.5 text-xs">
               <div>
-                <label className="block font-semibold text-slate-700 mb-1">Founder Full Name</label>
+                <label className="block font-semibold text-slate-300 mb-1">Founder Full Name</label>
                 <div className="relative">
                   <UserIcon size={14} className="absolute left-3 top-3 text-slate-400" />
                   <input
                     type="text"
                     value={accountName}
                     onChange={e => setAccountName(e.target.value)}
-                    className="w-full pl-9 pr-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm outline-none focus:border-[#0052FF] focus:bg-white"
+                    className="w-full pl-9 pr-3 py-2 bg-slate-950/80 border border-slate-800 rounded-xl text-sm text-slate-100 outline-none focus:border-blue-500 focus:bg-slate-900 transition"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block font-semibold text-slate-700 mb-1">Email Address</label>
+                <label className="block font-semibold text-slate-300 mb-1">Email Address</label>
                 <div className="relative">
                   <Mail size={14} className="absolute left-3 top-3 text-slate-400" />
                   <input
                     type="email"
                     value={accountEmail}
                     onChange={e => setAccountEmail(e.target.value)}
-                    className="w-full pl-9 pr-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm outline-none focus:border-[#0052FF] focus:bg-white"
+                    className="w-full pl-9 pr-3 py-2 bg-slate-950/80 border border-slate-800 rounded-xl text-sm text-slate-100 outline-none focus:border-blue-500 focus:bg-slate-900 transition"
                   />
                 </div>
               </div>
@@ -494,6 +494,7 @@ export const SettingsPage: React.FC<SettingsPageProps> = ({
                   variant="outline"
                   size="sm"
                   disabled={profileSaving}
+                  className="border-slate-700 text-slate-200 hover:bg-slate-800"
                 >
                   {profileSaving ? 'Saving...' : 'Update Account'}
                 </Button>
@@ -504,8 +505,8 @@ export const SettingsPage: React.FC<SettingsPageProps> = ({
                     variant="ghost"
                     size="sm"
                     onClick={onLogout}
-                    leftIcon={<LogOut size={14} className="text-rose-500" />}
-                    className="text-rose-600 hover:bg-rose-50"
+                    leftIcon={<LogOut size={14} className="text-rose-400" />}
+                    className="text-rose-400 hover:bg-rose-950/40 hover:text-rose-300"
                   >
                     Sign Out
                   </Button>
@@ -516,60 +517,60 @@ export const SettingsPage: React.FC<SettingsPageProps> = ({
 
           {/* Change Password Card */}
           {!isDemo && (
-            <Card variant="default" className="p-6 space-y-4">
-              <h3 className="font-bold text-base text-slate-900 flex items-center gap-2 border-b border-slate-100 pb-3">
-                <Key size={18} className="text-[#0052FF]" />
+            <Card variant="default" className="p-6 space-y-4 border border-slate-800 bg-slate-900/90">
+              <h3 className="font-bold text-base text-white flex items-center gap-2 border-b border-slate-800/80 pb-3">
+                <Key size={18} className="text-blue-400" />
                 <span>Security & Password</span>
               </h3>
 
               {pwdError && (
-                <div className="p-3 rounded-xl bg-rose-50 border border-rose-200 text-rose-800 text-xs flex items-start gap-2">
-                  <AlertCircle size={15} className="text-rose-600 shrink-0 mt-0.5" />
+                <div className="p-3 rounded-xl bg-rose-950/60 border border-rose-800/60 text-rose-200 text-xs flex items-start gap-2">
+                  <AlertCircle size={15} className="text-rose-400 shrink-0 mt-0.5" />
                   <span>{pwdError}</span>
                 </div>
               )}
 
               {pwdSuccess && (
-                <div className="p-3 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs flex items-center gap-2">
-                  <CheckCircle2 size={15} className="text-emerald-600 shrink-0" />
+                <div className="p-3 rounded-xl bg-emerald-950/60 border border-emerald-800/60 text-emerald-200 text-xs flex items-center gap-2">
+                  <CheckCircle2 size={15} className="text-emerald-400 shrink-0" />
                   <span>Password updated successfully!</span>
                 </div>
               )}
 
               <form onSubmit={handleChangePassword} className="space-y-3.5 text-xs">
                 <div>
-                  <label className="block font-semibold text-slate-700 mb-1">Current Password</label>
+                  <label className="block font-semibold text-slate-300 mb-1">Current Password</label>
                   <input
                     type="password"
                     required
                     value={currentPassword}
                     onChange={e => setCurrentPassword(e.target.value)}
                     placeholder="••••••••"
-                    className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm font-mono outline-none focus:border-[#0052FF] focus:bg-white"
+                    className="w-full px-3 py-2 bg-slate-950/80 border border-slate-800 rounded-xl text-sm font-mono text-slate-100 placeholder-slate-500 outline-none focus:border-blue-500 focus:bg-slate-900 transition"
                   />
                 </div>
 
                 <div>
-                  <label className="block font-semibold text-slate-700 mb-1">New Password (min 6 chars)</label>
+                  <label className="block font-semibold text-slate-300 mb-1">New Password (min 6 chars)</label>
                   <input
                     type="password"
                     required
                     value={newPassword}
                     onChange={e => setNewPassword(e.target.value)}
                     placeholder="••••••••"
-                    className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm font-mono outline-none focus:border-[#0052FF] focus:bg-white"
+                    className="w-full px-3 py-2 bg-slate-950/80 border border-slate-800 rounded-xl text-sm font-mono text-slate-100 placeholder-slate-500 outline-none focus:border-blue-500 focus:bg-slate-900 transition"
                   />
                 </div>
 
                 <div>
-                  <label className="block font-semibold text-slate-700 mb-1">Confirm New Password</label>
+                  <label className="block font-semibold text-slate-300 mb-1">Confirm New Password</label>
                   <input
                     type="password"
                     required
                     value={confirmPassword}
                     onChange={e => setConfirmPassword(e.target.value)}
                     placeholder="••••••••"
-                    className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm font-mono outline-none focus:border-[#0052FF] focus:bg-white"
+                    className="w-full px-3 py-2 bg-slate-950/80 border border-slate-800 rounded-xl text-sm font-mono text-slate-100 placeholder-slate-500 outline-none focus:border-blue-500 focus:bg-slate-900 transition"
                   />
                 </div>
 
@@ -578,6 +579,7 @@ export const SettingsPage: React.FC<SettingsPageProps> = ({
                   variant="outline"
                   size="sm"
                   disabled={pwdLoading}
+                  className="border-slate-700 text-slate-200 hover:bg-slate-800"
                 >
                   {pwdLoading ? 'Updating...' : 'Update Password'}
                 </Button>
