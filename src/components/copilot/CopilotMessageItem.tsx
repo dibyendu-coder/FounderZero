@@ -27,7 +27,7 @@ import { ClaudeMessage } from '../brainless/claude/claude-message';
 interface CopilotMessageItemProps {
   message: CopilotMessage;
   conversationId: string;
-  onConfirmAction: (proposal: CopilotActionProposal) => Promise<boolean>;
+  onConfirmAction: (proposal: CopilotActionProposal, messageId?: string) => Promise<boolean>;
   onAcceptDiff?: (diff: CopilotDiffData) => void;
   onRejectDiff?: (diff: CopilotDiffData) => void;
   onAllowPermission?: (permission: CopilotPermissionRequestData) => void;
@@ -185,7 +185,7 @@ export const CopilotMessageItem: React.FC<CopilotMessageItemProps> = ({
               proposal={message.actionProposal}
               conversationId={conversationId}
               messageId={message.id}
-              onConfirm={onConfirmAction}
+              onConfirm={(proposal) => onConfirmAction(proposal, message.id)}
               onNavigate={onNavigate}
             />
           )}

@@ -25,7 +25,8 @@ import {
   CopilotActionProposal,
   CopilotDiffData,
   CopilotPermissionRequestData,
-  StartupProfile
+  StartupProfile,
+  FounderNote
 } from '../types';
 import { CopilotHeader } from '../components/copilot/CopilotHeader';
 import { ConversationSidebar } from '../components/copilot/ConversationSidebar';
@@ -502,30 +503,176 @@ export const CopilotPage: React.FC<CopilotPageProps> = ({
     }
   };
 
-  // Confirm Action Proposal (Save note, create mission, create experiment)
-  const handleConfirmAction = async (proposal: CopilotActionProposal): Promise<boolean> => {
+  // Confirm Action Proposal (Save note, create mission, create experiment, etc.)
+  const handleConfirmAction = async (proposal: CopilotActionProposal, messageId?: string): Promise<boolean> => {
+    let apiSuccess = false;
     try {
       const res = await fetch('/api/copilot/action/confirm', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           conversationId: activeConvId,
+          messageId,
           actionProposal: proposal
         })
       });
 
       if (res.ok) {
         const data = await res.json();
-        if (data.state) {
+        if (data && data.state) {
           onUpdateState(() => data.state);
+          apiSuccess = true;
         }
-        return true;
       }
-      return false;
     } catch (err) {
-      console.error('Error confirming Copilot action:', err);
-      return false;
+      console.error('Error confirming Copilot action via API:', err);
     }
+
+    if (apiSuccess) return true;
+
+    // Client-side fallback state update if backend is unreachable or offline
+    if (proposal.type === 'notepad_draft' && proposal.draftNote) {
+      onUpdateState(prev => {
+        const notes = prev.notes || [];
+        const newNote: FounderNote = {
+          id: "note-" + Date.now() + "-" + Math.random().toString(36).substring(2, 5),
+          title: proposal.draftNote!.title || "Untitled Note",
+          collection: proposal.draftNote!.collection || "Strategy",
+          tags: proposal.draftNote!.tags || ["Copilot", "Strategy"],
+          blocks: (proposal.draftNote!.blocks || []).map((b: any, i: number) => ({
+            ...b,
+            id: b.id || `b-${Date.now()}-${i}`
+          })),
+          includeInKnowledgeBase: true,
+          createdAt: new Date().toISOString(),
+          updatedAt: new Date().toISOString()
+        };
+
+        const notifications = prev.notifications || [];
+        const newNotif = {
+          id: "notif-" + Date.now(),
+          title: "Note Saved to Notepad",
+          message: `Copilot created note: "${newNote.title}" in collection "${newNote.collection}".`,
+          timestamp: new Date().toISOString(),
+          read: false,
+          type: "action" as const
+        };
+
+        const convId = activeConvId;
+        const currentMsgs = (prev.copilotMessages && prev.copilotMessages[convId]) || [];
+        const updatedMsgs = currentMsgs.map(m => {
+          if (m.actionProposal && (m.actionProposal.id === proposal.id || m.id === messageId)) {
+            return {
+              ...m,
+              actionProposal: {
+                ...m.actionProposal,
+                status: 'confirmed' as const
+              }
+            };
+          }
+          return m;
+        });
+
+        const newNotesList = [newNote, ...notes];
+
+        try {
+          const bc = new BroadcastChannel('founderzero_notepad_sync');
+          bc.postMessage({ type: 'SYNC_NOTES', notes: newNotesList });
+          bc.close();
+        } catch (e) {
+          // ignore if BroadcastChannel not available
+        }
+
+        return {
+          ...prev,
+          notes: newNotesList,
+          notifications: [newNotif, ...notifications],
+          copilotMessages: {
+            ...(prev.copilotMessages || {}),
+            [convId]: updatedMsgs
+          }
+        };
+      });
+      return true;
+    } else if (proposal.type === 'create_mission' && proposal.missionData) {
+      onUpdateState(prev => {
+        const missions = prev.missions || [];
+        const newMission = {
+          id: "mis-" + Date.now() + "-" + Math.random().toString(36).substring(2, 5),
+          title: proposal.missionData!.title,
+          category: proposal.missionData!.category || "Growth",
+          objective: proposal.missionData!.objective,
+          whyItMatters: proposal.missionData!.whyItMatters,
+          estimatedTime: proposal.missionData!.estimatedTime || "3 hours",
+          estimatedCost: proposal.missionData!.estimatedCost || "₹0",
+          difficulty: proposal.missionData!.difficulty || "Medium",
+          expectedResult: proposal.missionData!.expectedResult,
+          completed: false,
+          steps: proposal.missionData!.steps || []
+        };
+        const convId = activeConvId;
+        const currentMsgs = (prev.copilotMessages && prev.copilotMessages[convId]) || [];
+        const updatedMsgs = currentMsgs.map(m => {
+          if (m.actionProposal && (m.actionProposal.id === proposal.id || m.id === messageId)) {
+            return {
+              ...m,
+              actionProposal: { ...m.actionProposal, status: 'confirmed' as const }
+            };
+          }
+          return m;
+        });
+        return {
+          ...prev,
+          missions: [newMission, ...missions],
+          copilotMessages: {
+            ...(prev.copilotMessages || {}),
+            [convId]: updatedMsgs
+          }
+        };
+      });
+      return true;
+    } else if (proposal.type === 'create_experiment' && proposal.experimentData) {
+      onUpdateState(prev => {
+        const experiments = prev.experiments || [];
+        const newExp = {
+          id: "exp-" + Date.now() + "-" + Math.random().toString(36).substring(2, 5),
+          title: proposal.experimentData!.title,
+          hypothesis: proposal.experimentData!.hypothesis,
+          problem: proposal.experimentData!.problem,
+          metric: proposal.experimentData!.metric,
+          currentValue: proposal.experimentData!.currentValue || "0",
+          targetValue: proposal.experimentData!.targetValue || "50%",
+          method: proposal.experimentData!.method || "In-app test",
+          audience: proposal.experimentData!.audience || "Active users",
+          duration: proposal.experimentData!.duration || "14 days",
+          budget: proposal.experimentData!.budget || "₹0",
+          status: "Running" as const,
+          createdAt: new Date().toISOString()
+        };
+        const convId = activeConvId;
+        const currentMsgs = (prev.copilotMessages && prev.copilotMessages[convId]) || [];
+        const updatedMsgs = currentMsgs.map(m => {
+          if (m.actionProposal && (m.actionProposal.id === proposal.id || m.id === messageId)) {
+            return {
+              ...m,
+              actionProposal: { ...m.actionProposal, status: 'confirmed' as const }
+            };
+          }
+          return m;
+        });
+        return {
+          ...prev,
+          experiments: [newExp, ...experiments],
+          copilotMessages: {
+            ...(prev.copilotMessages || {}),
+            [convId]: updatedMsgs
+          }
+        };
+      });
+      return true;
+    }
+
+    return false;
   };
 
   // Accept Diff Changes (e.g. updating profile / positioning)

@@ -2660,10 +2660,12 @@ Return JSON array of suggestions:
     }
 
     // Mark message's actionProposal as confirmed in state
-    if (conversationId && messageId && state.copilotMessages && state.copilotMessages[conversationId]) {
-      const msg = state.copilotMessages[conversationId].find(m => m.id === messageId);
-      if (msg && msg.actionProposal) {
-        msg.actionProposal.status = "confirmed";
+    if (conversationId && state.copilotMessages && state.copilotMessages[conversationId]) {
+      const targetMsg = state.copilotMessages[conversationId].find(
+        m => (messageId && m.id === messageId) || (m.actionProposal && m.actionProposal.id === actionProposal.id)
+      );
+      if (targetMsg && targetMsg.actionProposal) {
+        targetMsg.actionProposal.status = "confirmed";
       }
     }
 
