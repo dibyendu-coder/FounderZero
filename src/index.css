@@ -4,56 +4,134 @@
 
 @layer base {
   :root {
-    /* Linear / Modern Design System Tokens */
-    --background-deep: #020203;
-    --background-base: #050506;
-    --background-elevated: #0a0a0c;
-    --surface-glass: rgba(255, 255, 255, 0.05);
-    --surface-glass-hover: rgba(255, 255, 255, 0.08);
-    --foreground-linear: #EDEDEF;
-    --foreground-muted: #8A8F98;
-    --foreground-subtle: rgba(255, 255, 255, 0.60);
-    --accent-linear: #5E6AD2;
-    --accent-bright: #6872D9;
-    --accent-glow: rgba(94, 106, 210, 0.3);
-    --border-linear: rgba(255, 255, 255, 0.06);
-    --border-linear-hover: rgba(255, 255, 255, 0.10);
-    --border-accent: rgba(94, 106, 210, 0.30);
+    /* Slash Design System Tokens */
+    --color-obsidian: #08080a;
+    --color-onyx: #040406;
+    --color-carbon: #121317;
+    --color-graphite: #1c1d22;
+    --color-slate: #2e3038;
+    --color-smoke: #464853;
+    --color-ash: #5e616e;
+    --color-steel: #777a88;
+    --color-fog: #9194a1;
+    --color-mist: #acafb9;
+    --color-silver: #c7c9d1;
+    --color-bone: #e2e3e9;
+    --color-paper-white: #ffffff;
+    --color-copper: #cc9166;
+    --color-gilded-gradient: #ae9357;
+    --gradient-gilded: linear-gradient(103deg, rgb(174, 147, 87), rgb(255, 240, 204) 40%, rgb(174, 147, 87) 70%, rgba(189, 157, 79, 0));
+
+    /* Font Families */
+    --font-ivy-presto: 'Playfair Display', 'Ivy Presto', Georgia, Didot, serif;
+    --font-inter: 'Inter', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+    /* Spacing & Radii */
+    --page-max-width: 1216px;
+    --section-gap: 160px;
+    --card-padding: 24px;
+    --radius-sm: 2px;
+    --radius-lg: 10px;
+    --radius-full: 9999px;
 
     /* Fallback tokens */
-    --primary: #5E6AD2;
-    --primary-hover: #6872D9;
-    --primary-light: #0a0a0c;
-    --accent: #5E6AD2;
-    --background: #050506;
-    --foreground: #EDEDEF;
-    --card: #0a0a0c;
-    --card-foreground: #EDEDEF;
-    --border: rgba(255, 255, 255, 0.06);
-    --muted: #8A8F98;
-    --muted-light: #0a0a0c;
-  }
-
-  .dark {
-    --primary: #5E6AD2;
-    --primary-hover: #6872D9;
-    --primary-light: #0a0a0c;
-    --accent: #5E6AD2;
-    --background: #050506;
-    --foreground: #EDEDEF;
-    --card: #0a0a0c;
-    --card-foreground: #EDEDEF;
-    --border: rgba(255, 255, 255, 0.06);
-    --muted: #8A8F98;
-    --muted-light: #0a0a0c;
+    --primary: #ffffff;
+    --background: #08080a;
+    --foreground: #e2e3e9;
+    --card: #040406;
+    --border: #1c1d22;
+    --muted: #9194a1;
   }
 
   body {
-    background-color: #050506;
-    color: #EDEDEF;
-    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background-color: #08080a;
+    color: #e2e3e9;
+    font-family: var(--font-inter);
     transition: background-color 0.2s cubic-bezier(0.16, 1, 0.3, 1), color 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   }
+}
+
+/* Slash Typographic Collision Classes */
+.font-ivy-presto {
+  font-family: var(--font-ivy-presto);
+  letter-spacing: 0.01em;
+}
+
+.font-inter {
+  font-family: var(--font-inter);
+}
+
+/* Slash Component Utility Classes */
+.btn-slash-primary {
+  background-color: #ffffff;
+  color: #000000;
+  border-radius: 9999px;
+  padding: 10px 20px;
+  font-family: var(--font-inter);
+  font-size: 14px;
+  font-weight: 500;
+  border: none;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+
+.btn-slash-primary:hover {
+  opacity: 0.92;
+  transform: translateY(-1px);
+}
+
+.btn-slash-ghost {
+  background-color: transparent;
+  border: 1px solid #ffffff;
+  color: #ffffff;
+  border-radius: 9999px;
+  padding: 10px 20px;
+  font-family: var(--font-inter);
+  font-size: 14px;
+  font-weight: 500;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.btn-slash-ghost:hover {
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+.btn-slash-pill-tag {
+  background-color: transparent;
+  border: 1px solid #777a88;
+  color: #ffffff;
+  border-radius: 9999px;
+  padding: 6px 12px;
+  font-family: var(--font-inter);
+  font-size: 13px;
+  font-weight: 400;
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+
+.btn-slash-pill-tag:hover {
+  border-color: #ffffff;
+}
+
+.input-slash-pill {
+  background-color: transparent;
+  border: 1px solid #ffffff;
+  color: #ffffff;
+  border-radius: 9999px;
+  padding: 10px 20px;
+  font-family: var(--font-inter);
+  font-size: 14px;
+  outline: none;
+}
+
+.input-slash-pill::placeholder {
+  color: #777a88;
+}
+
+.text-copper {
+  color: #cc9166;
+}
+
+.bg-gilded-gradient {
+  background: linear-gradient(103deg, rgb(174, 147, 87), rgb(255, 240, 204) 40%, rgb(174, 147, 87) 70%, rgba(189, 157, 79, 0));
 }
 
 /* Resend Font Classes */

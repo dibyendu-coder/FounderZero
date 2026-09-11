@@ -80,7 +80,7 @@ export const HeroCube: React.FC = () => {
       ctx.clearRect(0, 0, width, height);
 
       // Canvas background
-      ctx.fillStyle = '#000000';
+      ctx.fillStyle = '#08080a';
       ctx.fillRect(0, 0, width, height);
 
       angleX += 0.006 + mouseY * 0.1;
@@ -102,7 +102,7 @@ export const HeroCube: React.FC = () => {
         return project(x1, y2, z2);
       });
 
-      // Draw faces (dark solid black with hairline depth)
+      // Draw faces (dark solid onyx black with hairline depth)
       faces.forEach((face) => {
         ctx.beginPath();
         const p0 = rotatedVertices[face[0]];
@@ -112,28 +112,28 @@ export const HeroCube: React.FC = () => {
           ctx.lineTo(p.x, p.y);
         }
         ctx.closePath();
-        ctx.fillStyle = '#000000';
+        ctx.fillStyle = '#040406';
         ctx.fill();
       });
 
-      // Draw Edges (Graphite Hairline #292d30)
+      // Draw Edges (Graphite Hairline #1c1d22)
       edges.forEach(([i, j]) => {
         const p1 = rotatedVertices[i];
         const p2 = rotatedVertices[j];
         ctx.beginPath();
         ctx.moveTo(p1.x, p1.y);
         ctx.lineTo(p2.x, p2.y);
-        ctx.strokeStyle = '#292d30';
+        ctx.strokeStyle = '#1c1d22';
         ctx.lineWidth = 1;
         ctx.stroke();
       });
 
-      // Draw Vertex Neon Points (Iris Violet #9281f7)
+      // Draw Vertex Neon Points (Copper #cc9166)
       rotatedVertices.forEach((p) => {
         ctx.beginPath();
         ctx.arc(p.x, p.y, 2.5 * p.scale, 0, Math.PI * 2);
-        ctx.fillStyle = '#9281f7';
-        ctx.shadowColor = '#9281f7';
+        ctx.fillStyle = '#cc9166';
+        ctx.shadowColor = '#cc9166';
         ctx.shadowBlur = 8;
         ctx.fill();
         ctx.shadowBlur = 0;
@@ -152,10 +152,10 @@ export const HeroCube: React.FC = () => {
   }, []);
 
   return (
-    <div className="relative w-full h-[360px] sm:h-[440px] flex items-center justify-center overflow-hidden rounded-[16px] border-graphite bg-[#000000]">
+    <div className="relative w-full h-[360px] sm:h-[440px] flex items-center justify-center overflow-hidden rounded-[10px] border border-[#1c1d22] bg-[#08080a]">
       <canvas ref={canvasRef} className="w-full h-full block cursor-grab active:cursor-grabbing" />
-      <div className="absolute bottom-4 right-4 text-[11px] font-commit text-[#a1a4a5] bg-[#000000]/80 px-2.5 py-1 rounded-[6px] border-graphite flex items-center gap-2 pointer-events-none">
-        <span className="w-2 h-2 rounded-full bg-[#9281f7] animate-pulse" />
+      <div className="absolute bottom-4 right-4 text-[11px] font-inter text-[#9194a1] bg-[#040406]/90 px-3 py-1.5 rounded-full border border-[#1c1d22] flex items-center gap-2 pointer-events-none">
+        <span className="w-2 h-2 rounded-full bg-[#cc9166] animate-pulse" />
         <span>3D Geometric Anchor</span>
       </div>
     </div>
